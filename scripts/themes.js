@@ -4,6 +4,7 @@ export class Theme {
         this.themeColorRegex = /^§[(0-9a-f)*?]$/;
     }
     addTheme({
+        name,
         successColor,
         errorColor,
         infoColor,
@@ -17,13 +18,14 @@ export class Theme {
         category,
         command,
         description,
-        alias
+        alias,
+        warningColor
     }) {
         // awful array shit
-        let allCorrect = [successColor,errorColor,infoColor,defaultBracketColor,defaultRankColor,defaultNameColor,defaultMessageColor,barFull,barEmpty,barBracket, category, command, description, alias].every(col => /^§[(0-9a-f)*?]$/.test(col));
+        let allCorrect = [successColor,errorColor,infoColor,defaultBracketColor,defaultRankColor,defaultNameColor,defaultMessageColor,barFull,barEmpty,barBracket, category, command, description, alias,warningColor].every(col => /^§[(0-9a-f)*?]$/.test(col));
         if(allCorrect) {
             // add the theme
-            this.themes.push({successColor,errorColor,infoColor,defaultBracketColor,defaultRankColor,defaultNameColor,defaultMessageColor,barFull,barEmpty,barBracket, category, command, description, alias})
+            this.themes.push({name, successColor,errorColor,infoColor,defaultBracketColor,defaultRankColor,defaultNameColor,defaultMessageColor,barFull,barEmpty,barBracket, category, command, description, alias, warningColor})
         }
     }
     getTheme(id) {

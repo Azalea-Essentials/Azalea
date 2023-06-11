@@ -1,7 +1,15 @@
 import {world, System} from '@minecraft/server';
 import { commands } from './commands';
 import { addHelpCommand } from './commands/help';
+import { addPingCommand } from './commands/ping';
+import { addRollCommand } from './commands/rolldice';
+import { addRealHackCommand } from './commands/realhack';
+import { addCreditsCommand } from './commands/credits';
 addHelpCommand(commands);
+addPingCommand(commands);
+addRollCommand(commands);
+addRealHackCommand(commands);
+addCreditsCommand(commands);
 // small utility function lmao
 function isAdmin(player) {
     return player.isOp() || player.hasTag("admin");

@@ -1,6 +1,7 @@
 export function addHelpCommand(commands) {
     commands.addCommand("help", {
         description: "Get some help",
+        category: "Help Center",
         onRun(msg, args, theme, response, commands, prefix) {
             let text = [];
             let categorizedCommands = commands.reduce((acc, obj) => {
