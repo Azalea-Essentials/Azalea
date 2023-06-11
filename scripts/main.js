@@ -1,6 +1,7 @@
 import {world, System} from '@minecraft/server';
-
-
+import { commands } from './commands';
+import { addHelpCommand } from './commands/help';
+addHelpCommand(commands);
 // small utility function lmao
 function isAdmin(player) {
     return player.isOp() || player.hasTag("admin");
@@ -18,7 +19,7 @@ let prefix = '!';
 world.beforeEvents.chatSend.subscribe(msg=>{
     msg.cancel = true;
     if(msg.message.startsWith(prefix)) {
-        world.sendMessage("Need to make commands, sorry. Also this will be better than BaconChat");
+        commands.run(msg, prefix);
     } else {
         // chat ranks are done
         // it just took a shitty utility function and weird string formatting
