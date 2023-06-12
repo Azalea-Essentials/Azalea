@@ -19,6 +19,7 @@ export class Theme {
     command,
     description,
     alias,
+    descriptionText,
     warningColor
   }) {
     // awful array shit
@@ -26,6 +27,7 @@ export class Theme {
     if (allCorrect) {
       // add the theme
       this.themes.push({
+        descriptionText,
         name,
         successColor,
         errorColor,

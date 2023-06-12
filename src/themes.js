@@ -19,13 +19,14 @@ export class Theme {
         command,
         description,
         alias,
+        descriptionText,
         warningColor
     }) {
         // awful array shit
         let allCorrect = [successColor,errorColor,infoColor,defaultBracketColor,defaultRankColor,defaultNameColor,defaultMessageColor,barFull,barEmpty,barBracket, category, command, description, alias,warningColor].every(col => /^§[(0-9a-f)*?]$/.test(col));
         if(allCorrect) {
             // add the theme
-            this.themes.push({name, successColor,errorColor,infoColor,defaultBracketColor,defaultRankColor,defaultNameColor,defaultMessageColor,barFull,barEmpty,barBracket, category, command, description, alias, warningColor})
+            this.themes.push({descriptionText, name, successColor,errorColor,infoColor,defaultBracketColor,defaultRankColor,defaultNameColor,defaultMessageColor,barFull,barEmpty,barBracket, category, command, description, alias, warningColor})
         }
     }
     getTheme(id) {

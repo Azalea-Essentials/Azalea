@@ -17,10 +17,16 @@ export default function addHelpCommand(commands) {
                 return response(`TEXT ${text.join('\n')}`);
             }
 
+            let commandsSort = commands.sort(function(a, b) {
+                var textA = a.category.toUpperCase();
+                var textB = b.category.toUpperCase();
+                return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+            })
+
             let text = [];
             var arrays = [], size = 10;
-            for (let i = 0; i < commands.length; i += size)
-               arrays.push(commands.slice(i, i + size));
+            for (let i = 0; i < commandsSort.length; i += size)
+               arrays.push(commandsSort.slice(i, i + size));
 
             let p = (args.length ? /^\d+$/.test(args[0]) ? parseInt(args[0]) : 1 : 1)-1;
             if(p < 0) return response(`ERROR Minimum page is 1`);
@@ -33,6 +39,14 @@ export default function addHelpCommand(commands) {
                 return acc;
             }, {});
             for(const category of Object.keys(categorizedCommands)) {
+                categorizedCommands[category] = categorizedCommands[category].sort(function(a, b) {
+                    var textA = a.name.toUpperCase();
+                    var textB = b.name.toUpperCase();
+                    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+                })
+            }
+            for(const category of Object.keys(categorizedCommands)) {
+                text.push(``)
                 text.push(`${theme.category}<-=- ${theme.command}${category} §r${theme.category}-=->`)
                 for(const command of categorizedCommands[category]) {
                     text.push(`${theme.command}${prefix}${command.name} ${theme.description}${command.description}`);

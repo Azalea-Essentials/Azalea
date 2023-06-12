@@ -29,11 +29,11 @@ export class Commands {
     let scoreboardIdentity = msg.sender.scoreboardIdentity;
     try {
       system.run(() => {
-        world.scoreboard.addObjective("themes", "§aPlayer Theme Data");
+        try {
+          world.scoreboard.addObjective("themes", "§aPlayer Theme Data");
+        } catch {}
       });
-    } catch (e) {
-      console.warn("ERROR: " + e);
-    }
+    } catch (e) {}
     let themeScoreboard = world.scoreboard.getObjective("themes");
     let score = 0;
     try {
@@ -41,8 +41,6 @@ export class Commands {
     } catch {
       score = 0;
     }
-    console.warn(score);
-    console.warn(this.themeMgr.themes.length);
     let theme = this.themeMgr.getTheme(score);
     // let {message} = msg;
     // msg.sender.sendMessage(this.parseResult('ERROR Command not found!'))
@@ -61,13 +59,26 @@ export class Commands {
   }
 
   removeCommand(name) {
-    this._cmds = this._cmds.filter(_ => _.name != name);
+    try {
+      this._cmds = this._cmds.filter(_ => _.name != name);
+    } catch {}
+  }
+  editCommandDescription(name, description) {
+    let index = this._cmds.findIndex(_ => _.name == name);
+    if (index < 0) return;
+    this._cmds[index].description = description;
+  }
+  editCommandCategory(name, category) {
+    let index = this._cmds.findIndex(_ => _.name == name);
+    if (index < 0) return;
+    this._cmds[index].category = category;
   }
 }
 let themeManager = new Theme();
 export const commands = new Commands(themeManager);
 commands.themeMgr.addTheme({
   name: "Default Azalea",
+  descriptionText: "Default.",
   successColor: "§a",
   errorColor: "§c",
   infoColor: "§b",
@@ -86,6 +97,7 @@ commands.themeMgr.addTheme({
 });
 commands.themeMgr.addTheme({
   name: "Discord Light Mode",
+  descriptionText: "Burns your eyes, and makes everything look the same",
   successColor: "§f",
   errorColor: "§f",
   infoColor: "§f",
@@ -104,6 +116,7 @@ commands.themeMgr.addTheme({
 });
 commands.themeMgr.addTheme({
   name: "Ocean",
+  descriptionText: "Blue everywhere, sometimes green because minecraft doesnt have enough blue colors.",
   successColor: "§a",
   errorColor: "§3",
   infoColor: "§9",
@@ -122,6 +135,7 @@ commands.themeMgr.addTheme({
 });
 commands.themeMgr.addTheme({
   name: "shit",
+  descriptionText: "Awful Theme",
   successColor: "§e",
   errorColor: "§9",
   infoColor: "§9",

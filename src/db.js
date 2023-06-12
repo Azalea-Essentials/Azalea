@@ -4,7 +4,10 @@ export class Database {
         this.table = table;
         try {
             system.run(()=>{
-                world.scoreboard.addObjective(`db-${table}`, `TABLE: ${table}`);
+                try {
+
+                    world.scoreboard.addObjective(`db-${table}`, `TABLE: ${table}`);
+                } catch {}
             })
         } catch {}
     }
@@ -36,7 +39,7 @@ export class Database {
         for(const participant of valParticipants) {
             str += String.fromCharCode(participant.getScore(objective));
         }
-        console.warn(str);
+        // console.warn(str);
         return str;
     }
     delete(key) {

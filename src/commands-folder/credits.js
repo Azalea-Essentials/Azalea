@@ -11,13 +11,4 @@ export default function addCreditsCommand(commands) {
             response(`TEXT ${text.join('\n')}`);
         }
     })
-    for(let i = 0;i < 100;i++) {
-        commands.addCommand(i.toString(), {
-            description: i.toString(),
-            category: "Spam",
-            onRun() {
-
-            }
-        });
-    }
 }
