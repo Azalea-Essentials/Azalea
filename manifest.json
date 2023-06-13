@@ -3,7 +3,7 @@
 	"header": {
 		"description": "§9Yet another rewrite",
 		"name": "§aAzalea Recontinued V1 - Pre-Release",
-		"uuid": "4ab46595-eafa-4aa4-970f-fc2ec0741198",
+		"uuid": "4ab46595-eafa-4aa4-970f-fc2ec074a198",
 		"version": [
 			0,
 			0,
@@ -20,7 +20,7 @@
 			"description": "Script that implements basic starter tests.",
 			"type": "script",
 			"language": "javascript",
-			"uuid": "bf5f6284-d86d-4300-8353-cd245cbf5477",
+			"uuid": "bf5f6484-d86d-4300-8353-cd245cbf5477",
 			"version": [
 				0,
 				0,
@@ -31,7 +31,7 @@
 		{
 			"description": "Some useful things",
 			"type": "data",
-			"uuid": "bf5f6284-d86d-4300-8353-cd245cbf5477",
+			"uuid": "b25f6484-d86d-4320-8353-cd245cbf5477",
 			"version": [
 				0,
 				0,
