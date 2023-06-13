@@ -89,6 +89,29 @@ let configOptions = {
                 "key": "ImprovedNametagsEnabled"
             }
         ]
+    },
+    "Verification": {
+        "icon": "textures/ui/realms_slot_check",
+        "options": [
+            {
+                "label": "Enable verification",
+                "type": "toggle",
+                "key": "EnableVerification"
+            },
+            {
+                "label": "Verification Type",
+                "type": "dropdown",
+                "key": "VerificationType",
+                "keyOptions": ["private", "public"],
+                "cliOptions": ["Private (Requires Code + Command)", "Public (Requires Command)"]
+            },
+            {
+                "label": "Verification Code (Requires private verification type)",
+                "type": "text-input",
+                "key": "VerificationCode",
+                "placeholder": "Type a verification code"
+            }
+        ]
     }
 }
 e.cancel = true;

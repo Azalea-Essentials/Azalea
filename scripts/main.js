@@ -1,6 +1,7 @@
 import { world, system } from '@minecraft/server';
 import { commands } from './commands';
 import './configurator';
+import './verification';
 system.run(() => {
   try {
     world.scoreboard.addObjective('themes');
@@ -9,8 +10,10 @@ system.run(() => {
 NicknamesModule();
 // managed by gulp
 const Commands = {};
-import _wcImport11 from "./commands-folder\\version.js";
-Commands["Version"] = _wcImport11;
+import _wcImport12 from "./commands-folder\\version.js";
+Commands["Version"] = _wcImport12;
+import _wcImport11 from "./commands-folder\\verify.js";
+Commands["Verify"] = _wcImport11;
 import _wcImport10 from "./commands-folder\\tagcmd.js";
 Commands["Tagcmd"] = _wcImport10;
 import _wcImport9 from "./commands-folder\\staffchat.js";

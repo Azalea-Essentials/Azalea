@@ -1,6 +1,7 @@
 import {world, system} from '@minecraft/server';
 import { commands } from './commands';
 import './configurator';
+import './verification';
 system.run(()=>{
     try {
         world.scoreboard.addObjective('themes');
