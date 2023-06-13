@@ -1,12 +1,16 @@
 import {world, system} from '@minecraft/server';
 import { commands } from './commands';
+import './configurator';
 system.run(()=>{
     try {
         world.scoreboard.addObjective('themes');
     } catch {}
 })
+NicknamesModule();
 // managed by gulp
 import * as Commands from './commands-folder';
+import { NicknamesModule } from './nicknames';
+import { Database } from './db';
 for(const command of Object.values(Commands)) {
     command(commands);
 }
@@ -41,7 +45,7 @@ function getFirstStringStartingWithPrefixAndRemovePrefix(list, prefix, defaultSt
     else return defaultString;
 }
 let prefix = '!';
-
+let configDb = new Database("Config");
 world.beforeEvents.chatSend.subscribe(msg=>{
     msg.cancel = true;
     if(msg.message.startsWith(prefix)) {
@@ -57,10 +61,14 @@ world.beforeEvents.chatSend.subscribe(msg=>{
         let bracketColor = getFirstStringStartingWithPrefixAndRemovePrefix(tags, "bracket-color:");
         let messageColor = getFirstStringStartingWithPrefixAndRemovePrefix(tags, "message-color:");
         let themeObjective;
+        let ViewGlobalSC = configDb.get("ViewGlobalSC") == "true" ? true : false;
         try {
             themeObjective = world.scoreboard.getObjective("themes");
         } catch {}
+        let isStaffChat = msg.sender.hasTag("staffchat");
         for(const player of world.getPlayers()) {
+            if(!ViewGlobalSC && player.hasTag("staffchat") && !msg.sender.hasTag("staffchat")) continue;
+            if(isStaffChat && !player.hasTag("staffchat")) continue;
             let score = 0;
             try {
                 let s = themeObjective.getScore(player.scoreboardIdentity);
@@ -72,7 +80,7 @@ world.beforeEvents.chatSend.subscribe(msg=>{
                 console.warn(e)
             }
             let theme = commands.themeMgr.getTheme(score);
-            player.sendMessage(`${bracketColor ? bracketColor : theme.defaultBracketColor}[${theme.defaultRankColor}${ranks.join(`§r${bracketColor ? bracketColor : theme.defaultBracketColor}, ${theme.defaultRankColor}`)}§r${bracketColor ? bracketColor : theme.defaultBracketColor}] ${/^§[(0-9a-f)*?]$/.test(nameColor) ? nameColor : theme.defaultNameColor}${msg.sender.nameTag}${bracketColor ? bracketColor : theme.defaultBracketColor}: ${messageColor ? messageColor : theme.defaultMessageColor}${msg.message}`);
+            player.sendMessage(`${isStaffChat ? `${theme.infoColor}(STAFF CHAT) §r` : ``}${bracketColor ? bracketColor : theme.defaultBracketColor}[${theme.defaultRankColor}${ranks.join(`§r${bracketColor ? bracketColor : theme.defaultBracketColor}, ${theme.defaultRankColor}`)}§r${bracketColor ? bracketColor : theme.defaultBracketColor}] ${/^§[(0-9a-f)*?]$/.test(nameColor) ? nameColor : theme.defaultNameColor}${msg.sender.name}${bracketColor ? bracketColor : theme.defaultBracketColor}: ${messageColor ? messageColor : theme.defaultMessageColor}${msg.message}`);
         }
         // world.sendMessage(`[${ranks.join('§r, ')}§r] ${/^§[(0-9a-f)*?]$/.test(nameColor) ? nameColor : "§b"}${msg.sender.nameTag} ${msg.message}`);
         return;

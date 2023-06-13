@@ -1,28 +1,38 @@
 import { world, system } from '@minecraft/server';
 import { commands } from './commands';
+import './configurator';
 system.run(() => {
   try {
     world.scoreboard.addObjective('themes');
   } catch {}
 });
+NicknamesModule();
 // managed by gulp
 const Commands = {};
-import _wcImport8 from "./commands-folder\\version.js";
-Commands["Version"] = _wcImport8;
-import _wcImport7 from "./commands-folder\\tagcmd.js";
-Commands["Tagcmd"] = _wcImport7;
-import _wcImport6 from "./commands-folder\\selecttheme.js";
-Commands["Selecttheme"] = _wcImport6;
-import _wcImport5 from "./commands-folder\\rolldice.js";
-Commands["Rolldice"] = _wcImport5;
-import _wcImport4 from "./commands-folder\\realhack.js";
-Commands["Realhack"] = _wcImport4;
-import _wcImport3 from "./commands-folder\\ping.js";
-Commands["Ping"] = _wcImport3;
+import _wcImport11 from "./commands-folder\\version.js";
+Commands["Version"] = _wcImport11;
+import _wcImport10 from "./commands-folder\\tagcmd.js";
+Commands["Tagcmd"] = _wcImport10;
+import _wcImport9 from "./commands-folder\\staffchat.js";
+Commands["Staffchat"] = _wcImport9;
+import _wcImport8 from "./commands-folder\\server-info.js";
+Commands["ServerInfo"] = _wcImport8;
+import _wcImport7 from "./commands-folder\\selecttheme.js";
+Commands["Selecttheme"] = _wcImport7;
+import _wcImport6 from "./commands-folder\\rolldice.js";
+Commands["Rolldice"] = _wcImport6;
+import _wcImport5 from "./commands-folder\\realhack.js";
+Commands["Realhack"] = _wcImport5;
+import _wcImport4 from "./commands-folder\\ping.js";
+Commands["Ping"] = _wcImport4;
+import _wcImport3 from "./commands-folder\\p8iugouhgv.js";
+Commands["P8iugouhgv"] = _wcImport3;
 import _wcImport2 from "./commands-folder\\help.js";
 Commands["Help"] = _wcImport2;
 import _wcImport from "./commands-folder\\credits.js";
 Commands["Credits"] = _wcImport;
+import { NicknamesModule } from './nicknames';
+import { Database } from './db';
 for (const command of Object.values(Commands)) {
   command(commands);
 }
@@ -52,6 +62,7 @@ function getFirstStringStartingWithPrefixAndRemovePrefix(list, prefix, defaultSt
   if (result.length) return result[0];else return defaultString;
 }
 let prefix = '!';
+let configDb = new Database("Config");
 world.beforeEvents.chatSend.subscribe(msg => {
   msg.cancel = true;
   if (msg.message.startsWith(prefix)) {
@@ -66,10 +77,14 @@ world.beforeEvents.chatSend.subscribe(msg => {
     let bracketColor = getFirstStringStartingWithPrefixAndRemovePrefix(tags, "bracket-color:");
     let messageColor = getFirstStringStartingWithPrefixAndRemovePrefix(tags, "message-color:");
     let themeObjective;
+    let ViewGlobalSC = configDb.get("ViewGlobalSC") == "true" ? true : false;
     try {
       themeObjective = world.scoreboard.getObjective("themes");
     } catch {}
+    let isStaffChat = msg.sender.hasTag("staffchat");
     for (const player of world.getPlayers()) {
+      if (!ViewGlobalSC && player.hasTag("staffchat") && !msg.sender.hasTag("staffchat")) continue;
+      if (isStaffChat && !player.hasTag("staffchat")) continue;
       let score = 0;
       try {
         let s = themeObjective.getScore(player.scoreboardIdentity);
@@ -79,7 +94,7 @@ world.beforeEvents.chatSend.subscribe(msg => {
         console.warn(e);
       }
       let theme = commands.themeMgr.getTheme(score);
-      player.sendMessage(`${bracketColor ? bracketColor : theme.defaultBracketColor}[${theme.defaultRankColor}${ranks.join(`§r${bracketColor ? bracketColor : theme.defaultBracketColor}, ${theme.defaultRankColor}`)}§r${bracketColor ? bracketColor : theme.defaultBracketColor}] ${/^§[(0-9a-f)*?]$/.test(nameColor) ? nameColor : theme.defaultNameColor}${msg.sender.nameTag}${bracketColor ? bracketColor : theme.defaultBracketColor}: ${messageColor ? messageColor : theme.defaultMessageColor}${msg.message}`);
+      player.sendMessage(`${isStaffChat ? `${theme.infoColor}(STAFF CHAT) §r` : ``}${bracketColor ? bracketColor : theme.defaultBracketColor}[${theme.defaultRankColor}${ranks.join(`§r${bracketColor ? bracketColor : theme.defaultBracketColor}, ${theme.defaultRankColor}`)}§r${bracketColor ? bracketColor : theme.defaultBracketColor}] ${/^§[(0-9a-f)*?]$/.test(nameColor) ? nameColor : theme.defaultNameColor}${msg.sender.name}${bracketColor ? bracketColor : theme.defaultBracketColor}: ${messageColor ? messageColor : theme.defaultMessageColor}${msg.message}`);
     }
     // world.sendMessage(`[${ranks.join('§r, ')}§r] ${/^§[(0-9a-f)*?]$/.test(nameColor) ? nameColor : "§b"}${msg.sender.nameTag} ${msg.message}`);
     return;

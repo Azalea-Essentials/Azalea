@@ -21,26 +21,30 @@ export class Database {
         })
     }
     get(key) {
-        let objective = world.scoreboard.getObjective(`db-${this.table}`)
-        let participants = objective.getParticipants();
-
-        let lenParticipant = participants.find(_=>_.displayName==`${key}-L`);
-        if(!lenParticipant) return;
-
-        let len = lenParticipant.getScore(objective);
-
-        let valParticipants = participants
-            .filter(_=>_.displayName.startsWith(`${key}-`)&&!_.displayName.endsWith('L'))
-            .sort((a,b)=>parseInt(a.displayName.substring(`${key}-`.length) - parseInt(b.displayName.substring(`${key}-`.length))))
-            .filter(_=>parseInt(_.displayName.substring(`${key}-`.length)) < len);
-
-        let str = "";
-        
-        for(const participant of valParticipants) {
-            str += String.fromCharCode(participant.getScore(objective));
+        try {
+            let objective = world.scoreboard.getObjective(`db-${this.table}`)
+            let participants = objective.getParticipants();
+            if(!participants.length) return "";
+            let lenParticipant = participants.find(_=>_.displayName==`${key}-L`);
+            if(!lenParticipant) return;
+    
+            let len = lenParticipant.getScore(objective);
+    
+            let valParticipants = participants
+                .filter(_=>_.displayName.startsWith(`${key}-`)&&!_.displayName.endsWith('L'))
+                .sort((a,b)=>parseInt(a.displayName.substring(`${key}-`.length) - parseInt(b.displayName.substring(`${key}-`.length))))
+                .filter(_=>parseInt(_.displayName.substring(`${key}-`.length)) < len);
+    
+            let str = "";
+            
+            for(const participant of valParticipants) {
+                str += String.fromCharCode(participant.getScore(objective));
+            }
+            // console.warn(str);
+            return str;    
+        } catch {
+            return "";
         }
-        // console.warn(str);
-        return str;
     }
     delete(key) {
         let objective = world.scoreboard.getObjective(`db-${this.table}`);
