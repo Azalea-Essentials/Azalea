@@ -10,35 +10,60 @@ system.run(() => {
 NicknamesModule();
 // managed by gulp
 const Commands = {};
-import _wcImport12 from "./commands-folder\\version.js";
-Commands["Version"] = _wcImport12;
-import _wcImport11 from "./commands-folder\\verify.js";
-Commands["Verify"] = _wcImport11;
-import _wcImport10 from "./commands-folder\\tagcmd.js";
-Commands["Tagcmd"] = _wcImport10;
-import _wcImport9 from "./commands-folder\\staffchat.js";
-Commands["Staffchat"] = _wcImport9;
-import _wcImport8 from "./commands-folder\\server-info.js";
-Commands["ServerInfo"] = _wcImport8;
-import _wcImport7 from "./commands-folder\\selecttheme.js";
-Commands["Selecttheme"] = _wcImport7;
-import _wcImport6 from "./commands-folder\\rolldice.js";
-Commands["Rolldice"] = _wcImport6;
-import _wcImport5 from "./commands-folder\\realhack.js";
-Commands["Realhack"] = _wcImport5;
-import _wcImport4 from "./commands-folder\\ping.js";
-Commands["Ping"] = _wcImport4;
-import _wcImport3 from "./commands-folder\\p8iugouhgv.js";
-Commands["P8iugouhgv"] = _wcImport3;
-import _wcImport2 from "./commands-folder\\help.js";
-Commands["Help"] = _wcImport2;
-import _wcImport from "./commands-folder\\credits.js";
-Commands["Credits"] = _wcImport;
+import _wcImport14 from "./commands-folder\\version.js";
+Commands["Version"] = _wcImport14;
+import _wcImport13 from "./commands-folder\\verify.js";
+Commands["Verify"] = _wcImport13;
+import _wcImport12 from "./commands-folder\\uptime.js";
+Commands["Uptime"] = _wcImport12;
+import _wcImport11 from "./commands-folder\\tagcmd.js";
+Commands["Tagcmd"] = _wcImport11;
+import _wcImport10 from "./commands-folder\\staffchat.js";
+Commands["Staffchat"] = _wcImport10;
+import _wcImport9 from "./commands-folder\\server-info.js";
+Commands["ServerInfo"] = _wcImport9;
+import _wcImport8 from "./commands-folder\\selecttheme.js";
+Commands["Selecttheme"] = _wcImport8;
+import _wcImport7 from "./commands-folder\\rolldice.js";
+Commands["Rolldice"] = _wcImport7;
+import _wcImport6 from "./commands-folder\\realhack.js";
+Commands["Realhack"] = _wcImport6;
+import _wcImport5 from "./commands-folder\\ping.js";
+Commands["Ping"] = _wcImport5;
+import _wcImport4 from "./commands-folder\\p8iugouhgv.js";
+Commands["P8iugouhgv"] = _wcImport4;
+import _wcImport3 from "./commands-folder\\help.js";
+Commands["Help"] = _wcImport3;
+import _wcImport2 from "./commands-folder\\credits.js";
+Commands["Credits"] = _wcImport2;
+import _wcImport from "./commands-folder\\addrank.js";
+Commands["Addrank"] = _wcImport;
 import { NicknamesModule } from './nicknames';
 import { Database } from './db';
+import { ActionFormData, ModalFormData } from '@minecraft/server-ui';
 for (const command of Object.values(Commands)) {
   command(commands);
 }
+let azaleaSessionToken = `${Date.now()}.${Math.floor(Math.random() * 8196).toString(16)}`;
+let initialRun = Date.now();
+let finalRun = Date.now();
+world.afterEvents.playerJoin.subscribe(e => {
+  let db = new Database(`PLAYER-${e.playerName}`);
+  let joinsList = JSON.parse(db.get("JoinsList") ? db.get("JoinsList") : "[]");
+  joinsList.push({
+    d: Date.now(),
+    t: system.currentTick
+  });
+  db.set("JoinsList", JSON.stringify(joinsList));
+});
+system.runInterval(() => {
+  finalRun = Date.now();
+  let db = new Database(`Uptime`);
+  db.set(azaleaSessionToken, JSON.stringify({
+    from: initialRun,
+    to: finalRun
+  }));
+}, 100);
 // create the events using my shitty import system
 // import '*events';
 // let events = [];
@@ -71,6 +96,7 @@ world.beforeEvents.chatSend.subscribe(msg => {
   if (msg.message.startsWith(prefix)) {
     commands.run(msg, prefix);
   } else {
+    msg.message = msg.message.replaceAll(':chest:', '').replaceAll(':crystal:', '').replaceAll(':wrench:', '').replaceAll(':coins:', '').replaceAll(':fireball:', '').replaceAll(':lootbag:', '').replaceAll(':expbottle:', '').replaceAll(':plus:', '').replaceAll(':kill:', '').replaceAll(':admin:', '').replaceAll(':owner:', '').replaceAll(':member:', '');
     // chat ranks are done
     // it just took a shitty utility function and weird string formatting
     let tags = msg.sender.getTags();
@@ -97,9 +123,59 @@ world.beforeEvents.chatSend.subscribe(msg => {
         console.warn(e);
       }
       let theme = commands.themeMgr.getTheme(score);
-      player.sendMessage(`${isStaffChat ? `${theme.infoColor}(STAFF CHAT) §r` : ``}${bracketColor ? bracketColor : theme.defaultBracketColor}[${theme.defaultRankColor}${ranks.join(`§r${bracketColor ? bracketColor : theme.defaultBracketColor}, ${theme.defaultRankColor}`)}§r${bracketColor ? bracketColor : theme.defaultBracketColor}] ${/^§[(0-9a-f)*?]$/.test(nameColor) ? nameColor : theme.defaultNameColor}${msg.sender.name}${bracketColor ? bracketColor : theme.defaultBracketColor}: ${messageColor ? messageColor : theme.defaultMessageColor}${msg.message}`);
+      // player.sendMessage(`${isStaffChat ? `${theme.infoColor}(STAFF CHAT) §r` : ``}${bracketColor ? bracketColor : theme.defaultBracketColor}[${theme.defaultRankColor}${ranks.join(`§r${bracketColor ? bracketColor : theme.defaultBracketColor}, ${theme.defaultRankColor}`)}§r${bracketColor ? bracketColor : theme.defaultBracketColor}] ${nameColor ? nameColor : theme.defaultNameColor}${msg.sender.name}${bracketColor ? bracketColor : theme.defaultBracketColor}: ${messageColor ? messageColor : theme.defaultMessageColor}${msg.message}`);
+      player.sendMessage(`${isStaffChat ? `${theme.infoColor}(STAFF CHAT) §r` : ``}${bracketColor || theme.defaultBracketColor}[${theme.defaultRankColor}${ranks.join(`§r${bracketColor || theme.defaultBracketColor}, ${theme.defaultRankColor}`)}§r${bracketColor || theme.defaultBracketColor}] ${nameColor || theme.defaultNameColor}${msg.sender.name}${bracketColor || theme.defaultBracketColor} §l» §r${messageColor || theme.defaultMessageColor}${msg.message}`);
     }
     // world.sendMessage(`[${ranks.join('§r, ')}§r] ${/^§[(0-9a-f)*?]$/.test(nameColor) ? nameColor : "§b"}${msg.sender.nameTag} ${msg.message}`);
     return;
+  }
+});
+system.events.scriptEventReceive.subscribe(e => {
+  console.warn(e.sourceType);
+  if (e.id == "azalea:open_debug_ui" && e.sourceType == "clientScript") {
+    let player = e.sourceEntity;
+    system.run(() => {
+      let tables = world.scoreboard.getObjectives().filter(_ => _.id.startsWith('db-'));
+      let action1 = new ActionFormData();
+      for (const table of tables) {
+        action1.button(table.displayName);
+      }
+      action1.show(player).then(res1 => {
+        if (res1.canceled) return;
+        let table = tables[res1.selection];
+        let tableName = table.id.substring(3);
+        let db = new Database(tableName);
+        let keys = db.keys();
+        let action2 = new ActionFormData();
+        for (const key of keys) {
+          action2.button(`KEY: ${key}`);
+        }
+        action2.show(player).then(res2 => {
+          if (res2.canceled) return;
+          let key = keys[res2.selection];
+          let action3 = new ActionFormData();
+          action3.title(`§aView/edit key§r: §r${tableName}§7/§r${key}`);
+          action3.body(`Value: ${db.get(key)}`);
+          action3.button(`Delete`);
+          action3.button(`Edit`);
+          action3.show(player).then(res3 => {
+            if (res3.canceled) return;
+            if (res3.selection == 0) {
+              db.delete(key);
+            } else {
+              let modal1 = new ModalFormData();
+              modal1.title(`§r§aEdit key§r: §r${tableName}§7/§r${key}`);
+              modal1.textField(`New value`, `Type a new value...`, db.get(key));
+              modal1.show(player).then(res4 => {
+                if (res4.canceled) return;
+                if (res4.formValues[0]) {
+                  db.set(key, res4.formValues[0]);
+                }
+              });
+            }
+          });
+        });
+      });
+    });
   }
 });

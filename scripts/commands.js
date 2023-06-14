@@ -15,14 +15,29 @@ export class Commands {
       onRun: data.onRun
     });
   }
-  parseResult(res, theme) {
+  parseResult(res, theme, sender) {
     if (typeof res == 'string') {
-      if (res.startsWith('ERROR ')) return `${theme.errorColor}§l[ERROR] §r${theme.defaultMessageColor}${res.substring('ERROR '.length)}`;
-      if (res.startsWith('SUCCESS ')) return `${theme.successColor}§l[SUCCESS] §r${theme.defaultMessageColor}${res.substring('SUCCESS '.length)}`;
-      if (res.startsWith('INFO ')) return `${theme.infoColor}§l[INFO] §r${theme.defaultMessageColor}${res.substring('INFO '.length)}`;
-      if (res.startsWith('TEXT ')) return `${res.substring('TEXT '.length)}`;
-      if (res.startsWith('WARN ')) return `${res.substring('WARN '.length)}`;
-      if (res.startsWith('RESPONSE1 ')) return `§l[RESULT] §r${res.substring('RESPONSE1 '.length)}`;
+      if (res.startsWith('ERROR ')) {
+        return [`${theme.errorColor}§l[ERROR] §r${theme.defaultMessageColor}${res.substring('ERROR '.length)}`, `random.glass`];
+      }
+      if (res.startsWith('SUCCESS ')) {
+        // sender.pl
+        return [`${theme.successColor}§l[SUCCESS] §r${theme.defaultMessageColor}${res.substring('SUCCESS '.length)}`, `note.pling`];
+      }
+      if (res.startsWith('INFO ')) {
+        return [`${theme.infoColor}§l[INFO] §r${theme.defaultMessageColor}${res.substring('INFO '.length)}`, `note.chime`];
+      }
+      if (res.startsWith('TEXT ')) {
+        return [`${res.substring('TEXT '.length)}`, `random.toast`, {
+          pitch: 0.5
+        }];
+      }
+      if (res.startsWith('WARN ')) {
+        return [`${theme.warningColor}§l[WARNING] §r${res.substring('WARN '.length)}`, `note.guitar`];
+      }
+      if (res.startsWith('RESPONSE1 ')) {
+        return [`§l[RESULT] §r${res.substring('RESPONSE1 '.length)}`, `note.chime`];
+      }
     }
   }
   async run(msg, prefix) {
@@ -51,9 +66,21 @@ export class Commands {
     let cmd2 = this._cmds.find(_ => _.name == cmd);
     // console.warn(typeof cmd2.onRun)a
     // console.warn(cmd2);
-    if (!cmd2) return msg.sender.sendMessage(this.parseResult('ERROR Command not found!', theme));
+    if (!cmd2) {
+      let res = this.parseResult('ERROR Command not found!', theme, msg.sender);
+      let player = msg.sender;
+      system.run(() => {
+        player.playSound(res[1], res.length > 2 ? res[2] : undefined);
+      });
+      return msg.sender.sendMessage(res[0]);
+    }
     cmd2.onRun(msg, args, theme, res => {
-      msg.sender.sendMessage(this.parseResult(res, theme));
+      let res2 = this.parseResult(res, theme, msg.sender);
+      let player = msg.sender;
+      system.run(() => {
+        player.playSound(res2[1], res2.length > 2 ? res2[2] : undefined);
+      });
+      msg.sender.sendMessage(res2[0]);
     }, this._cmds, prefix);
     // let sender = msg.sender;
   }
@@ -83,8 +110,8 @@ commands.themeMgr.addTheme({
   errorColor: "§c",
   infoColor: "§s",
   defaultBracketColor: "§8",
-  defaultRankColor: "§7",
-  defaultNameColor: "§a",
+  defaultRankColor: "§d",
+  defaultNameColor: "§d",
   defaultMessageColor: "§f",
   barFull: "§q",
   barEmpty: "§n",

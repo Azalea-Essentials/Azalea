@@ -38,6 +38,15 @@ export class Database {
       return "";
     }
   }
+  keys() {
+    try {
+      let obj = world.scoreboard.getObjective(`db-${this.table}`);
+      let participants = obj.getParticipants().filter(_ => _.displayName.endsWith('-L')).map(_ => _.displayName.slice(0, -2));
+      return participants;
+    } catch {
+      return [];
+    }
+  }
   delete(key) {
     let objective = world.scoreboard.getObjective(`db-${this.table}`);
     let participants = objective.getParticipants();

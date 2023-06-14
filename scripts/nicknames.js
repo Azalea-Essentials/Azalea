@@ -20,7 +20,7 @@ export function NicknamesModule() {
     if (ImprovedNametagsEnabled) {
       for (const player of minecraft.world.getPlayers()) {
         let nameColor = player.getTags().find(_ => _.startsWith("name-color:"))?.substring("name-color:".length);
-        let bracketColor = player.getTags().find(_ => _.startsWith("bracket-prefix:"))?.substring("bracket-prefix:".length);
+        let bracketColor = player.getTags().find(_ => _.startsWith("bracket-color:"))?.substring("bracket-color:".length);
         let rankText = player.getTags().filter(tag => tag.startsWith("rank:")).map(rank => rank.substring(5)).join("§r, ");
         let healthComponent = player.getComponent("health");
         if (nameColor && !/\u00A7[0-9a-gk-orA-GK-OR]/.test(nameColor)) nameColor = "";
