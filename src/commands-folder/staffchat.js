@@ -1,13 +1,17 @@
-import { system, world } from "@minecraft/server";
-import { isAdmin } from "../isAdmin"
-import { Database } from "../db";
+import {
+  system,
+  world,
+} from '@minecraft/server';
+
+import { Database } from '../db';
 
 export default function AddStaffChatCommand(commands) {
     commands.addCommand("staffchat",{
         description: "Staff chat, its a chat for staff",
         category: "Staff",
+        admin: true,
         onRun(msg, args, theme, response) {
-            if(!isAdmin(msg.sender)) return response(`ERROR You need admin!`);
+            // if(!isAdmin(msg.sender)) return response(`ERROR You need admin!`);
             let player = msg.sender;
             let config = new Database("Config");
             let LogJoinsLeavesSC = config.get("LogJoinsLeavesSC") == "true" ? true : false;

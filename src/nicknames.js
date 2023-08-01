@@ -11,8 +11,10 @@
 Nicknames
 Made by TRASH, if you remove this comment, i will kidnap your dog
 */
-import * as minecraft from "@minecraft/server";
-import { Database } from "./db";
+import * as minecraft from '@minecraft/server';
+
+import { Database } from './db';
+
 export function NicknamesModule() {
     minecraft.system.runInterval(() => {
         let db = new Database("Config");
@@ -40,7 +42,7 @@ export function NicknamesModule() {
                 if (!bracketColor) bracketColor = "§f";
                //  player.nameTag = `${nameColor}${player.hasTag("name-bold") ? "§l" : ""}${player.nameTag.split("\n")[0].replace(/\u00A7[0-9a-gk-orA-GKM-OR]/gi, "")}\n§r${bracketColor}< ${rankText ? rankText : "§dMember"} §r${bracketColor}>\n§2${healthComponent.current
                   //  }/${healthComponent.value} §a${"".repeat(Math.floor((healthComponent.current / healthComponent.value) * 5)) + "░".repeat(5 - Math.floor((healthComponent.current / healthComponent.value) * 5))}`;
-               player.nameTag = `${nameColor}${player.hasTag("name-bold") ? "§l" : ""}${player.nameTag.split("\n")[0].replace(/\u00A7[0-9a-gk-orA-GKM-OR]/gi, "")}\n§r${bracketColor}< ${rankText ? rankText : "§dMember"} §r${bracketColor}>\n§2${healthComponent.current}/${healthComponent.value}`;
+               player.nameTag = `${nameColor}${player.hasTag("name-bold") ? "§l" : ""}${player.nameTag.split("\n")[0].replace(/\u00A7[0-9a-gk-orA-GKM-OR]/gi, "")}\n§r${bracketColor}< ${rankText ? rankText : "§dMember"} §r${bracketColor}>${healthComponent.currentValue?`\n§2${Math.floor(healthComponent.currentValue)}/${Math.floor(healthComponent.effectiveMax)}`:``}`;
              }
        
         } else {

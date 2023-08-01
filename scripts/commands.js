@@ -1,9 +1,11 @@
-import { Theme } from "./themes";
-import { world, system } from '@minecraft/server';
+import { system, world } from '@minecraft/server';
+import { isAdmin } from './isAdmin';
+import { Theme } from './themes';
 export class Commands {
   constructor(themeMgr) {
     this.themeMgr = themeMgr;
     this._cmds = [];
+    this.middleware = [];
   }
   addCommand(name, data) {
     this._cmds.push({
@@ -12,25 +14,28 @@ export class Commands {
       category: data.category ? data.category : "Uncategorized",
       usage: data.usage ? data.usage : "No Usage Description",
       author: data.author ? data.author : "TRASH",
-      onRun: data.onRun
+      onRun: data.onRun,
+      cb_version: data.cb_version ? data.cb_version : 1,
+      admin: data.admin ? true : false
     });
+  }
+  use(fn) {
+    this.middleware.push(fn);
   }
   parseResult(res, theme, sender) {
     if (typeof res == 'string') {
       if (res.startsWith('ERROR ')) {
-        return [`${theme.errorColor}§l[ERROR] §r${theme.defaultMessageColor}${res.substring('ERROR '.length)}`, `random.glass`];
+        return [`${theme.errorColor}§l[ERROR] §r${theme.darkError ? theme.darkError : theme.defaultMessageColor}${res.substring('ERROR '.length)}`, `random.glass`];
       }
       if (res.startsWith('SUCCESS ')) {
         // sender.pl
-        return [`${theme.successColor}§l[SUCCESS] §r${theme.defaultMessageColor}${res.substring('SUCCESS '.length)}`, `note.pling`];
+        return [`${theme.successColor}§l[SUCCESS] §r${theme.darkSuccess ? theme.darkSuccess : theme.defaultMessageColor}${res.substring('SUCCESS '.length)}`, `note.pling`];
       }
       if (res.startsWith('INFO ')) {
-        return [`${theme.infoColor}§l[INFO] §r${theme.defaultMessageColor}${res.substring('INFO '.length)}`, `note.chime`];
+        return [`${theme.infoColor}§l[INFO] §r${theme.darkInfo ? theme.darkInfo : theme.defaultMessageColor}${res.substring('INFO '.length)}`, `note.chime`];
       }
       if (res.startsWith('TEXT ')) {
-        return [`${res.substring('TEXT '.length)}`, `random.toast`, {
-          pitch: 0.5
-        }];
+        return [`${res.substring('TEXT '.length)}`, `note.iron_xylophone`];
       }
       if (res.startsWith('WARN ')) {
         return [`${theme.warningColor}§l[WARNING] §r${res.substring('WARN '.length)}`, `note.guitar`];
@@ -57,15 +62,32 @@ export class Commands {
       score = 0;
     }
     let theme = this.themeMgr.getTheme(score);
+    let middlewareCmds = [];
+    for (const middleware of this.middleware) {
+      let mCmds = middleware(true);
+      if (mCmds) middlewareCmds = [...middlewareCmds, ...mCmds];
+    }
+    let cmdsList = [...this._cmds, ...middlewareCmds];
+    let cmd = msg.message.substring(prefix.length).split(' ')[0].toLowerCase();
+    let args = msg.message.substring(prefix.length).split(' ').slice(1);
+    for (const middleware of this.middleware) {
+      let isSuccessful = middleware(false, cmd, msg, args, theme, res => {
+        let res2 = this.parseResult(res, theme, msg.sender);
+        let player = msg.sender;
+        system.run(() => {
+          player.playSound(res2[1], res2.length > 2 ? res2[2] : undefined);
+        });
+        msg.sender.sendMessage(res2[0]);
+      }, cmdsList, prefix);
+      if (isSuccessful) return;
+    }
     // let {message} = msg;
     // msg.sender.sendMessage(this.parseResult('ERROR Command not found!'))
     if (!msg.message.startsWith(prefix)) return;
-    let cmd = msg.message.split(' ')[0].substring(prefix.length);
-    let args = msg.message.split(' ').slice(1);
-    // console.warn(msg.message);
+    let cmdtoggles = world.scoreboard.getObjective("cmdtoggles");
+    let cmdStatusP = cmdtoggles.getParticipants().find(_ => _.displayName == cmd);
+    let cmdStatus = cmdStatusP ? cmdtoggles.getScore(cmdStatusP) : 0;
     let cmd2 = this._cmds.find(_ => _.name == cmd);
-    // console.warn(typeof cmd2.onRun)a
-    // console.warn(cmd2);
     if (!cmd2) {
       let res = this.parseResult('ERROR Command not found!', theme, msg.sender);
       let player = msg.sender;
@@ -74,14 +96,38 @@ export class Commands {
       });
       return msg.sender.sendMessage(res[0]);
     }
-    cmd2.onRun(msg, args, theme, res => {
-      let res2 = this.parseResult(res, theme, msg.sender);
-      let player = msg.sender;
-      system.run(() => {
-        player.playSound(res2[1], res2.length > 2 ? res2[2] : undefined);
+    if (cmdStatus == 1 && !isAdmin(msg.sender)) return msg.sender.sendMessage("§cThis command is only for admins!");
+    if (cmdStatus == 2) return msg.sender.sendMessage("§cThis command is disabled!");
+    if (cmdStatus != 3 && cmd2.admin && !isAdmin(msg.sender)) return msg.sender.sendMessage("§cThis command requires admin!");
+    // console.warn(msg.message);
+    // console.warn(typeof cmd2.onRun)a
+    // console.warn(cmd2);
+    if (cmd2.cb_version == 1) {
+      cmd2.onRun(msg, args, theme, res => {
+        let res2 = this.parseResult(res, theme, msg.sender);
+        let player = msg.sender;
+        system.run(() => {
+          player.playSound(res2[1], res2.length > 2 ? res2[2] : undefined);
+        });
+        msg.sender.sendMessage(res2[0]);
+      }, cmdsList, prefix);
+    } else {
+      cmd2.onRun({
+        msg,
+        args,
+        theme,
+        response: res => {
+          let res2 = this.parseResult(res, theme, msg.sender);
+          let player = msg.sender;
+          system.run(() => {
+            player.playSound(res2[1], res2.length > 2 ? res2[2] : undefined);
+          });
+          msg.sender.sendMessage(res2[0]);
+        },
+        cmdsList,
+        prefix
       });
-      msg.sender.sendMessage(res2[0]);
-    }, this._cmds, prefix);
+    }
     // let sender = msg.sender;
   }
 
@@ -104,11 +150,37 @@ export class Commands {
 let themeManager = new Theme();
 export const commands = new Commands(themeManager);
 commands.themeMgr.addTheme({
-  name: "Default Azalea",
+  name: "Default Azalea (new)",
+  descriptionText: "Default.",
+  successColor: "§a",
+  errorColor: "§c",
+  infoColor: "§b",
+  darkSuccess: "§2",
+  darkError: "§4",
+  darkInfo: "§9",
+  defaultBracketColor: "§8",
+  defaultRankColor: "§6",
+  defaultNameColor: "§4",
+  defaultMessageColor: "§f",
+  barFull: "§a",
+  barEmpty: "§c",
+  barBracket: "§7",
+  category: "§8",
+  header: "§d",
+  command: "§a",
+  description: "§7",
+  alias: "§h",
+  warningColor: "§e"
+});
+commands.themeMgr.addTheme({
+  name: "Default Azalea (old)",
   descriptionText: "Default.",
   successColor: "§a",
   errorColor: "§c",
   infoColor: "§s",
+  darkSuccess: null,
+  darkError: null,
+  darkInfo: null,
   defaultBracketColor: "§8",
   defaultRankColor: "§d",
   defaultNameColor: "§d",
@@ -128,6 +200,9 @@ commands.themeMgr.addTheme({
   successColor: "§f",
   errorColor: "§f",
   infoColor: "§f",
+  darkSuccess: null,
+  darkError: null,
+  darkInfo: null,
   defaultBracketColor: "§f",
   defaultRankColor: "§f",
   defaultNameColor: "§f",
@@ -147,6 +222,9 @@ commands.themeMgr.addTheme({
   successColor: "§q",
   errorColor: "§m",
   infoColor: "§9",
+  darkSuccess: null,
+  darkError: null,
+  darkInfo: null,
   defaultBracketColor: "§t",
   defaultRankColor: "§b",
   defaultNameColor: "§9",
@@ -166,6 +244,9 @@ commands.themeMgr.addTheme({
   successColor: "§e",
   errorColor: "§9",
   infoColor: "§9",
+  darkSuccess: null,
+  darkError: null,
+  darkInfo: null,
   defaultBracketColor: "§3",
   defaultRankColor: "§9",
   defaultNameColor: "§b",
@@ -185,6 +266,9 @@ commands.themeMgr.addTheme({
   "successColor": "§b",
   "errorColor": "§d",
   "infoColor": "§u",
+  darkSuccess: null,
+  darkError: null,
+  darkInfo: null,
   "defaultBracketColor": "§d",
   "defaultRankColor": "§c",
   "defaultNameColor": "§e",
@@ -204,6 +288,9 @@ commands.themeMgr.addTheme({
   "successColor": "§2",
   "errorColor": "§4",
   "infoColor": "§b",
+  darkSuccess: null,
+  darkError: null,
+  darkInfo: null,
   "defaultBracketColor": "§8",
   "defaultRankColor": "§8",
   "defaultNameColor": "§a",
@@ -223,6 +310,9 @@ commands.themeMgr.addTheme({
   "successColor": "§c",
   "errorColor": "§e",
   "infoColor": "§g",
+  darkSuccess: null,
+  darkError: null,
+  darkInfo: null,
   "defaultBracketColor": "§c",
   "defaultRankColor": "§p",
   "defaultNameColor": "§g",
@@ -235,4 +325,27 @@ commands.themeMgr.addTheme({
   "description": "§e",
   "alias": "§g",
   "warningColor": "§6"
+});
+commands.themeMgr.addTheme({
+  name: "TheLegendaryTheme",
+  descriptionText: "a",
+  successColor: "§a",
+  errorColor: "§c",
+  infoColor: "§b",
+  darkSuccess: "§q",
+  darkError: "§m",
+  darkInfo: "§t",
+  defaultBracketColor: "§8",
+  defaultRankColor: "§6",
+  defaultNameColor: "§c",
+  defaultMessageColor: "§d",
+  barFull: "§a",
+  barEmpty: "§c",
+  barBracket: "§7",
+  category: "§8",
+  header: "§a",
+  command: "§d",
+  description: "§f",
+  alias: "§h",
+  warningColor: "§g"
 });

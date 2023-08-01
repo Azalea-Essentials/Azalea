@@ -1,12 +1,15 @@
-import { system, world } from "@minecraft/server";
-import { isAdmin } from "../isAdmin"
+import {
+  system,
+  world,
+} from '@minecraft/server';
 
 export default function AddRankCommand(commands) {
     commands.addCommand("rank", {
         description: "Add / remove ranks",
         category: "Management",
+        admin: true,
         onRun(msg, args, theme, response) {
-            if(!isAdmin(msg.sender)) return response(`ERROR You need admin!`);
+            // if(!isAdmin(msg.sender)) return response(`ERROR You need admin!`);
             if(args.length) {
                 if(args[0] == "add") {
                     let playerName = args[1].replace(/_/g," ");

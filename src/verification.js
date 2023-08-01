@@ -1,12 +1,17 @@
-import { system, world } from "@minecraft/server";
-import { Database } from "./db";
+import {
+  system,
+  world,
+} from '@minecraft/server';
+
+import { Database } from './db';
+
 let EnableVerification = false;
 let VerificationType = "public";
 system.runInterval(()=>{
     let db = new Database('Config');
     EnableVerification = db.get("EnableVerification") == "true" ? true : false;
     VerificationType = db.get("VerificationType") == "private" ? "private" : "public";
-},50);
+},100);
 let ids = [];
 system.runInterval(()=>{
     if(EnableVerification) {

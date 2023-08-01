@@ -20,13 +20,18 @@ export class Theme {
         description,
         alias,
         descriptionText,
-        warningColor
+        warningColor,
+        darkError,
+        darkSuccess,
+        darkInfo,
+        header
     }) {
         // awful array shit
-        let allCorrect = [successColor,errorColor,infoColor,defaultBracketColor,defaultRankColor,defaultNameColor,defaultMessageColor,barFull,barEmpty,barBracket, category, command, description, alias,warningColor].every(col => this.themeColorRegex.test(col));
+        // let allCorrect = [successColor,errorColor,infoColor,defaultBracketColor,defaultRankColor,defaultNameColor,defaultMessageColor,barFull,barEmpty,barBracket, category, command, description, alias,warningColor].every(col => this.themeColorRegex.test(col));
+        let allCorrect = true;
         if(allCorrect) {
             // add the theme
-            this.themes.push({descriptionText, name, successColor,errorColor,infoColor,defaultBracketColor,defaultRankColor,defaultNameColor,defaultMessageColor,barFull,barEmpty,barBracket, category, command, description, alias, warningColor})
+            this.themes.push({descriptionText, name, successColor,errorColor,infoColor,defaultBracketColor,defaultRankColor,defaultNameColor,defaultMessageColor,barFull,barEmpty,barBracket, category, command, description, alias, warningColor, darkSuccess, darkInfo, darkError, header})
         }
     }
     getTheme(id) {

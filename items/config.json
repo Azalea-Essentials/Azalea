@@ -8,11 +8,11 @@
 			"minecraft:can_destroy_in_creative": false,
 			"minecraft:allow_off_hand": false,
 			"minecraft:display_name": {
-				"value": "§aConfig UI"
+				"value": "§bAdmin Panel"
 			},
 			"minecraft:max_stack_size": 1,
 			"minecraft:icon": {
-				"texture": "settings_ui"
+				"texture": "echo_shard"
 			},
 			"minecraft:foil": true
 		}

@@ -1,5 +1,5 @@
-import { system, world } from "@minecraft/server";
-import { Database } from "../db";
+import { system, world } from '@minecraft/server';
+import { Database } from '../db';
 export default function VerifyCommand(commands) {
   commands.addCommand("verify", {
     description: "Get access",
@@ -19,9 +19,7 @@ export default function VerifyCommand(commands) {
             system.run(() => player.addTag("verified"));
             system.run(() => {
               let loc = world.getDefaultSpawnPosition();
-              player.teleport(loc, {
-                dimension: world.getDimension('overworld')
-              });
+              player.teleport(loc);
             });
             return response(`SUCCESS You are now verified!`);
           } else if (VerificationType == "public") {
@@ -31,9 +29,7 @@ export default function VerifyCommand(commands) {
 
             system.run(() => {
               let loc = world.getDefaultSpawnPosition();
-              player.teleport(loc, {
-                dimension: world.getDimension('overworld')
-              });
+              player.teleport(loc);
             });
             return response(`SUCCESS You are now verified!`);
           }

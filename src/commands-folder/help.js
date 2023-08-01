@@ -4,11 +4,16 @@ export default function addHelpCommand(commands) {
         category: "Help Center",
         usage: "!help <command name | page>",
         onRun(msg, args, theme, response, commands, prefix) {
+            if(args && args.length && args[0] == "cmd-count") {
+                response(`TEXT ${commands.length}`)
+                return;
+            }
+
             if(args.length && !/^\d+$/.test(args[0])) {
                 let cmd2 = commands.find(_=>_.name == args[0]);
                 if(!cmd2) return response(`ERROR Command not found!`);
                 let text = [];
-                text.push(`${theme.category}<-=- ${theme.command}Command Help: ${cmd2.name} ${theme.category}-=->`)
+                text.push(`${theme.category}<-=- ${theme.header ? theme.header : theme.command}Command Help: ${cmd2.name} ${theme.category}-=->`)
                 text.push(``);
                 text.push(`${theme.command}Command Name ${theme.description}${cmd2.name}`)
                 text.push(`${theme.command}Command Category ${theme.description}${cmd2.category}`)
@@ -47,7 +52,7 @@ export default function addHelpCommand(commands) {
             }
             for(const category of Object.keys(categorizedCommands)) {
                 text.push(``)
-                text.push(`${theme.category}<-=- ${theme.command}${category} §r${theme.category}-=->`)
+                text.push(`${theme.category}<-=- ${theme.header ? theme.header : theme.command}${category} §r${theme.category}-=->`)
                 for(const command of categorizedCommands[category]) {
                     text.push(`${theme.command}${prefix}${command.name} ${theme.description}${command.description}`);
                 }
