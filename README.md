@@ -14,5 +14,4 @@ Current features:
 
 Made by TRASH#0093 on Discord (or TheLegendaryTrashcan#8485 on Revolt)
 
-[Talk on the Discord server](https://discord.gg/azalea-1-year-anniversary-922867041029984316)
-[Talk on the Revolt server](https://rvlt.gg/PjgTYFgF)
+[Talk on the Discord server](https://discord.gg/azalea-1-year-anniversary-922867041029984316) or [Talk on the Revolt server](https://rvlt.gg/PjgTYFgF)
