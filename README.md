@@ -1,3 +1,5 @@
+![Azalea](https://github.com/Ant767/Azalea/blob/main/.github/workflows/bdd80c50-6b00-4dee-aa0c-9eea79718ecd-8.png?raw=true)
+
 # 🌺 Azalea 🌺
 
 Azalea is a very customizable addon for Minecraft Bedrock.
