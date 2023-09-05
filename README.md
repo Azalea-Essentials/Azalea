@@ -1,8 +1,8 @@
-![Azalea](https://github.com/Ant767/Azalea/blob/main/.github/workflows/bdd80c50-6b00-4dee-aa0c-9eea79718ecd-8.png?raw=true)
-
 # 🌺 Azalea 🌺
 
-Azalea is a very customizable addon for Minecraft Bedrock.
+***NOTE: AZALEA IS STILL IN BETA AND SOME FEATURES MIGHT NOT WORK PROPERLY***
+
+**Azalea is a very customizable addon for Minecraft Bedrock.**
 
 Current features:
 - Admin UI
@@ -16,4 +16,4 @@ Current features:
 
 Made by TRASH#0093 on Discord (or TheLegendaryTrashcan#8485 on Revolt)
 
-[Talk on the Discord server](https://discord.gg/azalea-1-year-anniversary-922867041029984316) or [Talk on the Revolt server](https://rvlt.gg/PjgTYFgF)
+[Talk on the Discord server](https://discord.gg/azalea-1-year-anniversary-922867041029984316) or [talk on the Revolt server](https://rvlt.gg/PjgTYFgF)
