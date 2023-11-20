@@ -1,4 +1,4 @@
-![Azalea Banner](https://github.com/Ant767/Azalea/assets/122332042/0aeed6ce-9da8-476e-8389-5e6ad61ff5b1)
+![Azalea Banner Rounded](https://github.com/Ant767/Azalea/assets/122332042/35520c60-4b06-4bb6-bca4-979ccd3b0ebd)
 
 ***NOTE: AZALEA IS STILL IN BETA AND SOME FEATURES MIGHT NOT WORK PROPERLY***
 
