@@ -223,8 +223,8 @@ export const baseConfigMenu = base.toOptions();
 system.run(() => {
   let configuratorDb = new Database("Config");
   configuratorDb.tableVars = {
-    "AZALEA_VERSION": "V0.9.1",
+    "AZALEA_VERSION": "V1.0",
     "NOW": Date.now().toString(),
-    "BUILDTIME": `${moment( 1700221962932).format('MMMM Do YYYY, h:mm:ss a [UTC]')}`
+    "BUILDTIME": `${moment( 1700456145293).format('MMMM Do YYYY, h:mm:ss a [UTC]')}`
   };
 });

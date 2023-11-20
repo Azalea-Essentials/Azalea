@@ -224,19 +224,25 @@ system.runInterval(()=>{
                 let scores = [];
                 for(const participant of participants) {
                     if(participant.displayName == "commands.scoreboard.players.offlinePlayerName") continue;
+                    // world.sendMessage(participant.type);
+                    if(participant.type != "Player") return;
                     scores.push({player:participant.displayName, score:objective.getScore(participant)});
                 }
                 scores = scores.sort((a,b)=>b.score-a.score);
                 for(const score of scores) {
-                    let player = getPlayer(score.player);
-                    let ranks = player.getTags().filter(_=>_.startsWith('rank:')).map(_=>_.substring(5));
-                    if(!ranks.length) ranks.push(`${lbTheme.defaultRankColor}Member`)
-                    let nameColor = player.getTags().find(_=>_.startsWith('name-color:'))
-                    if(nameColor) nameColor = nameColor.substring('name-color:'.length);
-                    let bracketColor = player.getTags().find(_=>_.startsWith('bracket-color:'));
-                    if(bracketColor) bracketColor = bracketColor.substring('bracket-color:'.length)
-                    else bracketColor = lbTheme.defaultBracketColor
-                    lbTextList.push(`${bracketColor}[§r${lbTheme.defaultRankColor}${ranks.join(`§r${bracketColor}] [`)}§r${bracketColor}] ${nameColor ? nameColor : lbTheme.defaultNameColor}${player.name} §r§7: §r§a${score.score}`);
+                    try {
+                        let player = getPlayer(score.player);
+                        let ranks = player.getTags().filter(_=>_.startsWith('rank:')).map(_=>_.substring(5));
+                        if(!ranks.length) ranks.push(`${lbTheme.defaultRankColor}Member`)
+                        let nameColor = player.getTags().find(_=>_.startsWith('name-color:'))
+                        if(nameColor) nameColor = nameColor.substring('name-color:'.length);
+                        let bracketColor = player.getTags().find(_=>_.startsWith('bracket-color:'));
+                        if(bracketColor) bracketColor = bracketColor.substring('bracket-color:'.length)
+                        else bracketColor = lbTheme.defaultBracketColor
+                        lbTextList.push(`${bracketColor}[§r${lbTheme.defaultRankColor}${ranks.join(`§r${bracketColor}] [`)}§r${bracketColor}] ${nameColor ? nameColor : lbTheme.defaultNameColor}${player.name} §r§7: §r§a${score.score}`);
+                    } catch {
+
+                    }
                 }
                 let longestText = lbTextList.map(_=>{
                     let newText = _;
