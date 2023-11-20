@@ -2,7 +2,7 @@
 *Azalea is a very customizable addon for Minecraft Bedrock.*
 
 > [!NOTE]
-> NOTE: AZALEA IS STILL IN BETA AND SOME FEATURES MIGHT NOT WORK PROPERLY
+> Azalea is still in development and some features might not work properly
 
 ## ⭐ Current features:
 - Admin UI
