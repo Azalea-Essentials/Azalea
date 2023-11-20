@@ -1,7 +1,8 @@
 ![Azalea Banner Rounded](https://github.com/Ant767/Azalea/assets/122332042/35520c60-4b06-4bb6-bca4-979ccd3b0ebd)
 *Azalea is a very customizable addon for Minecraft Bedrock.*
 
-> ***NOTE: AZALEA IS STILL IN BETA AND SOME FEATURES MIGHT NOT WORK PROPERLY***
+> [!NOTE]
+> NOTE: AZALEA IS STILL IN BETA AND SOME FEATURES MIGHT NOT WORK PROPERLY
 
 ## ⭐ Current features:
 - Admin UI
