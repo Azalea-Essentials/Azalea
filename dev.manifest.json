@@ -1,0 +1,52 @@
+{
+	"format_version": 2,
+	"header": {
+		"description": "§9Finally, a new release! Make sure to do §a/tag @s add admin",
+		"name": "§bV0.9.2 §5( DEVELOPMENT ) §a(ID: 15)",
+		"uuid": "1e94f5fd-5e5f-41c4-884e-62a5a30b9968",
+		"version": [
+			0,
+			0,
+			1
+		],
+		"min_engine_version": [
+			1,
+			19,
+			0
+		]
+	},
+	"modules": [
+		{
+			"description": "99.9% of azalea",
+			"type": "script",
+			"language": "javascript",
+			"uuid": "a88d5bd6-648e-4941-867f-13000b42b440",
+			"version": [
+				0,
+				0,
+				1
+			],
+			"entry": "scripts/index.js"
+		},
+		{
+			"description": "Some useful things",
+			"type": "data",
+			"uuid": "1183db70-0077-475b-9e3a-c8411b8d0806",
+			"version": [
+				0,
+				0,
+				1
+			]
+		}
+	],
+	"dependencies": [
+		{
+			"module_name": "@minecraft/server",
+			"version": "1.7.0-beta"
+		},
+		{
+			"module_name": "@minecraft/server-ui",
+			"version": "1.2.0-beta"
+		}
+	]
+}

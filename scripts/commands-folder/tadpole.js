@@ -2,6 +2,7 @@ import { system, world } from '@minecraft/server';
 export default function addTadpoleCommand(commands) {
   commands.addCommand("tadpole", {
     description: "Spawns a tadpole",
+    category: "Why",
     admin: true,
     async onRun(msg, args, theme, response) {
       //   if(score == 0 && !isAdmin(msg.sender)) return response(`ERROR This command requires admin`);

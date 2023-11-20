@@ -3,7 +3,7 @@ export default function addVersionCommand(commands) {
         description: "Get the azalea version",
         category: "Help Center",
         onRun(msg, args, theme, response) {
-            response(`TEXT ${theme.command}Azalea version ${theme.description}V0.9.6`);
+            response(`TEXT ${theme.command}Azalea version ${theme.description}%%AZALEA_VER%%\n\n${theme.footer}i hope i dont forget to change the version`);
         }
     })
 }

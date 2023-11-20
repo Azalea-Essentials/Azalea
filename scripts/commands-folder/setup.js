@@ -26,7 +26,7 @@ export default function () {
         modal.show(msg.sender).then(res => {
           if (res.canceled) return;
           let configDb = new Database("Config");
-          configDb.set("ChatrankFormat", otps1[res.formValues[0]]);
+          configDb.set("ChatrankFormat", opts1[res.formValues[0]]);
         });
         system.clearRun(interval);
         return;

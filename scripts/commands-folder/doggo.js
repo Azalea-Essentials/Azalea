@@ -1,6 +1,7 @@
 export default function doggoCommand(commands) {
   commands.addCommand("doggo", {
     description: "Doggo",
+    category: "Fun",
     admin: true,
     async onRun(msg, args, theme, response) {
       if (msg.sender.hasTag("already-has-doggo")) return response(`ERROR You already got a doggo.`);

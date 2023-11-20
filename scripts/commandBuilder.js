@@ -18,12 +18,12 @@ export class CommandBuilder {
     return this;
   }
   desc(text) {
-    if (typeof fn !== "string") return this;
+    if (typeof text !== "string") return this;
     this.data.description = text;
     return this;
   }
   category(text) {
-    if (typeof fn !== "string") return this;
+    if (typeof text !== "string") return this;
     this.data.category = text;
     return this;
   }

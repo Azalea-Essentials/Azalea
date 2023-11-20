@@ -1,8 +1,9 @@
 import { ConfiguratorSub } from '../configuratorOptions';
 import { Database } from '../db';
 import { ActionForm, ModalForm } from '../form_func';
+import { uiManager } from '../uis';
 export const TAGCMD_UI = function () {
-  return new ConfiguratorSub("§cTag commands\n§8Manage tag commands", "azalea_icons/11").setCallback(player => {
+  uiManager.addUI("Azalea0.9.0/TagCmd", player => {
     let cmds = new ActionForm();
     let tagCmdTable = new Database("TagCmdConfig");
     let tagCmds = JSON.parse(tagCmdTable.get("Cmds", "[]"));
@@ -25,5 +26,8 @@ export const TAGCMD_UI = function () {
       });
     }
     cmds.show(player, false, (player, response) => {});
+  });
+  return new ConfiguratorSub("§cTag commands\n§8Manage tag commands", "azalea_icons/11").setCallback(player => {
+    uiManager.open("Azalea0.9.0/TagCmd", player);
   });
 };

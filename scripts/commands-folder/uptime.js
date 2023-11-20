@@ -1,8 +1,8 @@
-import { Database } from "../db";
+import { Database } from '../db';
 export default function addUptimeCommand(commands) {
   commands.addCommand("uptime", {
     description: "List server uptime records",
-    category: "Info",
+    category: "Utilities",
     onRun(msg, args, theme, response) {
       let db = new Database("Uptime");
       let keys = db.keys();

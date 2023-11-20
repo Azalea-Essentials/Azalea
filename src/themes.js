@@ -24,6 +24,8 @@ export class Theme {
         darkError,
         darkSuccess,
         darkInfo,
+        footer,
+        footerAlt,
         header
     }) {
         // awful array shit
@@ -31,7 +33,7 @@ export class Theme {
         let allCorrect = true;
         if(allCorrect) {
             // add the theme
-            this.themes.push({descriptionText, name, successColor,errorColor,infoColor,defaultBracketColor,defaultRankColor,defaultNameColor,defaultMessageColor,barFull,barEmpty,barBracket, category, command, description, alias, warningColor, darkSuccess, darkInfo, darkError, header})
+            this.themes.push({descriptionText, name, successColor,errorColor,infoColor,defaultBracketColor,defaultRankColor,defaultNameColor,defaultMessageColor,barFull,barEmpty,barBracket, category, command, description, alias, warningColor, darkSuccess, darkInfo, darkError, header, footer, footerAlt});
         }
     }
     getTheme(id) {

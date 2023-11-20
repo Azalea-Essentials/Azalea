@@ -7,6 +7,7 @@ export default function addWhatCommand(commands) {
     description: "Send out announcements",
     category: "Management",
     author: "TRASH",
+    category: "Management",
     usage: "!announcements <post | view> [text]",
     onRun(msg, args, theme, response, commands, prefix) {
       let db = new Database("AnncList");

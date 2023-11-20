@@ -119,7 +119,8 @@ export default function AddTagCmdManager() {
   });
   commands.addCommand("tagcmd", {
     description: "Create custom commands using commands",
-    category: "Management",
+    category: "Customization",
+    usage: "\n!tagcmd add <name> <tag>\n!tagcmd remove <name>\n!tagcmd",
     admin: true,
     onRun(msg, args, theme, response) {
       let tagCmdTable = new Database("TagCmdConfig");

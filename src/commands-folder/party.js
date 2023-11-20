@@ -5,6 +5,7 @@ let parties = new Map();
 export default function partyCommand(commands) {
     commands.addCommand("party", {
         description: "Parties, most likely with 1 person as you have no friends.",
+        category: "WIP Party System",
         async onRun(msg, args, theme, response) {
             if(!args.length) return response(`ERROR You require a party action: join, create, chat, delete, leave`);
             if(args[0] == "create") {
@@ -51,6 +52,7 @@ export default function partyCommand(commands) {
     })
     commands.addCommand("pc", {
         description: "Party chat",
+        category: "WIP Party System",
         async onRun(msg, args, theme, response) {
             if(!args.length) return response(`ERROR Please include a message`);
             if(!partyMembers.has(msg.sender.id)) return response(`ERROR You're not in a party, find some friends.`);

@@ -43,6 +43,7 @@ export default function main() {
                         price: parseInt(args[1])
                     });
                     shopDb.set("ShopItems", shopItems);
+                    return response(`SUCCESS Successfully added item to shop for $${parseInt(args[1])}`);
                 }
             } else {
                 response("SUCCESS Move around to open the shop UI")
@@ -77,7 +78,7 @@ export default function main() {
                 let inventory = msg.sender.getComponent("inventory");
                 let container = inventory.container;
                 let item = container.getItem(msg.sender.selectedSlot);
-                let nameTag = item.typeId.split(':').slice(1).join(':').split('_').map(_=>`${_[0].toUpperCase()}${_.substring(1)}`);
+                let nameTag = item.typeId.split(':').slice(1).join(':').split('_').map(_=>`${_[0].toUpperCase()}${_.substring(1)}`).join(' ');
                 let sellShopDb = new Database("SellShop");
                 let sellShopItems = sellShopDb.get("Items", {});
                 sellShopItems[item.typeId] = {
@@ -94,7 +95,7 @@ export default function main() {
                 let sellShopItems = sellShopDb.get("Items", {});
                 let text = [];
                 for(const item of Object.keys(sellShopItems)) {
-                    let nameTag = item.split(':').slice(1).join(':').split('_').map(_=>`${_[0].toUpperCase()}${_.substring(1)}`);
+                    let nameTag = item.split(':').slice(1).join(':').split('_').map(_=>`${_[0].toUpperCase()}${_.substring(1)}`).join(' ');
                     text.push(`§a${nameTag} §7$${sellShopItems[item].price}`);
                 }
                 sellShopUi.body(text.join('\n§r'));
@@ -103,18 +104,23 @@ export default function main() {
                 for(let i = 0;i < inventory.inventorySize;i++) {
                     let item = container.getItem(i);
                     if(!item) continue;
-                    let nameTag = item.typeId.split(':').slice(1).join(':').split('_').map(_=>`${_[0].toUpperCase()}${_.substring(1)}`);
+                    let nameTag = item.typeId.split(':').slice(1).join(':').split('_').map(_=>`${_[0].toUpperCase()}${_.substring(1)}`).join(' ');
                     if(sellShopItems[item.typeId]) {
                         sellShopUi.button(`${nameTag} x${item.amount}`, null, (player, i2)=>{
                             let price = sellShopItems[item.typeId].price;
-                            let moneyScoreboard = world.scoreboard.getObjective("money");
+                            let configDb = new Database("Config")
+                            let moneyScoreboard = world.scoreboard.getObjective(configDb.get("MoneyScoreboard", "money"));
+                            if(!moneyScoreboard) {
+                                moneyScoreboard = world.scoreboard.addObjective(configDb.get("MoneyScoreboard", "money"))
+                            }
                             let score = 0;
                             try {
                                 score = moneyScoreboard.getScore(player.scoreboardIdentity)
                             } catch {score=0}
+                            if(!score && typeof score != "number") score = 0;
                             score += (price * item.amount);
                             moneyScoreboard.setScore(player.scoreboardIdentity, score);
-                            container.setItem(i, new ItemStack("minecraft:air", 1))
+                            container.setItem(i)
                             let result = new ActionForm();
                             result.title("Sold!");
                             result.body(`You have sold ${item.amount}x ${nameTag}`);
@@ -135,12 +141,11 @@ export default function main() {
                     }
                     if(msg.sender.location.x != x || y != msg.sender.location.y || z != msg.sender.location.z) {
                         system.clearRun(interval);
-                        sellShopUi.show(msg.sender, false, (player, response)=>{})
-                        return;
+                        sellShopUi.show(msg.sender, true, (player, response)=>{})
                     }
                 },10)
 
-                response(responseStr(SUCCESS, "Close chat to open UI"))
+                response(responseStr(SUCCESS, "Close chat and move to open UI"))
             }
         })
         .register();

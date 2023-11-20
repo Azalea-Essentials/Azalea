@@ -1,0 +1,38 @@
+export default {
+    "English": {
+        "add": "Add",
+        "delete": "Delete",
+        "forms": "Forms",
+        "leaderboards": "Leaderboards",
+        "server": "Server",
+        "commands": "Commands",
+        "verification": "Verification",
+        "experimental_toggles": "Experimental Toggles",
+        "more_configuration": "More Configuration",
+        "player_reports": "Player Reports",
+        "tagcmds": "Tag Commands",
+        "reviews": "Reviews",
+        "polls": "Polls",
+        "developer": "Developer Settings",
+        "player_shops": "Player Shops",
+        "players": "Players"
+    },
+    "Русский": {
+        "add": "Добавить",
+        "delete": "Удалить",
+        "forms": "Формы",
+        "leaderboards": "Таблицы лидеров",
+        "server": "Сервер",
+        "commands": "Команды",
+        "verification": "Проверка",
+        "experimental_toggles": "Экспериментальные переключатели",
+        "more_configuration": "Дополнительная конфигурация",
+        "player_reports": "Отчеты игроков",
+        "tagcmds": "Команды тегов",
+        "reviews": "Отзывы",
+        "polls": "Опросы",
+        "developer": "Настройки разработчика",
+        "player_shops": "Магазины игроков",
+        "players": "Игроки"
+    },
+}

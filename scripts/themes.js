@@ -24,6 +24,8 @@ export class Theme {
     darkError,
     darkSuccess,
     darkInfo,
+    footer,
+    footerAlt,
     header
   }) {
     // awful array shit
@@ -52,7 +54,9 @@ export class Theme {
         darkSuccess,
         darkInfo,
         darkError,
-        header
+        header,
+        footer,
+        footerAlt
       });
     }
   }

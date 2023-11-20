@@ -2,6 +2,7 @@ import { CommandBuilder } from '../commandBuilder';
 import { Database } from '../db';
 import { cacheId, getCachedId, getPlayerDb } from '../playerData';
 export default function () {
+  return;
   new CommandBuilder("mail").category("Fun").desc("Mail").callback(({
     msg,
     args,

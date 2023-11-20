@@ -56,7 +56,8 @@
 55: Player is not online!
 56: Player does not own a party.
 57: Theres no party to leave, you probably need to find some friends.
-58: Moderation0: Teleporting you to warp: <insert warp name here>
+58: Moderation
+0: Teleporting you to warp: <insert warp name here>
 1: Warp not found!
 2: Warp added!
 3: This command requires admin

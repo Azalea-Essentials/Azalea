@@ -1,0 +1,20 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "azalea:bindable_22"
+		},
+		"components": {
+			"minecraft:can_destroy_in_creative": false,
+			"minecraft:allow_off_hand": false,
+			"minecraft:display_name": {
+				"value": "§cBindable 22"
+			},
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": {
+				"texture": "bindable_22"
+			},
+            "minecraft:foil": false
+		}
+	}
+}

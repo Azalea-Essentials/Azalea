@@ -6,7 +6,7 @@ import {
   ActionFormData,
   ModalFormData,
 } from '@minecraft/server-ui';
-
+import {warps} from './warpsapi';
 import { baseConfigMenu } from './configuratorOptions';
 import { Database } from './db';
 import {
@@ -15,22 +15,12 @@ import {
 } from './form_func';
 import { isAdmin } from './isAdmin';
 import { openShopUI } from './shopui';
+import { uiManager } from './uis';
 
 world.afterEvents.playerSpawn.subscribe((e) => {
-    let player = e.player;
-    let configDb = new Database("Config");
-    let WelcomeMessageEnabled = configDb.get("WelcomeMessageEnabled");
-    let ServerWelcomeMessage = configDb.get("ServerWelcomeMessage") ? configDb.get("ServerWelcomeMessage") : `§cWelcome §e@[@username] §cto the server, and tell the admins to configure this message`;
-    if (!WelcomeMessageEnabled) return;
-    player.sendMessage(ServerWelcomeMessage.replace(/\[\@username\]/g, player.name));
-    player.sendMessage(`§3<-=- §cAzalea DEV §3-=->\n§rWelcome to the azalea development server. Here are some things you should know:\n- no griefing\n- no hacking\n- have fun with new azalea feautres\n- see the progress on azalea\n- i have made some commands that you can use and have fun with specifically for this server, just type !azaleadev to list them\n- if this server is offline, ping/dm me on discord, and I'll put it back online`);
-    for (const player of world.getPlayers()) {
-        player.playSound("note.bit", {
-            "pitch": 1
-        })
-    }
 })
 world.afterEvents.playerLeave.subscribe(e => {
+    if (!WelcomeMessageEnabled) return;
     for (const player of world.getPlayers()) {
         player.playSound("note.bit", {
             "pitch": 0.5
@@ -49,40 +39,30 @@ world.afterEvents.playerLeave.subscribe(e => {
 // }, 20);
 world.beforeEvents.itemUse.subscribe((e) => {
     system.run(() => {
+        if(e.itemStack.typeId == "azalea:player_shop") {
+            uiManager.open("Azalea0.9.1/PlayerShop/Main", e.source)
+        }
         if(e.itemStack.typeId == 'azalea:warp') {
-            let warps = world.scoreboard.getObjectives()
-                .filter(_=>_.id.startsWith('WARP_'))
-                .map(_=>_.id.substring(5));
+            let warps2 = warps.getAllWarps();
             let warpUI = new ActionForm();
-            for(const warpName of warps) {
-                warpUI.button(`§5${warpName}`, null, (player)=>{
-                    let dimensions = [
-                "minecraft:overworld",
-                "minecraft:nether",
-                "minecraft:the_end"
-            ]
-                    let objectiveName = `WARP_${warpName}`;
-                    let objective = world.scoreboard.getObjective(objectiveName);
-                    if(!objective) return response(`ERROR Warp not found!`);
-                    let participants = objective.getParticipants();
-                    let x = participants.find(_=>_.displayName=="x");
-                    let y = participants.find(_=>_.displayName=="y");
-                    let z = participants.find(_=>_.displayName=="z");
-                    let dimension = participants.find(_=>_.displayName=="dimension");
-                    system.run(()=>{
-                        player.teleport({
-                            x: objective.getScore(x),
-                            y: objective.getScore(y),
-                            z: objective.getScore(z)
-                        }, {
-                            dimension: world.getDimension(dimensions[objective.getScore(dimension)])
-                        })
-                    })
+            warpUI.title("Warps");
+            warpUI.button("§cLeave", "azalea_icons/2", (player,i)=>{})
+            if(!warps2.length) {
+                warpUI.title("Warps - Not Configured");
+                warpUI.body("§cIt looks like warps are not configured on this server.\n§bFor admins: do §e!spawn set §bto set spawn, and §e!warp set <name> §bto set a warp.");
+            }
+            for(const warpName of warps2) {
+                warpUI.button(`§a${warpName == "spawn" ? "§dWorld Spawn" : warpName}`, warpName == "spawn" ? `azalea_icons/icontextures/nether_star` : `azalea_icons/icontextures/ender_pearl`, (player)=>{
+                    warps.tpDB(player, warpName);
                 })
             }
             warpUI.title("Warps")
             warpUI.show(e.source,false,(player,response)=>{});
         }
+        console.warn(e.itemStack.typeId);
+        // if(e.itemStack.typeId == 'minecraft:flint') {
+        //     uiManager.open("Azalea0.9.1/MoneyTransfer", e.source)
+        // }
         if (e.itemStack.typeId == 'azalea:shop') {
             openShopUI(e.source);
         }
@@ -92,7 +72,7 @@ world.beforeEvents.itemUse.subscribe((e) => {
         //     e.source.getComponent('inventory').container.setItem(e.source.selectedSlot, e.itemStack)
         //     return e.source.sendMessage("§bClick again to open admin panel!");
         // }
-        if (e.itemStack.typeId == 'azalea:config_ui') {
+        if (e.itemStack.typeId == 'azalea:config_ui' && isAdmin(e.source)) {
             let configOptions = baseConfigMenu;
             if(e.source.hasTag("experiment-1")) {
                 let mainForm = new ActionForm()
@@ -280,7 +260,9 @@ world.beforeEvents.itemUse.subscribe((e) => {
                         for (let i = 0; i < result.formValues.length; i++) {
                             let formValue = result.formValues[i];
                             if (typeof formValue == 'string') {
-                                cfgDb.set(cfg.options[i].key, formValue);
+                                let currVal = cfgDb.get(cfg.options[i].key);
+                                if(formValue != currVal)
+                                    cfgDb.set(cfg.options[i].key, formValue);
                             } else if (typeof formValue == 'boolean') {
                                 cfgDb.set(cfg.options[i].key, formValue ? "true" : "false");
                             } else if (typeof formValue == "number") {

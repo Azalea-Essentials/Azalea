@@ -7,6 +7,7 @@ import {
 } from '../playerData';
 
 export default function() {
+    return;
     new CommandBuilder("mail")
         .category("Fun")
         .desc("Mail")

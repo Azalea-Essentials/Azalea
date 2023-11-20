@@ -104,6 +104,7 @@ export default function muteCmd(commands) {
   commands.addCommand("mute", {
     description: "Mute a player",
     usage: "!mute <player> [timeString]",
+    category: "Moderation",
     admin: true,
     async onRun(msg, worseArgs, theme, response) {
       // if(!isAdmin(msg.sender)) return response(`ERROR You require admin`);

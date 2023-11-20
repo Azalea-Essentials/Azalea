@@ -6,11 +6,13 @@ export default function clearChat(commands) {
   commands.addCommand("cls", {
     description: "Clears chat",
     category: "Management",
-    onRun: run
+    onRun: run,
+    admin: true
   });
   commands.addCommand("clear-chat", {
     description: "Clears chat",
     category: "Management",
-    onRun: run
+    onRun: run,
+    admin: true
   });
 }

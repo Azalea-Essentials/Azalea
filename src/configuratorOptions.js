@@ -1,3 +1,4 @@
+import moment from './moment';
 // let configOptions = {
 //     "Server": {
 //         "icon": "textures/ui/servers",
@@ -113,11 +114,15 @@
 //     }
 // }
 
+import { system } from '@minecraft/server';
 import { PLAYER_REPORTS } from './adminpanel/reports';
 import { REVIEWS } from './adminpanel/reviews';
 import { TAGCMD_UI } from './adminpanel/tagcmd_ui';
 import { ADMIN_TEST } from './adminpanel/test';
+import { Database } from './db';
 import { ActionForm } from './form_func';
+import { POLLS } from './adminpanel/polls';
+import { LB } from './adminpanel/leaderboardthemes';
 
 /*
     "Misc": {
@@ -216,6 +221,7 @@ let base = new ConfiguratorBase()
     .addSub(
         new ConfiguratorSub("§6Commands\n§8Prefix", "azalea_icons/7")
             .addTextInput("Prefix", "Prefix", "Type a prefix")
+            .addTextInput("MoneyScoreboard", "Money Scoreboard (default: money)", "Type the scoreboard here")
     )
     .addSub(
         new ConfiguratorSub("§bServer\n§8Configure the server options", "azalea_icons/6")
@@ -223,6 +229,8 @@ let base = new ConfiguratorBase()
             .addTextInput("ServerDescription", "Server Description", "Type a server description...")
             .addToggle("WelcomeMessageEnabled", "Welcome message enabled?")
             .addTextInput("ServerWelcomeMessage", "Welcome message text, remember: §d[@username] §r= joined user ", "Type a welcome message.")
+            .addToggle("DevEnvironment", "§c§l[DANGER] §rDev Commands")
+            .addToggle("TeleportPlayerToSpawnOnRejoin", "Teleport players to spawn when joining")
     )
     .addSub(
         new ConfiguratorSub("§2Verification\n§8Make users go through a verification process.", "azalea_icons/4")
@@ -236,12 +244,48 @@ let base = new ConfiguratorBase()
             .addToggle("NewShop", "§bNew shop (Requires Reload)")
             .addToggle("ImprovedNametagsEnabled", "§bImproved nametags")
     )
+    .addSub(
+        new ConfiguratorSub("§6More §cconfiguration\n§8Why", "azalea_icons/1")
+            .addDropdown("FormsExperiment", ["Enabled", "Disabled", "Enabled, but better"], ["enabled","disabled","enabled-2"], "Forms Experiment")
+    )
     .addSub(PLAYER_REPORTS())
     .addSub(TAGCMD_UI())
     .addSub(REVIEWS())
     .addSub(ADMIN_TEST())
+    .addSub(POLLS())
+    .addSub(
+        new ConfiguratorSub("§3Developer Settings\n§8Ignore", "azalea_icons/Wrench")
+            .addDropdown("DevelopmentMessage", [
+                "Disabled",
+                "Dev Server",
+                "Dev World",
+                "Public Preview"
+            ], [
+                "disabled",
+                "dev-server",
+                "dev-world",
+                "public-preview"
+            ], "Development message")
+            .addToggle("ShittyCode", "Use sh!tty code i abandoned?")
+            .addToggle("Uwuify", "Im running out of ideas §7§o(dont enable if you care about your sanity)")
+    )
+    .addSub(
+        new ConfiguratorSub("§mPlayer Shops\n§8Why", "azalea_icons/playershop")
+            .addToggle("DisablePlayerShops", "Disable player shops")
+            .addDropdown("Sorting", ["None", "Trusted"], ["None", "Trusted"], "Sorting")
+    )
+    .addSub(LB())
 base.options["§2Players\n§8Manage players"] = {
     "type": "hardcoded-playermenu",
     "icon": "azalea_icons/8"
 }
 export const baseConfigMenu = base.toOptions();
+
+system.run(()=>{
+    let configuratorDb = new Database("Config");
+    configuratorDb.tableVars = {
+        "AZALEA_VERSION": "%%AZALEA_VER%%",
+        "NOW": Date.now().toString(),
+        "BUILDTIME": `${moment(/*BUILDTIME*/).format('MMMM Do YYYY, h:mm:ss a [UTC]')}`
+    }
+})

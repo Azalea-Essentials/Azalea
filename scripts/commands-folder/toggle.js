@@ -9,6 +9,7 @@ export default function addToggleCmd(commands) {
   commands.addCommand("toggle", {
     description: "Toggle a command",
     admin: true,
+    category: "Management",
     async onRun(msg, args, theme, response) {
       if (!isAdmin(msg.sender)) return response(`ERROR This command requires admin`);
       system.run(() => {

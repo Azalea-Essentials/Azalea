@@ -1,9 +1,9 @@
 {
 	"format_version": 2,
 	"header": {
-		"description": "§9Yet another rewrite",
-		"name": "§aAzalea Recontinued V1 - Pre-Release",
-		"uuid": "4ab46595-eafa-4aa4-970f-fc2ec074a198",
+		"description": "§9Finally, a new release! Make sure to do §a/tag @s add admin",
+		"name": "V0.9.1 §5( DEVELOPMENT ) §a(ID: 101)",
+		"uuid": "e52c3c3a-1897-4d7e-ab65-e544b4136e88",
 		"version": [
 			0,
 			0,
@@ -17,10 +17,10 @@
 	},
 	"modules": [
 		{
-			"description": "Script that implements basic starter tests.",
+			"description": "99.9% of azalea",
 			"type": "script",
 			"language": "javascript",
-			"uuid": "bf5f6484-d86d-4300-8353-cd245cbf5477",
+			"uuid": "457977b0-7844-40a4-a86c-72fe58d7361b",
 			"version": [
 				0,
 				0,
@@ -31,7 +31,7 @@
 		{
 			"description": "Some useful things",
 			"type": "data",
-			"uuid": "b25f6484-d86d-4320-8353-cd245cbf5477",
+			"uuid": "3e915fad-2c32-4499-b6b8-6cab659905bc",
 			"version": [
 				0,
 				0,
@@ -42,7 +42,7 @@
     "dependencies": [
         {
           "module_name": "@minecraft/server",
-          "version": "1.4.0-beta"
+          "version": "1.7.0-beta"
         },
         {
           "module_name": "@minecraft/server-ui",

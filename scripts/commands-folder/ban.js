@@ -1,5 +1,7 @@
 import { system, world } from '@minecraft/server';
 import { Database } from '../db';
+import { isAdmin } from '../isAdmin';
+import moment from '../moment';
 let cachedBans = [];
 world.afterEvents.worldInitialize.subscribe(() => {
   let bansDb = new Database("Bans");
@@ -14,7 +16,7 @@ world.afterEvents.playerSpawn.subscribe(eventData => {
     if (ban.expires > 0 && Date.now() < ban.expires) {
       let player = eventData.player;
       system.run(() => {
-        player.runCommand(`kick "${player.name}" §cYou have been banned!`);
+        player.runCommand(`kick "${player.name}" §cYou have been banned until ${moment(ban.expires).format('MMMM Do YYYY, h:mm:ss a')} UTC!\n\n§r§eYou can try contacting an admin to get unbanned if you think the ban wasnt fair`);
       });
       return;
     } else if (ban.expires > 0 && Date.now() > ban.expires) {
@@ -24,7 +26,7 @@ world.afterEvents.playerSpawn.subscribe(eventData => {
     } else if (ban.expires == 0) {
       let player = eventData.player;
       system.run(() => {
-        player.runCommand(`kick "${player.name}" §cYou have been banned permanently!`);
+        player.runCommand(`kick "${player.name}" §cYou have been banned permanently!\n\n§r§eYou can try contacting an admin to get unbanned if you think the ban wasnt fair`);
       });
     }
     eventData.player.sendMessage("You are banned!");
@@ -135,6 +137,7 @@ export default function banCommand(commands) {
   commands.addCommand("ban", {
     description: "Ban a player",
     admin: true,
+    category: "Moderation",
     async onRun(msg, worseArgs, theme, response) {
       // if(!isAdmin(msg.sender)) return response(`ERROR You require admin to use this command!`);
       let args = betterArgs(worseArgs.join(' '));
@@ -148,7 +151,7 @@ export default function banCommand(commands) {
         }
       }
       if (!player) return response(`ERROR Could not find player. Make sure the player you're trying to ban is online and if they have spaces in their username, put quotes around their name in the command.`);
-      if (player.hasTag("admin")) return response(`ERROR Cant ban admins`);
+      if (isAdmin(player)) return response(`ERROR Cant ban admins`);
       let bansDb = new Database("Bans");
       let bansList = JSON.parse(bansDb.get("bans") ? bansDb.get("bans") : "[]");
       let expiration = 0;
@@ -170,7 +173,8 @@ export default function banCommand(commands) {
         bannedAt: Date.now()
       });
       let playerName2 = player.name;
-      player.runCommand(`kick "${player.name}" §cYou have been banned!`);
+      let text1 = `${moment(expiration).format('MMMM Do YYYY, h:mm:ss a')} UTC`;
+      player.runCommand(`kick "${player.name}" \n§cYou have been banned${expiration > 0 ? ` until ` + text1 + `!` : ``}\n\n§r§eYou can try contacting an admin to get unbanned if you think the ban wasnt fair`);
       bansDb.set("bans", JSON.stringify(bansList));
       cachedBans = bansList;
       return response(`SUCCESS ${responseText}`);
@@ -179,6 +183,7 @@ export default function banCommand(commands) {
   commands.addCommand("unban", {
     description: "Unban a player",
     admin: true,
+    category: "Moderation",
     async onRun(msg, worseArgs, theme, response) {
       // if(!isAdmin(msg.sender)) return response(`ERROR You require admin to use this command!`);
       let args = betterArgs(worseArgs.join(' '));
@@ -202,6 +207,7 @@ export default function banCommand(commands) {
   commands.addCommand('banlist', {
     description: "List all bans",
     admin: true,
+    category: "Moderation",
     async onRun(msg, args, theme, response) {
       let bansDb = new Database("Bans");
       let bansList = JSON.parse(bansDb.get("bans") ? bansDb.get("bans") : "[]");

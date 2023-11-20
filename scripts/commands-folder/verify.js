@@ -1,9 +1,10 @@
 import { system, world } from '@minecraft/server';
 import { Database } from '../db';
+import { warps } from '../warpsapi';
 export default function VerifyCommand(commands) {
   commands.addCommand("verify", {
     description: "Get access",
-    category: "Management",
+    category: "Utilities",
     onRun(msg, args, theme, response) {
       try {
         let db = new Database("Config");
@@ -18,8 +19,7 @@ export default function VerifyCommand(commands) {
             let player = msg.sender;
             system.run(() => player.addTag("verified"));
             system.run(() => {
-              let loc = world.getDefaultSpawnPosition();
-              player.teleport(loc);
+              warps.tpDB(player, "spawn");
             });
             return response(`SUCCESS You are now verified!`);
           } else if (VerificationType == "public") {
@@ -28,8 +28,7 @@ export default function VerifyCommand(commands) {
             // player.teleport({})
 
             system.run(() => {
-              let loc = world.getDefaultSpawnPosition();
-              player.teleport(loc);
+              warps.tpDB(player, "spawn");
             });
             return response(`SUCCESS You are now verified!`);
           }

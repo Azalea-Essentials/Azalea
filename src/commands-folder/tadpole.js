@@ -6,6 +6,7 @@ import {
 export default function addTadpoleCommand(commands) {
       commands.addCommand("tadpole",{
           description: "Spawns a tadpole",
+          category: "Why",
           admin: true,
           async onRun(msg, args, theme, response) {
               

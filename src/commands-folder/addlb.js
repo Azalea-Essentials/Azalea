@@ -5,6 +5,7 @@ export default function main() {
     commands.addCommand("add-lb",{
         admin: true,
         description: "Test",
+        category: "Floating Text",
         async onRun(msg, args, theme, response) {
             let leaderboardsDB = new Database("LB");
             let leaderboards = leaderboardsDB.get("leaderboards") ? JSON.parse(leaderboardsDB.get("leaderboards")) : [];

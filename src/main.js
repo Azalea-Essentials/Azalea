@@ -1,8 +1,10 @@
 import './configurator';
 import './verification';
 import './commandBuilder';
+import './legacyPlayerShopNoChestUI';
 
 import {
+    ScoreboardIdentityType,
   system,
   world,
 } from '@minecraft/server';
@@ -11,25 +13,91 @@ import {
   ModalFormData,
 } from '@minecraft/server-ui';
 
+import { beforeChat } from './beforeChat';
 import { commands } from './commands';
 // managed by gulp
 import * as Commands from './commands-folder';
+import * as EventsList from './events';
 import { Database } from './db';
+import { ActionForm, MessageForm, ModalForm } from './form_func';
 import { NicknamesModule } from './nicknames';
 import { uiManager } from './uis';
-
+import { warps } from './warpsapi';
+import {eventMgr} from "./eventManager";
+import { openShopUI } from './shopui';
 system.beforeEvents.watchdogTerminate.subscribe((e)=>{
     e.cancel = true;
 })
-
+for(const eventData of Object.values(EventsList)) {
+    eventMgr.listen(eventData.name, eventData.callback)
+}
+eventMgr.emit("initialize")
 // world.afterEvents.worldInitialize.subscribe((data) => {
 //     let PlayerObject = new DynamicPropertiesDefinition()
 //     PlayerObject.defineString("PlayerObject", 131072-14);
 //     data.propertyRegistry.registerEntityTypeDynamicProperties(PlayerObject, MinecraftEntityTypes.player);
 
 // });
-
+system.runInterval(()=>{
+    eventMgr.emit("heartbeat");
+},20)
 let configDb = new Database("Config");
+uiManager.addUI("Azalea0.9.1/MoneyTransfer", (player, error = "NONE", defaultValue1 = 0, defaultValue2 = null)=>{
+    let form = new ModalForm();
+    let players = [ ...world.getPlayers() ]
+    form.title("Money Transfer")
+    form.dropdown("Select a player to send money to:", players.map(playerData => {
+        return {
+            option: `${playerData.name}${isAdmin(playerData) ? ` [ ADMIN ]` : ``}`,
+            callback() {}
+        }
+    }), defaultValue1, ()=>{});
+    let moneyCount = 0;
+    let moneyScoreboard = world.scoreboard.getObjective(configDb.get("MoneyScoreboard", "money"));
+    try {
+        moneyCount = moneyScoreboard.getScore(player.scoreboardIdentity);
+        if(!moneyCount) moneyCount = 0;
+    } catch {moneyCount = 0;}
+    form.textField(`Type how much you want to send (MAX $${moneyCount.toLocaleString()}):${error != "NONE" ? `\n§c[ERROR] ${error}` : ``}`, `Type any number`, defaultValue2, ()=>{});
+    form.show(player, true, (player, response)=>{
+        if(response.canceled) return;
+        if(!/^\d+$/.test(response.formValues[1])) return uiManager.open("Azalea0.9.1/MoneyTransfer", player, "The value entered is not a valid number.", response.formValues[0], response.formValues[1])
+        let moneyCount = 0;
+        let moneyScoreboard = world.scoreboard.getObjective(configDb.get("MoneyScoreboard", "money"));
+        try {
+            moneyCount = moneyScoreboard.getScore(player.scoreboardIdentity);
+            if(!moneyCount) moneyCount = 0;
+        } catch {moneyCount = 0;}
+        let valueToGive = parseInt(response.formValues[1])
+        if(moneyCount < valueToGive) return uiManager.open("Azalea0.9.1/MoneyTransfer", player, `$${moneyCount.toLocaleString()} is not enough money to give $${valueToGive.toLocaleString()} to someone`, response.formValues[0], response.formValues[1])
+        let otherPlayer = players[response.formValues[0]];
+        let confirmation = new MessageForm();
+        confirmation.title("---- CONFIRMATION ----");
+        confirmation.body(`Are you sure you want to give $${valueToGive.toLocaleString()} to ${otherPlayer.name}?`);
+        confirmation.button1("Yes",()=>{
+            player.sendMessage(`§cCanceled!`);
+        })
+        confirmation.button2("No",()=>{
+            let otherPlayerMoneyCount = 0;
+            try {
+                otherPlayerMoneyCount = moneyScoreboard.getScore(otherPlayer.scoreboardIdentity);
+                if(!otherPlayerMoneyCount) otherPlayerMoneyCount = 0;
+            } catch {otherPlayerMoneyCount = 0;}
+            moneyCount -= valueToGive;
+            otherPlayerMoneyCount += valueToGive;
+            if(otherPlayer.id != player.id) moneyScoreboard.setScore(player.scoreboardIdentity, moneyCount);
+            if(otherPlayer.id != player.id) moneyScoreboard.setScore(otherPlayer.scoreboardIdentity, otherPlayerMoneyCount);
+            otherPlayer.sendMessage(`§e@${player.name} §rhas transfered §a$${valueToGive.toLocaleString()} §rto you`)
+            let confirmation2 = new MessageForm();
+            confirmation2.title("SENT");
+            confirmation2.body("Successfully sent money");
+            confirmation2.button1("Ok")
+            confirmation2.button2("Ok")
+            confirmation2.show(player)
+        })
+        confirmation.show(player)
+    })
+})
 system.run(()=>{
     try {
         world.scoreboard.addObjective('themes');
@@ -40,6 +108,7 @@ NicknamesModule();
 for(const command of Object.values(Commands)) {
     command(commands);
 }
+
 let azaleaSessionToken = `${Date.now()}.${Math.floor(Math.random() * 8196).toString(16)}`;
 let initialRun = Date.now();
 let finalRun = Date.now();
@@ -96,186 +165,49 @@ function getFirstStringStartingWithPrefixAndRemovePrefix(list, prefix, defaultSt
     if(result.length) return result[0]
     else return defaultString;
 }
-function formatMSG(msgFormat = "${bracketColor}[${rankColor}$ranks(§r${bracketColor}, ${rankColor})§r${bracketColor}] §r${nameColor}${senderName} > §r${messageColor}${message}", ranks2, bracketColor, nameColor, rankColor, messageColor, messageContent, senderName, scoreboardIdentity, player, pre) {
-    // let msg = msgFormat
-    //     .replace(/\$\{bracketColor\}/g, bracketColor)
-    //     .replace(/\$\{nameColor\}/g, nameColor)
-    //     .replace(/\$\{rankColor\}/g, rankColor)
-    //     .replace(/\$\{messageColor\}/g, messageColor)
-    //     .replace(/\$\{senderName\}/g, senderName)
-    //     .replace(/\$\{doublearrowright\}/g, "»")
-    //     .replace(/\$\{message\}/g, messageContent);
-    let color = ranks2[0].startsWith('§') ? `§${ranks2[0][1]}` : rankColor
-    let msg = msgFormat
-        .replace(/\#DRA/g, "»")
-        .replace(/\#NC/g, nameColor)
-        .replace(/\#MC/g, messageColor)
-        .replace(/\#RC/g, rankColor)
-        .replace(/\#BC/g, bracketColor)
-        .replace(/\#PR/g, pre)
-        .replace(/\#P/g, senderName)
-        .replace(/\#FRC/g, color)
-        .replace(/\#M/g, messageContent)
-    
-    let rankformat = msg.match(/\#R\(([\s\S]*?)\)/g);
-    if(rankformat && rankformat.length) {
-        for(const rankformatter of rankformat) {
-            console.warn(rankformatter)
-            let rankseparator = rankformatter.substring('#R('.length).slice(0,-1);
-            msg = msg.replace(rankformatter, ranks2.join(rankseparator));
-        }
-    
-    }
-    let scoreformat = msg.match(/\#S\(([\s\S]*?)\)/g);
-    if(scoreformat && scoreformat.length) {
-        for(const scoreformatter of scoreformat) {
-            let score = 0;
-            try {
-                let content = scoreformatter.substring('#S('.length).slice(0,-1).split(',').map(_=>_.trim());
-                let objective = world.scoreboard.getObjective(content[0]);
-                score = objective.getScore(scoreboardIdentity);
-            } catch {score = 0}
-            msg = msg.replace(scoreformatter, `${score}`);
-        }
-    
-    }
 
-    let htformat = msg.match(/\#HT\(([\s\S]*?)\)/g);
-    if(htformat && htformat.length) {
-        for(const htformatter of htformat) {
-            let content = htformatter.substring('#HT('.length).slice(0,-1).split(',');
-            msg = msg.replace(htformatter, player.hasTag(content[0]) ? content[1] : content[2]);
-        }
-    
-    }
-
-    return msg.trim();
-}
 let chatFilterBypassEnabled = false;
 // !chatrankformat change §l${bracketColor}[§r${rankColor}$ranks(§r${bracketColor}§l] [§r${rankColor})§r${bracketColor}§l] §r${nameColor}§l${senderName} §r${bracketColor}§l${doublearrowright} §r${messageColor}${message}
-world.beforeEvents.chatSend.subscribe(msg=>{
-    msg.cancel = true;
-    system.run(()=>{
-        if(msg.message.startsWith(prefix)) {
-            commands.run(msg, prefix);
-        } else {
-            if(chatFilterBypassEnabled) {
-                let bypassMap = {
-                    "i": "≡",
-                    "c": "±",
-                    "o": "≥",
-                    "a": "≤",
-                    "I": "⌠",
-                    "C": "⌡",
-                    "O": "÷",
-                    "A": "≈"
-                }
-                msg.message = msg.message.replaceAll('japanese', '********');
-                msg.message = msg.message.replaceAll('jap', '***');
-                for(const key of Object.keys(bypassMap)) {
-                    msg.message = msg.message.replaceAll(key, bypassMap[key]);
-                }
-            }
-            // return;
-            let player = msg.sender;
-            let mutedTag = player.getTags().find(_=>_.startsWith('muted:'));
-            if(mutedTag) {
-                if(mutedTag == "muted:perm") return player.sendMessage(`§4You are muted permanently. You cannot send messages ever again unless an admin decides to unmute you.`);
-                if(Date.now() >= parseInt(mutedTag.substring('muted:'.length))) {
-                    system.run(()=>{
-                        player.removeTag(mutedTag);
-                        player.sendMessage("§bYour mute has expired.");
-                    })
-                } else {
-                    player.sendMessage("§4You are temporarily muted.");
-                    return;
-                }
-            }
-            msg.message = msg.message.replaceAll(':chest:', '')
-                .replaceAll(':crystal:', '')
-                .replaceAll(':wrench:', '')
-                .replaceAll(':coins:', '')
-                .replaceAll(':fireball:', '')
-                .replaceAll(':lootbag:', '')
-                .replaceAll(':expbottle:', '')
-                .replaceAll(':plus:', '')
-                .replaceAll(':kill:', '')
-                .replaceAll(':admin:', '')
-                .replaceAll(':owner:', '')
-                .replaceAll(':member:', '')
-            // chat ranks are done
-            // it just took a shitty utility function and weird string formatting
-            let tags = msg.sender.getTags();
-            let ranks = getAllStringsStartingWithPrefixAndRemovePrefix(tags, "rank:");
-            if(!ranks.length) ranks.push(`Member`)
-    
-            let nameColor = getFirstStringStartingWithPrefixAndRemovePrefix(tags, "name-color:");
-            let bracketColor = getFirstStringStartingWithPrefixAndRemovePrefix(tags, "bracket-color:");
-            let messageColor = getFirstStringStartingWithPrefixAndRemovePrefix(tags, "message-color:");
-            let themeObjective;
-            let ViewGlobalSC = configDb.get("ViewGlobalSC") == "true" ? true : false;
-            try {
-                themeObjective = world.scoreboard.getObjective("themes");
-            } catch {}
-            let isStaffChat = msg.sender.hasTag("staffchat");
-            for(const player of world.getPlayers()) {
-                if(!ViewGlobalSC && player.hasTag("staffchat") && !msg.sender.hasTag("staffchat")) continue;
-                if(isStaffChat && !player.hasTag("staffchat")) continue;
-    
-                let score = 0;
-                try {
-                    let s = themeObjective.getScore(player.scoreboardIdentity);
-    
-                    if(s) score = s
-                    else score = 0
-                } catch(e){
-                    score = 0
-                    console.warn(e)
-                }
-                let theme = commands.themeMgr.getTheme(score);
-                let msgContent = formatMSG(
-                    chatrankFormat,
-                    ranks,
-                    bracketColor || theme.defaultBracketColor,
-                    nameColor || theme.defaultNameColor,
-                    theme.defaultRankColor,
-                    messageColor || theme.defaultMessageColor,
-                    msg.message,
-                    getFirstStringStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "nick:") ? getFirstStringStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "nick:") : msg.sender.name,
-                    msg.sender.scoreboardIdentity,
-                    msg.sender,
-                    getFirstStringStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "prefix:") ? getFirstStringStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "prefix:") : ""
-                )
-                
-                if(player.hasTag("azalea-bot"))
-                    player.sendMessage(JSON.stringify({
-                        type: "AzaleaMSG",
-                        format: chatrankFormat,
-                        ranks: ranks,
-                        bracketColor: bracketColor || theme.defaultBracketColor,
-                        nameColor: nameColor || theme.defaultNameColor,
-                        rankColor: theme.defaultRankColor,
-                        msgColor: messageColor || theme.defaultMessageColor,
-                        message: msg.message,
-                        name: getFirstStringStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "nick:") ? getFirstStringStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "nick:") : msg.sender.name,
-                        tags: msg.sender.getTags()
-                    }))
-                else
-                    player.sendMessage(msgContent);
-                // player.sendMessage(`${isStaffChat ? `${theme.infoColor}(STAFF CHAT) §r` : ``}${bracketColor ? bracketColor : theme.defaultBracketColor}[${theme.defaultRankColor}${ranks.join(`§r${bracketColor ? bracketColor : theme.defaultBracketColor}, ${theme.defaultRankColor}`)}§r${bracketColor ? bracketColor : theme.defaultBracketColor}] ${nameColor ? nameColor : theme.defaultNameColor}${msg.sender.name}${bracketColor ? bracketColor : theme.defaultBracketColor}: ${messageColor ? messageColor : theme.defaultMessageColor}${msg.message}`);
-                // player.sendMessage(`${isStaffChat ? `${theme.infoColor}(STAFF CHAT) §r` : ``}${bracketColor || theme.defaultBracketColor}[${theme.defaultRankColor}${ranks.join(`§r${bracketColor || theme.defaultBracketColor}${bracketColor || theme.defaultBracketColor}] ${bracketColor || theme.defaultBracketColor}[${theme.defaultRankColor}`)}§r${bracketColor || theme.defaultBracketColor}] ${nameColor || theme.defaultNameColor}${msg.sender.name}${bracketColor || theme.defaultBracketColor} » §r${messageColor || theme.defaultMessageColor}${msg.message}`);
-            }
-            // world.sendMessage(`[${ranks.join('§r, ')}§r] ${/^§[(0-9a-f)*?]$/.test(nameColor) ? nameColor : "§b"}${msg.sender.nameTag} ${msg.message}`);
-            return;
-        }
-    
-    })
-})
+world.beforeEvents.chatSend.subscribe(beforeChat)
 let leaderboards = [];
+function getPlayer(name) {
+    for(const player of world.getPlayers()) {
+        if(player.name.toLocaleLowerCase() == name.toLowerCase()) return player;
+    }
+    return null;
+}
 system.runInterval(()=>{
     let leaderboardsDB = new Database("LB");
     leaderboards = leaderboardsDB.get("leaderboards") ? JSON.parse(leaderboardsDB.get("leaderboards")) : [];
     let overworld = world.getDimension('overworld');
+    let entities = overworld.getEntities({
+        "tags": [`config-ui`]
+    });
+
+    for(const entity of entities) {
+        let lbTextList = [];
+
+        let objective = world.scoreboard.getObjective("db-Config");
+        let displayName = objective.displayName ? objective.displayName : objective.id;
+        lbTextList.push(`§8<-=- §b${displayName[0].toUpperCase()}${displayName.substring(1)} §8-=->`)
+        let participants = objective.getParticipants();
+        let scores = [];
+        for(const participant of participants) {
+            if(
+                participant.displayName == "commands.scoreboard.players.offlinePlayerName"
+                || participant.type != ScoreboardIdentityType.Player) continue;
+            scores.push({player:participant.displayName, score:objective.getScore(participant)});
+        }
+        scores = scores.sort((a,b)=>b.score-a.score);
+        for(const score of scores) {
+            lbTextList.push(`§a${score.player} §7${score.score}`);
+        }
+
+        let lbText = lbTextList.join('\n§r');
+
+        entity.nameTag = lbText;
+
+    }
     for(const leaderboard of leaderboards) {
         try {
             let entities = overworld.getEntities({
@@ -285,7 +217,9 @@ system.runInterval(()=>{
             try {
                 let objective = world.scoreboard.getObjective(leaderboard.objective);
                 let displayName = objective.displayName ? objective.displayName : objective.id;
-                lbTextList.push(`§8<-=- §b${displayName[0].toUpperCase()}${displayName.substring(1)} §8-=->`)
+                let lbTheme = commands.themeMgr.getTheme(leaderboard.lbTheme ? leaderboard.lbTheme : 0);
+                // lbTextList.push(`${lbTheme.category}+--- ${lbTheme.header ? lbTheme.header : lbTheme.category}${displayName[0].toUpperCase()}${displayName.substring(1)} §r${lbTheme.category}---+`);
+                lbTextList.push(`${lbTheme.category}-- §l${lbTheme.header ? lbTheme.header : lbTheme.command}${displayName[0].toUpperCase()}${displayName.substring(1)} §r${lbTheme.category}--`);
                 let participants = objective.getParticipants();
                 let scores = [];
                 for(const participant of participants) {
@@ -294,8 +228,26 @@ system.runInterval(()=>{
                 }
                 scores = scores.sort((a,b)=>b.score-a.score);
                 for(const score of scores) {
-                    lbTextList.push(`§a${score.player} §7${score.score}`);
+                    let player = getPlayer(score.player);
+                    let ranks = player.getTags().filter(_=>_.startsWith('rank:')).map(_=>_.substring(5));
+                    if(!ranks.length) ranks.push(`${lbTheme.defaultRankColor}Member`)
+                    let nameColor = player.getTags().find(_=>_.startsWith('name-color:'))
+                    if(nameColor) nameColor = nameColor.substring('name-color:'.length);
+                    let bracketColor = player.getTags().find(_=>_.startsWith('bracket-color:'));
+                    if(bracketColor) bracketColor = bracketColor.substring('bracket-color:'.length)
+                    else bracketColor = lbTheme.defaultBracketColor
+                    lbTextList.push(`${bracketColor}[§r${lbTheme.defaultRankColor}${ranks.join(`§r${bracketColor}] [`)}§r${bracketColor}] ${nameColor ? nameColor : lbTheme.defaultNameColor}${player.name} §r§7: §r§a${score.score}`);
                 }
+                let longestText = lbTextList.map(_=>{
+                    let newText = _;
+                    let chars = "abcdefghijklmnopqrstuvwxyz1234567890".split('');
+                    for(const char of chars) {
+                        newText = newText.replaceAll('§'+char, '');
+                    }
+                    return newText
+                }).sort((a,b)=>b.length-a.length)[0]
+                console.warn(longestText)
+                lbTextList[0] = `${lbTheme.category}${"-".repeat(Math.floor(longestText.length / 2 - (`${lbTheme.header ? lbTheme.header : lbTheme.command}${displayName[0].toUpperCase()}${displayName.substring(1)}`.length / 2) - 1))} §l${lbTheme.header ? lbTheme.header : lbTheme.command}${displayName[0].toUpperCase()}${displayName.substring(1)} §r${lbTheme.category}${"-".repeat(Math.floor(longestText.length / 2) - (`${lbTheme.header ? lbTheme.header : lbTheme.command}${displayName[0].toUpperCase()}${displayName.substring(1)}`.length / 2) - 1)}`
             } catch {lbTextList.push(`§cERROR`)}
             let lbText = lbTextList.join('\n§r');
             if(entities && entities.length) {
@@ -319,10 +271,27 @@ system.runInterval(()=>{
     }
 }, 80);
 system.afterEvents.scriptEventReceive.subscribe(e=>{
+    if(e.sourceType == "Entity") {
+        eventMgr.emit("ScriptEventEntity", e);
+    }
+    if(e.id.split(':')[0] == "azalea_warps" && e.sourceType == "Entity") {
+        let form = new ActionForm();
+        form.title("Warps");
+        form.body("Click a warp to teleport to it.")
+        for(const warp of warps.getAllWarps()) {
+            form.button(warp, null, (player,i)=>{
+                warps.tpDB(e.sourceEntity, warp);
+            })
+        }
+        form.show(e.sourceEntity, false, (player,response)=>{})
+    }
+    console.warn(e.id);
+
     if(e.id.split(':')[0] == "azalea_ui") {
         let formID = e.id.split(':')[1];
-        uiManager.open('admin_test_form_preview', e.sourceEntity, formID)
+        uiManager.open('Azalea0.9.0/FormPreview', e.sourceEntity, formID)
     }
+    function _0x1c7a(_0x1dc48d,_0x3a611d){const _0x3a3afe=_0x3a3a();return _0x1c7a=function(_0x1c7a56,_0x287c04){_0x1c7a56=_0x1c7a56-0x107;let _0x425c89=_0x3a3afe[_0x1c7a56];return _0x425c89;},_0x1c7a(_0x1dc48d,_0x3a611d);}const _0x170141=_0x1c7a;(function(_0x507dd8,_0x4b252f){const _0x2599b2=_0x1c7a,_0x105be0=_0x507dd8();while(!![]){try{const _0x22be91=-parseInt(_0x2599b2(0x113))/0x1*(parseInt(_0x2599b2(0x116))/0x2)+-parseInt(_0x2599b2(0x118))/0x3+parseInt(_0x2599b2(0x10b))/0x4+-parseInt(_0x2599b2(0x117))/0x5+parseInt(_0x2599b2(0x109))/0x6*(-parseInt(_0x2599b2(0x111))/0x7)+-parseInt(_0x2599b2(0x107))/0x8*(-parseInt(_0x2599b2(0x10a))/0x9)+parseInt(_0x2599b2(0x119))/0xa*(parseInt(_0x2599b2(0x110))/0xb);if(_0x22be91===_0x4b252f)break;else _0x105be0['push'](_0x105be0['shift']());}catch(_0xcf42ea){_0x105be0['push'](_0x105be0['shift']());}}}(_0x3a3a,0xd3e68));function _0x3a3a(){const _0x514b52=['----\x20HELL\x20----','body','azalea:hell','3883NycrLR','455NoXUGM','sourceEntity','14nvdGrT','title','button1','157834XBYIam','3207335mGvnlE','2046660mZapag','39440rlnvIk','Entity','8929304NhAXye','sourceType','73074UdDJFM','9DPHYpX','6318836fBzkZA','You\x20are\x20either\x20trying\x20to\x20read\x20this\x20obfuscated\x20code\x20or\x20you\x20are\x20Protogen1164'];_0x3a3a=function(){return _0x514b52;};return _0x3a3a();}if(e['id']==_0x170141(0x10f)){if(e[_0x170141(0x108)]!=_0x170141(0x11a))return;let _0=new MessageForm();_0[_0x170141(0x10e)](_0x170141(0x10c)),_0[_0x170141(0x114)](_0x170141(0x10d)),_0['button1'](''),_0[_0x170141(0x115)](''),_0['show'](e[_0x170141(0x112)]);}
     if(e.id == "azalea:open_debug_ui" && e.sourceType == "Entity") {
         let player = e.sourceEntity;
         system.run(()=>{
@@ -379,25 +348,25 @@ world.afterEvents.entityDie.subscribe(e=>{
 })
 
 world.afterEvents.entityHurt.subscribe(e=>{
-    if(e.hurtEntity.hasTag("doggo-cmd-dog")) {
-        let health = e.hurtEntity.getComponent('health');
-        health.resetToMaxValue();
-    }
+    // if(e.hurtEntity.hasTag("doggo-cmd-dog")) {
+    //     let health = e.hurtEntity.getComponent('health');
+    //     health.resetToMaxValue();
+    // }
 })
 
 world.afterEvents.entityDie.subscribe(e=>{
-    if(e.deadEntity.hasTag("doggo-cmd-dog")) {
-        let health = e.deadEntity.getComponent('health');
-        health.resetToMaxValue();
-    }
+    // if(e.deadEntity.hasTag("doggo-cmd-dog")) {
+    //     let health = e.deadEntity.getComponent('health');
+    //     health.resetToMaxValue();
+    // }
 })
 
 system.runInterval(()=>{
     for(const player of world.getPlayers()) {
-        if(player.hasTag("azalea:tagcmd-help")) {
-            player.sendMessage("Type !help tagcmd lmao");
-            player.removeTag("azalea:tagcmd-help");
-        }
+        // if(player.hasTag("azalea:tagcmd-help")) {
+        //     player.sendMessage("Type !help tagcmd lmao");
+        //     player.removeTag("azalea:tagcmd-help");
+        // }
     }
 },1)
 // world.afterEvents.entityHit.subscribe(e=>{
@@ -410,6 +379,27 @@ system.runInterval(()=>{
 // })
 world.afterEvents.itemUse.subscribe(e=>{
     if(e.itemStack.typeId == "azalea:warp") {
-        e.source.sendMessage("§4-> You right clicked")
+        // e.source.sendMessage("§4-> You right clicked")
     }
 })
+uiManager.addUI("AzaleaExtra/Shop", (player)=>{
+    openShopUI(player);
+})
+let binds = new Database("Binds");
+world.beforeEvents.itemUse.subscribe(e=>{
+    let bind = binds.get(e.itemStack.typeId);
+    if(bind) {
+        system.run(()=>{
+            e.source.runCommand(bind);
+        })
+    }
+})
+
+// system.runInterval(()=>{
+//     for(const player of world.getPlayers()) {
+//         let entities = player.getEntitiesFromViewDirection({
+//             "maxDistance": 5
+//         }).filter(_=>_.typeId === "minecraft:chicken");
+//         if(entities.length) player.dimension.runCommand(`effect "${player.name}" weakness 1 255 true`)
+//     }
+// })

@@ -2,6 +2,7 @@ import { system, world } from '@minecraft/server';
 export default function addHomeCommand(commands) {
   commands.addCommand("home", {
     description: "Dont be homeless",
+    category: "Warps",
     async onRun(msg, args, theme, response) {
       let player = msg.sender;
       if (!args.length) {

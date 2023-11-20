@@ -8,7 +8,7 @@ export default function addHelpCommand(commands) {
         response(`TEXT ${commands.length}`);
         return;
       }
-      if (args.length && !/^\d+$/.test(args[0])) {
+      if (args.length && !/^\d+$/.test(args[0]) && args[0] != "-s") {
         let cmd2 = commands.find(_ => _.name == args[0]);
         if (!cmd2) return response(`ERROR Command not found!`);
         let text = [];
@@ -27,7 +27,7 @@ export default function addHelpCommand(commands) {
       });
       let text = [];
       var arrays = [],
-        size = 10;
+        size = 14;
       for (let i = 0; i < commandsSort.length; i += size) arrays.push(commandsSort.slice(i, i + size));
       let p = (args.length ? /^\d+$/.test(args[0]) ? parseInt(args[0]) : 1 : 1) - 1;
       if (p < 0) return response(`ERROR Minimum page is 1`);
@@ -46,15 +46,15 @@ export default function addHelpCommand(commands) {
         });
       }
       for (const category of Object.keys(categorizedCommands)) {
-        text.push(``);
-        text.push(`${theme.category}<-=- ${theme.header ? theme.header : theme.command}${category} §r${theme.category}-=->`);
+        // text.push(``)
+        if (!args.includes("-s")) text.push(`${theme.category}+--- ${theme.header ? theme.header : theme.command}${category} §r${theme.category}---+`);
         for (const command of categorizedCommands[category]) {
-          text.push(`${theme.command}${prefix}${command.name} ${theme.description}${command.description}`);
+          text.push(`${theme.category}> ${theme.command}${prefix}${command.name} ${theme.description}${command.description}`);
         }
       }
       text.push(``);
-      text.push(`${theme.description}Help page ${theme.command}${p + 1}/${arrays.length}${theme.description}, use ${theme.command}${prefix}help <page> ${theme.description}to select another page`);
-      text.push(`${theme.description}Use ${theme.command}!help <command name> ${theme.description}to get help with a specific command`);
+      text.push(`${theme.footer}Help page ${theme.footerAlt}${p + 1}/${arrays.length}§r${theme.footer}, use ${theme.footerAlt}${prefix}help <page> §r${theme.footer}to select another page`);
+      text.push(`${theme.footer}Use ${theme.footerAlt}!help <command name> §r${theme.footer}to get help with a specific command`);
       response(`TEXT ${text.join('\n')}`);
     }
   });

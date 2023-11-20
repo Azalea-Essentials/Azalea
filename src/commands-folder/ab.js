@@ -24,6 +24,7 @@ function betterArgs(myString) {
 export default function azaleaBotCmd(commands) {
     commands.addCommand("azaleabot", {
     description: "Azalea Bot",
+    category: "Azalea-Bot Communication",
     async onRun(msg, worseArgs, theme, response) {
         // world.sendMessage(msg.message)
         if(!msg.sender.hasTag("azalea-bot")) return;
