@@ -29,7 +29,7 @@ export default function VerifyCommand(commands) {
                         return response(`SUCCESS You are now verified!`);
                     } else if(VerificationType == "public") {
                         let player = msg.sender;
-                        system.run(()=>player.addTag("verified"));
+                        system.run(() => player.addTag("verified"));
                         // player.teleport({})
                         
                         system.run(()=>{

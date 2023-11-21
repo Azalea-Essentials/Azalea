@@ -93,6 +93,7 @@ export class Commands {
     // msg.sender.sendMessage(this.parseResult('ERROR Command not found!'))
     if (!msg.message.startsWith(prefix)) return;
     let cmdtoggles = world.scoreboard.getObjective("cmdtoggles");
+    if (!cmdtoggles) cmdtoggles = world.scoreboard.addObjective("cmdtoggles", "Command Toggles");
     let cmdStatusP = cmdtoggles.getParticipants().find(_ => _.displayName == cmd);
     let cmdStatus = cmdStatusP ? cmdtoggles.getScore(cmdStatusP) : 0;
     let cmd2 = this._cmds.find(_ => _.name == cmd);

@@ -1,4 +1,5 @@
 import {
+    Player,
   system,
   world,
 } from '@minecraft/server';
@@ -11,6 +12,7 @@ import { baseConfigMenu } from './configuratorOptions';
 import { Database } from './db';
 import {
   ActionForm,
+  MessageForm,
   ModalForm,
 } from './form_func';
 import { isAdmin } from './isAdmin';
@@ -27,6 +29,7 @@ world.afterEvents.playerLeave.subscribe(e => {
         })
     }
 })
+// do not question the code
 // system.runInterval(() => {
 // let items = world.getDimension('overworld').getEntities({
 //     "type": "item"
@@ -37,6 +40,43 @@ world.afterEvents.playerLeave.subscribe(e => {
 // itemStack.nameTag = "a"//
 // }
 // }, 20);
+// broken code
+// function openConfigPanel(player, page = 0) {
+//     if(!(player instanceof Player)) return;
+//     let uiMain = new ActionForm();
+//     let configItems = [];
+//     for(const key in baseConfigMenu) {
+//         configItems.push({
+//             name: key,
+//             data: baseConfigMenu[key]
+//         })
+//     }
+//     var arrays = [], size = 3;
+//     for (let i = 0; i < configItems; i += size)
+//        arrays.push(configItems.slice(i, i + size));
+
+//     let pageItems = arrays[page];
+//     for(const item of pageItems) {
+//         let submenu = item.data;
+//         uiMain.button(item.name, submenu.icon ? submenu.icon : null, (player, i)=>{
+//             new MessageForm().body("A").title("ExampleText").button1("BTN1").button2("BTN2").show(player, false, ()=>{})
+//         })
+//     }
+//     let pages = arrays.length;
+//     if(page < pages) {
+//         uiMain.button("Next Page", null, (player,i)=>{
+//             openConfigPanel(player, page+1);
+//         });
+//     }
+//     if(page > 0) {
+//         uiMain.button("Previous Page", null, (player,i)=>{
+//             openConfigPanel(player, page-1);
+//         })
+//     }
+//     uiMain.show(player, false, (player, response)=>{
+
+//     })
+// }
 world.beforeEvents.itemUse.subscribe((e) => {
     system.run(() => {
         if(e.itemStack.typeId == "azalea:player_shop") {
@@ -73,6 +113,8 @@ world.beforeEvents.itemUse.subscribe((e) => {
         //     return e.source.sendMessage("§bClick again to open admin panel!");
         // }
         if (e.itemStack.typeId == 'azalea:config_ui' && isAdmin(e.source)) {
+            // Enable this line if you really hate config UI!
+            // return openConfigPanel(e.source);
             let configOptions = baseConfigMenu;
             if(e.source.hasTag("experiment-1")) {
                 let mainForm = new ActionForm()
