@@ -4,6 +4,7 @@
 //! license : MIT
 //! momentjs.com
 
+import { world } from "@minecraft/server";
 var hookCallback;
 function hooks() {
   return hookCallback.apply(null, arguments);
@@ -213,11 +214,7 @@ function Moment(config) {
 function isMoment(obj) {
   return obj instanceof Moment || obj != null && obj._isAMomentObject != null;
 }
-function warn(msg) {
-  if (hooks.suppressDeprecationWarnings === false && typeof console !== 'undefined' && console.warn) {
-    console.warn('Deprecation warning: ' + msg);
-  }
-}
+function warn(msg) {}
 function deprecate(msg, fn) {
   var firstTime = true;
   return extend(function () {
@@ -1705,12 +1702,7 @@ function getSetGlobalLocale(key, values) {
     if (data) {
       // moment.duration._locale = moment._locale = data;
       globalLocale = data;
-    } else {
-      if (typeof console !== 'undefined' && console.warn) {
-        //warn user if arguments are passed but the locale could not be set
-        console.warn('Locale ' + key + ' not found. Did you forget to load it?');
-      }
-    }
+    } else {}
   }
   return globalLocale._abbr;
 }

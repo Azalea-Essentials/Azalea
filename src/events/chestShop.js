@@ -37,7 +37,7 @@ export default {
     name: "ItemUseOn",
     callback(e) {
         return;
-        console.warn("CALLED")
+        // console.warn("CALLED")
         const qblock = e.source.getBlockFromViewDirection({
             "maxDistance": 6,
             includePassableBlocks: true
@@ -57,8 +57,8 @@ export default {
             const block = qblock.block;
             const signComponent = block.getComponent("sign");
             let sign = signComponent;
-            console.warn(block.typeId);
-            // console.warn(signComponent.getText());
+            // console.warn(block.typeId);
+            // // console.warn(signComponent.getText());
             if(signComponent && signComponent.getText() == "/sell") {
                 signComponent.setWaxed();
                 signComponent.setText("Linking...");

@@ -3,7 +3,7 @@ import { Database } from '../db';
 import { warps } from '../warpsapi';
 export default function VerifyCommand(commands) {
   commands.addCommand("verify", {
-    description: "Get access",
+    description: "Get access to the server, if verification is enabled.",
     category: "Utilities",
     onRun(msg, args, theme, response) {
       try {
@@ -36,7 +36,7 @@ export default function VerifyCommand(commands) {
           return response(`ERROR No need to verify, verification is not enabled.`);
         }
       } catch (e) {
-        console.warn(e);
+        // console.warn(e);
       }
     }
   });

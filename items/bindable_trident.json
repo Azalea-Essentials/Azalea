@@ -1,0 +1,21 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "azalea:bindable_trident",
+            "category": "equipment"
+        },
+		"components": {
+            "minecraft:creative_category": {
+                "parent": "itemGroup.name.goatHorn"
+            },
+			"minecraft:display_name": {
+                "value": "§cBindable trident"
+            },
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": {
+				"texture": "trident_bindable"
+			}
+		}
+	}
+}

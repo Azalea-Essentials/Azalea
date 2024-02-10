@@ -12,7 +12,7 @@
 			},
 			"minecraft:max_stack_size": 1,
 			"minecraft:icon": {
-				"texture": "bindable_30"
+				"texture": "admin_ui"
 			},
 			"minecraft:foil": false
 		}

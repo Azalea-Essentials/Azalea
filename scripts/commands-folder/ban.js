@@ -2,6 +2,7 @@ import { system, world } from '@minecraft/server';
 import { Database } from '../db';
 import { isAdmin } from '../isAdmin';
 import moment from '../moment';
+import { logManager } from '../logManager';
 let cachedBans = [];
 world.afterEvents.worldInitialize.subscribe(() => {
   let bansDb = new Database("Bans");
@@ -12,7 +13,7 @@ world.afterEvents.playerSpawn.subscribe(eventData => {
   let ban = cachedBans.find(_ => eventData.player.id == _.playerId || eventData.player.name == _.playerName);
   let banIndex = cachedBans.findIndex(_ => eventData.player.id == _.playerId || eventData.player.name == _.playerName);
   if (ban) {
-    console.warn(ban.expires, Date.now());
+    // console.warn(ban.expires, Date.now())
     if (ban.expires > 0 && Date.now() < ban.expires) {
       let player = eventData.player;
       system.run(() => {
@@ -166,6 +167,7 @@ export default function banCommand(commands) {
           return response(`ERROR Invalid time string.`);
         }
       }
+      logManager.log("moderation", "ban", `Banned Player ${expiration == 0 ? "Permanently" : "Temporarily"}`, `${msg.sender.name} has banned ${player.name} ${expiration == 0 ? "Permanently" : "Temporarily"}`);
       bansList.push({
         expires: expiration,
         playerId: player.id,
@@ -193,7 +195,7 @@ export default function banCommand(commands) {
       let expiration = 0;
       let responseText = `Unbanned player!`;
       let ban = bansList.find(_ => _.playerName.toLowerCase() == args[0].toLowerCase());
-      let banIndex = bansList.find(_ => _.playerName.toLowerCase() == args[0].toLowerCase());
+      let banIndex = bansList.findIndex(_ => _.playerName.toLowerCase() == args[0].toLowerCase());
       if (ban) {
         bansList.splice(banIndex, 1);
       } else {

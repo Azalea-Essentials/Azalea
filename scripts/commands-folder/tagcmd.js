@@ -56,7 +56,8 @@ export default function AddTagCmdManager() {
           return {
             name: _.name,
             description: _.description ? _.description : "No description",
-            category: _.category ? _.category : "Uncategorized"
+            category: _.category ? _.category : "Uncategorized",
+            deprecated: true
           };
         });
       }
@@ -122,6 +123,7 @@ export default function AddTagCmdManager() {
     category: "Customization",
     usage: "\n!tagcmd add <name> <tag>\n!tagcmd remove <name>\n!tagcmd",
     admin: true,
+    deprecated: true,
     onRun(msg, args, theme, response) {
       let tagCmdTable = new Database("TagCmdConfig");
       if (!tagCmdTable.get("Cmds")) {
@@ -150,6 +152,7 @@ export default function AddTagCmdManager() {
         let tagCmds = JSON.parse(tagCmdTable.get("Cmds") ? tagCmdTable.get("Cmds") : "[]");
         switch (args[0]) {
           case "add":
+            return response(`DEPRINFO This command is deprecated. You can't add any TagCMDs as of v1.0, and this command only exists for compatibility. Please use custom commands in admin panel from now on`);
             if (args.length < 3) return response(`ERROR You must include a command name and tag name`);
             if (commands._cmds.find(_ => _.name.toLowerCase() == args[1]) || tagCmds.find(_ => _.name.toLowerCase() == args[1])) return response(`ERROR Command already exists!`);
             tagCmds.push({

@@ -35,7 +35,7 @@ function getFirstStringStartingWithPrefixAndRemovePrefix(list, prefix, defaultSt
 //    let rankformat = msg.match(/\#R\(([\s\S]*?)\)/g);
 //    if(rankformat && rankformat.length) {
 //        for(const rankformatter of rankformat) {
-//            console.warn(rankformatter)
+//            // console.warn(rankformatter)
 //            let rankseparator = rankformatter.substring('#R('.length).slice(0,-1);
 //            msg = msg.replace(rankformatter, ranks2.join(rankseparator));
 //        }
@@ -127,6 +127,24 @@ export function formatMSG(
     player,
     pre) {
     formatter.defineFunc("R", (separator)=> ranks2.join(separator));
+    formatter.defineFunc("F1", (contents)=>{
+        let args = contents.match(/\"([\s\S]*?)\"/g);
+        if(player.getTags().find(_=>_.startsWith(args[0].substring(1).slice(0,-1)))) {
+            let text = player
+                .getTags()
+                .find(_=>_.startsWith(args[0]
+                        .substring(1)
+                        .slice(0,-1)))
+                .slice(args[0]
+                    .substring(1)
+                    .slice(0,-1)
+                    .length
+                )    
+            return args[1].substring(1).slice(0,-1).replaceAll('$TAG', text).replaceAll('$U.TAG', text.toUpperCase()).replaceAll('#S[','#S(').replaceAll('^]',')');
+        } else {
+            return args[2].substring(1).slice(0,-1);
+        }
+    })
     formatter.defineFunc("HT", (contents)=>{
         let parts = contents.split(',');
         if(player.hasTag(parts[0])) return parts[1]
@@ -149,10 +167,12 @@ export function formatMSG(
         "RC": rankColor,
         "BC": bracketColor,
         "PR": pre,
+        "PS:": pre ? pre + " " : pre,
+        ":PS": pre ? " " + pre : pre,
         "P": senderName,
         "FRC": nameColor,
         "M": messageContent
     });
     formatter.reset();
-    return stringToReturn;
+    return stringToReturn.replace(/\s+/g," ");
 }

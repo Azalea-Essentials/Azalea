@@ -15,6 +15,8 @@ export default function addCreditsCommand(commands) {
       };
       let reviews = new Database("Reviews");
       let reviewList = reviews.get("Reviews", []);
+      if (!reviewList) reviewList = [];
+      if (reviewList && reviewList.length) reviewList = reviewList.filter(_ => _.sentBy != msg.sender.name);
       reviewList.push(data);
       reviews.set("Reviews", reviewList);
     });
@@ -35,6 +37,8 @@ export default function addCreditsCommand(commands) {
         };
         let reviews = new Database("Reviews");
         let reviewList = reviews.get("Reviews", []);
+        if (!reviewList) reviewList = [];
+        if (reviewList && reviewList.length) reviewList = reviewList.filter(_ => _.sentBy != msg.sender.name);
         reviewList.push(data);
         reviews.set("Reviews", reviewList);
       });

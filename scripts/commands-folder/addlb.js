@@ -3,9 +3,12 @@ import { Database } from '../db';
 export default function main() {
   commands.addCommand("add-lb", {
     admin: true,
-    description: "Test",
+    description: "Removes floating text",
     category: "Floating Text",
+    aliases: ["lb-add", "+lb"],
     async onRun(msg, args, theme, response) {
+      let translation = commands.callExtensionEvent("translation", "get_translation", msg.sender);
+      if (!args.length) return response(`ERROR ${translation.commands.addlb.addObjectiveName}`);
       let leaderboardsDB = new Database("LB");
       let leaderboards = leaderboardsDB.get("leaderboards") ? JSON.parse(leaderboardsDB.get("leaderboards")) : [];
       leaderboards.push({
@@ -17,6 +20,26 @@ export default function main() {
         id: Date.now().toString(),
         objective: args[0]
       });
+      leaderboardsDB.set("leaderboards", JSON.stringify(leaderboards));
+      response(`SUCCESS ${translation.commands.addlb.addedLeaderboard}`);
+    }
+  });
+  commands.addCommand("remove-lb", {
+    admin: true,
+    description: "Removes a leaderboard",
+    category: "Floating Text",
+    aliases: ["lb-remove", "-lb", "rm-lb", "lb-rm", "del-lb", "lb-del", "delete-lb", "lb-delete"],
+    async onRun(msg, args, theme, response) {
+      let translation = commands.callExtensionEvent("translation", "get_translation", msg.sender);
+      if (!args.length) return response(`ERROR ${translation.commands.addlb.addObjectiveNameRemove}`);
+      let leaderboardsDB = new Database("LB");
+      let leaderboards = leaderboardsDB.get("leaderboards") ? JSON.parse(leaderboardsDB.get("leaderboards")) : [];
+      let originalLeaderboardLength = leaderboards.length;
+      leaderboards = leaderboards.filter(_ => _.objective != args[0]);
+      let newLeaderboardLength = leaderboards.length;
+      let removedCount = originalLeaderboardLength - newLeaderboardLength;
+      if (removedCount == 0) response("ERROR " + translation.commands.addlb.removedNone);else response(`SUCCESS ${translation.commands.addlb.removed.replace(/\{\{COUNT\}\}/g, removedCount.toString())}`);
+      msg.sender.runCommand(`kill @e[type=rabbit,tag=leaderboard]`);
       leaderboardsDB.set("leaderboards", JSON.stringify(leaderboards));
     }
   });

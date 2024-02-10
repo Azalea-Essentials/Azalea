@@ -1,9 +1,12 @@
+import { isAdmin } from "../isAdmin";
 export default function addHelpCommand(commands) {
-  commands.addCommand("help", {
+  commands.addCommand("commands", {
     description: "Get some help",
     category: "Help Center",
     usage: "!help <command name | page>",
-    onRun(msg, args, theme, response, commands, prefix) {
+    aliases: ["?", "cmds"],
+    onRun(msg, args, theme, response, commands, prefix, usedCommand, useRevertedHelp = false) {
+      console.warn("HELP");
       if (args && args.length && args[0] == "cmd-count") {
         response(`TEXT ${commands.length}`);
         return;
@@ -24,7 +27,7 @@ export default function addHelpCommand(commands) {
         var textA = a.category.toUpperCase();
         var textB = b.category.toUpperCase();
         return textA < textB ? -1 : textA > textB ? 1 : 0;
-      });
+      }).filter(_ => !_.private);
       let text = [];
       var arrays = [],
         size = 14;
@@ -49,13 +52,16 @@ export default function addHelpCommand(commands) {
         // text.push(``)
         if (!args.includes("-s")) text.push(`${theme.category}+--- ${theme.header ? theme.header : theme.command}${category} §r${theme.category}---+`);
         for (const command of categorizedCommands[category]) {
-          text.push(`${theme.category}> ${theme.command}${prefix}${command.name} ${theme.description}${command.description}`);
+          if (command.admin && !isAdmin(msg.sender)) continue;
+          if (command.private) continue;
+          text.push(`${theme.category}> ${!command.deprecated ? theme.command : "§c"}${prefix}${command.name} ${theme.description}${command.description}${command.aliases && command.aliases.length ? ` §o${theme.alias}${command.aliases.join("§r" + theme.alias + ", §o")}§r` : ``}${command.admin ? " \uE12A" : ""}${command.isDev ? " \uE12B" : ""}${command.deprecated ? " \uE12C" : ""}`);
         }
       }
       text.push(``);
-      text.push(`${theme.footer}Help page ${theme.footerAlt}${p + 1}/${arrays.length}§r${theme.footer}, use ${theme.footerAlt}${prefix}help <page> §r${theme.footer}to select another page`);
-      text.push(`${theme.footer}Use ${theme.footerAlt}!help <command name> §r${theme.footer}to get help with a specific command`);
-      response(`TEXT ${text.join('\n')}`);
+      text.push(`${theme.footer}Help page ${theme.footerAlt}${p + 1}/${arrays.length}§r${theme.footer}, use ${theme.footerAlt}${prefix}${usedCommand} <page> §r${theme.footer}to select another page`);
+      text.push(`${theme.footer}Use ${theme.footerAlt}${prefix}${usedCommand} <command name> §r${theme.footer}to get help with a specific command`);
+      if (useRevertedHelp) text.push(`${theme.footer}Do ${theme.footerAlt}${prefix}help revert §r${theme.footer}to go back, or ${theme.footerAlt}${prefix}guide §r${theme.footer}to use the new help menu`);
+      response(`TEXT ${text.join('\n§r')}`);
     }
   });
 }

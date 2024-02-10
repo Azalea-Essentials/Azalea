@@ -3,8 +3,10 @@ import {
   world,
 } from '@minecraft/server';
 import LZString from './lz-string';
+import { DynamicPropertyDatabase } from './dynamicPropertyDb';
 
 // 100% copied from stackoverflow because im dumb lmfao
+// AzaleaDB is legacy now.
 function MergeRecursive(obj1, obj2) {
     for (var p in obj2) {
       try {
@@ -24,6 +26,7 @@ function MergeRecursive(obj1, obj2) {
 
 const tables = {};
 // if you dont want a shit ton of data to go unused, used hardDelete() and hardSet() instead of set() and delete()
+let cache = new Map();
 export class Database {
     constructor(table, compressed = false) {
         this.compressed = compressed;
@@ -36,9 +39,20 @@ export class Database {
                 } catch { }
             })
         } catch { }
-        try {
-            if (!tables[table]) tables[table] = new Map();
-        } catch { }
+        // try {
+        //     if (!tables[table]) tables[table] = new Map();
+        // } catch { }
+        this.getTable();
+    }
+    getCache() {
+        if(cache.has(this.table)) {
+            return cache.get(this.table)
+        } else {
+            return new Map();
+        }
+    }
+    setCache(cacheData) {
+        cache.set(this.table, cacheData);
     }
     set(_key, _val) {
         // system.run(() => {
@@ -54,17 +68,25 @@ export class Database {
             }
             if(this.compressed) val = LZString.compress(val);
             let overworld = world.getDimension('overworld');
-            overworld.runCommand(`scoreboard players set "${key}-L" "db-${this.table}" ${val.length}`);
+            let scoreboard = world.scoreboard.getObjective(`db-${this.table}`);
+            scoreboard.setScore(`${key}-L`, val.length);
+            // overworld.runCommand(`scoreboard players set "${key}-L" "db-${this.table}" ${val.length}`);
             for (let i = 0; i < val.length; i++) {
-                overworld.runCommand(`scoreboard players set "${key}-${i}" "db-${this.table}" ${val[i].charCodeAt()}`);
+                // overworld.runCommand(`scoreboard players set "${key}-${i}" "db-${this.table}" ${val[i].charCodeAt()}`);
+                scoreboard.setScore(`${key}-${i}`, val[i].charCodeAt());
             }
-            tables[this.table].set(key, val);
+            let cache = this.getCache();
+            cache.set(key, _val);
+            this.setCache(cache);
+            // tables[this.table].set(key, val);
         // })
     }
     get(key, defaultResult = "") {
+        let cacheData = this.getCache();
+        if(cacheData.has(key)) return cacheData.get(key);
         try {
             let objective = world.scoreboard.getObjective(`db-${this.table}`);
-            // console.warn(objective.getParticipants().map(_=>_.displayName).join(', '))
+            // // console.warn(objective.getParticipants().map(_=>_.displayName).join(', '))
             let participants = objective.getParticipants();
             if (!participants.length) return defaultResult;
             let lenParticipant = participants.find(_ => _.displayName == `${key}-L`);
@@ -81,7 +103,7 @@ export class Database {
             for (const participant of valParticipants) {
                 str += String.fromCharCode(objective.getScore(participant));
             }
-            // console.warn(str);
+            // // console.warn(str);
             if (!str || !str.length || str == "") {
                 return defaultResult;
             }
@@ -94,20 +116,24 @@ export class Database {
             }
             if(!str.length) return defaultResult;
             if(this.compressed) str = LZString.decompress();
-            if(this.compressed) console.warn(str)
-            return str.startsWith("OBJECT:")
+            // if(this.compressed) // console.warn(str)
+            let returnData = str.startsWith("OBJECT:")
                 ? JSON.parse(str.substring("OBJECT:".length))
-                : str.startsWith("NUMBER:") ? parseInt(str.substring("NUMBER:".length))
+                : str.startsWith("NUMBER:") ? parseInt(str.substring("NUM:".length))
                 : str == "BOOL:true" ? true
                 : str == "BOOL:false" ? false
                 : str;
+            let cache = this.getCache();
+            cache.set(key, returnData);
+            this.setCache(cache);
+            return returnData;
         } catch (e) {
             return defaultResult;
         }
     }
     getNoCheck(key) {
         let objective = world.scoreboard.getObjective(`db-${this.table}`);
-        // console.warn(objective.getParticipants().map(_=>_.displayName).join(', '))
+        // // console.warn(objective.getParticipants().map(_=>_.displayName).join(', '))
         let participants = objective.getParticipants();
         if (!participants.length) return defaultResult;
         let lenParticipant = participants.find(_ => _.displayName == `${key}-L`);
@@ -141,6 +167,11 @@ export class Database {
         }
     }
     delete(key) {
+        let cacheData = this.getCache();
+        if(cacheData.has(key)) {
+            cacheData.delete(key);
+        }
+        this.setCache(cacheData);
         let objective = world.scoreboard.getObjective(`db-${this.table}`);
         let participants = objective.getParticipants();
 
@@ -150,6 +181,11 @@ export class Database {
         objective.removeParticipant(lenParticipant);
     }
     hardDelete(key) {
+        let cacheData = this.getCache();
+        if(cacheData.has(key)) {
+            cacheData.delete(key);
+        }
+        this.setCache(cacheData);
         let objective = world.scoreboard.getObjective(`db-${this.table}`);
         let participants = objective.getParticipants();
 
@@ -242,3 +278,76 @@ export class Database {
         return this.get("table_variables", {});
     }
 }
+export class DatabaseNew {
+    constructor(table) {
+        this.table = table.toLowerCase();
+    }
+    set(key,_val) {
+        let val = _val;
+        if(typeof _val == "object") val = `[OBJ:${JSON.stringify(_val)}`;
+        world.setDynamicProperty(`${this.table}:${key}`, val);
+    }
+    get(key,defaultResult="") {
+        try {
+            let val = world.getDynamicProperty(`${this.table}:${key}`);
+            if(val === undefined) return defaultResult;
+            if(val.startsWith('[OBJ:')) return JSON.parse(val.substring(5));
+            // if(val.startsWith('BOOL2:')) {
+            //     if(val == "BOOL2:TRUE") return "true"
+            //     else return "false";
+            // }
+            return val;
+    
+        } catch {
+            this.delete(key);
+            return defaultResult;
+        }
+    }
+    keys() {
+        return world.getDynamicPropertyIds()
+            .filter(_=>_.startsWith(this.table))
+            .map(_=>_.substring(this.table.length+1));
+    }
+    delete(key) {
+        try {
+            world.setDynamicProperty(`${this.table}:${key}`, undefined);
+        } catch {}
+    }
+    hardDelete(key) {
+        this.delete(key);
+    }
+    clear() {
+        for(const key of this.keys()) {
+            this.delete(key)
+        }
+    }
+    hardSet(key, val) {
+        this.set(key, val);
+    }
+    getTable() {
+        let table = {};
+        for (const key of this.keys()) {
+            table[key] = this.get(key);
+        }
+        return table;
+    }
+    get allData() {
+        return this.getTable();
+    }
+    set tableInfo(val) {
+        this.set("TABLE_INFO", val);
+    }
+    get tableInfo() {
+        return this.get("TABLE_INFO");
+    }
+    get gkeys() {
+        return this.keys();
+    }
+    get vals() {
+        let table = [];
+        for (const key of this.gkeys)
+            table.push(this.get(key));
+        return table;
+    }
+}
+export const DatabaseLegacy = Database;

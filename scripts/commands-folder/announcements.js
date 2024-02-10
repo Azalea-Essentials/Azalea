@@ -32,7 +32,12 @@ export default function addWhatCommand(commands) {
             text.push(`${theme.command}${post.s} ${theme.description}${post.t}§r`);
           }
           text.push(``);
+          if (isAdmin(msg.sender)) {
+            text.push(`§eUse §a!announcements announce <text> §eto §oannounce`);
+          }
           response(`TEXT ${text.join('\n')}`);
+        } else {
+          response(`ERROR Seems like someone can't figure out the announcements command. All you have to do is §a!announcements announce <text>`);
         }
       } else {
         let text = [];
@@ -41,6 +46,9 @@ export default function addWhatCommand(commands) {
           text.push(`${theme.command}${post.s} ${theme.description}${post.t}§r`);
         }
         text.push(``);
+        if (isAdmin(msg.sender)) {
+          text.push(`§eUse §a!announcements announce <text> §eto §oannounce`);
+        }
         response(`TEXT ${text.join('\n')}`);
       }
     }

@@ -1,4 +1,4 @@
-import { world } from '@minecraft/server';
+import { system, world } from '@minecraft/server';
 import { CommandBuilder } from '../commandBuilder';
 import { isAdmin } from '../isAdmin';
 import { warps } from '../warpsapi';
@@ -123,12 +123,18 @@ export default function WarpCommand(commands) {
         return response(`TEXT ${text.join('\n§r')}`);
       } else if (args[0] == "tp") {
         if (warps.hasDB(args.slice(1).join(' '))) {
-          warps.tpDB(msg.sender, args.slice(1).join(' '));
-          // msg.sender.playSound("portal.travel");
-          return response(`SUCCESS Teleporting...`);
+          let response2 = warps.tpDB(msg.sender, args.slice(1).join(' '));
+          if (response2 == 0) return response(`SUCCESS Teleporting...`);else if (response2 == 1) return response(`ERROR Missing required tag!`);
         } else {
           return response(`ERROR Warp not found!`);
         }
+      } else if (args[0] == "-v") {
+        response(`INFO Warps API version: v${warps.version.toFixed(1)}`);
+        let text = [];
+        text.push("§a§lChangelog:");
+        text.push(`§r- §e${warps.changelog.join('\n§r- §e')}`);
+        response(`TEXT `);
+        response(`TEXT ${text.join('\n§r')}`);
       } else if (args[0] == "remove") {
         if (!isAdmin(msg.sender)) return response(`ERROR You are not admin`);
         if (warps.hasDB(args.slice(1).join(' '))) {
@@ -139,7 +145,8 @@ export default function WarpCommand(commands) {
         }
       } else {
         if (warps.hasDB(args.join(' '))) {
-          warps.tpDB(msg.sender, args.join(' '));
+          let response2 = warps.tpDB(msg.sender, args.join(' '));
+          if (response2 == 0) return response(`SUCCESS Teleporting...`);else if (response2 == 1) return response(`ERROR Missing required tag!`);
           return response(`SUCCESS Teleporting...`);
         } else {
           return response(`ERROR Warp not found: Invalid argument, the valid ones are: set-r, set, list, tp, remove`);
@@ -161,6 +168,11 @@ export default function WarpCommand(commands) {
         text.push(`${theme.category}+--- ${theme.header}Warps ${theme.category}---+`);
         for (const warp of warps.getAllWarps()) {
           text.push(`${theme.category}> §r${theme.command}${warp}`);
+        }
+        if (isAdmin(msg.sender)) {
+          text.push("");
+          text.push("To set a warp: §b!warp set §e<name>");
+          text.push("To set a warp (with rotation): §b!warp set-r §e<name>");
         }
         return response(`TEXT ${text.join('\n§r')}`);
       }
@@ -186,3 +198,6 @@ export default function WarpCommand(commands) {
     });
   }).register();
 }
+system.runInterval(() => {
+  warps.checkTeleportTags();
+}, 10);

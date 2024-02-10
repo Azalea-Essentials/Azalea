@@ -90,7 +90,7 @@ export const ADMIN_TEST = function () {
     let formData = forms[formDataIndex];
     let commands = formData.commands ? formData.commands : [];
     let form = new ActionForm().title(formData.title).body(formData.body);
-    form.button("§4Exit", "azalea_icons/2", () => {});
+    if (!commands.length) form.button("§4Exit", "textures/azalea_icons/2", () => {});
     for (const command of commands) {
       let icon = command.icon ? icons.find(_ => _.name == command.icon) : null;
       form.button(command.text, icon ? icon.path : null, player => {
@@ -139,6 +139,7 @@ export const ADMIN_TEST = function () {
     if (formDataIndex < 0) return uiManager.open("Azalea0.9.0/FormcmdRoot", player);
     let formData = forms[formDataIndex];
     let form = new ActionForm();
+    form.title(`Edit "${formData.title}"`);
     form.button("Edit", null, (player, i) => {
       uiManager.open("Azalea0.9.0/FormcmdFormEditOptions", player, formData.id);
     });
@@ -155,8 +156,8 @@ export const ADMIN_TEST = function () {
     let form = new ActionForm();
     let actionFormsDb = new Database("ActionForms");
     let forms = actionFormsDb.get("ActionForms", []);
-    form.button("§4Exit", "azalea_icons/2", () => {});
-    form.button("§2Add", "azalea_icons/1", () => {
+    form.button("§4Exit", "textures/azalea_icons/2", () => {});
+    form.button("§2Add", "textures/azalea_icons/1", () => {
       uiManager.open("Azalea0.9.0/FormcmdAdd", player);
     });
     for (const formData of forms) {
@@ -166,7 +167,7 @@ export const ADMIN_TEST = function () {
     }
     form.show(player, false, () => {});
   });
-  return new ConfiguratorSub("§tForms\n§8Buttons", "azalea_icons/9").setCallback(player => {
+  return new ConfiguratorSub("§tForms", "textures/azalea_icons/9").setCallback(player => {
     uiManager.open("Azalea0.9.0/FormcmdRoot", player);
   });
 };

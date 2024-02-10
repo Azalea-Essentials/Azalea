@@ -2,7 +2,7 @@ import { ConfiguratorSub } from '../configuratorOptions';
 import { Database } from '../db';
 import { ActionForm, MessageForm } from '../form_func';
 export const PLAYER_REPORTS = function () {
-  return new ConfiguratorSub("§cPlayer reports\n§8Manage player reports", "azalea_icons/5").setCallback(player => {
+  return new ConfiguratorSub("§cPlayer reports", "textures/azalea_icons/5").setCallback(player => {
     let actionForm = new ActionForm();
     actionForm.body("Select a case");
     actionForm.title("Player reports");

@@ -18,11 +18,11 @@ export default function addChatrankFormatCommand(commands) {
         // }
         // let reg2 = /\$([a-zA-Z]*?)\(([\s\S]*?)\)/g;
         // let funcs = formatted.match(reg2);
-        // // console.warn(funcs.join(', '))
+        // // // console.warn(funcs.join(', '))
         // let funcStrings = [];
         // if(funcs && funcs.length) {
         //     for(const func of funcs) {
-        //         console.warn(func[1]);
+        //         // console.warn(func[1]);
         //         let funcString = `§9$§b${func.match(/\$([\s\S]*?)\(/)[0].substring(1).slice(0,-1)}§a(${func.split('(').slice(1).join('(').slice(0,-1)}§r§a)`;
         //         formatted = formatted.replace(func, funcString);
         //         funcStrings.push(funcString);

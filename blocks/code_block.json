@@ -1,0 +1,58 @@
+{
+	"format_version": "1.20.50",
+	"minecraft:block": {
+		"description": {
+			"identifier": "azalea:code_block"
+		},
+		"components": {
+			"minecraft:display_name": "§cCODE BLOCK",
+			"minecraft:flammable": false,
+			"minecraft:on_interact": {
+				"event": "open"
+			},
+			"minecraft:on_placed": {
+				"event": "place"
+			},
+			"minecraft:on_player_destroyed": {
+				"event": "break"
+			},
+			"minecraft:queued_ticking": {
+				"interval_range": [
+					2,
+					2
+				],
+				"looping": true,
+				"on_tick": {
+					"condition": "query.is_powered",
+					"event": "run"
+				}
+			}
+		},
+		"events": {
+			"run": {
+				"run_command": {
+					"command": "scriptevent azalea:script_block_run",
+					"target": "block"
+				}
+			},
+			"open": {
+				"run_command": {
+					"command": "scriptevent azalea:open_ui Azalea2.0/CodeBlock",
+					"target": "player"
+				}
+			},
+			"place": {
+				"run_command": {
+					"target": "block",
+					"command": "scriptevent azalea:script_block_place"
+				}
+			},
+			"break": {
+				"run_command": {
+					"target": "block",
+					"command": "scriptevent azalea:script_block_break"
+				}
+			}
+		}
+	}
+}

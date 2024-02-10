@@ -26,7 +26,9 @@ export class Theme {
     darkInfo,
     footer,
     footerAlt,
-    header
+    header,
+    leaderboardNumber,
+    leaderboardScore
   }) {
     // awful array shit
     // let allCorrect = [successColor,errorColor,infoColor,defaultBracketColor,defaultRankColor,defaultNameColor,defaultMessageColor,barFull,barEmpty,barBracket, category, command, description, alias,warningColor].every(col => this.themeColorRegex.test(col));
@@ -56,7 +58,9 @@ export class Theme {
         darkError,
         header,
         footer,
-        footerAlt
+        footerAlt,
+        leaderboardNumber,
+        leaderboardScore
       });
     }
   }

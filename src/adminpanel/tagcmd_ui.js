@@ -33,7 +33,7 @@ export const TAGCMD_UI = function() {
 
         })
     })
-    return new ConfiguratorSub("§cTag commands\n§8Manage tag commands", "azalea_icons/11")
+    return new ConfiguratorSub("§eTag commands", "textures/azalea_icons/11")
         .setCallback((player)=>{
             uiManager.open("Azalea0.9.0/TagCmd", player);
         })

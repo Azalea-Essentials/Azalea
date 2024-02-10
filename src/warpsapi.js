@@ -5,6 +5,13 @@ import { Database } from './db';
 class Warps {
     constructor() {
         this.warpsDb = new Database("Warps");
+        this.version = 1;
+        this.changelog = [
+            "Added warp teleport tag",
+            "Added warp tag requirements",
+            "Added hidden warps",
+            "\"spawn\" warp now displays as \"World Spawn\""
+        ]
     }
     set(name, location, dimension = world.getDimension("overworld")) {
         let { x, y, z } = location;
@@ -64,6 +71,14 @@ class Warps {
             })
         }
     }
+    get2(_name) {
+        let name = _name == "§aWorld Spawn" ? "spawn" : _name;
+        return this.warpsDb.get(name, null);
+    }
+    set2(_name, _val) {
+        let name = _name == "§aWorld Spawn" ? "spawn" : _name;
+        this.warpsDb.set(name, _val);
+    }
     getDB(name) {
         return this.warpsDb.get(name, null);
     }
@@ -74,6 +89,30 @@ class Warps {
             z: location.z,
             dimension: dimension.id
         })
+    }
+    setRequiredTag(name, tag) {
+        if(!this.hasDB(name)) return null;
+        let warp = this.warpsDb.get(name);
+        warp.requiredTag = tag;
+        this.warpsDb.set(name, warp);
+    }
+    setTeleportTag(name, tag) {
+        if(!this.hasDB(name)) return null;
+        let warp = this.warpsDb.get(name);
+        warp.teleportTag = tag;
+        this.warpsDb.set(name, warp);
+    }
+    checkTeleportTags() {
+        let warps = this.warpsDb.allData;
+        for(const player of world.getPlayers()) {
+            for(const warpName of [...Object.keys(warps)]) {
+                let warp = warps[warpName];
+                if(warp.teleportTag && player.hasTag(warp.teleportTag)) {
+                    this.tpDB(player, warpName);
+                    player.removeTag(warp.teleportTag);
+                }
+            }
+        }
     }
     setDBRotation(name, location, dimension, rotation) {
         return this.warpsDb.set(name, {
@@ -88,10 +127,18 @@ class Warps {
     hasDB(name) {
         return this.getDB(name) ? true : false;
     }
-    tpDB(player, name) {
+    setHidden(name, state = false) {
+        if(!this.hasDB(name)) return;
+        let warp = this.warpsDb.get(name);
+        warp.hidden = state;
+        this.warpsDb.set(name, warp);
+    }
+    tpDB(player, _name) {
+        let name = _name == "§aWorld Spawn" ? "spawn" : _name;
         if(this.hasDB(name)) {
             let warp = this.getDB(name);
             if(warp.rotX) return this.tpDBRotation(player, name);
+            if(warp.requiredTag && !player.hasTag(warp.requiredTag)) return 1;
             player.teleport({
                 x: warp.x,
                 y: warp.y,
@@ -99,11 +146,14 @@ class Warps {
             }, {
                 dimension: world.getDimension(warp.dimension)
             })
+            return 0;
         }
     }
-    tpDBRotation(player, name) {
+    tpDBRotation(player, _name) {
+        let name = _name == "§aWorld Spawn" ? "spawn" : _name;
         if(this.hasDB(name)) {
             let warp = this.getDB(name);
+            if(warp.requiredTag && !player.hasTag(warp.requiredTag)) return 1;
             player.teleport({
                 x: warp.x,
                 y: warp.y,
@@ -115,6 +165,7 @@ class Warps {
                     y: warp.rotY
                 }
             })
+            return 0;
         }
     }
     getAllOldWarps() {
@@ -126,6 +177,12 @@ class Warps {
         }).map(_=>_.id.substring(5));
     }
     getAllWarps() {
+        return this.warpsDb.gkeys.map(_=>_=="spawn"?"§aWorld Spawn":_).filter(_=>{
+            let warp = this.warpsDb.get(_);
+            return warp.hidden ? false : true;
+        });
+    }
+    getAllWarpsOld() {
         return this.warpsDb.gkeys;
     }
 }

@@ -2,12 +2,12 @@
 	"format_version": 2,
 	"header": {
 		"description": "§9Finally, a new release! Make sure to do §a/tag @s add admin",
-		"name": "V0.9.1 §5( DEVELOPMENT ) §a(ID: 101)",
-		"uuid": "e52c3c3a-1897-4d7e-ab65-e544b4136e88",
+		"name": "§aAzalea §5[BETA] §r§7- §rV2.0 RELEASE",
+		"uuid": "ed6177c2-defb-48bd-b644-47991a76ca5b",
 		"version": [
 			0,
 			0,
-			1
+			226
 		],
 		"min_engine_version": [
 			1,
@@ -20,33 +20,34 @@
 			"description": "99.9% of azalea",
 			"type": "script",
 			"language": "javascript",
-			"uuid": "457977b0-7844-40a4-a86c-72fe58d7361b",
+			"uuid": "a88d5bd6-648e-4941-867f-13000b42b440",
 			"version": [
 				0,
 				0,
-				1
+				226
 			],
 			"entry": "scripts/index.js"
 		},
 		{
 			"description": "Some useful things",
 			"type": "data",
-			"uuid": "3e915fad-2c32-4499-b6b8-6cab659905bc",
+			"uuid": "7ad4d280-b0eb-4c98-8c5b-1bf70c79929a",
 			"version": [
 				0,
 				0,
-				1
+				226
 			]
 		}
 	],
     "dependencies": [
         {
           "module_name": "@minecraft/server",
-          "version": "1.7.0-beta"
+          "version": "1.9.0-beta"
         },
         {
           "module_name": "@minecraft/server-ui",
           "version": "1.2.0-beta"
         }
-    ]
+    ],
+	"capabilities": ["script_eval"]
 }

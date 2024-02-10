@@ -9,5 +9,8 @@ export class UIRegister {
         let ui = this.uis.find(_=>_.id==id)
         if(ui) ui.ui(player, ...args);
     }
+    addUI_V2() {
+        
+    }
 }
 export const uiManager = new UIRegister();

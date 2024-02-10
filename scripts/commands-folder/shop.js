@@ -7,6 +7,20 @@ import { ActionForm } from '../form_func';
 import { isAdmin } from '../isAdmin';
 import { responseStr, SUCCESS } from '../response';
 import { openShopUI } from '../shopui';
+import { DynamicPropertyDatabase } from '../dynamicPropertyDb';
+import { uiManager } from '../uis';
+function getShopKey(player) {
+  let score = 0;
+  try {
+    let shopScoreboard = world.scoreboard.getObjective("multishop");
+    if (!shopScoreboard) shopScoreboard = world.scoreboard.addObjective("multishop", "Multishop");
+    score = shopScoreboard.getScore(player.scoreboardIdentity);
+  } catch {
+    score = 0;
+  }
+  if (!score) score = 0;
+  return score == 0 ? "ShopItems" : "ShopItems-" + score.toString();
+}
 export default function main() {
   commands.addCommand("shop", {
     description: "Shop",
@@ -20,6 +34,15 @@ export default function main() {
           return;
         }
         if (args[0] == "add") {
+          let shopDB2 = new DynamicPropertyDatabase("ShopNew");
+          let shopItems = shopDB2.get(getShopKey(msg.sender), "");
+          if (!shopItems) {
+            shopItems = [{
+              "category": "Uncategorized",
+              "items": []
+            }];
+            shopDB2.set("ShopItems", shopItems);
+          }
           if (!isAdmin(msg.sender)) return response("ERROR You require admin");
           if (args.length < 2) return response("ERROR Enter a price");
           if (!/^\d+$/.test(args[1])) return response("ERROR Invalid price!");
@@ -27,13 +50,20 @@ export default function main() {
           let container = inventory.container;
           let itemStack = container.getItem(msg.sender.selectedSlot);
           if (!itemStack) return response("ERROR You need to be holding an item");
-          let shopItems = shopDb.get("ShopItems", []);
           // world.sendMessage(`${JSON.stringify(shopItems)}`);
-          shopItems.push({
+          let uncategorizedIndex = shopItems.findIndex(_ => _.category == "Uncategorized");
+          if (uncategorizedIndex < 0) {
+            uncategorizedIndex = shopItems.length;
+            shopItems.push({
+              "category": "Uncategorized",
+              "items": []
+            });
+          }
+          shopItems[uncategorizedIndex].items.push({
             item: itemToJson(itemStack),
             price: parseInt(args[1])
           });
-          shopDb.set("ShopItems", shopItems);
+          shopDB2.set(getShopKey(msg.sender), shopItems);
           return response(`SUCCESS Successfully added item to shop for $${parseInt(args[1])}`);
         }
       } else {
@@ -46,7 +76,7 @@ export default function main() {
         let interval = system.runInterval(() => {
           if (msg.sender.location.x != x || msg.sender.location.y != y || msg.sender.location.z != z) {
             system.clearRun(interval);
-            openShopUI(sender);
+            uiManager.open("Azalea1.1/Shop/Root", sender);
           } else {
             count++;
             if (count > 5 * 2) {

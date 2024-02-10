@@ -22,6 +22,15 @@ export class CommandBuilder {
     this.data.description = text;
     return this;
   }
+  deprecated(bool = true) {
+    this.data.deprecated = bool;
+    return this;
+  }
+  aliases(list) {
+    // if(typeof text !) return this;
+    this.data.aliases = list;
+    return this;
+  }
   category(text) {
     if (typeof text !== "string") return this;
     this.data.category = text;

@@ -2,7 +2,7 @@ import { Player, world } from '@minecraft/server';
 import { ActionFormData, ActionFormResponse, FormCancelationReason, MessageFormData, MessageFormResponse, ModalFormData, ModalFormResponse } from '@minecraft/server-ui';
 export const content = {
   warn(...messages) {
-    console.warn(messages.map(message => JSON.stringify(message, (key, value) => value instanceof Function ? '<f>' : value)).join(' '));
+    // console.warn(messages.map(message => JSON.stringify(message, (key, value) => (value instanceof Function) ? '<f>' : value)).join(' '));
   },
   chatFormat(...messages) {
     world.say(messages.map(message => JSON.stringify(message, (key, value) => value instanceof Function ? value.toString().replaceAll('\r\n', '\n') : value, 4)).join(' '));
@@ -107,7 +107,7 @@ export class ActionForm {
    */
   title(titleText) {
     if (typeof titleText !== 'string') throw new Error(`titleText: ${titleText}, at params[0] is not a String!`);
-    this.form.title(titleText);
+    this.form.title(`§r§f${titleText}`);
     return this;
   }
   /**
@@ -143,6 +143,7 @@ export class ActionForm {
    * @returns {Promise<ActionFormResponse>}
    */
   async show(player, awaitNotBusy = false, callback) {
+    awaitNotBusy = true;
     try {
       if (!(player instanceof Player)) player = player?.player;
       if (!(player instanceof Player)) throw new Error(`player at params[0] is not a Player!`);
@@ -313,7 +314,7 @@ export class ModalForm {
       if (callback instanceof Function) callback(player, response);
       return response;
     } catch (error) {
-      console.warn(error, error.stack);
+      // console.warn(error, error.stack);
     }
   }
 }

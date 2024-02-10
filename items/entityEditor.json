@@ -1,0 +1,19 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "azalea:entity_editor",
+            "category": "equipment"
+        },
+		"components": {
+			"minecraft:display_name": {
+                "value": "§aEntity Property Editor"
+            },
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": {
+				"texture": "gem_01a_bindable"
+			},
+            "minecraft:foil": true
+		}
+	}
+}

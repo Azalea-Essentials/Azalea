@@ -1,0 +1,21 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "azalea:bindable_bone_meal",
+            "category": "equipment"
+        },
+		"components": {
+            "minecraft:creative_category": {
+                "parent": "itemGroup.name.goatHorn"
+            },
+			"minecraft:display_name": {
+                "value": "§cBindable bone_meal"
+            },
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": {
+				"texture": "bone_meal_bindable"
+			}
+		}
+	}
+}

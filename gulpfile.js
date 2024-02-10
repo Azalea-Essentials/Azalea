@@ -11,7 +11,11 @@ gulp.task("dev", function (cb) {
   gulp.watch("src/**/*.js", (cb)=>{
     return gulp.src("src/**/*.js")
     .pipe(babel({
-      plugins: ["wildcard"]
+      plugins: ["wildcard",["@babel/plugin-transform-react-jsx",      {
+        "throwIfNamespace": false, // defaults to true
+        "runtime": "automatic", // defaults to classic
+        "importSource": "azalea-jsx" // defaults to react
+      }]]
     }))
     .pipe(replace(/\%\%AZALEA_VER\%\%/g, JSON.parse(fs.readFileSync('build.json').toString()).Version))
     .pipe(replace(/\/\*BUILDTIME\*\//g, Date.now().toString()))
@@ -42,7 +46,7 @@ gulp.task("build", async function (cb) {
     const sourceFolder = __dirname;
     const outputZip = 'release/output.zip';
 
-    const foldersToInclude = ['scripts', 'structures', 'items', 'entities', 'scripts/adminpanel', 'scripts/commands-folder', 'scripts/events', 'scripts/scriptevents', 'scripts/lib', 'scripts/modules'];
+    const foldersToInclude = ['scripts', 'structures', 'items', 'entities', 'scripts/adminpanel', 'scripts/commands-folder', 'scripts/events', 'scripts/scriptevents', 'scripts/lib', 'scripts/modules', 'scripts', 'blocks', 'scripts/azalea-jsc'];
     const filesToInclude = ['manifest.json'];
     // 100% ai generated
     async function createSpecificZip() {
@@ -106,7 +110,7 @@ gulp.task("build-dev", async function (cb) {
   fs.readFile('release.manifest.json',async (err, data)=>{
     let str = data.toString();
     let AzaleaVer = JSON.parse(fs.readFileSync('build.json').toString()).Version;
-    str = str.replace(/\$AZALEAVER/g, AzaleaVer+" §5( DEVELOPMENT )");
+    str = str.replace(/\$AZALEAVER/g, AzaleaVer);
     let data2 = parseInt(fs.readFileSync('releasedata.txt').toString())+1;
     str = str.replace(/\$BUILDID/g, data2.toString());
     fs.writeFileSync('releasedata.txt', data2.toString());
@@ -120,7 +124,7 @@ gulp.task("build-dev", async function (cb) {
     const sourceFolder = __dirname;
     const outputZip = 'release/output.zip';
 
-    const foldersToInclude = ['scripts', 'structures', 'items', 'entities', 'scripts/adminpanel', 'scripts/commands-folder', 'scripts/events', 'scripts/scriptevents', 'scripts/utils'];
+    const foldersToInclude = ['scripts', 'structures', 'items', 'entities', 'scripts/adminpanel', 'scripts/commands-folder', 'scripts/events', 'scripts/scriptevents', 'scripts/utils', 'scripts/customcmds', 'scripts/things', 'scripts/things/DirectorUI-Modules', 'scripts/commandmanager_extensions', 'blocks', 'scripts/azalea-jsx'];
     const filesToInclude = ['manifest.json'];
     // 100% ai generated
     async function createSpecificZip() {
