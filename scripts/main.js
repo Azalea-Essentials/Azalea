@@ -203,7 +203,35 @@ world.beforeEvents.itemUse.subscribe(e => {
     }
   }
 });
+let signsDb = new DynamicPropertyDatabase("Signs");
+world.beforeEvents.playerBreakBlock.subscribe(e => {
+  if (signsDb.get(`${e.block.location.x},${e.block.location.y},${e.block.location.z}`)) {
+    signsDb.delete(`${e.block.location.x},${e.block.location.y},${e.block.location.z}`);
+  }
+});
+world.beforeEvents.playerInteractWithBlock.subscribe(e => {
+  let component = e.block.getComponent('minecraft:sign');
+  if (isAdmin(e.player)) {
+    if (typeof component == "object") {
+      let text = component.getText();
+      if (text.startsWith('run_command ')) {
+        signsDb.set(`${e.block.location.x},${e.block.location.y},${e.block.location.z}`, text.substring('run_command '.length));
+        system.run(() => {
+          component.setText("Please edit the text on the sign. And make sure to wax it too!");
+          component.setTextDyeColor(mc.DyeColor.Lime);
+        });
+      }
+    }
+  }
+  if (signsDb.get(`${e.block.location.x},${e.block.location.y},${e.block.location.z}`) && typeof component == "object" && !e.player.isSneaking) {
+    e.cancel = true;
+    system.run(() => {
+      e.player.runCommand(signsDb.get(`${e.block.location.x},${e.block.location.y},${e.block.location.z}`));
+    });
+  }
+});
 world.beforeEvents.playerInteractWithEntity.subscribe(e => {
+  return;
   let inventory = e.player.getComponent('inventory');
   let currItem = inventory.container.getItem(e.player.selectedSlot);
   if (currItem && currItem.typeId == "azalea:entity_editor") {

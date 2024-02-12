@@ -273,6 +273,6 @@ system.run(() => {
   // configuratorDb.tableVars = {
   //     "AZALEA_VERSION": "V2.0 RELEASE",
   //     "NOW": Date.now().toString(),
-  //     "BUILDTIME": `${moment(1707550553025).format('MMMM Do YYYY, h:mm:ss a [UTC]')}`
+  //     "BUILDTIME": `${moment(1707696876079).format('MMMM Do YYYY, h:mm:ss a [UTC]')}`
   // }
 });
