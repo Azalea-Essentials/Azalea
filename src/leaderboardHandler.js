@@ -171,4 +171,4 @@ system.runInterval(()=>{
     
         } catch {}
     }
-}, 20);
+}, 50);

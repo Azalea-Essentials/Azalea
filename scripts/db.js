@@ -23,7 +23,7 @@ function MergeRecursive(obj1, obj2) {
 const tables = {};
 // if you dont want a shit ton of data to go unused, used hardDelete() and hardSet() instead of set() and delete()
 let cache = new Map();
-export class Database {
+export class DatabaseLegacy {
   constructor(table, compressed = false) {
     this.compressed = compressed;
     this.table = table;
@@ -251,7 +251,7 @@ export class Database {
     return this.get("table_variables", {});
   }
 }
-export class DatabaseNew {
+export class Database {
   constructor(table) {
     this.table = table.toLowerCase();
   }
@@ -263,12 +263,8 @@ export class DatabaseNew {
   get(key, defaultResult = "") {
     try {
       let val = world.getDynamicProperty(`${this.table}:${key}`);
-      if (val === undefined) return defaultResult;
       if (val.startsWith('[OBJ:')) return JSON.parse(val.substring(5));
-      // if(val.startsWith('BOOL2:')) {
-      //     if(val == "BOOL2:TRUE") return "true"
-      //     else return "false";
-      // }
+      if (!val) return defaultResult;
       return val;
     } catch {
       this.delete(key);
@@ -319,4 +315,4 @@ export class DatabaseNew {
     return table;
   }
 }
-export const DatabaseLegacy = Database;
+// export const DatabaseLegacy = Database;
