@@ -7,7 +7,7 @@ let interval = "NUM:3";
 let enabled = configDb.get(`EnableAntiSpam`, `false`) == "true" ? true : false;
 let seconds = 0;
 export default {
-    name: "heartbeat",
+    name: "second",
     callback() {
         for(const player of world.getPlayers()) {
             for(const tag of player.getTags()) {

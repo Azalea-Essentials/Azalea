@@ -27,5 +27,6 @@ export default {
     "snowball": "\uE168",
     "cheese": "\uE164",
     "water": "\uE142",
-    "fish2": "\uE141"
+    "fish2": "\uE141",
+    "thumbsup": "\uE17A"
 }

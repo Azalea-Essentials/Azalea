@@ -1,119 +1,4 @@
 import moment from './moment';
-// let configOptions = {
-//     "Server": {
-//         "icon": "textures/ui/servers",
-//         "options": [
-//             {
-//                 "label": "Server Name",
-//                 "type": "text-input",
-//                 "key": "ServerName",
-//                 "placeholder": "Type a server name"
-//             },
-//             {
-//                 "label": "Server Description",
-//                 "type": "text-input",
-//                 "key": "ServerDescription",
-//                 "placeholder": "Type a server description"
-//             },
-//             {
-//                 "label": "Welcome message enabled?",
-//                 "type": "toggle",
-//                 "key": "WelcomeMessageEnabled"
-//             },
-//             {
-//                 "label": "Welcome message text\n§e( [@username] = joined user )",
-//                 "type": "text-input",
-//                 "key": "ServerWelcomeMessage",
-//                 "placeholder": "Type a welcome message"
-//             }
-//         ]
-//     },
-//     "General": {
-//         "icon": "textures/ui/settings_glyph_color_2x",
-//         "options": [
-//             {
-//                 "label": "Permission system",
-//                 "type": "dropdown",
-//                 "key": "PermissionSystem",
-//                 "keyOptions": ["v2", "legacy"],
-//                 "cliOptions": ["V2", "Legacy"]
-//             }
-//         ]
-//     },
-//     "Staffchat": {
-//         "icon": "textures/ui/permissions_op_crown",
-//         "options": [
-//             {
-//                 "label": "View global messages while in staffchat",
-//                 "type": "toggle",
-//                 "key": "ViewGlobalSC"
-//             },
-//             {
-//                 "label": "Log joins/leaves",
-//                 "type": "toggle",
-//                 "key": "LogJoinsLeavesSC"
-//             }
-//         ]
-//     },
-//     "Experiments": {
-//         "icon": "textures/gui/newgui/settings/radio_checked",
-//         "options": [
-//             {
-//                 "label": "Enable experimental commands §c(Rquires Reload)",
-//                 "type": "toggle",
-//                 "key": "ExperimentalCommands"
-//             },
-//             {
-//                 "label": "Enable command permission system §c(Rquires Reload)",
-//                 "type": "toggle",
-//                 "key": "CommandPermSystem"
-//             },
-//             {
-//                 "label": "Improved Nametags",
-//                 "type": "toggle",
-//                 "key": "ImprovedNametagsEnabled"
-//             }
-//         ]
-//     },
-//     "Verification": {
-//         "icon": "textures/ui/realms_slot_check",
-//         "options": [
-//             {
-//                 "label": "Enable verification",
-//                 "type": "toggle",
-//                 "key": "EnableVerification"
-//             },
-//             {
-//                 "label": "Verification Type",
-//                 "type": "dropdown",
-//                 "key": "VerificationType",
-//                 "keyOptions": ["private", "public"],
-//                 "cliOptions": ["Private (Requires Code + Command)", "Public (Requires Command)"]
-//             },
-//             {
-//                 "label": "Verification Code (Requires private verification type)",
-//                 "type": "text-input",
-//                 "key": "VerificationCode",
-//                 "placeholder": "Type a verification code"
-//             }
-//         ]
-//     },
-//     "Players": {
-//         "type": "hardcoded-playermenu"
-//     },
-//     "Misc": {
-//         options: [
-//             {
-//                 type: "dropdown",
-//                 label: "Azalea Conditional Language Version",
-//                 key: "AzaleaConditionalLanguageVersion",
-//                 keyOptions: ["v1", "experimental"],
-//                 cliOptions: ["V1", "Experimental"]
-//             }
-//         ]
-//     }
-// }
-
 import { system } from '@minecraft/server';
 import { PLAYER_REPORTS } from './adminpanel/reports';
 import { REVIEWS } from './adminpanel/reviews';
@@ -134,21 +19,7 @@ import chestguis from './adminpanel/chestguis';
 import formsv3 from './adminpanel/formsv3';
 import sidebar from './adminpanel/sidebar';
 import guimaker from './adminpanel/guimaker';
-
-/*
-    "Misc": {
-        options: [
-            {
-                type: "dropdown",
-                label: "Azalea Conditional Language Version",
-                key: "AzaleaConditionalLanguageVersion",
-                keyOptions: ["v1", "experimental"],
-                cliOptions: ["V1", "Experimental"]
-            }
-        ]
-    }
-}
-*/
+import suggestionBox from './adminpanel/suggestionBox';
 export class ConfiguratorBase {
   constructor() {
     this.options = {};
@@ -237,15 +108,15 @@ export function handleConfigurator(configuratorBase) {
     }
   }
 }
-let base = new ConfiguratorBase().addSub(new ConfiguratorSub("§dAzalea Settings", "textures/azalea_icons/Azalea").addTextInput("ServerName", "Server Name", "Type a server name...").addTextInput("ServerDescription", "Server Description", "Type a server description...").addTextInput("ReportReasons", "Report Reasons", "New").addTextInput("MoneyScoreboard", "Money Scoreboard (default: money)", "Type the scoreboard here").addTextInput("Prefix", "Prefix", "Type a prefix").addToggle("DisableServerCommunity", "Disable Server Community").addToggle("WelcomeMessageEnabled", "Welcome message enabled?").addTextInput("ServerWelcomeMessage", "Welcome message text, remember: §d[@username] §r= joined user ", "Type a welcome message.").addToggle("TeleportPlayerToSpawnOnRejoin", "Teleport players to spawn when joining").addToggle("IgnoreSetupMessage", "Disable Setup Message"))
+let base = new ConfiguratorBase().addSub(suggestionBox()).addSub(new ConfiguratorSub("§dAzalea Settings", "textures/azalea_icons/Azalea").addTextInput("ServerName", "Server Name", "Type a server name...").addTextInput("ServerDescription", "Server Description", "Type a server description...").addTextInput("ReportReasons", "Report Reasons", "New").addTextInput("MoneyScoreboard", "Money Scoreboard (default: money)", "Type the scoreboard here").addTextInput("Prefix", "Prefix", "Type a prefix").addToggle("DisableServerCommunity", "Disable Server Community").addToggle("WelcomeMessageEnabled", "Welcome message enabled?").addTextInput("ServerWelcomeMessage", "Welcome message text, remember: §d[@username] §r= joined user ", "Type a welcome message.").addToggle("TeleportPlayerToSpawnOnRejoin", "Teleport players to spawn when joining").addToggle("IgnoreSetupMessage", "Disable Setup Message"))
 // .addSub(
 //     new ConfiguratorSub("§cFeatures", null)
 //         .addToggle("BackToDeathLocationCommand", "Enable !death §7- allows players to teleport back to their death location")
 //         .addTextInput("DeathCommandMessage", "!death message §7- Sent to players when they die §cRequires !death enabled", "type")
 // )
-.addSub(guimaker()).addSub(chestguis()).addSub(logs()).addSub(FormsV2()).addSub(POLLS())
+.addSub(QUESTS()).addSub(guimaker()).addSub(chestguis()).addSub(logs()).addSub(FormsV2()).addSub(POLLS())
 // .addSub(QUESTS())
-.addSub(new ConfiguratorSub("§bChat", "textures/azalea_icons/Chat").addToggle("EnableAntiSpam", "Enable Anti-Spam?").addSlider("MessageLimit", 1, 10, 1, "Message limit (per 3 seconds)", 1).addTextInput("SpamLimitReachedMessage", "Anti-Spam message", "Shows a message user when spam")).addSub(REVIEWS()).addSub(new ConfiguratorSub("§2Verification", "textures/azalea_icons/4").addToggle("EnableVerification", "Enable Verification?").addDropdown("VerificationType", ["Private (Requires Code + Command)", "Public (Requires Command)"], ["private", "public"], "Verification Type").addTextInput("VerificationCode", "Verification Code (Requires private verification type)", "Type a verification code...")).addSub(new ConfiguratorSub("§dExperimental Toggles", "textures/azalea_icons/3").addToggle("AuctionHouse", "§bAuction House").addToggle("FirstTimeJoinUI", "§bFirst Time Join UI").addToggle("ImprovedNametagsEnabled", "§bImproved nametags")).addSub(PLAYER_REPORTS()).addSub(warpEditor()).addSub(LB()).addSub(new ConfiguratorSub("§mPlayer Shops", "textures/azalea_icons/PlayerShop/Normal/Online/playershop").addToggle("DisablePlayerShops", "Disable player shops").addDropdown("Sorting", ["Default", "Newest First", "Oldest First", "Player", "Lowest Avg. Price", "Highest Avg. Price"], ["NF", "NF", "OF", "P", "LAP", "HAP"], "Default Sorting").addSlider("PlayerShopLimit", 1, 10, 1, "Shop Limit (Per Player)", 3)).addSub(new ConfiguratorSub("§6Command Perms", "textures/azalea_icons/CommandPerms")).addSub(CUSTOM_COMMANDS()).addSub(sidebar());
+.addSub(new ConfiguratorSub("§bChat", "textures/azalea_icons/Chat").addToggle("EnableAntiSpam", "Enable Anti-Spam?").addSlider("MessageLimit", 1, 10, 1, "Message limit (per 3 seconds)", 1).addTextInput("SpamLimitReachedMessage", "Anti-Spam message", "Shows a message user when spam")).addSub(REVIEWS()).addSub(new ConfiguratorSub("§2Verification", "textures/azalea_icons/4").addToggle("EnableVerification", "Enable Verification?").addDropdown("VerificationType", ["Private (Requires Code + Command)", "Public (Requires Command)"], ["private", "public"], "Verification Type").addTextInput("VerificationCode", "Verification Code (Requires private verification type)", "Type a verification code...")).addSub(new ConfiguratorSub("§dExperimental Toggles", "textures/azalea_icons/3").addToggle("AuctionHouse", "§bAuction House").addToggle("FirstTimeJoinUI", "§bFirst Time Join UI").addToggle("ImprovedNametagsEnabled", "§bImproved nametags").addToggle("QuestsEnabled", "Quests §6§o(Unfinished V1.0 Feature)")).addSub(PLAYER_REPORTS()).addSub(warpEditor()).addSub(LB()).addSub(new ConfiguratorSub("§mPlayer Shops", "textures/azalea_icons/PlayerShop/Normal/Online/playershop").addToggle("DisablePlayerShops", "Disable player shops").addDropdown("Sorting", ["Default", "Newest First", "Oldest First", "Player", "Lowest Avg. Price", "Highest Avg. Price"], ["NF", "NF", "OF", "P", "LAP", "HAP"], "Default Sorting").addSlider("PlayerShopLimit", 1, 10, 1, "Shop Limit (Per Player)", 3)).addSub(new ConfiguratorSub("§6Command Perms", "textures/azalea_icons/CommandPerms")).addSub(CUSTOM_COMMANDS()).addSub(sidebar());
 base.options["§2Players"] = {
   "type": "hardcoded-playermenu",
   "icon": "textures/azalea_icons/8"
@@ -271,8 +142,8 @@ export const baseConfigMenu = base;
 system.run(() => {
   // let configuratorDb = new Database("Config");
   // configuratorDb.tableVars = {
-  //     "AZALEA_VERSION": "V2.0 RELEASE",
+  //     "AZALEA_VERSION": "V2.0.6 ALPHA",
   //     "NOW": Date.now().toString(),
-  //     "BUILDTIME": `${moment(1707703642239).format('MMMM Do YYYY, h:mm:ss a [UTC]')}`
+  //     "BUILDTIME": `${moment(1711313651056).format('MMMM Do YYYY, h:mm:ss a [UTC]')}`
   // }
 });

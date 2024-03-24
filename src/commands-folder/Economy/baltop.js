@@ -48,7 +48,7 @@ export default function() {
             if(!money) money = 0;
             baltop.set(`${playerID(player)}`, {money, playerName: player.name});
         }
-    },60);
+    },140);
     new CommandBuilder("baltop")
         .aliases(["top","$top"])
         .category("Economy")

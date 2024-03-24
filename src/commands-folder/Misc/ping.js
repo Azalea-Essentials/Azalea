@@ -1,14 +1,14 @@
 import { system } from '@minecraft/server';
 let lastTick = Date.now()
-let tps = 20
+let tps = -24143123
 let timeArray = []
 
-system.runInterval(() => {
-  if (timeArray.length === 20) timeArray.shift()
-  timeArray.push(Math.round(1000 / (Date.now() - lastTick) * 100) / 100)
-  tps = timeArray.reduce((a, b) => a + b) / timeArray.length
-  lastTick = Date.now()
-})
+// system.runInterval(() => {
+//   if (timeArray.length === 20) timeArray.shift()
+//   timeArray.push(Math.round(1000 / (Date.now() - lastTick) * 100) / 100)
+//   tps = timeArray.reduce((a, b) => a + b) / timeArray.length
+//   lastTick = Date.now()
+// })
 export default function addPingCommand(commands) {
     commands.addCommand("ping", {
         description: "Says pong",

@@ -17,8 +17,8 @@ import { Database } from './db';
 import LZString from './lz-string';
 
 export function NicknamesModule() {
-    minecraft.system.runInterval(() => {
-        let db = new Database("Config");
+   let db = new Database("Config");
+   minecraft.system.runInterval(() => {
         let ImprovedNametagsEnabled = db.get("ImprovedNametagsEnabled") == "true" ? true : false;
         if(ImprovedNametagsEnabled) {
             for (const player of minecraft.world.getPlayers()) {
@@ -53,5 +53,5 @@ export function NicknamesModule() {
                 player.nameTag = player.name;
             }
         }
-   }, 10);
+   }, 80);
 }

@@ -27,7 +27,7 @@ export default function() {
                 if(tick >= 200) {
                     system.clearRun(interval);
                 }
-            }, 1);
+            }, 10);
             response("WAIT Close the chat and move to open the UI.")
         })
         .register()

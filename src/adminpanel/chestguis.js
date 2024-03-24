@@ -11,18 +11,379 @@ export default function () {
   let chestFormsDB = new DynamicPropertyDatabase("ChestUIs");
   let forms = chestFormsDB.get("Forms", []);
   const HOPPER_MODE_MULTIPLIER = 0.5555555555555556;
+  let presetUIs = [
+    {
+      "author": "Trash9240",
+      "presetID": 0,
+      "icons": [
+        {
+          "row": 2,
+          "column": 2,
+          "itemAmount": 1,
+          "itemLore": [
+            "Changes your gamemode to Creative"
+          ],
+          "icon": "Packs/Asteroid/creative_icon",
+          "command": "gamemode c",
+          "itemName": "§eCreative Mode",
+          "sound": 1
+        },
+        {
+          "row": 2,
+          "column": 5,
+          "itemAmount": 1,
+          "itemLore": [
+            "Changes your gamemode to spectator"
+          ],
+          "sound": 1,
+          "icon": "Packs/Asteroid/random9",
+          "command": "gamemode spectator",
+          "itemName": "§eSpectator Mode"
+        },
+        {
+          "row": 2,
+          "column": 8,
+          "itemAmount": 1,
+          "itemLore": [
+            "Changes your gamemode to Survival"
+          ],
+          "sound": 1,
+          "icon": "Packs/Asteroid/creator_glyph_color",
+          "command": "gamemode s",
+          "itemName": "§eSurvival Mode"
+        },
+        {
+          "row": 1,
+          "column": 1,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        {
+          "row": 1,
+          "column": 2,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 1,
+          "column": 3,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 1,
+          "column": 4,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 1,
+          "column": 5,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 1,
+          "column": 6,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 1,
+          "column": 7,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 1,
+          "column": 8,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 1,
+          "column": 9,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 2,
+          "column": 9,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 3,
+          "column": 9,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 3,
+          "column": 8,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 3,
+          "column": 7,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 2,
+          "column": 7,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        {
+          "row": 2,
+          "column": 6,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 3,
+          "column": 6,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 3,
+          "column": 5,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 3,
+          "column": 4,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 2,
+          "column": 4,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        {
+          "row": 2,
+          "column": 3,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 3,
+          "column": 3,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 3,
+          "column": 2,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 3,
+          "column": 1,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        },
+        1,
+        {
+          "row": 2,
+          "column": 1,
+          "itemAmount": 1,
+          "itemLore": [
+            ""
+          ],
+          "icon": "gray_glass",
+          "command": "tag @s add <tag>",
+          "itemName": "§c§oX",
+          "sound": 4
+        }
+      ],
+      "title": "§eGamemode §6Switcher",
+      "tag": "gamemode-switcher",
+      "rows": 3,
+      "color": 0
+    }
+  ]
+  let uis = [];
+  uis = chestFormsDB.get("Forms", []);
   system.runInterval(() => {
-    forms = chestFormsDB.get("Forms", []);
+    uis = chestFormsDB.get("Forms", []);
+  }, 100);
+  system.runInterval(() => {
     for (const player of world.getPlayers()) {
-      for (const form of forms) {
+      for (const form of uis) {
         if (player.hasTag(form.tag)) {
           if (player.hasTag("no-chest-guis")) {
             let form2 = new ActionForm();
             form2.title(form.title);
             form2.body(`You have chest GUIs disabled. If you want them re-enabled, do §r§a!chest §r§fin chat to enable them.`);
             for (const icon of form.icons.sort((a, b) => 9 * (a.row - 1) + (a.column - 1) - 9 * (b.row - 1) + (b.column - 1))) {
+              if(typeof icon != "object") continue;
               let iconData = icons.find(_ => _.name == icon.icon);
-              if(icon.icon.includes('glass') || (icon.command.includes('tag') && icon.command.includes(form.tag))) continue;
+              if (icon.icon.includes('glass') || (icon.command.includes('tag') && icon.command.includes(form.tag))) continue;
               form2.button(icon.itemName, icon.icon.startsWith('minecraft:') ? icon.icon : iconData.path, player => {
                 let sound = sounds[icon.sound ? icon.sound : 0];
                 if (!(sound.type && sound.type == 1)) {
@@ -33,17 +394,18 @@ export default function () {
                 }
                 let commands = icon.command.split(';').map(_ => _.trim()).map(_ => _.startsWith('/') ? _.substring(1) : _);
                 for (const command of commands) {
-                  player.runCommand(command);
+                  player.runCommand(command.replaceAll('<tag>', form.tag));
                 }
               });
             }
             player.removeTag(form.tag);
-            form2.show(player, false, response => {});
+            form2.show(player, false, response => { });
             return;
           }
           let size = 9 * form.rows;
           let chestForm = new ChestFormData(size.toString());
           for (const icon of form.icons) {
+            if(typeof icon != "object") continue;
             let iconData = icons.find(_ => _.name == icon.icon);
             chestForm.button(9 * (icon.row - 1) + (icon.column - 1), icon.itemName, icon.itemLore && icon.itemLore.filter(_ => _.length ? true : false) ? icon.itemLore.filter(_ => _.length ? true : false) : [], icon.icon.startsWith('minecraft:') ? icon.icon : iconData.path, icon.itemAmount ? icon.itemAmount : 1);
           }
@@ -83,15 +445,60 @@ export default function () {
     let form = forms[index];
     let actionForm = new ActionForm();
     actionForm.body(`Editing: ${form.icons[itemIndex].itemName}`);
-    actionForm.button("Delete", null, player => {
+    actionForm.button("Delete", `textures/azalea_icons/Delete`, player => {
       forms[index].icons.splice(itemIndex, 1);
       chestFormsDB.set("Forms", forms);
       uiManager.open("Azalea2.0/ChestGUIs/Edit", player, index);
     });
-    actionForm.button("Edit", null, player => {
+    actionForm.button("Edit", `textures/azalea_icons/EditShop`, player => {
       uiManager.open("Azalea2.0/ChestGUIs/AddItem", player, index, itemIndex);
     });
-    actionForm.show(player, false, (player, response) => {});
+    actionForm.button("Add Extra", `textures/azalea_icons/AddItem`, player => {
+      uiManager.open("Azalea2.0/ChestGUIs/AddItem", player, index, -1, forms[index].icons[itemIndex].row, forms[index].icons[itemIndex].column);
+    });
+    actionForm.button("Duplicate Right", `textures/azalea_icons/DuplicateRight`, player => {
+      let maxColumns = forms[index].rows >= 1 ? 9 : 5;
+      let maxRows = forms[index].rows >= 1 ? forms[index.rows] : 1;
+      let newIcon = JSON.parse(JSON.stringify(forms[index].icons[itemIndex]));
+      newIcon.column++;
+      if(newIcon.column > maxColumns) return uiManager.open("Azalea2.0/ChestGUIs/Edit", player, index);
+      forms[index].icons.push(newIcon, 1);
+      chestFormsDB.set("Forms", forms);
+      uiManager.open("Azalea2.0/ChestGUIs/Edit", player, index);
+    });
+    actionForm.button("Duplicate Left", `textures/azalea_icons/DuplicateLeft`, player => {
+      let maxColumns = forms[index].rows >= 1 ? 9 : 5;
+      let maxRows = forms[index].rows >= 1 ? forms[index.rows] : 1;
+      let newIcon = JSON.parse(JSON.stringify(forms[index].icons[itemIndex]));
+      newIcon.column--;
+      if(newIcon.column < 0) return uiManager.open("Azalea2.0/ChestGUIs/Edit", player, index);
+      forms[index].icons.push(newIcon, 1);
+      chestFormsDB.set("Forms", forms);
+      uiManager.open("Azalea2.0/ChestGUIs/Edit", player, index);
+    });
+    actionForm.button("Duplicate Down", `textures/azalea_icons/DuplicateDown`, player => {
+      let maxColumns = forms[index].rows >= 1 ? 9 : 5;
+      let maxRows = forms[index].rows >= 1 ? forms[index.rows] : 1;
+      let newIcon = JSON.parse(JSON.stringify(forms[index].icons[itemIndex]));
+      newIcon.row++;
+      if(newIcon.row > maxRows) return uiManager.open("Azalea2.0/ChestGUIs/Edit", player, index);
+      forms[index].icons.push(newIcon, 1);
+      chestFormsDB.set("Forms", forms);
+      uiManager.open("Azalea2.0/ChestGUIs/Edit", player, index);
+    });
+    actionForm.button("Duplicate Up", `textures/azalea_icons/DuplicateUp`, player => {
+      let maxColumns = forms[index].rows >= 1 ? 9 : 5;
+      let maxRows = forms[index].rows >= 1 ? forms[index.rows] : 1;
+      let newIcon = JSON.parse(JSON.stringify(forms[index].icons[itemIndex]));
+      newIcon.row--;
+      if(newIcon.row < 0) return uiManager.open("Azalea2.0/ChestGUIs/Edit", player, index);
+      forms[index].icons.push(newIcon);
+      chestFormsDB.set("Forms", forms);
+      uiManager.open("Azalea2.0/ChestGUIs/Edit", player, index);
+    });
+
+
+    actionForm.show(player, false, (player, response) => { });
   });
   uiManager.addUI("Azalea2.0/ChestGUIs/AddItem", (player, index, itemIndex = -1, defaultRow = 1, defaultColumn = 1) => {
     let forms = chestFormsDB.get("Forms", []);
@@ -108,7 +515,7 @@ export default function () {
     modalForm.textField("Item Lore (§7Comma Separated§r§f)", "Example: Line 1,Line 2", itemIndex >= 0 ? form.icons[itemIndex].itemLore && form.icons[itemIndex].itemLore.length ? form.icons[itemIndex].itemLore.join(',') : undefined : undefined);
     modalForm.dropdown("Click Sound", sounds.map(_ => {
       return {
-        callback() {},
+        callback() { },
         option: _.name
       };
     }), itemIndex >= 0 ? form.icons[itemIndex].sound ? form.icons[itemIndex].sound : 0 : 0);
@@ -116,7 +523,7 @@ export default function () {
       if (!response.formValues[0] || (!icons.find(_ => _.name == response.formValues[0]) && !response.formValues[0].startsWith('minecraft:'))) return uiManager.open("Azalea2.0/ChestGUIs/Edit", player, index);
       if (!response.formValues[1]) return uiManager.open("Azalea2.0/ChestGUIs/Edit", player, index);
       if (!response.formValues[2]) return uiManager.open("Azalea2.0/ChestGUIs/Edit", player, index);
-      if (itemIndex < 0 && form.icons.find(_ => _.column == response.formValues[4] && _.row == response.formValues[3])) return uiManager.open("Azalea2.0/ChestGUIs/Edit", player, index);
+      // if (itemIndex < 0 && form.icons.find(_ => _.column == response.formValues[4] && _.row == response.formValues[3])) return uiManager.open("Azalea2.0/ChestGUIs/Edit", player, index);
       if (itemIndex >= 0) {
         forms[index].icons.splice(itemIndex, 1);
         forms[index].icons.push({
@@ -145,16 +552,25 @@ export default function () {
       return uiManager.open("Azalea2.0/ChestGUIs/Edit", player, index);
     });
   });
+  // uiManager.open("Azalea2.1/ChestGUIs/Multislot", player, res.selection)
+  uiManager.addUI("Azalea2.1/ChestGUIs/Multislot", (player, multiSlotIndex) => {
+
+  });
   uiManager.addUI("Azalea2.0/ChestGUIs/Edit", (player, index) => {
     let forms = chestFormsDB.get("Forms", []);
     let form = forms[index];
     let size = 9 * form.rows;
     let chestForm = new ChestFormData(size.toString());
     chestForm.title(size > 5 ? `Edit Chest GUI` : `Edit Hopper GUI`);
+    // world.sendMessage(JSON.stringify(form, null, 2))
+    let multislots = [];
     for (const icon of form.icons) {
+      if(typeof icon != "object") continue;
       let iconData = icons.find(_ => _.name == icon.icon);
+      let otherIconsInSlot = form.icons.filter(_ => _.row == icon.row && _.column == icon.column);
       // world.sendMessage(JSON.stringify(icon.itemLore))
-      chestForm.button(9 * (icon.row - 1) + (icon.column - 1), icon.itemName, icon.itemLore && icon.itemLore.filter(_ => _.length ? true : false) ? icon.itemLore.filter(_ => _.length ? true : false) : [], icon.icon.startsWith('minecraft:') ? icon.icon : iconData.path, icon.itemAmount ? icon.itemAmount : 1);
+      multislots.push(9 * (icon.row - 1) + (icon.column - 1));
+      chestForm.button(9 * (icon.row - 1) + (icon.column - 1), icon.itemName, icon.itemLore && icon.itemLore.filter(_ => _.length ? true : false) ? icon.itemLore.filter(_ => _.length ? true : false) : [], otherIconsInSlot.length > 1 ? "textures/azalea_icons/1" : icon.icon.startsWith('minecraft:') ? icon.icon : iconData.path, icon.itemAmount ? icon.itemAmount : 1);
     }
     if (form.color && form.color == 1) chestForm.titleText = `§d${chestForm.titleText.substring(2)}`;
     if (form.color && form.color == 2) chestForm.titleText = `§e${chestForm.titleText.substring(2)}`;
@@ -175,6 +591,9 @@ export default function () {
         return;
       }
       ;
+      if (multislots.includes(res.selection)) {
+        uiManager.open("Azalea2.1/ChestGUIs/Multislot", player, res.selection)
+      }
       let itemFound = form.icons.find(icon => 9 * (icon.row - 1) + (icon.column - 1) == res.selection);
       if (itemFound) {
         let itemFoundIndex = form.icons.findIndex(icon => 9 * (icon.row - 1) + (icon.column - 1) == res.selection);
@@ -192,7 +611,7 @@ export default function () {
     actionForm2.button("§bAdd chest GUI", "textures/azalea_icons/Chest/ChestAdd", player => {
       let modalForm = new ModalForm();
       modalForm.title("Add Chest GUI");
-      modalForm.slider("Rows", 1, 6, 1, 3, player => {});
+      modalForm.slider("Rows", 1, 6, 1, 3, player => { });
       modalForm.textField("Title", "Title", undefined);
       modalForm.textField("Tag", "Tag to open UI", undefined);
       modalForm.toggle("Hopper Mode? §7- ignores rows and enables full hopper mode!", undefined);
@@ -218,6 +637,29 @@ export default function () {
       });
     });
     let forms = chestFormsDB.get("Forms", []);
+    actionForm2.button("§dAdd Preset Chest GUI", "textures/azalea_icons/Import", player => {
+      let presetForm = new ActionForm();
+      presetForm.title(`Chest GUI Presets`);
+      for(const ui of presetUIs) {
+        presetForm.button(`§b${ui.title}\n§r§7By ${ui.author}`, icons.find(_=>_.name == ui.icons[0].icon).path, (player)=>{
+          let editUI = new ModalForm();
+          editUI.title(`Edit Properties`);
+          editUI.textField("Title", "Title", ui.title);
+          editUI.textField("Tag", "Tag", ui.tag);
+          editUI.show(player, false, (player, response)=>{
+            if(forms.find(_=>_.tag == response.formValues[1])) return;
+            let ui2 = JSON.parse(JSON.stringify(ui));
+            ui2.title = response.formValues[0];
+            ui2.tag = response.formValues[1];
+            forms.push(ui2);
+            chestFormsDB.set("Forms", forms);
+          })
+        });
+      }
+      presetForm.show(player, false, ()=>{
+
+      })
+    });
     if (forms.length) {
       for (let i = 0; i < forms.length; i++) {
         let form = forms[i];
@@ -227,6 +669,15 @@ export default function () {
           actionForm.button("Edit Items", "textures/azalea_icons/AddItem", player => {
             uiManager.open("Azalea2.0/ChestGUIs/Edit", player, i);
           });
+          //Code Editor
+          actionForm.button("Export", `textures/amethyst_icons/Packs/asteroid_icons/creator_glyph_color`, (player) => {
+            let modalForm = new ModalForm();
+            modalForm.title("Code Editor");
+            modalForm.textField("Code", "Code", JSON.stringify(form));
+            modalForm.show(player, false, (player, response) => {
+
+            })
+          })
           actionForm.button(form.rows >= 1 ? "Edit Chest GUI Settings" : "Edit Hopper GUI Settings", "textures/azalea_icons/ClickyClick", player => {
             // let actionForm = new ActionForm();
             // actionForm.title("Coming Soon!");
@@ -243,22 +694,22 @@ export default function () {
             modalForm.slider("Rows", 1, 6, 1, form.rows < 1 ? 1 : form.rows);
             modalForm.dropdown("Color", [{
               "option": "Default",
-              callback() {}
+              callback() { }
             }, {
               "option": "Blue",
-              callback() {}
+              callback() { }
             }, {
               'option': "Why",
-              callback() {}
+              callback() { }
             }, {
               'option': "Dark Purple",
-              callback() {}
+              callback() { }
             }, {
               option: "Green",
-              callback() {}
+              callback() { }
             }, {
               option: "Ocean",
-              callback() {}
+              callback() { }
             }], form.color ? form.color : 0);
             modalForm.toggle("Hopper Mode", form.rows < 1 ? true : false);
             modalForm.title("Chest GUI Settings");
@@ -282,7 +733,7 @@ export default function () {
                 actionForm.button(`§cNo`, null, player => {
                   return uiManager.open("Azalea2.0/ChestGUIs/Root", player);
                 });
-                actionForm.show(player, false, () => {});
+                actionForm.show(player, false, () => { });
               } else {
                 forms[i].title = response.formValues[0];
                 forms[i].tag = response.formValues[1];
@@ -293,19 +744,21 @@ export default function () {
               }
             });
           });
+
           actionForm.button("Delete", "textures/azalea_icons/Delete", player => {
             forms.splice(i, 1);
             chestFormsDB.set("Forms", forms);
             uiManager.open("Azalea2.0/ChestGUIs/Root", player);
           });
-          actionForm.show(player, false, (player, response) => {});
+          actionForm.show(player, false, (player, response) => { });
         });
       }
     }
     // actionForm2.button("Test",null,(player)=>{})
-    actionForm2.show(player, false, (player, response) => {});
+    actionForm2.show(player, false, (player, response) => { });
   });
   return new ConfiguratorSub("§5Chest GUIs", "textures/azalea_icons/ChestLarge").setCallback(player => {
+    // return new ConfiguratorSub("§5Chest GUIs", "textures/azalea_icons/ChestLarge").setCallback(player => {
     uiManager.open("Azalea2.0/ChestGUIs/Root", player);
   });
 }

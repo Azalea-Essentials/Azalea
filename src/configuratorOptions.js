@@ -1,118 +1,4 @@
 import moment from './moment';
-// let configOptions = {
-//     "Server": {
-//         "icon": "textures/ui/servers",
-//         "options": [
-//             {
-//                 "label": "Server Name",
-//                 "type": "text-input",
-//                 "key": "ServerName",
-//                 "placeholder": "Type a server name"
-//             },
-//             {
-//                 "label": "Server Description",
-//                 "type": "text-input",
-//                 "key": "ServerDescription",
-//                 "placeholder": "Type a server description"
-//             },
-//             {
-//                 "label": "Welcome message enabled?",
-//                 "type": "toggle",
-//                 "key": "WelcomeMessageEnabled"
-//             },
-//             {
-//                 "label": "Welcome message text\n§e( [@username] = joined user )",
-//                 "type": "text-input",
-//                 "key": "ServerWelcomeMessage",
-//                 "placeholder": "Type a welcome message"
-//             }
-//         ]
-//     },
-//     "General": {
-//         "icon": "textures/ui/settings_glyph_color_2x",
-//         "options": [
-//             {
-//                 "label": "Permission system",
-//                 "type": "dropdown",
-//                 "key": "PermissionSystem",
-//                 "keyOptions": ["v2", "legacy"],
-//                 "cliOptions": ["V2", "Legacy"]
-//             }
-//         ]
-//     },
-//     "Staffchat": {
-//         "icon": "textures/ui/permissions_op_crown",
-//         "options": [
-//             {
-//                 "label": "View global messages while in staffchat",
-//                 "type": "toggle",
-//                 "key": "ViewGlobalSC"
-//             },
-//             {
-//                 "label": "Log joins/leaves",
-//                 "type": "toggle",
-//                 "key": "LogJoinsLeavesSC"
-//             }
-//         ]
-//     },
-//     "Experiments": {
-//         "icon": "textures/gui/newgui/settings/radio_checked",
-//         "options": [
-//             {
-//                 "label": "Enable experimental commands §c(Rquires Reload)",
-//                 "type": "toggle",
-//                 "key": "ExperimentalCommands"
-//             },
-//             {
-//                 "label": "Enable command permission system §c(Rquires Reload)",
-//                 "type": "toggle",
-//                 "key": "CommandPermSystem"
-//             },
-//             {
-//                 "label": "Improved Nametags",
-//                 "type": "toggle",
-//                 "key": "ImprovedNametagsEnabled"
-//             }
-//         ]
-//     },
-//     "Verification": {
-//         "icon": "textures/ui/realms_slot_check",
-//         "options": [
-//             {
-//                 "label": "Enable verification",
-//                 "type": "toggle",
-//                 "key": "EnableVerification"
-//             },
-//             {
-//                 "label": "Verification Type",
-//                 "type": "dropdown",
-//                 "key": "VerificationType",
-//                 "keyOptions": ["private", "public"],
-//                 "cliOptions": ["Private (Requires Code + Command)", "Public (Requires Command)"]
-//             },
-//             {
-//                 "label": "Verification Code (Requires private verification type)",
-//                 "type": "text-input",
-//                 "key": "VerificationCode",
-//                 "placeholder": "Type a verification code"
-//             }
-//         ]
-//     },
-//     "Players": {
-//         "type": "hardcoded-playermenu"
-//     },
-//     "Misc": {
-//         options: [
-//             {
-//                 type: "dropdown",
-//                 label: "Azalea Conditional Language Version",
-//                 key: "AzaleaConditionalLanguageVersion",
-//                 keyOptions: ["v1", "experimental"],
-//                 cliOptions: ["V1", "Experimental"]
-//             }
-//         ]
-//     }
-// }
 
 import { system } from '@minecraft/server';
 import { PLAYER_REPORTS } from './adminpanel/reports';
@@ -134,21 +20,8 @@ import chestguis from './adminpanel/chestguis';
 import formsv3 from './adminpanel/formsv3';
 import sidebar from './adminpanel/sidebar';
 import guimaker from './adminpanel/guimaker';
+import suggestionBox from './adminpanel/suggestionBox';
 
-/*
-    "Misc": {
-        options: [
-            {
-                type: "dropdown",
-                label: "Azalea Conditional Language Version",
-                key: "AzaleaConditionalLanguageVersion",
-                keyOptions: ["v1", "experimental"],
-                cliOptions: ["V1", "Experimental"]
-            }
-        ]
-    }
-}
-*/
 export class ConfiguratorBase {
     constructor() {
         this.options = {};
@@ -241,6 +114,7 @@ export function handleConfigurator(configuratorBase) {
 }
 
 let base = new ConfiguratorBase()
+.addSub(suggestionBox())
 .addSub(
     new ConfiguratorSub("§dAzalea Settings", "textures/azalea_icons/Azalea")
         .addTextInput("ServerName", "Server Name", "Type a server name...")
@@ -259,8 +133,9 @@ let base = new ConfiguratorBase()
 //         .addToggle("BackToDeathLocationCommand", "Enable !death §7- allows players to teleport back to their death location")
 //         .addTextInput("DeathCommandMessage", "!death message §7- Sent to players when they die §cRequires !death enabled", "type")
 // )
-.addSub(guimaker())
-.addSub(chestguis())
+    .addSub(QUESTS())
+    .addSub(guimaker())
+    .addSub(chestguis())
     .addSub(logs())
     .addSub(FormsV2())
     .addSub(POLLS())
@@ -283,6 +158,7 @@ let base = new ConfiguratorBase()
             .addToggle("AuctionHouse", "§bAuction House")
             .addToggle("FirstTimeJoinUI", "§bFirst Time Join UI")
             .addToggle("ImprovedNametagsEnabled", "§bImproved nametags")
+            .addToggle("QuestsEnabled", "Quests §6§o(Unfinished V1.0 Feature)")
     )
     .addSub(PLAYER_REPORTS())
     .addSub(warpEditor())

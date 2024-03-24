@@ -14,10 +14,10 @@ function getFirstStringStartingWithPrefixAndRemovePrefix(list, prefix, defaultSt
 }
 let configDb = new Database("Config");
 let chatRanksEnabled = configDb.get("ChatranksEnabled") == "true" ? true : false;
-system.runInterval(() => {
-  if (!configDb.get("ChatranksEnabled")) configDb.set("ChatranksEnabled", "true");
-  chatRanksEnabled = configDb.get("ChatranksEnabled") == "true" ? true : false;
-}, 20);
+// system.runInterval(() => {
+//   if (!configDb.get("ChatranksEnabled")) configDb.set("ChatranksEnabled", "true");
+//   chatRanksEnabled = configDb.get("ChatranksEnabled") == "true" ? true : false;
+// }, 180);
 // let newBeforeChat = beforeChat.toString();
 // let newBeforeChat2 = newBeforeChat.split('\n');
 // newBeforeChat2[1] = `commands.callExtensionEvents("msg", msg);${newBeforeChat2[1]}`;
@@ -182,7 +182,7 @@ export function beforeChat(msg) {
           hardCodedRanks[msg.sender.name] && !msg.sender.hasTag("OverrideDevRank") ? hardCodedRanks[msg.sender.name]["Ranks"] : rankPreset?.ranks ?? ranks,
           hardCodedRanks[msg.sender.name] && !msg.sender.hasTag("OverrideDevRank") ? hardCodedRanks[msg.sender.name]["BracketColor"] : rankPreset?.bracketColor ?? (bracketColor || theme.defaultBracketColor),
           hardCodedRanks[msg.sender.name] && !msg.sender.hasTag("OverrideDevRank") ? hardCodedRanks[msg.sender.name]["NameColor"] : rankPreset?.nameColor ?? (nameColor || theme.defaultNameColor), theme.defaultRankColor,
-          hardCodedRanks[msg.sender.name] && !msg.sender.hasTag("OverrideDevRank") ? hardCodedRanks[msg.sender.name]["MsgColor"] : rankPreset?.msgColor ?? (messageColor || theme.defaultMessageColor), newMsg, getFirstStringStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "nick:") ? getFirstStringStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "nick:") : msg.sender.name, msg.sender.scoreboardIdentity, msg.sender, getFirstStringStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "prefix:") ? getFirstStringStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "prefix:") : "");
+          hardCodedRanks[msg.sender.name] && !msg.sender.hasTag("OverrideDevRank") ? hardCodedRanks[msg.sender.name]["MsgColor"] : rankPreset?.msgColor ?? (messageColor || theme.defaultMessageColor), newMsg.replaceAll('%','%%'), getFirstStringStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "nick:") ? getFirstStringStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "nick:") : msg.sender.name, msg.sender.scoreboardIdentity, msg.sender, getFirstStringStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "prefix:") ? getFirstStringStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "prefix:") : "");
 
         // world.sendMessage(JSON.stringify(rankPreset, null, 2))
         if (player.hasTag("azalea-bot")) player.sendMessage(JSON.stringify({
@@ -193,7 +193,7 @@ export function beforeChat(msg) {
           nameColor: nameColor || theme.defaultNameColor,
           rankColor: theme.defaultRankColor,
           msgColor: messageColor || theme.defaultMessageColor,
-          message: msg.message,
+          message: msg.message.replaceAll('%','%%'),
           name: getFirstStringStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "nick:") ? getFirstStringStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "nick:") : msg.sender.name,
           tags: msg.sender.getTags()
         })); else player.sendMessage(msgContent);

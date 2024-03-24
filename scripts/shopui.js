@@ -18,6 +18,14 @@ var move = function (array, element, delta) {
   array.splice(indexes[0], 2, array[indexes[1]], array[indexes[0]]); //Replace from lowest index, two elements, reverting the order
 };
 
+function calculateDiscount(originalPrice, discountPercentage) {
+  // Calculate the discount amount
+  const discountAmount = originalPrice * discountPercentage / 100;
+
+  // Calculate the discounted price
+  const discountedPrice = originalPrice - discountAmount;
+  return discountedPrice;
+}
 var moveUp = function (array, element) {
   move(array, element, -1);
 };
@@ -55,6 +63,10 @@ uiManager.addUI("Azalea1.1/Shop/Root/Category", (player, category, previousCateg
   if (!shopData.items || !shopData.items.length) {
     actionForm.body("Looks like there are no items here!");
   }
+  actionForm.title(`Shop §7> §r§f${shopData.category}`);
+  if (shopData.discount) {
+    actionForm.body(`§a${shopData.discount}%% §r§fdiscount!`);
+  }
   actionForm.button("Leave", "textures/azalea_icons/2", player => {
     if (previousCategories.length) {
       let category3 = previousCategories.reverse().slice(1);
@@ -86,11 +98,34 @@ uiManager.addUI("Azalea1.1/Shop/Root/Category", (player, category, previousCateg
     } else if (item.category_reference) {
       icon = icons.find(_ => _.name == shopItems.find(_ => _.reference_id == item.category_reference)?.icon);
     }
-    actionForm.button(`${itemName}${item.price ? `\n§r§6\uE117 ${item.price}` : ``}`, icon && icon.path ? icon.path : null, (player, i) => {
+    // yes ik this is awful i do not care
+    function strikethroughNumber(number) {
+      let str = number.toString().split('');
+      let strToReturn = "";
+      for (const digit of str) {
+        if (digit == "0") strToReturn += "\uF830";
+        if (digit == "1") strToReturn += "\uF831";
+        if (digit == "2") strToReturn += "\uF832";
+        if (digit == "3") strToReturn += "\uF833";
+        if (digit == "4") strToReturn += "\uF834";
+        if (digit == "5") strToReturn += "\uF835";
+        if (digit == "6") strToReturn += "\uF836";
+        if (digit == "7") strToReturn += "\uF837";
+        if (digit == "8") strToReturn += "\uF838";
+        if (digit == "9") strToReturn += "\uF839";
+      }
+      return strToReturn;
+    }
+    actionForm.button(`${itemName}${item.price ? `${shopData.discount ? `\n§r§6\uE117 §c§o${item.price} §6${Math.floor(calculateDiscount(item.price, shopData.discount))}` : `\n§r§6\uE117 ${item.price}`}` : ``}`, icon && icon.path ? icon.path : null, (player, i) => {
       if (item.category_reference) {
         let categoryName = shopItems.find(_ => _.reference_id == item.category_reference).category;
         uiManager.open("Azalea1.1/Shop/Root/Category", player, categoryName, [...previousCategories, category]);
         return;
+      }
+      if (!item.price) return;
+      let finalPrice = item.price;
+      if (shopData.discount) {
+        finalPrice = Math.floor(calculateDiscount(item.price, shopData.discount));
       }
       if (item.tag) {
         let actionForm = new ActionForm();
@@ -105,7 +140,7 @@ uiManager.addUI("Azalea1.1/Shop/Root/Category", (player, category, previousCateg
             score = 0;
           }
           if (!score) score = 0;
-          if (score >= item.price) {
+          if (score >= finalPrice) {
             player.addTag(item.tag);
             let moneyScoreboard = world.scoreboard.getObjective(configDb.get("MoneyScoreboard", "money") ? configDb.get("MoneyScoreboard", "money") : "money");
             moneyScoreboard.setScore(player, score - item.price);
@@ -142,7 +177,7 @@ uiManager.addUI("Azalea1.1/Shop/Root/Category", (player, category, previousCateg
           score = 0;
         }
         if (!score) score = 0;
-        if (score >= fullPrice) {
+        if (score >= finalPrice) {
           let moneyScoreboard = world.scoreboard.getObjective(configDb.get("MoneyScoreboard", "money") ? configDb.get("MoneyScoreboard", "money") : "money");
           score -= fullPrice;
           moneyScoreboard.setScore(player, score);
@@ -273,6 +308,17 @@ uiManager.addUI("Azalea1.1/Shop/Root/AdminManage/Category", (player, category) =
   if (!shopData) return uiManager.open("Azalea1.1/Shop/Root/AdminManage", player);
   actionForm.button("Back", "textures/azalea_icons/2", player => {
     return uiManager.open("Azalea1.1/Shop/Root/AdminManage", player);
+  });
+  actionForm.button("Add Discount", "textures/azalea_icons/SetDiscount", (player, i) => {
+    let modalForm = new ModalForm();
+    modalForm.title("Set Discount");
+    modalForm.slider("Discount", 0, 100, 1, shopData.discount ? shopData.discount : 0);
+    modalForm.show(player, false, (player, response) => {
+      let index1 = shopItems.findIndex(_ => _.category == shopData.category);
+      shopItems[index1].discount = response.formValues[0];
+      shopDbV2.set(getShopKey(player), shopItems);
+      return uiManager.open("Azalea1.1/Shop/Root/AdminManage", player, category);
+    });
   });
   actionForm.button("Edit Category Name", "textures/azalea_icons/icontextures/name_tag", (player, i) => {
     let modalForm = new ModalForm();
@@ -478,6 +524,7 @@ uiManager.addUI("Azalea1.1/Shop/Root/AdminManage", player => {
     let modal = new ModalForm();
     modal.textField("Title", "UI Title", thing1);
     modal.textField("Body", "UI Body", thing2);
+    modal.textField("Tag Required", "Tag Required", thing2);
     modal.show(player, false, (player, response) => {
       if (!response.formValues[0]) {
         shopDbV2.set(getShopKey(player) + "-Title", "");
@@ -489,6 +536,11 @@ uiManager.addUI("Azalea1.1/Shop/Root/AdminManage", player => {
       } else {
         shopDbV2.set(getShopKey(player) + "-Body", response.formValues[1]);
       }
+      // if(!response.formValues[2]) {
+      //     shopDbV2.set(getShopKey(player)+"-TagRequired", "")
+      // } else {
+      //     shopDbV2.set(getShopKey(player)+"-TagRequired", response.formValues[1])
+      // }
       uiManager.open("Azalea1.1/Shop/Root/AdminManage", player);
     });
   });
@@ -690,10 +742,10 @@ uiManager.addUI("Azalea1.1/Shop/Root", player => {
       });
     }
   }
-  actionForm.button("Switch to Chest UI", "textures/azalea_icons/Settings", player => {
-    player.addTag("chest-shop");
-    uiManager.open("Azalea2.0/ShopChest/Root", player);
-  });
+  // actionForm.button("Switch to Chest UI", "textures/azalea_icons/Settings", player => {
+  //     player.addTag("chest-shop")
+  //     uiManager.open("Azalea2.0/ShopChest/Root", player);
+  // })
   actionForm.show(player, false, (player, response) => {});
 });
 export function openShopUI(sender) {

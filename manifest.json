@@ -2,12 +2,12 @@
 	"format_version": 2,
 	"header": {
 		"description": "§9Finally, a new release! Make sure to do §a/tag @s add admin",
-		"name": "§aAzalea §5[BETA] §r§7- §rV2.0 RELEASE",
+		"name": "§aAzalea §5[BETA] §r§7- §rV2.0.6 ALPHA",
 		"uuid": "ed6177c2-defb-48bd-b644-47991a76ca5b",
 		"version": [
 			0,
 			0,
-			226
+			249
 		],
 		"min_engine_version": [
 			1,
@@ -24,25 +24,25 @@
 			"version": [
 				0,
 				0,
-				226
+				249
 			],
 			"entry": "scripts/index.js"
 		},
 		{
 			"description": "Some useful things",
 			"type": "data",
-			"uuid": "7ad4d280-b0eb-4c98-8c5b-1bf70c79929a",
+			"uuid": "7cc12af2-7601-4b9b-a6a8-125d8a5065e3",
 			"version": [
 				0,
 				0,
-				226
+				249
 			]
 		}
 	],
     "dependencies": [
         {
           "module_name": "@minecraft/server",
-          "version": "1.9.0-beta"
+          "version": "1.10.0-beta"
         },
         {
           "module_name": "@minecraft/server-ui",

@@ -152,7 +152,14 @@ world.beforeEvents.itemUse.subscribe(e => {
         let actionForm = new ActionFormData();
         actionForm.title("§dConfig Menu");
         // actionForm.body("");
+        let keys = [];
         for (const key of Object.keys(configOptions)) {
+          if (key.toLowerCase().includes('quests')) {
+            let cfgDb = new Database("Config");
+            let enabled = cfgDb.get("QuestsEnabled", "false") == "true";
+            if (!enabled) continue;
+          }
+          keys.push(key);
           // if (key == "§eDeveloper Settings" && (!e.itemStack.getLore() || !e.itemStack.getLore().length || !e.itemStack.getLore().includes("§r§bDevPanel"))) continue;
           actionForm.button(key, configOptions[key].icon);
         }
@@ -160,7 +167,7 @@ world.beforeEvents.itemUse.subscribe(e => {
         // let configOptions2 = configOptions;
         actionForm.show(player).then(res => {
           if (res.canceled) return;
-          let cfg = configOptions[Object.keys(configOptions)[res.selection]];
+          let cfg = configOptions[keys[res.selection]];
           if (cfg.type && cfg.type == "func") {
             cfg.options[0].fn(player, res);
             return;
@@ -288,7 +295,7 @@ world.beforeEvents.itemUse.subscribe(e => {
               modal.slider(option.label, option.minVal, option.maxVal, option.step, cfgDb.get(option.key) == `NUM:${option.default}` ? option.default : cfgDb.get(option.key) ? parseInt(cfgDb.get(option.key).substring(4)) : option.default);
             }
           }
-          modal.title("Config menu - " + Object.keys(configOptions)[res.selection]);
+          modal.title("Config menu - " + keys[res.selection]);
           modal.show(player).then(result => {
             if (result.canceled) return;
             for (let i = 0; i < result.formValues.length; i++) {

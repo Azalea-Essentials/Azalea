@@ -167,6 +167,10 @@ export function CUSTOM_COMMANDS() {
                 uiManager.open("Azalea1.0/CustomCommands/EditAction", player, name, i - 1);
             });
         }
+        actionForm.button(`Delete`, null, (player, i2) => {
+            commands.splice(commandIndex, 1);
+            db.set("Commands", commands);
+          });
         actionForm.show(player,false,()=>{})
     })
     function getIsntEnabled() {

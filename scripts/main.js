@@ -1,3 +1,98 @@
+// // Import azalea features
+// import './configurator';
+// import './verification';
+// import './commandBuilder';
+// import './legacyPlayerShopNoChestUI';
+// import './leaderboardHandler';
+// import './profiles';
+// import './inventorySaving';
+// import './uiIconsList'
+// import './things/DirectorUI';
+// import './iconExtension';
+// import './helpCenter';
+// import './tpRequestUI';
+
+// // Import minecraft shit
+// import * as mc from '@minecraft/server';
+// import * as ui from '@minecraft/server-ui';
+// import {
+//     Player,
+//     ScoreboardIdentityType,
+//   ScriptEventSource,
+//   system,
+//   world,
+// } from '@minecraft/server';
+// import {
+//   ActionFormData,
+//   ModalFormData,
+// } from '@minecraft/server-ui';
+// import './commandmanager_extensions/commandLogger';
+// import './commandmanager_extensions/aliasManager'
+// import icons from './icons';
+
+// // Import azalea functions
+// import { baseConfigMenu } from './configuratorOptions';
+// import { beforeChat } from './beforeChat';
+// import { commands } from './commands';
+// import { Database } from './db';
+// import { ActionForm, MessageForm, ModalForm } from './form_func';
+// import { NicknamesModule } from './nicknames';
+// import { uiManager } from './uis';
+// import { warps } from './warpsapi';
+// import {eventMgr} from "./eventManager";
+// import { openShopUI } from './shopui';
+// import { DynamicPropertyDatabase } from './dynamicPropertyDb';
+// import { logManager } from './logManager';
+// import hardCodedRanks from './hardCodedRanks';
+// import { ChestFormData } from './chestUI';
+
+// // Import each command category
+// import * as AdvancedCommands from './commands-folder/Advanced';
+// import * as AzaleaCommands from './commands-folder/Azalea';
+// import * as ConverterCommands from './commands-folder/Converter';
+// import * as DevCommands from './commands-folder/Dev';
+// import * as EconomyCommands from './commands-folder/Economy';
+// import * as InternalCommands from './commands-folder/Internal';
+// import * as LeaderboardCommands from './commands-folder/Leaderboards';
+// import * as MiscCommands from './commands-folder/Misc';
+// import * as ModerationCommands from './commands-folder/Moderation';
+// import * as PreferenceCommands from './commands-folder/Preferences';
+// import * as SocialCommands from './commands-folder/Social';
+// import * as UtilityCommands from './commands-folder/Utilities';
+// import * as WarpCommands from './commands-folder/Warps';
+
+// // Import event 
+// import * as EventsList from './events'; 
+import torchflowerCommand from './adminpanel/torchflower';
+torchflowerCommand();
+let signsDb = new DynamicPropertyDatabase("Signs");
+world.beforeEvents.playerBreakBlock.subscribe(e => {
+  if (signsDb.get(`${e.block.location.x},${e.block.location.y},${e.block.location.z}`)) {
+    signsDb.delete(`${e.block.location.x},${e.block.location.y},${e.block.location.z}`);
+  }
+});
+world.beforeEvents.playerInteractWithBlock.subscribe(e => {
+  let component = e.block.getComponent('minecraft:sign');
+  if (isAdmin(e.player)) {
+    if (typeof component == "object") {
+      let text = component.getText();
+      if (text.startsWith('run_command ')) {
+        signsDb.set(`${e.block.location.x},${e.block.location.y},${e.block.location.z}`, text.substring('run_command '.length));
+        system.run(() => {
+          component.setText("Please edit the text on the sign. And make sure to wax it too!");
+          component.setTextDyeColor(mc.DyeColor.Lime);
+        });
+      }
+    }
+  }
+  if (signsDb.get(`${e.block.location.x},${e.block.location.y},${e.block.location.z}`) && typeof component == "object" && !e.player.isSneaking) {
+    e.cancel = true;
+    system.run(() => {
+      e.player.runCommand(signsDb.get(`${e.block.location.x},${e.block.location.y},${e.block.location.z}`));
+    });
+  }
+});
+
 // Import azalea dependencies 🪴
 import './configurator';
 import './verification';
@@ -326,13 +421,10 @@ let azaleaSessionToken = `${Date.now()}.${Math.floor(Math.random() * 8196).toStr
 let initialRun = Date.now();
 let finalRun = Date.now();
 world.afterEvents.playerJoin.subscribe(e => {
-  let db = new Database(`PLAYER-${e.playerName}`);
-  let joinsList = JSON.parse(db.get("JoinsList") ? db.get("JoinsList") : "[]");
-  joinsList.push({
-    d: Date.now(),
-    t: system.currentTick
-  });
-  db.set("JoinsList", JSON.stringify(joinsList));
+  // let db = new DynamicPropertyDatabase(`PLAYER-${e.playerName}`);
+  // let joinsList = JSON.parse(db.get("JoinsList") ? db.get("JoinsList") : "[]");
+  // joinsList.push({d:Date.now(),t:system.currentTick});
+  // db.set("JoinsList", JSON.stringify(joinsList));
 });
 let defaultChatrankFormat = "#HT(staffchat,#BC[#NCStaffChat#BC] ,)§r#BC[#RC#R(§r#BC] [§r#RC)§r#BC] §r#NC#P #BC#DRA §r#MC#M";
 let chatrankFormat = configDb.get("ChatrankFormat") ? configDb.get("ChatrankFormat") : defaultChatrankFormat;
@@ -355,101 +447,119 @@ function getFirstStringStartingWithPrefixAndRemovePrefix(list, prefix, defaultSt
   let result = getAllStringsStartingWithPrefixAndRemovePrefix(list, prefix);
   if (result.length) return result[0];else return defaultString;
 }
-uiManager.addUI("Azalea2.0/CodeBlock", player => {
-  if (!(player instanceof Player)) return;
-  // let chestGUI = new ChestFormData();
-  // chestGUI.title("§aScript Block");
-  // chestGUI.button((9*1)+4, "§a§l+--- Create New Script ---+", ["Creates a new script", "Can be:", "- §eJavaScript", "- §aAzaleaScript","§d§lNOTE: AzaleaScript is limited and currently in development"], "textures/items/redstone_dust");
-  let block = player.getBlockFromViewDirection({
-    "maxDistance": 5
-  });
-  let blockLocation;
-  if (block.block.permutation.matches("azalea:code_block")) {
-    blockLocation = block.block.location;
-  } else {
-    return;
-  }
-  let codeBlock = codeBlocks.get(`${blockLocation.x},${blockLocation.y},${blockLocation.z}`);
-  if (!codeBlock) return;
-  let script = codeBlock.script ? codeBlock.script : undefined;
-  let modal = new ModalForm();
-  modal.title("Code Editor");
-  modal.textField("Code Input", "Type some code here...", script);
-  modal.show(player, false, (player, response) => {
-    codeBlock.script = response.formValues[0];
-    codeBlocks.set(`${blockLocation.x},${blockLocation.y},${blockLocation.z}`, codeBlock);
-  });
+// uiManager.addUI("Azalea2.0/CodeBlock", (player)=>{
+//     if(!(player instanceof Player)) return;
+//     // let chestGUI = new ChestFormData();
+//     // chestGUI.title("§aScript Block");
+//     // chestGUI.button((9*1)+4, "§a§l+--- Create New Script ---+", ["Creates a new script", "Can be:", "- §eJavaScript", "- §aAzaleaScript","§d§lNOTE: AzaleaScript is limited and currently in development"], "textures/items/redstone_dust");
+//     let block = player.getBlockFromViewDirection({
+//         "maxDistance": 5
+//     });
+//     let blockLocation;
+//     if(block.block.permutation.matches("azalea:code_block")) {
+//         blockLocation = block.block.location;
+//     } else {
+//         return;
+//     }
+//     let codeBlock = codeBlocks.get(`${blockLocation.x},${blockLocation.y},${blockLocation.z}`);
+//     if(!codeBlock) return;
+//     let script = codeBlock.script ? codeBlock.script : undefined;
+//     let modal = new ModalForm();
+//     modal.title("Code Editor");
+//     modal.textField("Code Input", "Type some code here...", script);
+//     modal.show(player, false, (player, response)=>{
+//         codeBlock.script = response.formValues[0];
+//         codeBlocks.set(`${blockLocation.x},${blockLocation.y},${blockLocation.z}`, codeBlock);
+//     })
 
-  // chestGUI.show(player).then(res=>{
-  //     if(res.canceled) return;
-  //     if(res.selection == (9*1)+4) {
-  //     }
-  // })
-});
+// chestGUI.show(player).then(res=>{
+//     if(res.canceled) return;
+//     if(res.selection == (9*1)+4) {
+//     }
+// })
+// })
+// let codeBlocks = new DynamicPropertyDatabase("CodeBlocks")
+// system.afterEvents.scriptEventReceive.subscribe(e=>{
+//     if(e.id == "azalea:script_block_place") {
+//         if(e.sourceType == ScriptEventSource.Block) {
+//             codeBlocks.set(`${e.sourceBlock.location.x},${e.sourceBlock.location.y},${e.sourceBlock.location.z}`, {
+//                 placedAt: Date.now(),
+//                 scripts: [],
+//                 id: Date.now().toString()
+//             })
+//             // world.sendMessage(`${e.sourceBlock.location.x}, ${e.sourceBlock.location.y}, ${e.sourceBlock.location.z}`)
+//         }
+//     } else if(e.id == "azalea:script_block_break") {
 
-let codeBlocks = new DynamicPropertyDatabase("CodeBlocks");
-system.afterEvents.scriptEventReceive.subscribe(e => {
-  if (e.id == "azalea:script_block_place") {
-    if (e.sourceType == ScriptEventSource.Block) {
-      codeBlocks.set(`${e.sourceBlock.location.x},${e.sourceBlock.location.y},${e.sourceBlock.location.z}`, {
-        placedAt: Date.now(),
-        scripts: [],
-        id: Date.now().toString()
-      });
-      // world.sendMessage(`${e.sourceBlock.location.x}, ${e.sourceBlock.location.y}, ${e.sourceBlock.location.z}`)
-    }
-  } else if (e.id == "azalea:script_block_break") {} else if (e.id == "azalea:script_block_run") {
-    world.sendMessage("Hi");
-  }
-});
-world.beforeEvents.playerBreakBlock.subscribe(e => {
-  // world.sendMessage(`${e.block.location.x},${e.block.location.y},${e.block.location.z}`)
-  if (codeBlocks.get(`${e.block.location.x},${e.block.location.y},${e.block.location.z}`)) {
-    codeBlocks.delete(`${e.block.location.x},${e.block.location.y},${e.block.location.z}`);
-  }
-});
-function isCodeBlockPowered(block) {
-  if (block.above().permutation.matches("minecraft:redstone_block") || block.below().permutation.matches("minecraft:redstone_block") || block.west().permutation.matches("minecraft:redstone_block") || block.east().permutation.matches("minecraft:redstone_block") || block.north().permutation.matches("minecraft:redstone_block") || block.south().permutation.matches("minecraft:redstone_block")) {
-    return true;
-  }
+//     } else if(e.id == "azalea:script_block_run") {
+//         world.sendMessage("Hi")
+//     }
+// })
+// world.beforeEvents.playerBreakBlock.subscribe(e=>{
+//         // world.sendMessage(`${e.block.location.x},${e.block.location.y},${e.block.location.z}`)
+//     if(codeBlocks.get(`${e.block.location.x},${e.block.location.y},${e.block.location.z}`)) {
+//         codeBlocks.delete(`${e.block.location.x},${e.block.location.y},${e.block.location.z}`)
+//     }
+// })
+// function isCodeBlockPowered(block) {
+//     // if(block.above().permutation.matches("minecraft:redstone_block") ||
+//     // block.below().permutation.matches("minecraft:redstone_block") ||
+//     // block.west().permutation.matches("minecraft:redstone_block") ||
+//     // block.east().permutation.matches("minecraft:redstone_block") ||
+//     // block.north().permutation.matches("minecraft:redstone_block") ||
+//     // block.south().permutation.matches("minecraft:redstone_block")) {
+//         return false;
+//     // }
 
-  // ||
-  //  ||
-  //  ||
-  //  ||
-  // 
-}
+//     // ||
+//     //  ||
+//     //  ||
+//     //  ||
+//     // 
+// }
+// system.runInterval(()=>{
+//     for(const key of codeBlocks.keys()) {
+//         try {
+//             let block = world.getDimension('overworld').getBlock({
+//                 x: parseInt(key.split(',')[0]),
+//                 y: parseInt(key.split(',')[1]),
+//                 z: parseInt(key.split(',')[2]),
+//             });
+//             if(!block.permutation.matches("azalea:code_block")) {
+//                 codeBlocks.delete(key);
+//                 world.sendMessage("CODE BLOCK NOT FOUND");
+//                 continue;
+//             }
+//             if(
+//                 isCodeBlockPowered(block)
+//             ) {
+//                 // world.sendMessage(`CODE BLOCK ACTIVATED`)
+//                 let codeblock = codeBlocks.get(`${block.location.x},${block.location.y},${block.location.z}`);
+//                 // world.sendMessage(JSON.stringify(codeblock))
+//                 if(!codeblock) return;
+//                 let script = codeblock.script ? codeblock.script : "";
+//                 let newScript = `return function({world, configuratorOptions, commands, ui, mc, azaleaSession}) {
+//                     ${script}
+//                 }`;
+//                 // world.sendMessage(script)
+//                 let fn = new Function("world", "confiruatorOptions", "commands", "ui", "mc", "azaleaSession", "Database", "DynamicPropertyDatabase", "beforeChat", script);
+//                 // world.sendMessage(newFn.toString())
+//                     fn(
+//                         world,
+//                         baseConfigMenu,
+//                         commands,
+//                         ui,
+//                         mc,
+//                         azaleaSession,
+//                         Database,
+//                         DynamicPropertyDatabase,
+//                         beforeChat
+//                     )
 
-system.runInterval(() => {
-  for (const key of codeBlocks.keys()) {
-    try {
-      let block = world.getDimension('overworld').getBlock({
-        x: parseInt(key.split(',')[0]),
-        y: parseInt(key.split(',')[1]),
-        z: parseInt(key.split(',')[2])
-      });
-      if (!block.permutation.matches("azalea:code_block")) {
-        codeBlocks.delete(key);
-        world.sendMessage("CODE BLOCK NOT FOUND");
-        continue;
-      }
-      if (isCodeBlockPowered(block)) {
-        // world.sendMessage(`CODE BLOCK ACTIVATED`)
-        let codeblock = codeBlocks.get(`${block.location.x},${block.location.y},${block.location.z}`);
-        // world.sendMessage(JSON.stringify(codeblock))
-        if (!codeblock) return;
-        let script = codeblock.script ? codeblock.script : "";
-        let newScript = `return function({world, configuratorOptions, commands, ui, mc, azaleaSession}) {
-                    ${script}
-                }`;
-        // world.sendMessage(script)
-        let fn = new Function("world", "confiruatorOptions", "commands", "ui", "mc", "azaleaSession", "Database", "DynamicPropertyDatabase", "beforeChat", script);
-        // world.sendMessage(newFn.toString())
-        fn(world, baseConfigMenu, commands, ui, mc, azaleaSession, Database, DynamicPropertyDatabase, beforeChat);
-      }
-    } catch {}
-  }
-}, 1);
+//             }
+//         } catch {}
+//     }
+// },1)
 let chatFilterBypassEnabled = false;
 world.beforeEvents.chatSend.subscribe(beforeChat);
 let leaderboards = [];

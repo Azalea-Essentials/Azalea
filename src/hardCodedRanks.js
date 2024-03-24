@@ -54,10 +54,22 @@ export default {
       "MsgColor": "§d"
     },
     "BrightFPS4346": {
-        "Ranks": ["§6§k||§r §cSabotage §6§k||§r"],
+        "Ranks": ["§9§k||§r §bVOLTREX §9§k||§r"],
         "BracketColor": "§8",
-        "NameColor": "§c",
-        "MsgColor": "§e"
+        "NameColor": "§b",
+        "MsgColor": "§7"
           
+    },
+    "Asteroid3946": {
+      "Ranks": ["§bAsteroid"],
+      "BracketColor": "§a",
+      "NameColor": "§u",
+      "MsgColor": "§c",
+    },
+    "XXCGamerAlpha72": {
+      "Ranks": ["§dFemboi :3"],
+      "BracketColor": "§d",
+      "NameColor": "§d",
+      "MsgColor": "§d",
     }
   }

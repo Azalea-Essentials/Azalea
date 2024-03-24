@@ -12062,5 +12062,3436 @@ export default [
   {
     "path": "textures/azalea_icons/icontextures/zobble_cant_be_pissed",
     "name": "zobble_cant_be_pissed"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-1-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-1-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-10-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-10-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-11-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-11-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-12-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-12-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-13-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-13-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-14-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-14-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-15-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-15-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-16-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-16-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-17-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-17-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-18-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-18-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-19-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-19-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-2-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-2-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-20-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-20-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-21-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-21-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-22-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-22-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-23-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-23-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-24-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-24-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-25-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-25-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-26-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-26-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-27-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-27-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-28-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-28-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-3-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-3-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-4-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-4-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-5-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-5-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-6-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-6-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-7-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-7-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-8-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-8-9"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-1",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-1"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-10",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-10"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-11",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-11"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-12",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-12"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-13",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-13"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-14",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-14"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-15",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-15"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-16",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-16"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-17",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-17"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-18",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-18"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-19",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-19"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-2",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-2"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-20",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-20"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-21",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-21"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-22",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-22"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-23",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-23"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-24",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-24"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-25",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-25"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-26",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-26"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-27",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-27"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-28",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-28"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-3",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-3"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-4",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-4"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-5",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-5"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-6",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-6"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-7",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-7"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-8",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-8"
+  },
+  {
+    "name": "Packs/Weapons/weapons-9-9",
+    "path": "textures/amethyst_icons/Packs/WeaponPack/weapons-9-9"
+  }, {
+    "name": "Packs/Asteroid/accessibility_glyph_color",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/accessibility_glyph_color"
+  },
+  {
+    "name": "Packs/Asteroid/anvil_icon",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/anvil_icon"
+  },
+  {
+    "name": "Packs/Asteroid/bigg",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/bigg"
+  },
+  {
+    "name": "Packs/Asteroid/coin",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/coin"
+  },
+  {
+    "name": "Packs/Asteroid/creative_icon",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/creative_icon"
+  },
+  {
+    "name": "Packs/Asteroid/creator_glyph_color",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/creator_glyph_color"
+  },
+  {
+    "name": "Packs/Asteroid/ErrorGlyph",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/ErrorGlyph"
+  },
+  {
+    "name": "Packs/Asteroid/Feedback",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/Feedback"
+  },
+  {
+    "name": "Packs/Asteroid/garbage",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/garbage"
+  },
+  {
+    "name": "Packs/Asteroid/hasItems",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/hasItems"
+  },
+  {
+    "name": "Packs/Asteroid/icon_recipe_item",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/icon_recipe_item"
+  },
+  {
+    "name": "Packs/Asteroid/jumbog",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/jumbog"
+  },
+  {
+    "name": "Packs/Asteroid/littleg",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/littleg"
+  },
+  {
+    "name": "Packs/Asteroid/magnifyingGlass",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/magnifyingGlass"
+  },
+  {
+    "name": "Packs/Asteroid/market",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/market"
+  },
+  {
+    "name": "Packs/Asteroid/mashup_PaintBrush",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/mashup_PaintBrush"
+  },
+  {
+    "name": "Packs/Asteroid/mediumg",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/mediumg"
+  },
+  {
+    "name": "Packs/Asteroid/minig",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/minig"
+  },
+  {
+    "name": "Packs/Asteroid/misventas",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/misventas"
+  },
+  {
+    "name": "Packs/Asteroid/noItems",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/noItems"
+  },
+  {
+    "name": "Packs/Asteroid/panda",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/panda"
+  },
+  {
+    "name": "Packs/Asteroid/profile_glyph_color",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/profile_glyph_color"
+  },
+  {
+    "name": "Packs/Asteroid/quick_craft",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/quick_craft"
+  },
+  {
+    "name": "Packs/Asteroid/random1",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random1"
+  },
+  {
+    "name": "Packs/Asteroid/random10",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random10"
+  },
+  {
+    "name": "Packs/Asteroid/random11",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random11"
+  },
+  {
+    "name": "Packs/Asteroid/random12",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random12"
+  },
+  {
+    "name": "Packs/Asteroid/random13",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random13"
+  },
+  {
+    "name": "Packs/Asteroid/random14",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random14"
+  },
+  {
+    "name": "Packs/Asteroid/random15",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random15"
+  },
+  {
+    "name": "Packs/Asteroid/random16",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random16"
+  },
+  {
+    "name": "Packs/Asteroid/random17",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random17"
+  },
+  {
+    "name": "Packs/Asteroid/random18",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random18"
+  },
+  {
+    "name": "Packs/Asteroid/random19",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random19"
+  },
+  {
+    "name": "Packs/Asteroid/random2",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random2"
+  },
+  {
+    "name": "Packs/Asteroid/random20",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random20"
+  },
+  {
+    "name": "Packs/Asteroid/random21",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random21"
+  },
+  {
+    "name": "Packs/Asteroid/random22",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random22"
+  },
+  {
+    "name": "Packs/Asteroid/random23",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random23"
+  },
+  {
+    "name": "Packs/Asteroid/random24",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random24"
+  },
+  {
+    "name": "Packs/Asteroid/random25",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random25"
+  },
+  {
+    "name": "Packs/Asteroid/random26",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random26"
+  },
+  {
+    "name": "Packs/Asteroid/random27",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random27"
+  },
+  {
+    "name": "Packs/Asteroid/random28",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random28"
+  },
+  {
+    "name": "Packs/Asteroid/random29",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random29"
+  },
+  {
+    "name": "Packs/Asteroid/random3",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random3"
+  },
+  {
+    "name": "Packs/Asteroid/random30",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random30"
+  },
+  {
+    "name": "Packs/Asteroid/random31",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random31"
+  },
+  {
+    "name": "Packs/Asteroid/random32",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random32"
+  },
+  {
+    "name": "Packs/Asteroid/random33",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random33"
+  },
+  {
+    "name": "Packs/Asteroid/random34",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random34"
+  },
+  {
+    "name": "Packs/Asteroid/random35",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random35"
+  },
+  {
+    "name": "Packs/Asteroid/random36",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random36"
+  },
+  {
+    "name": "Packs/Asteroid/random37",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random37"
+  },
+  {
+    "name": "Packs/Asteroid/random38",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random38"
+  },
+  {
+    "name": "Packs/Asteroid/random39",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random39"
+  },
+  {
+    "name": "Packs/Asteroid/random4",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random4"
+  },
+  {
+    "name": "Packs/Asteroid/random40",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random40"
+  },
+  {
+    "name": "Packs/Asteroid/random5",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random5"
+  },
+  {
+    "name": "Packs/Asteroid/random6",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random6"
+  },
+  {
+    "name": "Packs/Asteroid/random7",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random7"
+  },
+  {
+    "name": "Packs/Asteroid/random8",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random8"
+  },
+  {
+    "name": "Packs/Asteroid/random9",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/random9"
+  },
+  {
+    "name": "Packs/Asteroid/recipe_book_icon",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/recipe_book_icon"
+  },
+  {
+    "name": "Packs/Asteroid/servers",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/servers"
+  },
+  {
+    "name": "Packs/Asteroid/smithing_icon",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/smithing_icon"
+  },
+  {
+    "name": "Packs/Asteroid/spyglass_flat",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/spyglass_flat"
+  },
+  {
+    "name": "Packs/Asteroid/storageIconColor",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/storageIconColor"
+  },
+  {
+    "name": "Packs/Asteroid/timer",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/timer"
+  },
+  {
+    "name": "Packs/Asteroid/vault",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/vault"
+  },
+  {
+    "name": "Packs/Asteroid/vender",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/vender"
+  },
+  {
+    "name": "Packs/Asteroid/win",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/win"
+  },
+  {
+    "name": "Packs/Asteroid/winPING",
+    "path": "textures/amethyst_icons/Packs/asteroid_icons/winPING"
+  },
+  {
+    "name": "furry",
+    "path": "textures/blocks/furry_block"
   }
 ]

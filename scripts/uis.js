@@ -9,7 +9,7 @@ export class UIRegister {
     });
   }
   open(id, player, ...args) {
-    let ui = this.uis.find(_ => _.id == id);
+    let ui = this.uis.find(_ => _.id.toLowerCase() == id.toLowerCase());
     if (ui) ui.ui(player, ...args);
   }
   addUI_V2() {}

@@ -94,7 +94,7 @@ uiManager.addUI("Azalea2.0/ServerCommunity/ViewPost", (player,id)=>{
     let post = posts.find(_=>_.id == id)
     if(!post) return uiManager.open("Azalea2.0/ServerCommunity/Root", player);
     let actionForm = new ActionForm();
-    actionForm.title(`§g§r§i§d§u§i§r${post.title}`)
+    actionForm.title(`${post.title}`)
     let text = [
         `§eDescription: §7${post.description}`,
         `§eAuthor: §7${post.sentBy}`,
@@ -273,7 +273,7 @@ uiManager.addUI("Azalea0.9.1/CommunityCenter/Root", (player) => {
 
         let pollsDb = new Database("Polls");
         let actionForm = new ActionForm();
-        actionForm.title("§g§r§i§d§u§i§rServer Hub");
+        actionForm.title("Server Hub");
         // actionForm.button(`Exit`, "textures/azalea_icons/2", ()=>{})
         actionForm.button(`§g§l§o§w§r§dCommunity`, `textures/azalea_icons/icontextures/gem_01f`, (player)=>{
             uiManager.open("Azalea2.0/ServerCommunity/Root", player)

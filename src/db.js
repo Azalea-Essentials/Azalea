@@ -27,7 +27,7 @@ function MergeRecursive(obj1, obj2) {
 const tables = {};
 // if you dont want a shit ton of data to go unused, used hardDelete() and hardSet() instead of set() and delete()
 let cache = new Map();
-export class DatabaseLegacy {
+export class Database {
     constructor(table, compressed = false) {
         this.compressed = compressed;
         this.table = table;
@@ -278,7 +278,7 @@ export class DatabaseLegacy {
         return this.get("table_variables", {});
     }
 }
-export class Database {
+export class DatabaseNew {
     constructor(table) {
         this.table = table.toLowerCase();
     }
@@ -346,4 +346,5 @@ export class Database {
         return table;
     }
 }
-// export const DatabaseLegacy = Database;
+export const DatabaseLegacy = Database;
+// export const Database = Database;

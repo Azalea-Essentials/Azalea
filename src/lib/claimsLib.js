@@ -22,29 +22,29 @@ class Claims {
         this.initializeLoop();
     }
     initializeLoop() {
-        system.runInterval(()=>{
-            for(const player of world.getPlayers()) {
-                for(const claim of this.getClaims()) {
-                    if(betweenXYZ(
-                        [
-                            claim.x1,
-                            claim.y1,
-                            claim.z1
-                        ],
-                        [
-                            claim.x2,
-                            claim.y2,
-                            claim.z2
-                        ],
-                        [
-                            player.location.x,
-                            player.location.y,
-                            player.location.z
-                        ]
-                    ));
-                }
-            }
-        },1);
+        // system.runInterval(()=>{
+        //     for(const player of world.getPlayers()) {
+        //         for(const claim of this.getClaims()) {
+        //             if(betweenXYZ(
+        //                 [
+        //                     claim.x1,
+        //                     claim.y1,
+        //                     claim.z1
+        //                 ],
+        //                 [
+        //                     claim.x2,
+        //                     claim.y2,
+        //                     claim.z2
+        //                 ],
+        //                 [
+        //                     player.location.x,
+        //                     player.location.y,
+        //                     player.location.z
+        //                 ]
+        //             ));
+        //         }
+        //     }
+        // },599);
     }
     createClaim(owner, x1, y1, z1, x2, y2, z2, ownerType = 0) {
         // Owner type 0 is per player

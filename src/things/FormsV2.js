@@ -33,7 +33,7 @@ export default function() {
         if(!forms || !forms.length) forms = [];
         uis = forms;
     
-    },60);
+    },100);
     function openUI(ui, player) {
         let actionForm = new ActionForm();
         actionForm.title(ui.title);
@@ -81,6 +81,7 @@ export default function() {
             }
         }
     })
+    
     uiManager.addUI("Azalea1.1/FormsV2/Root/Create",(player, error = "")=>{
         let modalform = new ModalForm();
         modalform.title(`Create GUI${error.length ? ` - §c${error}` : ``}`);
@@ -103,6 +104,7 @@ export default function() {
                 id: Date.now().toString()
             })
             formsV2Database.set("Forms", forms)
+            uis = forms;
             uiManager.open("Azalea1.1/FormsV2/Root", player)
         })
     })
@@ -116,6 +118,7 @@ export default function() {
         ui.button("§aYes",null,(player)=>{
             forms.splice(form, 1);
             formsV2Database.set("Forms", forms);
+            uis = forms;
         });
         ui.button("§cNo", null, (player, i)=>{
             uiManager.open("Azalea1.1/FormsV2/Root", player);
@@ -141,6 +144,7 @@ export default function() {
             form.body = response.formValues[2];
             form.item = response.formValues[3];
             forms[formIndex] = form;
+            uis = forms;
             formsV2Database.set("Forms", forms);
         })
     })

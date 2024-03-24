@@ -21,20 +21,20 @@ world.afterEvents.entityHitEntity.subscribe(e=>{
 export default {
     name: "heartbeat",
     callback() {
-        for(const player of world.getPlayers()) {
-            if(logs.has(player.id)) {
-                let logTime = logs.get(player.id);
-                if(Date.now() >= logTime + (1000 * seconds)) {
-                    logs.delete(player.id);
-                    try {
-                        player.removeTag("combat-log");
-                    } catch {}
-                } else {
-                    try {
-                        player.addTag("combat-log")
-                    } catch {}
-                }
-            }
-        }
+        // for(const player of world.getPlayers()) {
+        //     if(logs.has(player.id)) {
+        //         let logTime = logs.get(player.id);
+        //         if(Date.now() >= logTime + (1000 * seconds)) {
+        //             logs.delete(player.id);
+        //             try {
+        //                 player.removeTag("combat-log");
+        //             } catch {}
+        //         } else {
+        //             try {
+        //                 player.addTag("combat-log")
+        //             } catch {}
+        //         }
+        //     }
+        // }
     }
 }

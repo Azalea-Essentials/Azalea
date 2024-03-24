@@ -3,7 +3,7 @@ import { Database } from './db';
 import { isAdmin } from './isAdmin';
 let db = new Database("Config");
 let betaTesterVersion = false;
-system.runInterval(()=>{
+(()=>{
     let scoreboard = world.scoreboard.getObjective('AzaleaSetup');
     if(!scoreboard) scoreboard = world.scoreboard.addObjective('AzaleaSetup', 'AzaleaSetup');
     let score = 0;
@@ -17,7 +17,7 @@ system.runInterval(()=>{
         db.set("ChatrankFormat", `#NC#F1("counter-color:" "$TAG" "")#F1("counter:" "#S[,$TAG^]" "")#F1("counter-text:" " $TAG" "")#F1("counter:" "§r#BC | " "")§r#NC#F1("prefix-color:" "$TAG" "")#F1("prefix:" "$TAG " "")#HT(staffchat,#BC[#NCStaffChat#BC] ,)§r#BC[#RC#R(§r#BC] [§r#RC)§r#BC] §r#NC#P#F1("suffix:" " §r#BC|§r" "")#NC#F1("suffix-color:" "$TAG" "")#F1("suffix:" " $TAG" "") §r#BC#DRA §r#MC#M`);
         scoreboard.setScore('IsSetup', 1);       
     }
-},30);
+},80);
 world.afterEvents.playerSpawn.subscribe(e=>{
     if(!e.initialSpawn) return;
     system.runTimeout(()=>{

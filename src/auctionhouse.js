@@ -71,19 +71,19 @@ function playerID(entity) {
     return score;
 }
 let cfgDb = new Database("Config");
-system.runInterval(()=>{
-    for(const player of world.getPlayers()) {
-        let playerid = playerID(player);
-        playerIDData.set(playerid.toString(), player.name);
-        let score = 0;
-        let moneyScoreboard = world.scoreboard.getObjective(cfgDb.get("MoneyScoreboard", "money") ? cfgDb.get("MoneyScoreboard", "money") : "money");
-        try {
-            score = moneyScoreboard.getScore(player.scoreboardIdentity);
-        } catch {score=0;}
-        if(!score) score = 0;
-        offlinePlayerMoney.set(playerid.toString(), {score});
-    }
-},20);
+// system.runInterval(()=>{
+//     for(const player of world.getPlayers()) {
+//         let playerid = playerID(player);
+//         playerIDData.set(playerid.toString(), player.name);
+//         let score = 0;
+//         let moneyScoreboard = world.scoreboard.getObjective(cfgDb.get("MoneyScoreboard", "money") ? cfgDb.get("MoneyScoreboard", "money") : "money");
+//         try {
+//             score = moneyScoreboard.getScore(player.scoreboardIdentity);
+//         } catch {score=0;}
+//         if(!score) score = 0;
+//         offlinePlayerMoney.set(playerid.toString(), {score});
+//     }
+// },40);
 uiManager.addUI("Azalea1.1/AuctionHouse/Root/YourAuctions", (player)=>{
     let actionForm = new ActionForm();
     actionForm.body("Your auctions go here")

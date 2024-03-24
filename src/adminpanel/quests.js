@@ -5,13 +5,20 @@ import { ActionForm, ModalForm } from "../form_func";
 import icons from '../icons';
 import { ConfiguratorSub } from "../configuratorOptions";
 export const QUESTS = function() {
+    return new ConfiguratorSub("§5Quests", "textures/azalea_icons/icontextures/book_04e")
+    .setCallback((player)=>{
+        uiManager.open("Azalea/Quests/Edit/Root", player);
+    })
     let playerQuestData = new Database("PlayerQuestData");
     let db = new Database("Quests");
     let cfg = new Database("Config");
     let updateInterval = 1000 * 60 * 60 * 4;
     let goals = ["Get x money", "Get tag", "Get x items", "Break x blocks"];
     let rewards = ["Get tag", "Get money", "Get items"];
+    let enabled = cfg.get("QuestsEnabled", "false") == "true";
     system.runInterval(()=>{
+        enabled = cfg.get("QuestsEnabled", "false") == "true";
+        if(!enabled) return;
         for(const player of world.getPlayers()) {
             let qdata = playerQuestData.get(player.id.toString());
             let quests = db.get("Quests", []);
@@ -94,6 +101,7 @@ export const QUESTS = function() {
     // Preview Quest UI
     uiManager.addUI("Azalea/Quests/Preview", (player, isEdit=false, questIndex = 0)=>{
         if(!(player instanceof Player)) return;
+        if(!enabled) return player.sendMessage(`Quests experiment must be enabled.`);
         let quests = db.get("Quests", []);
         let actionForm = new ActionForm();
         actionForm.button("Back", "textures/azalea_icons/2", (player,i)=>{
@@ -107,6 +115,7 @@ export const QUESTS = function() {
     // Add quest UI
     uiManager.addUI("Azalea/Quests/Add", (player)=>{
         if(!(player instanceof Player)) return;
+        if(!enabled) return player.sendMessage(`Quests experiment must be enabled.`);
         // Get quests from Database
         let quests = db.get("Quests", []);
 
@@ -145,6 +154,7 @@ export const QUESTS = function() {
     // Add main UI
     uiManager.addUI("Azalea/Quests/Edit/Root", (player)=>{
         if(!(player instanceof Player)) return;
+        if(!enabled) return player.sendMessage(`Quests experiment must be enabled.`);
         // Get quests from Database
         let quests = db.get("Quests", []);
 
@@ -175,7 +185,7 @@ export const QUESTS = function() {
     })
 
     // Add admin panel submenu
-    return new ConfiguratorSub("§5Quests", "textures/azalea_icons/2")
+    return new ConfiguratorSub("§5Quests", "textures/azalea_icons/icontextures/book_04e")
         .setCallback((player)=>{
             uiManager.open("Azalea/Quests/Edit/Root", player);
         })

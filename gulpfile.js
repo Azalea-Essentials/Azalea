@@ -124,7 +124,7 @@ gulp.task("build-dev", async function (cb) {
     const sourceFolder = __dirname;
     const outputZip = 'release/output.zip';
 
-    const foldersToInclude = ['scripts', 'structures', 'items', 'entities', 'scripts/adminpanel', 'scripts/commands-folder', 'scripts/events', 'scripts/scriptevents', 'scripts/utils', 'scripts/customcmds', 'scripts/things', 'scripts/things/DirectorUI-Modules', 'scripts/commandmanager_extensions', 'blocks', 'scripts/azalea-jsx'];
+    const foldersToInclude = ['scripts', 'structures', 'items', 'entities', 'scripts/adminpanel', 'scripts/commands-folder', 'scripts/events', 'scripts/scriptevents', 'scripts/utils', 'scripts/customcmds', 'scripts/things', 'scripts/things/DirectorUI-Modules', 'scripts/commandmanager_extensions', 'blocks', 'scripts/azalea-jsx', 'scripts/commands-folder/2.2 new feature', 'scripts/commands-folder/Advanced', 'scripts/commands-folder/Azalea', 'scripts/commands-folder/Converter', 'scripts/commands-folder/Dev', 'scripts/commands-folder/Economy', 'scripts/commands-folder/Internal', 'scripts/commands-folder/Leaderboards', 'scripts/commands-folder/Misc', 'scripts/commands-folder/Moderation', 'scripts/commands-folder/Preferences', 'scripts/commands-folder/Unfinished', 'scripts/commands-folder/Utilities', 'scripts/commands-folder/Warps', 'scripts/admin', 'scripts/scriptevents', 'scripts/commands-folder/Social', 'scripts/utils', 'scripts/uis', 'scripts/things', 'scripts/scriptevents', 'scripts/main', 'scripts/lib', 'scripts/handlers', 'scripts/admin', 'scripts/azalea-jsx'];
     const filesToInclude = ['manifest.json'];
     // 100% ai generated
     async function createSpecificZip() {

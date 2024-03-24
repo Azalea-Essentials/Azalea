@@ -19,7 +19,7 @@ class InviteManager {
                     data.callback(-1, data.player, data.invitedPlayer)
                 }
             }
-        },40);
+        },100);
     }
     /**
      * @callback inviteCallback

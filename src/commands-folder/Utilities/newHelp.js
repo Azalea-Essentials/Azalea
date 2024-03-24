@@ -66,6 +66,19 @@ export default function() {
             response("SUCCESS Gave admin panel!");
         })
         .register();
+        new CommandBuilder("endgateway")
+        .requiresAdmin(true)
+        .desc("Gets an end gateway!")
+        .category("Misc")
+        .callback(({msg,args,response})=>{
+            let item = new ItemStack("minecraft:end_gateway", 1);
+            item.setLore(["§rNot to be used as a dildoo"]);
+            item.nameTag = "§r§l§9END GATEWAY";
+            let inventory = msg.sender.getComponent("inventory");
+            inventory.container.addItem(item);
+            response("SUCCESS Gave end gateway!");
+        })
+        .register();
     new CommandBuilder("help")
         .desc("Azalea Guide!")
         .category("Help Center")
