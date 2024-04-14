@@ -6,7 +6,7 @@ import {
 } from '../form_func';
 
 export const PLAYER_REPORTS = function() {
-    return new ConfiguratorSub("§cPlayer reports\n§8Manage player reports", "azalea_icons/5")
+    return new ConfiguratorSub("§cPlayer reports", "textures/azalea_icons/5")
         .setCallback((player)=>{
             let actionForm = new ActionForm();
             actionForm.body("Select a case");

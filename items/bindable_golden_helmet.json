@@ -1,0 +1,21 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "azalea:bindable_golden_helmet",
+            "category": "equipment"
+        },
+		"components": {
+            "minecraft:creative_category": {
+                "parent": "itemGroup.name.goatHorn"
+            },
+			"minecraft:display_name": {
+                "value": "§cBindable golden_helmet"
+            },
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": {
+				"texture": "golden_helmet_bindable"
+			}
+		}
+	}
+}

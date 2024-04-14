@@ -55,11 +55,11 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/Buy", (player, shopKey) => {
             for(let i = 0;i < shop.mcItems.length;i++) {
                 let item = shop.mcItems[i];
                 items.push(item);
-                // console.warn(Array.from(typeIdToID.entries())[0])
+                // // console.warn(Array.from(typeIdToID.entries())[0])
                 // let iconIndex = Array.from(typeIdToID.entries()).findIndex(_=>_[0]==item.typeId);
-                // console.warn(iconIndex)
+                // // console.warn(iconIndex)
                 let icon = item.item.typeId;
-                // console.warn(JSON.stringify(item))
+                // // console.warn(JSON.stringify(item))
                 actionform.button(i+offset, `${item.item.nameTag ? item.item.nameTag : item.item.typeId.split(':').slice(1).join(':').split('_').map(_ => _[0].toUpperCase() + _.substring(1)).join(' ')}`, [`§r ${numberWithCommas(item.price)}`], icon, item.item.amount);
             }
         }

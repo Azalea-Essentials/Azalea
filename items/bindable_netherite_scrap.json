@@ -1,0 +1,21 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "azalea:bindable_netherite_scrap",
+            "category": "equipment"
+        },
+		"components": {
+            "minecraft:creative_category": {
+                "parent": "itemGroup.name.goatHorn"
+            },
+			"minecraft:display_name": {
+                "value": "§cBindable netherite_scrap"
+            },
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": {
+				"texture": "netherite_scrap_bindable"
+			}
+		}
+	}
+}

@@ -1,10 +1,1 @@
-export default function addRealHackCommand(commands) {
-  commands.addCommand("realhack", {
-    description: "real hecking",
-    category: "Fun",
-    author: "ZSStudios",
-    onRun(msg, args, theme, response, commands, prefix) {
-      response(`TEXT ${Math.floor(Math.random() * (255 - 1 + 1) + 1)}.${Math.floor(Math.random() * (255 - 1 + 1) + 1)}.${Math.floor(Math.random() * (255 - 1 + 1) + 1)}.${Math.floor(Math.random() * (255 - 1 + 1) + 1)}`);
-    }
-  });
-}
+export default function a(a){a.addCommand("realhack",{description:"real hecking",category:"Fun",author:"ZSStudios",onRun(a,o,t,r,n,h){r(`TEXT ${Math.floor(255*Math.random()+1)}.${Math.floor(255*Math.random()+1)}.${Math.floor(255*Math.random()+1)}.${Math.floor(255*Math.random()+1)}`)}})}

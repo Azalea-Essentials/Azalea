@@ -57,14 +57,14 @@ export const POLLS = function() {
     uiManager.addUI("Azalea0.9.1/Polls/Main",(player)=>{
         let actionForm = new ActionForm();
         actionForm.title("Polls");
-        actionForm.button("Create Poll", "azalea_icons/1", (player)=>{
+        actionForm.button("Create Poll", "textures/azalea_icons/1", (player)=>{
             uiManager.open("Azalea0.9.1/Polls/Create", player);
         });
         let pollsDb = new Database("Polls");
         for(const key of pollsDb.keys()) {
             let pollData = pollsDb.get(key);
             let endsIn = (pollData.duration > Date.now() ? `Ends ` : `Ended `) + moment(pollData.duration).fromNow();
-            actionForm.button(`§4${pollData.name}\n§r${endsIn}`, "azalea_icons/vote", (player, i)=>{
+            actionForm.button(`§c${pollData.name}\n§7${endsIn}`, "textures/azalea_icons/vote", (player, i)=>{
                 uiManager.open("Azalea0.9.1/CommunityCenter/Vote", player, `${pollData.pollId}`, `${key}`, true)
             })
         }
@@ -72,7 +72,7 @@ export const POLLS = function() {
 
         });
     })
-    return new ConfiguratorSub("§4Polls\n§8Set up polls", "azalea_icons/vote")
+    return new ConfiguratorSub("§4Polls", "textures/azalea_icons/vote")
         .setCallback((player)=>{
             uiManager.open("Azalea0.9.1/Polls/Main", player);
         })

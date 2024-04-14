@@ -1,5 +1,6 @@
 import { world } from '@minecraft/server';
 import { AzaleaFormatter } from './utils/FormattingLang';
+import { formatStr } from './utils/AzaleaFormatting';
 // potential new feature?
 // const interpolate = (c1, c2, p) => "#" + [0, 2, 4].map(i => Math.round(parseInt(c1.substring(i, i + 2), 16) + (parseInt(c2.substring(i, i + 2), 16) - parseInt(c1.substring(i, i + 2), 16)) * p)).map(c => (c < 16 ? "0" : "") + c.toString(16)).join("");
 // maybe rank gradients? it might not look great because of the lack of colors in bedrock, but i'll think about it
@@ -35,7 +36,7 @@ function getFirstStringStartingWithPrefixAndRemovePrefix(list, prefix, defaultSt
 //    let rankformat = msg.match(/\#R\(([\s\S]*?)\)/g);
 //    if(rankformat && rankformat.length) {
 //        for(const rankformatter of rankformat) {
-//            console.warn(rankformatter)
+//            // console.warn(rankformatter)
 //            let rankseparator = rankformatter.substring('#R('.length).slice(0,-1);
 //            msg = msg.replace(rankformatter, ranks2.join(rankseparator));
 //        }
@@ -126,33 +127,12 @@ export function formatMSG(
     scoreboardIdentity,
     player,
     pre) {
-    formatter.defineFunc("R", (separator)=> ranks2.join(separator));
-    formatter.defineFunc("HT", (contents)=>{
-        let parts = contents.split(',');
-        if(player.hasTag(parts[0])) return parts[1]
-        else return parts[2];
-    })
-    formatter.defineFunc("S", (objective)=>{
-        let score = 0;
-        try {
-            let obj = world.scoreboard.getObjective(objective.startsWith(',') ? objective.substring(1) : objective);
-            score = obj.getScore(scoreboardIdentity);
-        } catch {score = 0;}
-        if(!score) score = 0;
-        if(typeof score != "number") score = 0;
-        return objective.startsWith(',') ? numberWithCommas(score) : score.toString();
+    let stringToReturn = formatStr(msgFormat, player, {
+        bc: bracketColor,
+        nc: nameColor,
+        rc: rankColor,
+        mc: messageColor,
+        msg: messageContent
     });
-    let stringToReturn = formatter.format(msgFormat, {
-        "DRA": "»",
-        "NC": nameColor,
-        "MC": messageContent.startsWith('>') ? '§a' : messageColor,
-        "RC": rankColor,
-        "BC": bracketColor,
-        "PR": pre,
-        "P": senderName,
-        "FRC": nameColor,
-        "M": messageContent
-    });
-    formatter.reset();
-    return stringToReturn;
+    return stringToReturn.replace(/\s+/g," ");
 }

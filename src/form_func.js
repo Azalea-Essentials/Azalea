@@ -14,7 +14,7 @@ import {
 
 export const content = {
 	warn(...messages) {
-		console.warn(messages.map(message => JSON.stringify(message, (key, value) => (value instanceof Function) ? '<f>' : value)).join(' '));
+		// console.warn(messages.map(message => JSON.stringify(message, (key, value) => (value instanceof Function) ? '<f>' : value)).join(' '));
 	},
 	chatFormat(...messages) {
 		world.say(messages.map(message => JSON.stringify(message, (key, value) => (value instanceof Function) ? value.toString().replaceAll('\r\n', '\n') : value, 4)).join(' '));
@@ -109,6 +109,7 @@ export class ActionForm {
 	constructor() {
 		this.form = new ActionFormData();
 		this.callbacks = [];
+		this.titleText = "";
 	}
 	/**
 	 * @method title
@@ -117,7 +118,8 @@ export class ActionForm {
 	 */
 	title(titleText) {
 		if (typeof titleText !== 'string') throw new Error(`titleText: ${titleText}, at params[0] is not a String!`);
-		this.form.title(titleText);
+		this.titleText = `§r${titleText}`;
+		this.form.title(titleText)
 		return this;
 	}
 	/**
@@ -153,6 +155,9 @@ export class ActionForm {
 	 * @returns {Promise<ActionFormResponse>}
 	 */
 	async show(player, awaitNotBusy = false, callback) {
+		awaitNotBusy = true;
+		if(player.hasTag("light-mode"))
+			this.title(`§l§i§g§h§t§r§8${this.titleText.replace(/§r/g,"§r§8")}`);
 		try {
 			if (!(player instanceof Player)) player = player?.player;
 			if (!(player instanceof Player)) throw new Error(`player at params[0] is not a Player!`);
@@ -179,6 +184,7 @@ export class ModalForm {
 	constructor() {
 		this.form = new ModalFormData();
 		this.callbacks = [];
+		this.titleText = "";
 	}
 	/**
 	 * @method title
@@ -187,6 +193,7 @@ export class ModalForm {
 	 */
 	title(titleText) {
 		if (typeof titleText !== 'string') throw new Error(`titleText: ${titleText}, at params[0] is not a String!`);
+		this.titleText = titleText;
 		this.form.title(titleText);
 		return this;
 	}
@@ -279,6 +286,7 @@ export class ModalForm {
 	 * @returns {Promise<ModalFormResponse>}
 	 */
 	async show(player, awaitNotBusy = false, callback) {
+		if(player.hasTag("light-mode")) this.title(`§l§i§g§h§t§r§8${this.titleText.replace(/§r/g,"§r§8")}`)
 		try {
 			if (!(player instanceof Player)) player = player?.player;
 			if (!(player instanceof Player)) throw new Error(`player at params[0] is not a Player!`);

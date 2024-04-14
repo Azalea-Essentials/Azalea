@@ -1,9 +1,1 @@
-export default function addVersionCommand(commands) {
-  commands.addCommand("version", {
-    description: "Get the azalea version",
-    category: "Help Center",
-    onRun(msg, args, theme, response) {
-      response(`TEXT ${theme.command}Azalea version ${theme.description}V1.0\n\n${theme.footer}i hope i dont forget to change the version`);
-    }
-  });
-}
+export default function e(e){e.addCommand("version",{description:"Get the azalea version",category:"Help Center",onRun(e,o,n,t){t(`TEXT ${n.command}Azalea version ${n.description}2.2 Beta 1\n\n${n.footer}i hope i dont forget to change the version`)}})}

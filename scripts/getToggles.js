@@ -1,10 +1,1 @@
-export function getToggle(cmdname) {
-  let score = 0;
-  try {
-    let objective = world.scoreboard.getObjective("cmdtoggles");
-    let participant = objective.getParticipants().find(participantData => participantData.displayName == cmdname);
-    if (participant) score = objective.getScore(participant);
-  } catch {
-    score = 0;
-  }
-}
+export function getToggle(e){let t=0;try{let c=world.scoreboard.getObjective("cmdtoggles"),g=c.getParticipants().find((t=>t.displayName==e));g&&(t=c.getScore(g))}catch{t=0}}

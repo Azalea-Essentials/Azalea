@@ -1,23 +1,25 @@
 import {
     Player,
-  system,
-  world,
+    system,
+    world,
 } from '@minecraft/server';
 import {
-  ActionFormData,
-  ModalFormData,
+    ActionFormData,
+    ModalFormData,
 } from '@minecraft/server-ui';
-import {warps} from './warpsapi';
+import { warps } from './warpsapi';
 import { baseConfigMenu } from './configuratorOptions';
 import { Database } from './db';
 import {
-  ActionForm,
-  MessageForm,
-  ModalForm,
+    ActionForm,
+    MessageForm,
+    ModalForm,
 } from './form_func';
 import { isAdmin } from './isAdmin';
 import { openShopUI } from './shopui';
 import { uiManager } from './uis';
+import icons from './icons';
+import { openConfigUI } from './configuratorBase';
 
 world.afterEvents.playerSpawn.subscribe((e) => {
 })
@@ -77,29 +79,40 @@ world.afterEvents.playerLeave.subscribe(e => {
 
 //     })
 // }
+uiManager.addUI("Azalea1.1/Warps", (player) => {
+    let warps2 = warps.getAllWarps();
+    let warpUIDB = new Database("WarpUI");
+    let warpUI = new ActionForm();
+    warpUI.title(warpUIDB.get("Title", "§dWarp UI") ? warpUIDB.get("Title", "§dWarp UI") : "§dWarp UI");
+    if (!warps2.length) {
+        warpUI.title("Warps - Not Configured");
+        warpUI.body("§cIt looks like warps are not configured on this server.\n§bFor admins: do §e!spawn set §bto set spawn, and §e!warp set <name> §bto set a warp.");
+        warpUI.button("§cLeave", "textures/azalea_icons/2", (player, i) => { })
+    }
+    for (const warpName of warps2) {
+        let warpData = warps.get2(warpName);
+        let icon = icons.find(_ => _.name == warpData.icon);
+        if (icon && icon.path) icon = icon.path
+        else icon = null;
+        warpUI.button(`§a${warpData.displayName ? warpData.displayName : warpName == "spawn" ? "§dWorld Spawn" : warpName}`, icon ? icon : warpName == "spawn" ? `textures/azalea_icons/icontextures/nether_star` : `textures/azalea_icons/icontextures/ender_pearl`, (player) => {
+            warps.tpDB(player, warpName);
+        })
+    }
+    warpUI.show(player, false, (player, response) => { });
+
+})
 world.beforeEvents.itemUse.subscribe((e) => {
     system.run(() => {
-        if(e.itemStack.typeId == "azalea:player_shop") {
+        if (e.itemStack.typeId == "azalea:player_shop") {
             uiManager.open("Azalea0.9.1/PlayerShop/Main", e.source)
         }
-        if(e.itemStack.typeId == 'azalea:warp') {
-            let warps2 = warps.getAllWarps();
-            let warpUI = new ActionForm();
-            warpUI.title("Warps");
-            warpUI.button("§cLeave", "azalea_icons/2", (player,i)=>{})
-            if(!warps2.length) {
-                warpUI.title("Warps - Not Configured");
-                warpUI.body("§cIt looks like warps are not configured on this server.\n§bFor admins: do §e!spawn set §bto set spawn, and §e!warp set <name> §bto set a warp.");
-            }
-            for(const warpName of warps2) {
-                warpUI.button(`§a${warpName == "spawn" ? "§dWorld Spawn" : warpName}`, warpName == "spawn" ? `azalea_icons/icontextures/nether_star` : `azalea_icons/icontextures/ender_pearl`, (player)=>{
-                    warps.tpDB(player, warpName);
-                })
-            }
-            warpUI.title("Warps")
-            warpUI.show(e.source,false,(player,response)=>{});
+        if(e.itemStack.typeId == "azalea:tp_requests") {
+            uiManager.open("Azalea2.0/TeleportRequests/Root", e.source)
         }
-        console.warn(e.itemStack.typeId);
+        if (e.itemStack.typeId == 'azalea:warp') {
+            uiManager.open("Azalea1.1/Warps", e.source);
+        }
+        // console.warn(e.itemStack.typeId);
         // if(e.itemStack.typeId == 'minecraft:flint') {
         //     uiManager.open("Azalea0.9.1/MoneyTransfer", e.source)
         // }
@@ -115,33 +128,36 @@ world.beforeEvents.itemUse.subscribe((e) => {
         if (e.itemStack.typeId == 'azalea:config_ui' && isAdmin(e.source)) {
             // Enable this line if you really hate config UI!
             // return openConfigPanel(e.source);
-            let configOptions = baseConfigMenu;
-            if(e.source.hasTag("experiment-1")) {
-                let mainForm = new ActionForm()
-                    .title("§dConfig UI V2");
-                for (const key of Object.keys(configOptions)) mainForm.button(key, configOptions[key].icon, (player, i)=>{
-                    if(configOptions[key].type)
-                        if(configOptions[key].type == "func" && configOptions[key].func) {
-                            configOptions[key].func(player, i);
-                            return;
-                        }
-                    let configDb = new Database("Config");
-                    let modalForm = new ModalForm().title(key.split('\n')[0]);
-                    for(const option of configOptions[key].options)
-                        if(option.type == 'text-input') modalForm.textField(option.label, option.placeholder, configDb.get(option.key) ? configDb.get(option.key) : null, (player,text,i)=>{ let configDb = new Database("Config"); configDb.set(option.key, text) });
-                        else if(option.type == 'dropdown') modalForm.dropdown(option.label, [{
-                            option: "Select an option",
-                            callback() {}
-                        }, ...option.cliOptions.map((v,i)=>{
-                            return {
-                                option: v,
-                                callback() { let configDb = new Database("Config"); configDb.set(option.key, option.keyOptions[i]) }
-                            }
-                        })], option.keyOptions.findIndex((v)=>v==configDb.get(option.key)) > -1 ? option.keyOptions.findIndex((v)=>v==configDb.get(option.key)) : 0, (player,selection,i)=>{})
-                        else if(option.type == 'toggle') modalForm.toggle(option.label, configDb.get(option.key) == "true" ? true : false, (player,state)=>{ let configDb = new Database("Config"); configDb.set(option.key, state ? 'true' : 'false')})
-                    modalForm.show(e.source, false, (player,response)=>{})
-                })
-                mainForm.show(e.source, true)
+            let configOptions = baseConfigMenu.options;
+            if (e.source.hasTag("experiment-1")) {
+                // let mainForm = new ActionForm()
+                //     .title("Config UI V2");
+                // mainForm.button("Panel Settings", "textures/azalea_icons/Settings", (player) => {
+                //     let form2 = new ActionForm();
+                //     form2.button("Hidden Items", null, (player)=>{
+                //         let modal = new ModalForm();
+                //         for(const key of keys) {
+                //             modal.toggle(key, hiddenItems.includes(keys.indexOf(key)) ? true : false);
+                //         }
+                //         modal.show(player, false, (player, response)=>{
+                //             hiddenItems = [];
+                //             let i = -1;
+                //             for(const bool of response.formValues) {
+                //                 i++;
+                //                 if(bool) hiddenItems.push(i)
+                //                 e.itemStack.setLore([
+                //                     `I:${itemArangement.map(_=>_.toString()).join(';')}`,
+                //                     `H:${hiddenItems.map(_=>_.toString()).join(';')}`
+                //                 ])
+                //                 let inventory = e.source.getComponent('inventory');
+                //                 inventory.container.setItem(e.source.selectedSlot, e.itemStack);
+                //             }
+                //         })
+                //     })
+                //     form2.show(player, false, ()=>{})
+                // })
+                // mainForm.show(e.source, true)
+                openConfigUI(e.source, baseConfigMenu.toOptions(), "Config UI V2")
                 return;
             }
 
@@ -150,17 +166,25 @@ world.beforeEvents.itemUse.subscribe((e) => {
             // let e = e2;
             system.run(() => {
                 let actionForm = new ActionFormData();
-                actionForm.title("Config menu");
-                actionForm.body("Please select an option")
+                actionForm.title(`${player.hasTag("light-mode") ? "§l§i§g§h§t" : ""}${"§r§dConfig Menu"}`);
+                // actionForm.body("");
+                let keys = [];
                 for (const key of Object.keys(configOptions)) {
+                    if(key.toLowerCase().includes('quests')) {
+                        let cfgDb = new Database("Config");
+                        let enabled = cfgDb.get("QuestsEnabled", "false") == "true";
+                        if(!enabled) continue;
+                    }
+                    keys.push(key);
+                    // if (key == "§eDeveloper Settings" && (!e.itemStack.getLore() || !e.itemStack.getLore().length || !e.itemStack.getLore().includes("§r§bDevPanel"))) continue;
                     actionForm.button(key, configOptions[key].icon);
                 }
                 // let player = e.source;
                 // let configOptions2 = configOptions;
                 actionForm.show(player).then((res) => {
                     if (res.canceled) return;
-                    let cfg = configOptions[Object.keys(configOptions)[res.selection]];
-                    if(cfg.type && cfg.type == "func") {
+                    let cfg = configOptions[keys[res.selection]];
+                    if (cfg.type && cfg.type == "func") {
                         cfg.options[0].fn(player, res);
                         return;
                     }
@@ -283,6 +307,8 @@ world.beforeEvents.itemUse.subscribe((e) => {
                     }
                     let modal = new ModalFormData();
                     let cfgDb = new Database("Config");
+                    let cmdtoggles = world.scoreboard.getObjective("cmdtoggles");
+                    if (!cmdtoggles) cmdtoggles = world.scoreboard.addObjective("cmdtoggles");
                     for (const option of cfg.options) {
                         if (option.type == "toggle") {
                             let optionValue = cfgDb.get(option.key) ? cfgDb.get(option.key) : null;
@@ -294,22 +320,47 @@ world.beforeEvents.itemUse.subscribe((e) => {
                             let optionValue = cfgDb.get(option.key) ? cfgDb.get(option.key) : null;
                             let index = option.keyOptions.findIndex(_ => _ == optionValue);
                             modal.dropdown(option.label, ["Select an option", ...option.cliOptions], index < 0 ? null : index + 1);
+                        } else if (option.type == "dropdown-command") {
+                            /*
+            if (cmdStatus == 0) response(`TEXT ${theme.successColor}§l[TOGGLED] §r${theme.successColor}Default permissions`)
+            else if (cmdStatus == 1) response(`TEXT ${theme.warningColor}§l[TOGGLED] §r${theme.warningColor}Admins only`)
+            else if (cmdStatus == 2) response(`TEXT ${theme.errorColor}§l[TOGGLED] §r${theme.errorColor}Completely disabled`)
+            else if (cmdStatus == 3) response(`TEXT ${theme.infoColor}§l[TOGGLED] §r${theme.infoColor}Enabled for everyone (BETA)`)
+                            */
+                            let toggleScore = 0;
+                            try {
+                                toggleScore = cmdtoggles.getScore(option.command);
+                                if (!toggleScore) toggleScore = 0;
+                            } catch {
+                                toggleScore = 0;
+                            }
+                            modal.dropdown("!" + option.command + " toggle", ["Default permissions", "Force admins only", "Completely disabled", "Enabled for everyone"], toggleScore);
+                        } else if (option.type == "slider") {
+                            modal.slider(option.label, option.minVal, option.maxVal, option.step, cfgDb.get(option.key) == `NUM:${option.default}` ? option.default : cfgDb.get(option.key) ? parseInt(cfgDb.get(option.key).substring(4)) : option.default);
                         }
                     }
-                    modal.title("Config menu - " + Object.keys(configOptions)[res.selection])
+                    modal.title(`${player.hasTag("light-mode") ? `§l§i§g§h§t` : ``}§r${"Config menu - " + keys[res.selection]}`)
                     modal.show(player).then(result => {
                         if (result.canceled) return;
                         for (let i = 0; i < result.formValues.length; i++) {
                             let formValue = result.formValues[i];
                             if (typeof formValue == 'string') {
+                                console.warn(cfg.options[i].key);
                                 let currVal = cfgDb.get(cfg.options[i].key);
-                                if(formValue != currVal)
+                                if (formValue != currVal)
                                     cfgDb.set(cfg.options[i].key, formValue);
                             } else if (typeof formValue == 'boolean') {
                                 cfgDb.set(cfg.options[i].key, formValue ? "true" : "false");
                             } else if (typeof formValue == "number") {
-                                if (formValue > 0) {
-                                    cfgDb.set(cfg.options[i].key, cfg.options[i].keyOptions[formValue - 1]);
+                                if (cfg.options[i].type == "dropdown-command") {
+                                    cmdtoggles.setScore(cfg.options[i].command, formValue);
+                                } else if (cfg.options[i].type == "slider") {
+                                    cfgDb.set(cfg.options[i].key, `NUM:${formValue}`);
+                                } else {
+                                    if (formValue > 0) {
+                                        cfgDb.set(cfg.options[i].key, cfg.options[i].keyOptions[formValue - 1]);
+
+                                    }
 
                                 }
                             }

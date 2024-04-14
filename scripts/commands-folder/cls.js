@@ -1,18 +1,1 @@
-import { world } from '@minecraft/server';
-export default function clearChat(commands) {
-  function run(msg) {
-    world.sendMessage(`${`\n`.repeat(125)}§c<-=- §e@${msg.sender.name} §r§6cleared the chat §c-=->`);
-  }
-  commands.addCommand("cls", {
-    description: "Clears chat",
-    category: "Management",
-    onRun: run,
-    admin: true
-  });
-  commands.addCommand("clear-chat", {
-    description: "Clears chat",
-    category: "Management",
-    onRun: run,
-    admin: true
-  });
-}
+import{world as e}from"@minecraft/server";export default function a(a){function n(a){e.sendMessage(`${"\n".repeat(125)}§c<-=- §e@${a.sender.name} §r§6cleared the chat §c-=->`)}a.addCommand("cls",{description:"Clears chat",category:"Management",onRun:n,admin:!0}),a.addCommand("clear-chat",{description:"Clears chat",category:"Management",onRun:n,admin:!0})}
