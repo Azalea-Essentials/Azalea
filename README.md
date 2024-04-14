@@ -10,7 +10,6 @@
     <img src="https://img.shields.io/github/downloads/Ant767/Torchflower/total?style=for-the-badge" alt="shield.png">
 </a>
 
-![repository-open-graph-template22](https://github.com/Ant767/Torchflower/assets/125575168/ec67e91e-fc35-4d5e-95d6-1f8468c790bc)
 ## About
 Azalea is a free and Open-Source minecraft bedrock essentials addon. It has many features, including Chest GUI editor and more.
 ![img](https://api.mcpedl.com/storage/submissions/211982/images/azalea-essentials--update-v22-beta-1_6.png)
