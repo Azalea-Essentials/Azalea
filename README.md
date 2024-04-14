@@ -11,7 +11,9 @@
 </a>
 
 ## About
+
 Azalea is a free and Open-Source minecraft bedrock essentials addon. It has many features, including Chest GUI editor and more.
+
 ![img](https://api.mcpedl.com/storage/submissions/211982/images/azalea-essentials--update-v22-beta-1_6.png)
 
 ## Support
