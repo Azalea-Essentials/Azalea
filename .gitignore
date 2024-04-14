@@ -6,7 +6,7 @@ release
 .idea
 output
 scripts
-
+azalea-build-config.yaml
 # Logs
 logs
 *.log

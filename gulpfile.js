@@ -106,7 +106,6 @@ async function build(prefix = "DEV") {
   let uuid = crypto.randomUUID();
   let uploadData = await bucket.upload(`Downloads/${uuid}.mcaddon`, mcAddon.toBuffer())
   let db = cli.from('DownloadMetadata');
-  // cli.storage.from("Downloads").download(`Downloads/Data`).da
   await db.insert({
     json_data: JSON.stringify({
       date: Date.now(),
