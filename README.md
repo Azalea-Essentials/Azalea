@@ -7,7 +7,7 @@
 </a>
 
 <a href="https://github.com/Ant767/Torchflower/releases">
-    <img src="https://img.shields.io/github/downloads/Ant767/Torchflower/total?style=for-the-badge" alt="shield.png">
+    <img src="https://img.shields.io/github/downloads/Ant767/Azalea/total?style=for-the-badge" alt="shield.png">
 </a>
 
 ## About
