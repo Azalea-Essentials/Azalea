@@ -1,19 +1,37 @@
-# 🌺 Azalea 🌺
+![torchflower logo](https://azalea.trashdev.org/img/azalea_essentials2.png)
 
-***NOTE: AZALEA IS STILL IN BETA AND SOME FEATURES MIGHT NOT WORK PROPERLY***
+<div align="center">
 
-**Azalea is a very customizable addon for Minecraft Bedrock.**
+<a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="shield.png">
+</a>
 
-Current features:
-- Admin UI
-- Tag commands
-- Custom UIs
-- Bind items to commands
-- Player reports
-- Moderation
-- Server reviews
-- Too lazy to finish this list lmfao
+<a href="https://github.com/Ant767/Torchflower/releases">
+    <img src="https://img.shields.io/github/downloads/Ant767/Torchflower/total?style=for-the-badge" alt="shield.png">
+</a>
 
-Made by TRASH#0093 on Discord (or TheLegendaryTrashcan#8485 on Revolt)
+![repository-open-graph-template22](https://github.com/Ant767/Torchflower/assets/125575168/ec67e91e-fc35-4d5e-95d6-1f8468c790bc)
+## About
+Azalea is a free and Open-Source minecraft bedrock essentials addon. It has many features, including Chest GUI editor and more.
+![img](https://api.mcpedl.com/storage/submissions/211982/images/azalea-essentials--update-v22-beta-1_6.png)
 
-[Talk on the Discord server](https://discord.gg/azalea-1-year-anniversary-922867041029984316) or [talk on the Revolt server](https://rvlt.gg/PjgTYFgF)
+## Support
+
+<a href="https://discord.gg/azalea-essentials-922867041029984316">
+    <img alt="Discord" src="https://img.shields.io/discord/922867041029984316?style=for-the-badge">
+</a>
+[placeholder]
+
+## License
+
+Released under the [MIT](https://opensource.org/licenses/MIT) license.
+
+
+<details>
+<summary><b>Faq</b></summary>
+
+## How do I download?
+On the [MCPEDL Page](https://mcpedl.com/azalea)
+</details>
+
+---

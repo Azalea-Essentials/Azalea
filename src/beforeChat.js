@@ -6,7 +6,7 @@ import {
 import { commands } from './commands';
 import { Database } from './db';
 import { formatMSG } from './formatmsg';
-
+//
 function getAllStringsStartingWithPrefixAndRemovePrefix(list, prefix) {
     return list
         .filter(_=>_.startsWith(prefix))
