@@ -2,7 +2,7 @@ import { ActionFormData } from '@minecraft/server-ui';
 import { typeIdToDataId, typeIdToID } from "./typeIds.js";
 import { world } from '@minecraft/server';
 
-const number_of_1_16_100_items = 271;
+const number_of_1_16_100_items = 278;
 // world.afterEvents.item
 const sizes = new Map([
 	['single', ['§c§h§t§h§i§s§i§s§b§r§o§k§e§n§e§s§t§2§7§r', 27]], ['small', ['§c§h§t§h§i§s§i§s§b§r§o§k§e§n§e§s§t§2§7§r', 27]],
@@ -54,9 +54,10 @@ class ChestFormData {
 		}
 		return this;
 	}
-	show(player) {
+	show(player, body = null) {
 		const form = new ActionFormData()
 			.title(this.titleText);
+		if(body) form.body(body);
 		this.#buttonArray.forEach(button => {
 			form.button(button[0], button[1]?.toString());
 		})

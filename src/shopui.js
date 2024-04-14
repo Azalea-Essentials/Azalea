@@ -70,7 +70,7 @@ uiManager.addUI("Azalea1.1/Shop/Root/Category", (player, category, previousCateg
     if(!shopData.items || !shopData.items.length) {
         actionForm.body("Looks like there are no items here!");
     }
-    actionForm.title(`Shop §7> §r§f${shopData.category}`);
+    actionForm.title(`Shop §7> §r${shopData.category}`);
     if(shopData.discount) {
         actionForm.body(`§a${shopData.discount}%% §r§fdiscount!`)
     }

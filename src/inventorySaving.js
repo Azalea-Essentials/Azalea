@@ -1,3 +1,4 @@
+console.warn("test")
 // import { system, world } from "@minecraft/server";
 // import { ItemDatabase } from "./itemDB";
 

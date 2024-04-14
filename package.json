@@ -6,6 +6,8 @@
     "@minecraft/server-ui": "^1.2.0-beta",
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",
     "gulp": "^4.0.2",
+    "gulp-minify": "^3.1.0",
+    "gulp-minify-code": "^1.0.1",
     "gulp-zip": "^5.1.0"
   },
   "scripts": {
@@ -14,12 +16,22 @@
     "mcaddon-dev": "gulp build-dev"
   },
   "dependencies": {
+    "@minecraft/vanilla-data": "^1.20.70",
+    "@pkl-ts/parser": "^0.3.1",
+    "@supabase/supabase-js": "^2.42.0",
+    "adm-zip": "^0.5.12",
     "axios": "^1.4.0",
     "babel-plugin-wildcard": "^7.0.0",
+    "discord-webhook-node": "^1.1.8",
+    "firebase": "^10.10.0",
     "gulp-babel": "^8.0.0",
+    "gulp-minify-inline": "^1.1.0",
     "gulp-replace": "^1.1.4",
     "jszip": "^3.10.1",
+    "mediafire": "^0.1.2",
+    "terser": "^5.30.3",
     "uuid": "^9.0.0",
-    "ws": "^8.13.0"
+    "ws": "^8.13.0",
+    "yaml": "^2.4.1"
   }
 }

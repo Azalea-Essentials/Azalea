@@ -1,17 +1,1 @@
-import { ItemStack } from '@minecraft/server';
-export function itemToJson(item) {
-  let json = {};
-  json.typeId = item.typeId;
-  json.amount = item.amount;
-  if (item.keepOnDeath) json.keepOnDeath = item.keepOnDeath;
-  if (item.nameTag) json.nameTag = item.nameTag;
-  if (item.getLore().length) json.lore = item.getLore();
-  return json;
-}
-export function jsonToItem(json) {
-  let item = new ItemStack(json.typeId, json.amount);
-  item.keepOnDeath = json.keepOnDeath ? true : false;
-  item.setLore(json.lore ? json.lore : []);
-  if (json.nameTag) item.nameTag = json.nameTag;
-  return item;
-}
+import{ItemStack as e}from"@minecraft/server";export function itemToJson(e){let t={};return t.typeId=e.typeId,t.amount=e.amount,e.keepOnDeath&&(t.keepOnDeath=e.keepOnDeath),e.nameTag&&(t.nameTag=e.nameTag),e.getLore().length&&(t.lore=e.getLore()),t}export function jsonToItem(t){let n=new e(t.typeId,t.amount);return n.keepOnDeath=!!t.keepOnDeath,n.setLore(t.lore?t.lore:[]),t.nameTag&&(n.nameTag=t.nameTag),n}

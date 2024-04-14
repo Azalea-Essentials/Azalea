@@ -166,7 +166,7 @@ world.beforeEvents.itemUse.subscribe((e) => {
             // let e = e2;
             system.run(() => {
                 let actionForm = new ActionFormData();
-                actionForm.title("§dConfig Menu");
+                actionForm.title(`${player.hasTag("light-mode") ? "§l§i§g§h§t" : ""}${"§r§dConfig Menu"}`);
                 // actionForm.body("");
                 let keys = [];
                 for (const key of Object.keys(configOptions)) {
@@ -339,7 +339,7 @@ world.beforeEvents.itemUse.subscribe((e) => {
                             modal.slider(option.label, option.minVal, option.maxVal, option.step, cfgDb.get(option.key) == `NUM:${option.default}` ? option.default : cfgDb.get(option.key) ? parseInt(cfgDb.get(option.key).substring(4)) : option.default);
                         }
                     }
-                    modal.title("Config menu - " + keys[res.selection])
+                    modal.title(`${player.hasTag("light-mode") ? `§l§i§g§h§t` : ``}§r${"Config menu - " + keys[res.selection]}`)
                     modal.show(player).then(result => {
                         if (result.canceled) return;
                         for (let i = 0; i < result.formValues.length; i++) {

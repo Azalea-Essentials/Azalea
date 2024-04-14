@@ -42,7 +42,7 @@ export class Database {
         // try {
         //     if (!tables[table]) tables[table] = new Map();
         // } catch { }
-        this.getTable();
+        // this.getTable();
     }
     getCache() {
         if(cache.has(this.table)) {

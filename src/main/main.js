@@ -151,71 +151,18 @@ uiManager.addUI('banana', (player)=>{
         
     })
 })
-system.afterEvents.scriptEventReceive.subscribe(e => {
-    if (e.sourceType === "Entity") {
-        eventMgr.emit("ScriptEventEntity", e);
-    }
-    if (e.id.startsWith("azalea_ui")) {
-        const formID = e.id.split(":")[1];
-        uiManager.open("Azalea0.9.0/FormPreview", e.sourceEntity, formID);
-    }
-    if (e.id === "azalea:open_debug_ui" && e.sourceType === "Entity") {
-        const player = e.sourceEntity;
-        system.run(() => {
-            const tables = world.scoreboard.getObjectives().filter(obj => obj.id.startsWith("db-"));
-            const action1 = new ActionFormData();
-
-            for (const table of tables) {
-                action1.button(table.displayName);
-            }
-
-            action1.show(player).then(res1 => {
-                if (res1.canceled) return;
-
-                const table = tables[res1.selection];
-                const tableName = table.id.substring(3);
-                const db = new Database(tableName);
-                const keys = db.keys();
-                const action2 = new ActionFormData();
-
-                for (const key of keys) {
-                    action2.button(`KEY: ${key}`);
-                }
-
-                action2.show(player).then(res2 => {
-                    if (res2.canceled) return;
-
-                    const key = keys[res2.selection];
-                    const action3 = new ActionFormData()
-                        .title(`§aView/edit key§r: §r${tableName}§7/§r${key}`)
-                        .body(`Value: ${db.get(key)}`)
-                        .button(`Delete`)
-                        .button(`Edit`);
-
-                    action3.show(player).then(res3 => {
-                        if (res3.canceled) return;
-
-                        if (res3.selection === 0) {
-                            db.delete(key);
-                        } else {
-                            const modal1 = new ModalFormData()
-                                .title(`§r§aEdit key§r: §r${tableName}§7/§r${key}`)
-                                .textField(`New value`, `Type a new value...`, db.get(key));
-
-                            modal1.show(player).then(res4 => {
-                                if (res4.canceled) return;
-
-                                if (res4.formValues[0]) {
-                                    db.set(key, res4.formValues[0]);
-                                }
-                            });
-                        }
-                    });
-                });
-            });
-        });
-    }
-});
+// system.afterEvents.scriptEventReceive.subscribe(e => {
+//     if (e.sourceType === "Entity") {
+//         eventMgr.emit("ScriptEventEntity", e);
+//     }
+//     if (e.id.startsWith("azalea_ui")) {
+//         const formID = e.id.split(":")[1];
+//         uiManager.open("Azalea0.9.0/FormPreview", e.sourceEntity, formID);
+//     }
+//     if (e.id === "azalea:exec" && e.sourceType === "Entity") {
+//         switch(e.message)
+//     }
+// });
 
 uiManager.addUI("AzaleaExtra/Shop", player => {
     // Code for the "AzaleaExtra/Shop" UI

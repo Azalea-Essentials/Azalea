@@ -21,6 +21,8 @@ import formsv3 from './adminpanel/formsv3';
 import sidebar from './adminpanel/sidebar';
 import guimaker from './adminpanel/guimaker';
 import suggestionBox from './adminpanel/suggestionBox';
+import modalforms from './adminpanel/modalforms';
+import giftcodes from './adminpanel/giftcodes';
 
 export class ConfiguratorBase {
     constructor() {
@@ -134,10 +136,11 @@ let base = new ConfiguratorBase()
 //         .addTextInput("DeathCommandMessage", "!death message §7- Sent to players when they die §cRequires !death enabled", "type")
 // )
     .addSub(QUESTS())
-    .addSub(guimaker())
+    // .addSub(guimaker())
     .addSub(chestguis())
     .addSub(logs())
     .addSub(FormsV2())
+    .addSub(modalforms())
     .addSub(POLLS())
     // .addSub(QUESTS())
     .addSub(
@@ -160,6 +163,7 @@ let base = new ConfiguratorBase()
             .addToggle("ImprovedNametagsEnabled", "§bImproved nametags")
             .addToggle("QuestsEnabled", "Quests §6§o(Unfinished V1.0 Feature)")
     )
+    .addSub(giftcodes())
     .addSub(PLAYER_REPORTS())
     .addSub(warpEditor())
     .addSub(LB())

@@ -15493,5 +15493,809 @@ export default [
   {
     "name": "furry",
     "path": "textures/blocks/furry_block"
+  },
+  {
+    "name": "2.2/!",
+    "path": "textures/amethyst_icons/Packs/2.2/!"
+  },
+  {
+    "name": "2.2/1",
+    "path": "textures/amethyst_icons/Packs/2.2/1"
+  },
+  {
+    "name": "2.2/2",
+    "path": "textures/amethyst_icons/Packs/2.2/2"
+  },
+  {
+    "name": "2.2/3",
+    "path": "textures/amethyst_icons/Packs/2.2/3"
+  },
+  {
+    "name": "2.2/accept",
+    "path": "textures/amethyst_icons/Packs/2.2/accept"
+  },
+  {
+    "name": "2.2/administrator",
+    "path": "textures/amethyst_icons/Packs/2.2/administrator"
+  },
+  {
+    "name": "2.2/agent",
+    "path": "textures/amethyst_icons/Packs/2.2/agent"
+  },
+  {
+    "name": "2.2/alex",
+    "path": "textures/amethyst_icons/Packs/2.2/alex"
+  },
+  {
+    "name": "2.2/alex_green",
+    "path": "textures/amethyst_icons/Packs/2.2/alex_green"
+  },
+  {
+    "name": "2.2/alex_red",
+    "path": "textures/amethyst_icons/Packs/2.2/alex_red"
+  },
+  {
+    "name": "2.2/alex_steve",
+    "path": "textures/amethyst_icons/Packs/2.2/alex_steve"
+  },
+  {
+    "name": "2.2/alex_steve_gray",
+    "path": "textures/amethyst_icons/Packs/2.2/alex_steve_gray"
+  },
+  {
+    "name": "2.2/amethyst",
+    "path": "textures/amethyst_icons/Packs/2.2/amethyst"
+  },
+  {
+    "name": "2.2/apple",
+    "path": "textures/amethyst_icons/Packs/2.2/apple"
+  },
+  {
+    "name": "2.2/arrow",
+    "path": "textures/amethyst_icons/Packs/2.2/arrow"
+  },
+  {
+    "name": "2.2/azalea2.2",
+    "path": "textures/amethyst_icons/Packs/2.2/azalea2.2"
+  },
+  {
+    "name": "2.2/banner_blue",
+    "path": "textures/amethyst_icons/Packs/2.2/banner_blue"
+  },
+  {
+    "name": "2.2/banner_red",
+    "path": "textures/amethyst_icons/Packs/2.2/banner_red"
+  },
+  {
+    "name": "2.2/banner_red_blue",
+    "path": "textures/amethyst_icons/Packs/2.2/banner_red_blue"
+  },
+  {
+    "name": "2.2/banner_rgb",
+    "path": "textures/amethyst_icons/Packs/2.2/banner_rgb"
+  },
+  {
+    "name": "2.2/banner_white",
+    "path": "textures/amethyst_icons/Packs/2.2/banner_white"
+  },
+  {
+    "name": "2.2/bed",
+    "path": "textures/amethyst_icons/Packs/2.2/bed"
+  },
+  {
+    "name": "2.2/bed_remove",
+    "path": "textures/amethyst_icons/Packs/2.2/bed_remove"
+  },
+  {
+    "name": "2.2/berries",
+    "path": "textures/amethyst_icons/Packs/2.2/berries"
+  },
+  {
+    "name": "2.2/blockparty",
+    "path": "textures/amethyst_icons/Packs/2.2/blockparty"
+  },
+  {
+    "name": "2.2/blue_accept",
+    "path": "textures/amethyst_icons/Packs/2.2/blue_accept"
+  },
+  {
+    "name": "2.2/blue_bed",
+    "path": "textures/amethyst_icons/Packs/2.2/blue_bed"
+  },
+  {
+    "name": "2.2/blue_bed_remove",
+    "path": "textures/amethyst_icons/Packs/2.2/blue_bed_remove"
+  },
+  {
+    "name": "2.2/blue_dot",
+    "path": "textures/amethyst_icons/Packs/2.2/blue_dot"
+  },
+  {
+    "name": "2.2/blue_dot2",
+    "path": "textures/amethyst_icons/Packs/2.2/blue_dot2"
+  },
+  {
+    "name": "2.2/blue_no",
+    "path": "textures/amethyst_icons/Packs/2.2/blue_no"
+  },
+  {
+    "name": "2.2/blue_square",
+    "path": "textures/amethyst_icons/Packs/2.2/blue_square"
+  },
+  {
+    "name": "2.2/blue_square2",
+    "path": "textures/amethyst_icons/Packs/2.2/blue_square2"
+  },
+  {
+    "name": "2.2/book",
+    "path": "textures/amethyst_icons/Packs/2.2/book"
+  },
+  {
+    "name": "2.2/boots_outline",
+    "path": "textures/amethyst_icons/Packs/2.2/boots_outline"
+  },
+  {
+    "name": "2.2/bow_shoot",
+    "path": "textures/amethyst_icons/Packs/2.2/bow_shoot"
+  },
+  {
+    "name": "2.2/bw",
+    "path": "textures/amethyst_icons/Packs/2.2/bw"
+  },
+  {
+    "name": "2.2/cake",
+    "path": "textures/amethyst_icons/Packs/2.2/cake"
+  },
+  {
+    "name": "2.2/chat",
+    "path": "textures/amethyst_icons/Packs/2.2/chat"
+  },
+  {
+    "name": "2.2/chat_bubble",
+    "path": "textures/amethyst_icons/Packs/2.2/chat_bubble"
+  },
+  {
+    "name": "2.2/chestplate",
+    "path": "textures/amethyst_icons/Packs/2.2/chestplate"
+  },
+  {
+    "name": "2.2/chestplate_outline",
+    "path": "textures/amethyst_icons/Packs/2.2/chestplate_outline"
+  },
+  {
+    "name": "2.2/chest_small",
+    "path": "textures/amethyst_icons/Packs/2.2/chest_small"
+  },
+  {
+    "name": "2.2/chicken",
+    "path": "textures/amethyst_icons/Packs/2.2/chicken"
+  },
+  {
+    "name": "2.2/chicken_spider",
+    "path": "textures/amethyst_icons/Packs/2.2/chicken_spider"
+  },
+  {
+    "name": "2.2/clock",
+    "path": "textures/amethyst_icons/Packs/2.2/clock"
+  },
+  {
+    "name": "2.2/coal",
+    "path": "textures/amethyst_icons/Packs/2.2/coal"
+  },
+  {
+    "name": "2.2/coin",
+    "path": "textures/amethyst_icons/Packs/2.2/coin"
+  },
+  {
+    "name": "2.2/coins",
+    "path": "textures/amethyst_icons/Packs/2.2/coins"
+  },
+  {
+    "name": "2.2/compass",
+    "path": "textures/amethyst_icons/Packs/2.2/compass"
+  },
+  {
+    "name": "2.2/confetti",
+    "path": "textures/amethyst_icons/Packs/2.2/confetti"
+  },
+  {
+    "name": "2.2/controller",
+    "path": "textures/amethyst_icons/Packs/2.2/controller"
+  },
+  {
+    "name": "2.2/cooked_chicken",
+    "path": "textures/amethyst_icons/Packs/2.2/cooked_chicken"
+  },
+  {
+    "name": "2.2/copper",
+    "path": "textures/amethyst_icons/Packs/2.2/copper"
+  },
+  {
+    "name": "2.2/deathrun",
+    "path": "textures/amethyst_icons/Packs/2.2/deathrun"
+  },
+  {
+    "name": "2.2/diamond",
+    "path": "textures/amethyst_icons/Packs/2.2/diamond"
+  },
+  {
+    "name": "2.2/diamond_dot",
+    "path": "textures/amethyst_icons/Packs/2.2/diamond_dot"
+  },
+  {
+    "name": "2.2/ding",
+    "path": "textures/amethyst_icons/Packs/2.2/ding"
+  },
+  {
+    "name": "2.2/document",
+    "path": "textures/amethyst_icons/Packs/2.2/document"
+  },
+  {
+    "name": "2.2/dropper",
+    "path": "textures/amethyst_icons/Packs/2.2/dropper"
+  },
+  {
+    "name": "2.2/earth",
+    "path": "textures/amethyst_icons/Packs/2.2/earth"
+  },
+  {
+    "name": "2.2/echo_shard",
+    "path": "textures/amethyst_icons/Packs/2.2/echo_shard"
+  },
+  {
+    "name": "2.2/emerald",
+    "path": "textures/amethyst_icons/Packs/2.2/emerald"
+  },
+  {
+    "name": "2.2/emerald2",
+    "path": "textures/amethyst_icons/Packs/2.2/emerald2"
+  },
+  {
+    "name": "2.2/emoij_cat",
+    "path": "textures/amethyst_icons/Packs/2.2/emoij_cat"
+  },
+  {
+    "name": "2.2/emoji_angry",
+    "path": "textures/amethyst_icons/Packs/2.2/emoji_angry"
+  },
+  {
+    "name": "2.2/emoji_clown",
+    "path": "textures/amethyst_icons/Packs/2.2/emoji_clown"
+  },
+  {
+    "name": "2.2/emoji_green_mystery_substance",
+    "path": "textures/amethyst_icons/Packs/2.2/emoji_green_mystery_substance"
+  },
+  {
+    "name": "2.2/emoji_laugh",
+    "path": "textures/amethyst_icons/Packs/2.2/emoji_laugh"
+  },
+  {
+    "name": "2.2/emoji_no_smile",
+    "path": "textures/amethyst_icons/Packs/2.2/emoji_no_smile"
+  },
+  {
+    "name": "2.2/emoji_random",
+    "path": "textures/amethyst_icons/Packs/2.2/emoji_random"
+  },
+  {
+    "name": "2.2/emoji_smile",
+    "path": "textures/amethyst_icons/Packs/2.2/emoji_smile"
+  },
+  {
+    "name": "2.2/emoji_thing2",
+    "path": "textures/amethyst_icons/Packs/2.2/emoji_thing2"
+  },
+  {
+    "name": "2.2/feather",
+    "path": "textures/amethyst_icons/Packs/2.2/feather"
+  },
+  {
+    "name": "2.2/flagwars",
+    "path": "textures/amethyst_icons/Packs/2.2/flagwars"
+  },
+  {
+    "name": "2.2/gay_bed",
+    "path": "textures/amethyst_icons/Packs/2.2/gay_bed"
+  },
+  {
+    "name": "2.2/golden_apple",
+    "path": "textures/amethyst_icons/Packs/2.2/golden_apple"
+  },
+  {
+    "name": "2.2/gold_accept",
+    "path": "textures/amethyst_icons/Packs/2.2/gold_accept"
+  },
+  {
+    "name": "2.2/gold_dot",
+    "path": "textures/amethyst_icons/Packs/2.2/gold_dot"
+  },
+  {
+    "name": "2.2/gold_inot",
+    "path": "textures/amethyst_icons/Packs/2.2/gold_inot"
+  },
+  {
+    "name": "2.2/gold_no",
+    "path": "textures/amethyst_icons/Packs/2.2/gold_no"
+  },
+  {
+    "name": "2.2/gold_square",
+    "path": "textures/amethyst_icons/Packs/2.2/gold_square"
+  },
+  {
+    "name": "2.2/gray_dot",
+    "path": "textures/amethyst_icons/Packs/2.2/gray_dot"
+  },
+  {
+    "name": "2.2/green_bed",
+    "path": "textures/amethyst_icons/Packs/2.2/green_bed"
+  },
+  {
+    "name": "2.2/green_bed_remove",
+    "path": "textures/amethyst_icons/Packs/2.2/green_bed_remove"
+  },
+  {
+    "name": "2.2/green_dot",
+    "path": "textures/amethyst_icons/Packs/2.2/green_dot"
+  },
+  {
+    "name": "2.2/green_dot2",
+    "path": "textures/amethyst_icons/Packs/2.2/green_dot2"
+  },
+  {
+    "name": "2.2/green_flag",
+    "path": "textures/amethyst_icons/Packs/2.2/green_flag"
+  },
+  {
+    "name": "2.2/green_no",
+    "path": "textures/amethyst_icons/Packs/2.2/green_no"
+  },
+  {
+    "name": "2.2/green_skull",
+    "path": "textures/amethyst_icons/Packs/2.2/green_skull"
+  },
+  {
+    "name": "2.2/green_square",
+    "path": "textures/amethyst_icons/Packs/2.2/green_square"
+  },
+  {
+    "name": "2.2/green_square2",
+    "path": "textures/amethyst_icons/Packs/2.2/green_square2"
+  },
+  {
+    "name": "2.2/green_thing",
+    "path": "textures/amethyst_icons/Packs/2.2/green_thing"
+  },
+  {
+    "name": "2.2/green_up",
+    "path": "textures/amethyst_icons/Packs/2.2/green_up"
+  },
+  {
+    "name": "2.2/guy",
+    "path": "textures/amethyst_icons/Packs/2.2/guy"
+  },
+  {
+    "name": "2.2/hand1",
+    "path": "textures/amethyst_icons/Packs/2.2/hand1"
+  },
+  {
+    "name": "2.2/hand2",
+    "path": "textures/amethyst_icons/Packs/2.2/hand2"
+  },
+  {
+    "name": "2.2/hand3",
+    "path": "textures/amethyst_icons/Packs/2.2/hand3"
+  },
+  {
+    "name": "2.2/head_outline",
+    "path": "textures/amethyst_icons/Packs/2.2/head_outline"
+  },
+  {
+    "name": "2.2/heart",
+    "path": "textures/amethyst_icons/Packs/2.2/heart"
+  },
+  {
+    "name": "2.2/heart_empty",
+    "path": "textures/amethyst_icons/Packs/2.2/heart_empty"
+  },
+  {
+    "name": "2.2/heart_empty_outline",
+    "path": "textures/amethyst_icons/Packs/2.2/heart_empty_outline"
+  },
+  {
+    "name": "2.2/heart_half",
+    "path": "textures/amethyst_icons/Packs/2.2/heart_half"
+  },
+  {
+    "name": "2.2/hg",
+    "path": "textures/amethyst_icons/Packs/2.2/hg"
+  },
+  {
+    "name": "2.2/hunger",
+    "path": "textures/amethyst_icons/Packs/2.2/hunger"
+  },
+  {
+    "name": "2.2/iron_ingot",
+    "path": "textures/amethyst_icons/Packs/2.2/iron_ingot"
+  },
+  {
+    "name": "2.2/iron_no",
+    "path": "textures/amethyst_icons/Packs/2.2/iron_no"
+  },
+  {
+    "name": "2.2/javascript",
+    "path": "textures/amethyst_icons/Packs/2.2/javascript"
+  },
+  {
+    "name": "2.2/jump_boost",
+    "path": "textures/amethyst_icons/Packs/2.2/jump_boost"
+  },
+  {
+    "name": "2.2/lapis",
+    "path": "textures/amethyst_icons/Packs/2.2/lapis"
+  },
+  {
+    "name": "2.2/lava_floor",
+    "path": "textures/amethyst_icons/Packs/2.2/lava_floor"
+  },
+  {
+    "name": "2.2/left",
+    "path": "textures/amethyst_icons/Packs/2.2/left"
+  },
+  {
+    "name": "2.2/leggings_outline",
+    "path": "textures/amethyst_icons/Packs/2.2/leggings_outline"
+  },
+  {
+    "name": "2.2/lock",
+    "path": "textures/amethyst_icons/Packs/2.2/lock"
+  },
+  {
+    "name": "2.2/magenta_accept",
+    "path": "textures/amethyst_icons/Packs/2.2/magenta_accept"
+  },
+  {
+    "name": "2.2/magenta_dot",
+    "path": "textures/amethyst_icons/Packs/2.2/magenta_dot"
+  },
+  {
+    "name": "2.2/magenta_no",
+    "path": "textures/amethyst_icons/Packs/2.2/magenta_no"
+  },
+  {
+    "name": "2.2/magenta_square",
+    "path": "textures/amethyst_icons/Packs/2.2/magenta_square"
+  },
+  {
+    "name": "2.2/magnifying_glass",
+    "path": "textures/amethyst_icons/Packs/2.2/magnifying_glass"
+  },
+  {
+    "name": "2.2/map",
+    "path": "textures/amethyst_icons/Packs/2.2/map"
+  },
+  {
+    "name": "2.2/minecoin",
+    "path": "textures/amethyst_icons/Packs/2.2/minecoin"
+  },
+  {
+    "name": "2.2/minefield",
+    "path": "textures/amethyst_icons/Packs/2.2/minefield"
+  },
+  {
+    "name": "2.2/multicolor_square",
+    "path": "textures/amethyst_icons/Packs/2.2/multicolor_square"
+  },
+  {
+    "name": "2.2/namemc",
+    "path": "textures/amethyst_icons/Packs/2.2/namemc"
+  },
+  {
+    "name": "2.2/night",
+    "path": "textures/amethyst_icons/Packs/2.2/night"
+  },
+  {
+    "name": "2.2/no_blue",
+    "path": "textures/amethyst_icons/Packs/2.2/no_blue"
+  },
+  {
+    "name": "2.2/no_red",
+    "path": "textures/amethyst_icons/Packs/2.2/no_red"
+  },
+  {
+    "name": "2.2/orange_dot",
+    "path": "textures/amethyst_icons/Packs/2.2/orange_dot"
+  },
+  {
+    "name": "2.2/orange_square",
+    "path": "textures/amethyst_icons/Packs/2.2/orange_square"
+  },
+  {
+    "name": "2.2/paper",
+    "path": "textures/amethyst_icons/Packs/2.2/paper"
+  },
+  {
+    "name": "2.2/piss_bed",
+    "path": "textures/amethyst_icons/Packs/2.2/piss_bed"
+  },
+  {
+    "name": "2.2/piss_bed_remove",
+    "path": "textures/amethyst_icons/Packs/2.2/piss_bed_remove"
+  },
+  {
+    "name": "2.2/piss_flag",
+    "path": "textures/amethyst_icons/Packs/2.2/piss_flag"
+  },
+  {
+    "name": "2.2/poison",
+    "path": "textures/amethyst_icons/Packs/2.2/poison"
+  },
+  {
+    "name": "2.2/portal",
+    "path": "textures/amethyst_icons/Packs/2.2/portal"
+  },
+  {
+    "name": "2.2/portal2",
+    "path": "textures/amethyst_icons/Packs/2.2/portal2"
+  },
+  {
+    "name": "2.2/prk",
+    "path": "textures/amethyst_icons/Packs/2.2/prk"
+  },
+  {
+    "name": "2.2/purple_dot",
+    "path": "textures/amethyst_icons/Packs/2.2/purple_dot"
+  },
+  {
+    "name": "2.2/pvp",
+    "path": "textures/amethyst_icons/Packs/2.2/pvp"
+  },
+  {
+    "name": "2.2/question",
+    "path": "textures/amethyst_icons/Packs/2.2/question"
+  },
+  {
+    "name": "2.2/question_square",
+    "path": "textures/amethyst_icons/Packs/2.2/question_square"
+  },
+  {
+    "name": "2.2/random",
+    "path": "textures/amethyst_icons/Packs/2.2/random"
+  },
+  {
+    "name": "2.2/random2",
+    "path": "textures/amethyst_icons/Packs/2.2/random2"
+  },
+  {
+    "name": "2.2/random3",
+    "path": "textures/amethyst_icons/Packs/2.2/random3"
+  },
+  {
+    "name": "2.2/random4",
+    "path": "textures/amethyst_icons/Packs/2.2/random4"
+  },
+  {
+    "name": "2.2/reader",
+    "path": "textures/amethyst_icons/Packs/2.2/reader"
+  },
+  {
+    "name": "2.2/red_accept",
+    "path": "textures/amethyst_icons/Packs/2.2/red_accept"
+  },
+  {
+    "name": "2.2/red_dot",
+    "path": "textures/amethyst_icons/Packs/2.2/red_dot"
+  },
+  {
+    "name": "2.2/red_skull",
+    "path": "textures/amethyst_icons/Packs/2.2/red_skull"
+  },
+  {
+    "name": "2.2/red_square",
+    "path": "textures/amethyst_icons/Packs/2.2/red_square"
+  },
+  {
+    "name": "2.2/reload",
+    "path": "textures/amethyst_icons/Packs/2.2/reload"
+  },
+  {
+    "name": "2.2/right",
+    "path": "textures/amethyst_icons/Packs/2.2/right"
+  },
+  {
+    "name": "2.2/sand_block",
+    "path": "textures/amethyst_icons/Packs/2.2/sand_block"
+  },
+  {
+    "name": "2.2/settings",
+    "path": "textures/amethyst_icons/Packs/2.2/settings"
+  },
+  {
+    "name": "2.2/shears",
+    "path": "textures/amethyst_icons/Packs/2.2/shears"
+  },
+  {
+    "name": "2.2/shovels",
+    "path": "textures/amethyst_icons/Packs/2.2/shovels"
+  },
+  {
+    "name": "2.2/shovel_iron",
+    "path": "textures/amethyst_icons/Packs/2.2/shovel_iron"
+  },
+  {
+    "name": "2.2/shulker",
+    "path": "textures/amethyst_icons/Packs/2.2/shulker"
+  },
+  {
+    "name": "2.2/skull",
+    "path": "textures/amethyst_icons/Packs/2.2/skull"
+  },
+  {
+    "name": "2.2/small_axe_diamond",
+    "path": "textures/amethyst_icons/Packs/2.2/small_axe_diamond"
+  },
+  {
+    "name": "2.2/small_axe_gold",
+    "path": "textures/amethyst_icons/Packs/2.2/small_axe_gold"
+  },
+  {
+    "name": "2.2/small_axe_iron",
+    "path": "textures/amethyst_icons/Packs/2.2/small_axe_iron"
+  },
+  {
+    "name": "2.2/small_axe_netherite",
+    "path": "textures/amethyst_icons/Packs/2.2/small_axe_netherite"
+  },
+  {
+    "name": "2.2/small_axe_stone",
+    "path": "textures/amethyst_icons/Packs/2.2/small_axe_stone"
+  },
+  {
+    "name": "2.2/small_axe_wood",
+    "path": "textures/amethyst_icons/Packs/2.2/small_axe_wood"
+  },
+  {
+    "name": "2.2/small_diamond",
+    "path": "textures/amethyst_icons/Packs/2.2/small_diamond"
+  },
+  {
+    "name": "2.2/small_iron_sword",
+    "path": "textures/amethyst_icons/Packs/2.2/small_iron_sword"
+  },
+  {
+    "name": "2.2/small_pickaxe_diamond",
+    "path": "textures/amethyst_icons/Packs/2.2/small_pickaxe_diamond"
+  },
+  {
+    "name": "2.2/small_pickaxe_gold",
+    "path": "textures/amethyst_icons/Packs/2.2/small_pickaxe_gold"
+  },
+  {
+    "name": "2.2/small_pickaxe_iron",
+    "path": "textures/amethyst_icons/Packs/2.2/small_pickaxe_iron"
+  },
+  {
+    "name": "2.2/small_pickaxe_netherite",
+    "path": "textures/amethyst_icons/Packs/2.2/small_pickaxe_netherite"
+  },
+  {
+    "name": "2.2/small_pickaxe_stone",
+    "path": "textures/amethyst_icons/Packs/2.2/small_pickaxe_stone"
+  },
+  {
+    "name": "2.2/small_pickaxe_wood",
+    "path": "textures/amethyst_icons/Packs/2.2/small_pickaxe_wood"
+  },
+  {
+    "name": "2.2/small_sword_diamond",
+    "path": "textures/amethyst_icons/Packs/2.2/small_sword_diamond"
+  },
+  {
+    "name": "2.2/small_sword_gold",
+    "path": "textures/amethyst_icons/Packs/2.2/small_sword_gold"
+  },
+  {
+    "name": "2.2/small_sword_netherite",
+    "path": "textures/amethyst_icons/Packs/2.2/small_sword_netherite"
+  },
+  {
+    "name": "2.2/small_sword_stone",
+    "path": "textures/amethyst_icons/Packs/2.2/small_sword_stone"
+  },
+  {
+    "name": "2.2/small_sword_wood",
+    "path": "textures/amethyst_icons/Packs/2.2/small_sword_wood"
+  },
+  {
+    "name": "2.2/snowball",
+    "path": "textures/amethyst_icons/Packs/2.2/snowball"
+  },
+  {
+    "name": "2.2/speed",
+    "path": "textures/amethyst_icons/Packs/2.2/speed"
+  },
+  {
+    "name": "2.2/spleef",
+    "path": "textures/amethyst_icons/Packs/2.2/spleef"
+  },
+  {
+    "name": "2.2/steak",
+    "path": "textures/amethyst_icons/Packs/2.2/steak"
+  },
+  {
+    "name": "2.2/steve",
+    "path": "textures/amethyst_icons/Packs/2.2/steve"
+  },
+  {
+    "name": "2.2/sword_axe",
+    "path": "textures/amethyst_icons/Packs/2.2/sword_axe"
+  },
+  {
+    "name": "2.2/terminal",
+    "path": "textures/amethyst_icons/Packs/2.2/terminal"
+  },
+  {
+    "name": "2.2/thing",
+    "path": "textures/amethyst_icons/Packs/2.2/thing"
+  },
+  {
+    "name": "2.2/thumbsdown",
+    "path": "textures/amethyst_icons/Packs/2.2/thumbsdown"
+  },
+  {
+    "name": "2.2/thumbsup",
+    "path": "textures/amethyst_icons/Packs/2.2/thumbsup"
+  },
+  {
+    "name": "2.2/timer",
+    "path": "textures/amethyst_icons/Packs/2.2/timer"
+  },
+  {
+    "name": "2.2/tntrun",
+    "path": "textures/amethyst_icons/Packs/2.2/tntrun"
+  },
+  {
+    "name": "2.2/token",
+    "path": "textures/amethyst_icons/Packs/2.2/token"
+  },
+  {
+    "name": "2.2/totem",
+    "path": "textures/amethyst_icons/Packs/2.2/totem"
+  },
+  {
+    "name": "2.2/unlock",
+    "path": "textures/amethyst_icons/Packs/2.2/unlock"
+  },
+  {
+    "name": "2.2/visibility",
+    "path": "textures/amethyst_icons/Packs/2.2/visibility"
+  },
+  {
+    "name": "2.2/watermelon",
+    "path": "textures/amethyst_icons/Packs/2.2/watermelon"
+  },
+  {
+    "name": "2.2/water_bucket",
+    "path": "textures/amethyst_icons/Packs/2.2/water_bucket"
+  },
+  {
+    "name": "2.2/white_and_black_square",
+    "path": "textures/amethyst_icons/Packs/2.2/white_and_black_square"
+  },
+  {
+    "name": "2.2/white_dot",
+    "path": "textures/amethyst_icons/Packs/2.2/white_dot"
+  },
+  {
+    "name": "2.2/white_square",
+    "path": "textures/amethyst_icons/Packs/2.2/white_square"
+  },
+  {
+    "name": "2.2/x",
+    "path": "textures/amethyst_icons/Packs/2.2/x"
+  },
+  {
+    "name": "2.2/xyz",
+    "path": "textures/amethyst_icons/Packs/2.2/xyz"
   }
 ]

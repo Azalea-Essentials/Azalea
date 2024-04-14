@@ -1,0 +1,88 @@
+{
+    "Name": "Form",
+    "Props": [
+      {
+        "type": "Modal",
+        "title": "{{TITLE}}",
+        "children": [
+          {
+            "Name": "Input",
+            "Props": {
+              "isRequired": true,
+              "isIconID": true,
+              "label": "Icon ID",
+              "placeholder": "Azalea Icon ID",
+              "defaultValue": "{{DEFAULT_ICON}}"
+            },
+            "Key": "Icon"
+          },
+          {
+            "Name": "Input",
+            "Props": {
+              "isRequired": true,
+              "label": "Command",
+              "placeholder": "Command to run",
+              "defaultValue": "{{DEFAULT_COMMAND}}"
+            },
+            "Key": "Command"
+          },
+          {
+            "Name": "Input",
+            "Props": {
+              "isRequired": true,
+              "label": "Item Name",
+              "placeholder": "Item Name",
+              "defaultValue": "{{DEFAULT_ITEM_NAME}}"
+            },
+            "Key": "ItemName"
+          },
+          {
+            "Name": "Slider",
+            "Props": {
+              "defaultValue": "{{DEFAULT_ROW}}",
+              "max": "{{MAX_ROW}}",
+              "min": "{{MIN_ROW}}",
+              "label": "Row (&aY&r&f)"
+            },
+            "Key": "Row"
+          },
+          {
+            "Name": "Slider",
+            "Props": {
+              "defaultValue": "{{DEFAULT_COLUMN}}",
+              "max": "{{MAX_COLUMN}}",
+              "min": "{{MIN_COLUMN}}",
+              "label": "Column (&cX&r&f)"
+            },
+            "Key": "Column"
+          },
+          {
+            "Name": "Slider",
+            "Props": {
+              "defaultValue": "{{DEFAULT_ITEM_AMOUNT}}",
+              "max": "100",
+              "min": "1",
+              "label": "Item Amount"
+            },
+            "Key": "ItemLore"
+          },
+          {
+            "Name": "Input",
+            "Props": {
+              "isRequired": false,
+              "label": "Item Name",
+              "placeholder": "Item Lore",
+              "defaultValue": "{{DEFAULT_ITEM_LORE}}"
+            },
+            "Key": "ItemLore"
+          },
+          {
+            "Name": "SoundDropdown",
+            "Props": {},
+            "Key": "Sound"
+          }
+        ]
+      },
+      "Azalea2.0/ChestGUIs/AddItem"
+    ]
+  }

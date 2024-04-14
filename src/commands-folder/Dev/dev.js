@@ -4,6 +4,7 @@ import { uiManager } from '../../uis';
 import { DynamicPropertyDatabase } from '../../dynamicPropertyDb';
 import { logManager } from '../../logManager';
 import { ItemDatabase } from '../../itemDB';
+import { formatStr } from '../../utils/AzaleaFormatting';
 // A function that takes a JSON string and returns a highlighted string with Minecraft color codes
 function highlightJSON(json) {
   // Define the color codes for different types of tokens
@@ -93,20 +94,21 @@ export default function addVersionCommand(commands) {
             //   y: 145,
             //   z: 86
             // });
-            // let inventory = block.getComponent('inventory');
-            let inventory2 = msg.sender.getComponent('inventory');
-            // inventory.container.addItem()
-            if(args.length && args[0] == "test2") {
-              let item = itemDB.getItemFromID("1705977668453:616276");
-              inventory2.container.addItem(item);
-              world.sendMessage(`${item && typeof item != "number" && item.typeId ? item.typeId : "None"}`)
-              return;
-            } else if(args.length && args[0] == "test3") {
-              itemDB.removeItem("1705977668453:616276");
-            }
-            let itemID = itemDB.addItem(inventory2.container.getItem(msg.sender.selectedSlot));
-            let itemData = itemDB.db.get(itemID);
-            response(`INFO ID: ${itemID}, Entity: ${itemData.entityID}, Slot: ${itemData.slot}`);
+            // // let inventory = block.getComponent('inventory');
+            // let inventory2 = msg.sender.getComponent('inventory');
+            // // inventory.container.addItem()
+            // if(args.length && args[0] == "test2") {
+            //   let item = itemDB.getItemFromID("1705977668453:616276");
+            //   inventory2.container.addItem(item);
+            //   world.sendMessage(`${item && typeof item != "number" && item.typeId ? item.typeId : "None"}`)
+            //   return;
+            // } else if(args.length && args[0] == "test3") {
+            //   itemDB.removeItem("1705977668453:616276");
+            // }
+            // let itemID = itemDB.addItem(inventory2.container.getItem(msg.sender.selectedSlot));
+            // let itemData = itemDB.db.get(itemID);
+            // response(`INFO ID: ${itemID}, Entity: ${itemData.entityID}, Slot: ${itemData.slot}`);
+            response(`TEXT ${formatStr(args.join(' '), msg.sender)}`);
         }
     })
     commands.addCommand("extensions", {

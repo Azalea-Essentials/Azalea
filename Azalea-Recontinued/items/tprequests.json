@@ -1,0 +1,20 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "azalea:tp_requests"
+		},
+		"components": {
+			"minecraft:can_destroy_in_creative": false,
+			"minecraft:allow_off_hand": false,
+			"minecraft:display_name": {
+				"value": "§cTeleport Requests"
+			},
+			"minecraft:max_stack_size": 1,
+            "minecraft:foil": true,
+			"minecraft:icon": {
+				"texture": "ender_pearl"
+			}
+		}
+	}
+}

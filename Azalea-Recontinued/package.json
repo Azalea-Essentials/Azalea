@@ -1,0 +1,25 @@
+{
+  "devDependencies": {
+    "@babel/plugin-syntax-jsx": "^7.23.3",
+    "@babel/plugin-transform-react-jsx": "^7.23.4",
+    "@minecraft/server": "^1.9.0-beta.1.20.60-stable",
+    "@minecraft/server-ui": "^1.2.0-beta",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.4",
+    "gulp": "^4.0.2",
+    "gulp-zip": "^5.1.0"
+  },
+  "scripts": {
+    "development": "gulp dev",
+    "mcaddon": "gulp build",
+    "mcaddon-dev": "gulp build-dev"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "babel-plugin-wildcard": "^7.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-replace": "^1.1.4",
+    "jszip": "^3.10.1",
+    "uuid": "^9.0.0",
+    "ws": "^8.13.0"
+  }
+}
