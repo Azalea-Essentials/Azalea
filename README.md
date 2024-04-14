@@ -19,7 +19,6 @@ Azalea is a free and Open-Source minecraft bedrock essentials addon. It has many
 <a href="https://discord.gg/azalea-essentials-922867041029984316">
     <img alt="Discord" src="https://img.shields.io/discord/922867041029984316?style=for-the-badge">
 </a>
-[placeholder]
 
 ## License
 
