@@ -17,14 +17,18 @@
     "adm-zip": "^0.5.12",
     "axios": "^1.6.8",
     "babel-plugin-wildcard": "^7.0.0",
+    "bedrock-protocol": "^3.35.0",
     "discord-webhook-node": "^1.1.8",
+    "express": "^4.19.2",
     "gulp-babel": "^8.0.0",
     "gulp-replace": "^1.1.4",
     "jszip": "^3.10.1",
     "mediafire": "^0.1.2",
     "minecraft-bedrock-server": "^1.4.1",
+    "socket.io": "^4.7.5",
     "terser": "^5.30.3",
     "uuid": "^9.0.0",
-    "ws": "^8.13.0"
+    "ws": "^8.13.0",
+    "yaml": "^2.4.1"
   }
 }

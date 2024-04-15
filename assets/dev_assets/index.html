@@ -1,0 +1,91 @@
+<html>
+    <head>
+        <title>Azalea Dev Server</title>
+    </head>
+    <body>
+        <div class="input-area">
+            <input placeholder="Command">
+            <button>Send command</button>
+        </div>
+        <br>
+        <textarea disabled="disabled"></textarea>
+        <br>
+        <br>
+        <div align="center" class="text">
+            🌱🌺 Azalea, made by TheLegendaryTrashCan 🌺🌱
+        </div>
+        <style>
+            body {
+                background: #222;
+            }
+            .input-area {
+                padding: 1em;
+                background: #333;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+            }
+            .text {
+                color: #777;
+                font-family: Arial, Helvetica, sans-serif;
+                font-style: oblique;
+            }
+button {
+    background: #AB87FF;
+    border-radius: 10px;
+    border: 0;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    color: white;
+    transition: all 250ms ease;
+}
+button:hover {
+    background: #9B70FF;
+}
+button:active {
+    background: #8D5CFF;
+}
+input {
+    color: white;
+    padding: 0.5em 1em;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background: #222;
+    border: 1px solid #777;
+    outline: 0;
+    transition: all 250ms ease;
+}
+textarea {
+    width: 100%;
+    resize: none;
+    height: 80vh;
+    border-radius: 10px;
+    background: #333;
+    border: 1px solid #444;
+    color: #aaa;
+}
+input:focus {
+    border: 1px solid #AB87FF;
+}
+        </style>
+        <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+        <script>
+            const socket = io();
+            document.querySelector('textarea').value = ``
+            socket.on('logger', data=>{
+                if(`${data}\n`.includes("No targets matched selector") || `${data}\n`.includes("too many tags") || `${data}\n`.includes("Could not op")) return;
+                document.querySelector('textarea').value += `${data}\n`
+                document.querySelector('textarea').scrollTop += document.querySelector('textarea').scrollHeight;
+            })
+            document.querySelector('button').addEventListener('click', e=>{
+                let search = new URLSearchParams();
+                search.set('command', document.querySelector('input').value);
+                fetch(`/run-command?${search.toString()}`).then(res=>{
+                    
+                })
+            })
+        </script>
+    </body>
+</html>

@@ -9,13 +9,54 @@ const MediaFire = require('mediafire');
 const webhooks = require('discord-webhook-node');
 const axios = require('axios').default;
 const supabase = require('@supabase/supabase-js');
+const express = require('express');
 gulp.task("dev", function (cb) {
   const bedrockServer = require('./minecraft-bedrock-server/src/index')
-  // const bedrockServer = require('minecraft-bedrock-server')
 
   const fs = require('fs');
   let server2;
   const onStart = () => {
+    let buildConfig = YAML.parse(fs.readFileSync('azalea-build-config.yaml').toString());
+    let app = express();
+    const httpserver = require('http').createServer(app);
+    const bedrock = require('bedrock-protocol');
+    const bpClient = bedrock.createClient({
+        host: '127.0.0.1',   // optional
+        port: buildConfig.dev_server.port,         // optional, default 19132
+        skipPing: true,
+        username: 'azaleadevbot',   // the username you want to join as, optional if online mode
+        offline: true       // optional, default false. if true, do not login with Xbox Live. You will not be asked to sign-in if set to true.
+    })
+    const io = require('socket.io')(httpserver);
+    io.on('connection', socket=>{
+      server2.stdout.on('data', (data)=>{
+        socket.emit('logger', `${data}`);
+      })
+      server2.stderr.on('data', (data)=>{
+        socket.emit('logger', `${data}`);
+      })
+      bpClient.on('text', packet=>{
+        socket.emit('text_packet', packet)
+      })
+    })
+    app.get('/',(req,res)=>{
+      res.sendFile(__dirname+'/assets/dev_assets/index.html')
+    })
+    app.get('/api/stop', (req,res)=>{
+      server2.stdin.setEncoding('utf-8');
+      server2.stdin.write("stop\n")
+      httpserver.close();
+      res.send('Server Stopped!');
+    })
+    app.get('/run-command', (req,res)=>{
+      if(!req.query.command) return;
+      server2.stdin.setEncoding('utf-8');
+      server2.stdin.write(`${req.query.command}\n`)
+      res.send('Server Stopped!');
+    })
+    httpserver.listen(buildConfig.dev_server.http, ()=>{
+      console.log("DEV SERVER STARTED ON PORT " + buildConfig.dev_server.http.toString())
+    });
     gulp.watch("src/**/*.js", (cb) => {
       
       // server2.stdin.emit("data", "say hi\r\n")
@@ -58,7 +99,7 @@ gulp.task("dev", function (cb) {
   let buildConfig = YAML.parse(fs.readFileSync('azalea-build-config.yaml').toString());
   let resourceManifest = require(`${buildConfig.resourcePath}/manifest.json`);
   let otherZip = new admzip();
-  if (!fs.existsSync('bds/worlds/world')) {
+  if (!fs.existsSync('bds/worlds/world/level.dat')) {
     zip.addFile("world_behavior_packs.json", Buffer.from(JSON.stringify([{
       "pack_id": behaviorManifest.header.uuid,
       "version": behaviorManifest.header.version
@@ -439,9 +480,9 @@ gulp.task("dev", function (cb) {
   zip2.extractAllTo(`bds/development_resource_packs/azalea`, true)
   fs.writeFileSync(`bds/server.properties`, fs.readFileSync('server.properties'));
   let server3 = bedrockServer.startServer('1.20.72', onStart, {
-    'server-port': 19155,
-    'server-portv6': 19156,
-    'online-mode': true,
+    'server-port': buildConfig.dev_server.port,
+    'server-portv6': buildConfig.dev_server.portv6,
+    'online-mode': false,
     path: './bds',
     'level-name': 'world',
     'default-player-permission-level': 'operator',
@@ -449,12 +490,14 @@ gulp.task("dev", function (cb) {
     'gamemode': 'creative',
     'difficulty': 'peaceful',
     'server-name': '§bAzalea §bDev',
+
   }).then(proc => {
     setInterval(()=>{
       server2.stdin.setEncoding('utf-8');
       server2.stdin.write("op @a\n")
       server2.stdin.setEncoding('utf-8');
       server2.stdin.write("tag @a add admin\n")
+      server2.stdin.write("tag @a[name=azaleadevbot] add azalea-bot\n")
 
     },1000);
     server2 = proc;
