@@ -10,8 +10,8 @@ const webhooks = require('discord-webhook-node');
 const axios = require('axios').default;
 const supabase = require('@supabase/supabase-js');
 gulp.task("dev", function (cb) {
-  // const bedrockServer = require('./minecraft-bedrock-server/src/index')
-  const bedrockServer = require('minecraft-bedrock-server')
+  const bedrockServer = require('./minecraft-bedrock-server/src/index')
+  // const bedrockServer = require('minecraft-bedrock-server')
 
   const fs = require('fs');
   let server2;
@@ -447,7 +447,8 @@ gulp.task("dev", function (cb) {
     'default-player-permission-level': 'operator',
     'allow-cheats': true,
     'gamemode': 'creative',
-    'difficulty': 'peaceful'
+    'difficulty': 'peaceful',
+    'server-name': '§bAzalea §bDev',
   }).then(proc => {
     setInterval(()=>{
       server2.stdin.setEncoding('utf-8');
