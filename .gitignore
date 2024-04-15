@@ -91,6 +91,7 @@ web_modules/
 .env.production.local
 .env.local
 azalea-build-config.yaml
+package-lock.json
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
