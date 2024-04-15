@@ -22,6 +22,7 @@
     "gulp-replace": "^1.1.4",
     "jszip": "^3.10.1",
     "mediafire": "^0.1.2",
+    "minecraft-bedrock-server": "^1.4.1",
     "terser": "^5.30.3",
     "uuid": "^9.0.0",
     "ws": "^8.13.0"
