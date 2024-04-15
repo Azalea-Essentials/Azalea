@@ -1,0 +1,40 @@
+{
+  "name": "minecraft-bedrock-server",
+  "version": "1.4.1",
+  "description": "minecraft bedrock server wrapper",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "npm run lint && mocha --bail",
+    "lint": "standard",
+    "fix": "standard --fix",
+    "cli": "node cli.js"
+  },
+  "bin": {
+    "minecraft-bedrock-server": "./src/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/extremeheat/minecraft-bedrock-server.git"
+  },
+  "keywords": [
+    "minecraft",
+    "bedrock",
+    "server"
+  ],
+  "author": "extremeheat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/extremeheat/minecraft-bedrock-server/issues"
+  },
+  "homepage": "https://github.com/extremeheat/minecraft-bedrock-server#readme",
+  "dependencies": {
+    "basic-args": "^1.4.0",
+    "debug": "^4.3.3",
+    "prismarine-nbt": "^2.5.0"
+  },
+  "devDependencies": {
+    "minecraft-bedrock-server": "file:.",
+    "mocha": "^10.4.0",
+    "standard": "^17.1.0"
+  }
+}
