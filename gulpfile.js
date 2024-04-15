@@ -10,7 +10,8 @@ const webhooks = require('discord-webhook-node');
 const axios = require('axios').default;
 const supabase = require('@supabase/supabase-js');
 gulp.task("dev", function (cb) {
-  const bedrockServer = require('./minecraft-bedrock-server/src/index')
+  // const bedrockServer = require('./minecraft-bedrock-server/src/index')
+  const bedrockServer = require('minecraft-bedrock-server')
 
   const fs = require('fs');
   let server2;
@@ -438,7 +439,8 @@ gulp.task("dev", function (cb) {
   zip2.extractAllTo(`bds/development_resource_packs/azalea`, true)
   fs.writeFileSync(`bds/server.properties`, fs.readFileSync('server.properties'));
   let server3 = bedrockServer.startServer('1.20.72', onStart, {
-    'server-port': 19132,
+    'server-port': 19155,
+    'server-portv6': 19156,
     'online-mode': true,
     path: './bds',
     'level-name': 'world',
