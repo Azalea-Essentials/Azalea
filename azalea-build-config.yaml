@@ -1,0 +1,32 @@
+version: 2.2 Github Build
+dev_server:
+  port: 19155
+  portv6: 19156
+  http: 19157
+folders:
+  - scripts
+  - items
+  - entities
+files:
+  - pack_icon.png
+  - README.md
+  - LICENSE
+resourcePath: /RP
+resourceFolders:
+  - textures
+  - ui
+  - texts
+  - models
+  - attachables
+  - animation_controllers
+  - entity
+  - particles
+  - render_controllers
+  - font
+  - animations
+resourceFiles:
+  - blocks.json
+  - pack_icon.png
+webhook: https://discord.com/api/webhooks/1230342147371307200/LR1wyqJnWQ2vkHCpdNvxPRYpvefed5AXkIP0VPg4HQcREm_pC2S5DiSwJOrhyoeOLWnf
+stats:
+  ver: 306
