@@ -10,6 +10,10 @@
     <img src="https://img.shields.io/github/downloads/Ant767/Azalea/total?style=for-the-badge" alt="shield.png">
 </a>
 
+<a href="https://ko-fi.com/azaleaessentials">
+  <img src="https://storage.ko-fi.com/cdn/brandasset/kofi_button_dark.png">
+</a>
+
 ## About
 
 Azalea is a free and Open-Source minecraft bedrock essentials addon. It has many features, including Chest GUI editor and more.
