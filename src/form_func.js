@@ -191,6 +191,9 @@ export class ModalForm {
 	 * @param {String} titleText 
 	 * @returns {ModalForm}
 	 */
+	submitButton(text) {
+		this.form.submitButton(text);
+	}
 	title(titleText) {
 		if (typeof titleText !== 'string') throw new Error(`titleText: ${titleText}, at params[0] is not a String!`);
 		this.titleText = titleText;

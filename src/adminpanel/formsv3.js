@@ -1,6 +1,6 @@
 import { ConfiguratorSub } from "../configuratorOptions";
 
 export default function() {
-    return new ConfiguratorSub("§g§l§o§w§r§dGUI Maker", null)
+    return new ConfiguratorSub("GUI Maker", null)
         .addToggle("No", "No")
 }

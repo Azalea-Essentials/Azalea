@@ -8,6 +8,9 @@ import { isAdmin } from './isAdmin';
 import { Theme } from './themes';
 import translation from './translation';
 import { DynamicPropertyDatabase } from './dynamicPropertyDb';
+import { azalea } from './main';
+// let l=0;
+// import { combatLog } from './modules/combatLog';
 
 // export class Commands {
 //     // Creates a new instance of the service. This is the constructor that should be called by the service
@@ -321,6 +324,15 @@ export class Commands extends CommandExtensionManager {
             } catch {themeScore = 0};
             if(!themeScore) themeScore = 0;
             let theme = this.themeMgr.getTheme(themeScore);
+            let combatLog = azalea.extensions.find(_=>_.namespace == "CombatLog")
+            if(combatLog && combatLog.ext.combatLog.has(msg.sender.id)) return this.callExtensionEvent(
+                "internal",
+                "process_response",
+                msg.sender,
+                "ERROR You cant run commands while in combat",
+                theme
+            );
+
             if(cmd && cmd.isDev && !msg.sender.hasTag('devmode')) {
                 this.callExtensionEvent(
                     "internal",

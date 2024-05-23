@@ -11279,4 +11279,7 @@ let filteredList = iconsList.filter(_=>{
         path: _.path
     }
 })
-icons.push(...filteredList);
+filteredList.push(...iconsList);
+for(const icon of filteredList) {
+  icons.set(icon.name, icon);
+}

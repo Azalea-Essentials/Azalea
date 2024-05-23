@@ -1,11 +1,13 @@
 // Import azalea dependencies 🪴
 import './configurator';
+import './sellshop';
 import './verification';
 import './commandBuilder';
 import './legacyPlayerShopNoChestUI';
 import './leaderboardHandler';
 import './profiles';
 import './inventorySaving';
+import './modules/combatLog';
 import './admin/entityEditor';
 import * as mc from '@minecraft/server';
 // mc.Player.prototype.sendMessage = function(msg) {
@@ -32,7 +34,8 @@ import * as Commands11 from './commands-folder/Social';
 import * as Commands12 from './commands-folder/Utilities';
 import * as Commands13 from './commands-folder/Warps';
 import * as EventsList from './events';
-import { Database } from './db';
+import * as UIs from './uis_new';
+import { Database, ScoreboardDatabase } from './db';
 import { ActionForm, MessageForm, ModalForm } from './form_func';
 import { NicknamesModule } from './nicknames';
 import { uiManager } from './uis';
@@ -64,7 +67,189 @@ import './commandmanager_extensions/aliasManager'
 import { ChestFormData } from './chestUI';
 import icons from './icons';
 import { playerStorage } from './apis/PlayerStorage';
-// world.sendMessage("Azalea loaded!TESTTEWTWETEW")
+import { isDevServer } from './isDevServer';
+// import reach from './anticheat/reach';
+// import autoclicker from './anticheat/autoclicker';
+import { permList } from './isAdmin';
+import { torchEvents } from './TorchflowerConnect/Event';
+import { prismarineDb } from './lib/@trash/PrismarineDB/prismarine-db';
+import { formatStr } from './utils/AzaleaFormatting';
+// import lokijs from './lib/@trash/LokiJS-BE/lokijs';
+// system.runInterval(()=>{
+//     torchEvents.emit('hi', {
+//         my: 'balls',
+//         hurt: 'please',
+//         help: 'me',
+//         by: 'suckingg',
+//         them: 'daddy'
+//     })
+// },20);/give @s 
+function vec3tostring(vector3) {
+    return `${vector3.x};${vector3.y};${vector3.z}`;
+}
+function stringtovec3(string) {
+    return {
+        x: parseFloat(string.split(';')[0]),
+        y: parseFloat(string.split(';')[1]),
+        z: parseFloat(string.split(';')[2]),
+    }
+}
+
+let dynamicSign = prismarineDb.table("DynamicSign");
+world.beforeEvents.itemUseOn.subscribe(e=>{
+    if(e.itemStack.typeId == 'azalea:sign_editor') {
+        if(!isAdmin(e.source, "signeditor")) return;
+        if(e.block.getComponent('sign')) {
+            e.cancel = true;
+            system.run(()=>{
+                let signComponent = e.block.getComponent('sign');
+                // if(!(signComponent instanceof mc))
+                let modalForm = new ModalForm();
+                modalForm.title("Code Editor");
+                let sign = dynamicSign.findFirst({loc:vec3tostring(e.block.location)})
+                modalForm.textField("Sign Text", "Dynamic Sign Text", sign && sign.data ? sign.data.format : signComponent.getText());
+                modalForm.submitButton("Edit Sign Text")
+                modalForm.show(e.source, false, (player, response)=>{
+                    if(response.canceled) return;
+                    if(sign && sign.data) {
+                        sign.data.format = response.formValues[0];
+                        dynamicSign.overwriteDataByID(sign.id, sign.data);
+                    } else {
+                        dynamicSign.insertDocument({
+                            loc: vec3tostring(e.block.location),
+                            format: response.formValues[0]
+                        })
+                    }
+                })
+            })
+        }
+    }
+})
+world.afterEvents.playerBreakBlock.subscribe(e=>{
+    let doc = dynamicSign.findFirst({loc:vec3tostring(e.block.location)});
+    if(doc) {
+        try {
+            dynamicSign.deleteDocumentByID(doc.id);
+        } catch {}
+    }
+})
+world.afterEvents.explosion.subscribe(e=>{
+    let blocks = e.getImpactedBlocks();
+    for(const block of blocks) {
+        let doc = dynamicSign.findFirst({loc:vec3tostring(block.location)});
+        if(doc) {
+            try {
+                dynamicSign.deleteDocumentByID(doc.id);
+            } catch {}
+        }
+            
+    }
+})
+system.runInterval(()=>{
+    for(const sign of dynamicSign.data) {
+        try {
+            let block = world.getDimension('overworld').getBlock(stringtovec3(sign.data.loc));
+            if(!sign.data.format) return;
+            if(block.getComponent('sign')) {
+                let sign2 = block.getComponent('sign');
+                sign2.setText(formatStr(sign.data.format ? sign.data.format : ""))
+            }
+        } catch {}
+    }
+},30)
+torchEvents.on('test', (data, id)=>{
+    torchEvents.emit('test', {currentTimestamp:Date.now()}, id);
+})
+let db = new Database("ConversionData");
+let backupDb = new DynamicPropertyDatabase("backups");
+// db.set("Converted", "false");
+// for(const key of backupDb.keys()) {
+//     const table = backupDb.get(key);
+//     for(const key2 of Object.keys(table)) {
+//         let oldDb = new ScoreboardDatabase(key);
+//         oldDb.set(key2, table[key2])
+//     }
+// }
+// if(db.get("Converted", "false") != "true") {
+//     let tables = world.scoreboard.getObjectives().filter(_=>_.id.startsWith('db-')).map(_=>_.id.substring(3));
+//     for(const table of tables) {
+//         if(table.startsWith('PLAYER-')) continue;
+//         try {
+//             let legacyDb = new ScoreboardDatabase(table);
+//             let newDb = new Database(table);
+//             let allData = legacyDb.allData;
+//             for(const key in allData) {
+//                 newDb.set(key, allData[key]);
+//             }
+//             backupDb.set(table, allData);
+//             world.scoreboard.removeObjective(`db-${table}`);
+//         } catch {}
+//     }
+//     db.set("Converted", "true");
+// }
+permList.addPermission("Dynamic Sign Editor", "signeditor")
+permList.addPermission("Edit Shop", "shop.edit");
+permList.addPermission("Edit Warps", "warps.edit");
+permList.addPermission("Homes", "homes.personal.edit");
+permList.addPermission("Shared Homes", "homes.shared.use");
+permList.addPermission("Teleport To Warps", "warps.tp");
+permList.addPermission("Bypass Combat Log", "combatlog.bypass");
+permList.addPermission("Edit Chat Options", "chatoptions.edit");
+permList.addPermission("Edit Misc Options", "miscoptions.edit");
+permList.addPermission("Edit Leaderboards", "leaderboards.edit");
+permList.addPermission("Edit Gift Codes", "giftcodes.edit");
+permList.addPermission("Edit PVP Settings", "pvpsettings.edit");
+permList.addPermission("Edit Chest GUIs", "chestguis.edit");
+permList.addPermission("Edit Normal GUIs", "formsv2.edit");
+permList.addPermission("Edit Sidebar Options", "sidebar.edit");
+permList.addPermission("View Reports", "reports.view");
+permList.addPermission("Handle Reports", "reports.handle");
+permList.addPermission("Edit Player Settings", "players.edit");
+permList.addPermission("Edit Important Settings", "important.edit");
+permList.addPermission("Edit Verification Settings", "verification.edit");
+permList.addPermission("Edit Custom Commands", "customcmds.edit");
+// autoclicker.enable();
+// reach.enable()
+// world.sendMessages("Azalea loaded!TESTTEWTWETEW")
+if(isDevServer()) {
+    world.sendMessage(`§8§l[ §aAZALEA §r§8§l] §r§7Dev server reloaded`)
+    let sidebarDb = new DynamicPropertyDatabase("Sidebar");
+    let sidebarSettings = sidebarDb.get("Settings", {});
+    sidebarSettings.enabled = true;
+    sidebarSettings.lines = ([
+        "",
+        [
+            "   §2A§az§2a§flea Dev",
+            "   A§2z§aa§2l§fea Dev",
+            "   Az§2a§al§2e§fa Dev",
+            "   Aza§2l§ae§2a §fDev",
+            "   Azal§2e§aa §2D§fev",
+            "   Azale§2a §aD§2e§fv",
+            "   Azalea §2D§ae§2v",
+            "   §2A§fzalea D§2e§av",
+            "   §aA§2z§falea De§2v"
+        ],
+        "",
+        [
+            "{{alternate \"-------------\" \"78\"}}",
+            "{{alternate \"-------------\" \"87\"}}",
+        ],
+        "",
+        "§8> §aMoney§7: §r{{scoreshort money}}",
+        "",
+        "§8> §bv§f%%AZALEA_VER%%",
+        "",
+        [
+            "{{alternate \"-------------\" \"78\"}}",
+            "{{alternate \"-------------\" \"87\"}}",
+        ],
+        "",
+        "§l   <tps> §7TPS",
+        "§l   <cps> §7CPS",
+        ""
+    ]).map(_=>Array.isArray(_)?_.join('\n'):_)
+    sidebarDb.set("Settings", sidebarSettings);
+}
 let azaleaSession = {};
 system.beforeEvents.watchdogTerminate.subscribe((e)=>{
     e.cancel = true;
@@ -78,10 +263,12 @@ for(const eventData of Object.values(EventsList)) {
 
 eventMgr.emit("initialize")
 
+world.afterEvents.playerSpawn.subscribe(e=>{
+    if(!e.initialSpawn) return;
+    playerStorage.save(e.player);
+})
+
 system.runInterval(()=>{
-    for(const player of world.getPlayers()) {
-        playerStorage.save(player);
-    }
     eventMgr.emit("heartbeat");
 },20)
 // world.beforeEvents.itemUse.subscribe(e=>{
@@ -199,30 +386,46 @@ NicknamesModule();
 // world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
 //     // e.cancel = true
 // })
-world.beforeEvents.playerInteractWithEntity.subscribe
 let Commands = [Commands1,Commands2,Commands3,Commands4,Commands5,Commands6,Commands7,Commands8,Commands9,Commands10,Commands11,Commands12,Commands13];
 for(const CommandsList of Commands) {
     for(const command of Object.values(CommandsList)) {
         command(commands);
     }
 }
+for(const UI of Object.values(UIs)) {
+    uiManager.addUI(`${UI.name}${UI.description ? `:${UI.description}` : ``}`, UI.onOpen);
+}
 
 let azaleaSessionToken = `${Date.now()}.${Math.floor(Math.random() * 8196).toString(16)}`;
 let initialRun = Date.now();
 let finalRun = Date.now();
-world.afterEvents.playerJoin.subscribe(e=>{
-    let db = new Database(`PLAYER-${e.playerName}`);
-    let joinsList = JSON.parse(db.get("JoinsList") ? db.get("JoinsList") : "[]");
-    joinsList.push({d:Date.now(),t:system.currentTick});
-    db.set("JoinsList", JSON.stringify(joinsList));
-})
+// world.afterEvents.playerJoin.subscribe(e=>{
+//     let db = new Database(`PLAYER-${e.playerName}`);
+//     let joinsList = JSON.parse(db.get("JoinsList") ? db.get("JoinsList") : "[]");
+//     joinsList.push({d:Date.now(),t:system.currentTick});
+//     db.set("JoinsList", JSON.stringify(joinsList));
+// })
 let defaultChatrankFormat = "#HT(staffchat,#BC[#NCStaffChat#BC] ,)§r#BC[#RC#R(§r#BC] [§r#RC)§r#BC] §r#NC#P #BC#DRA §r#MC#M";
 let chatrankFormat = configDb.get("ChatrankFormat") ? configDb.get("ChatrankFormat") : defaultChatrankFormat;
 let prefix = '!';
+let didConvert = false;
 system.runInterval(()=>{
     // let chatrankFormatTemp = configDb.get("ChatrankFormat", null);
     // if(!chatrankFormatTemp) 
-    configDb.set("ChatrankFormat", `{{has_tag staffchat "<bc>[<nc>StaffChat<bc>] " "<bl>"}}§r<bc>[{{rank_joiner "<drj>"}}§r<bc>] §r<nc><name> §r<bc><dra> §r<mc><msg>`);
+    let startingRank = configDb.get("StartingRank", "");
+    if(!startingRank) {
+        startingRank = "Member";
+        configDb.set("StartingRank", startingRank);
+    }
+    if(didConvert) return;
+    let converted = configDb.get("converted", "false") == "false" ? false : true;
+    if(converted) {
+        didConvert = true;
+        return;
+    }
+    configDb.set("ChatrankFormat", `{{has_tag staffchat "<bc>[<nc>StaffChat<bc>] " "<bl>"}}§r<bc>[<rc>{{rank_joiner "<drj>"}}§r<bc>] §r<nc><name> §r<bc><dra> §r<mc><msg>`);
+    configDb.set("converted", "true");
+    didConvert = true;
 },100);
 // checks if the player can do shit
 function isAdmin(player) {
@@ -418,7 +621,7 @@ world.afterEvents.entityHitEntity.subscribe(e=>{
             let lore = item.getLore();
             let data = lore.filter(_=>_.startsWith('§d§a§t§a'));
             let iconID = data.find(_=>_.startsWith('§d§a§t§aicon=')).split('=')[1];
-            let icon = icons.find(_=>_.name == iconID);
+            let icon = icons.get(iconID);
             chest.button(i, parseItemName(item), item.getLore().filter(_=>!_.startsWith('§d§a§t§a')).join('\n§r'), icon.path ? icon.path : "azalea_icons/icontextures/cake", item.amount);
         }
         chest.button(9*2+4, "§6Claim", "", "textures/azalea_icons/EditShop", 1, false)

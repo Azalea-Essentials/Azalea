@@ -1,1 +1,1 @@
-export default function e(e){e.addCommand("version",{description:"Get the azalea version",category:"Help Center",onRun(e,o,n,t){t(`TEXT ${n.command}Azalea version ${n.description}2.2 Beta 1\n\n${n.footer}i hope i dont forget to change the version`)}})}
+let e="2.2 Beta 69420";export default function o(o){o.addCommand("version",{description:"Get the azalea version",category:"Help Center",onRun(o,n,t,a){a(`TEXT ${t.command}Azalea version ${t.description}${e}\n\n${t.footer}i hope i dont forget to change the version`)}})}

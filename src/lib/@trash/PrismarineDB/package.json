@@ -1,0 +1,11 @@
+{
+  "name": "prismarinedb",
+  "version": "1.0.1",
+  "description": "Minecraft Bedrock document database",
+  "main": "prismarine-db.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Azalea-Essentials",
+  "license": "MIT"
+}

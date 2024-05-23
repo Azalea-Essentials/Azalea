@@ -10,6 +10,7 @@ export default function() {
     .desc("Easily setup shit with a nice UI")
     .requiresAdmin(true)
     .callback(({msg, response})=>{
+        return;
         let x = msg.sender.location.x,
             y = msg.sender.location.y,
             z = msg.sender.location.z;

@@ -3,7 +3,7 @@ import { ActionForm } from "./form_func";
 import icons from "./icons";
 import { uiManager } from "./uis";
 
-uiManager.addUI("Azalea2.0/HelpCenter/Icons",(player, pageIndex = 0)=>{
+uiManager.addUI("Azalea2.0/HelpCenter/Icons:Icon Viewer (BROKEN)",(player, pageIndex = 0)=>{
     let chest = new ChestFormData("double");
     var chunk = 9*5;
     var result = [];
@@ -58,7 +58,7 @@ uiManager.addUI("Azalea2.0/HelpCenter/Icons",(player, pageIndex = 0)=>{
         }
     })
 })
-uiManager.addUI("Azalea2.0/HelpCenter/Root",(player)=>{
+uiManager.addUI("Azalea2.0/HelpCenter/Root:Help Center Root (UNFINISHED)",(player)=>{
     let form = new ActionForm();
     let helpCenterArticles = {
         "Getting Started": {

@@ -2,7 +2,7 @@ import { world, system } from '@minecraft/server';
 import { Database } from './db';
 import { isAdmin } from './isAdmin';
 let db = new Database("Config");
-let betaTesterVersion = false;
+let betaTesterVersion = true;
 (()=>{
     let scoreboard = world.scoreboard.getObjective('AzaleaSetup');
     if(!scoreboard) scoreboard = world.scoreboard.addObjective('AzaleaSetup', 'AzaleaSetup');
@@ -28,7 +28,7 @@ world.afterEvents.playerSpawn.subscribe(e=>{
             e.player.sendMessage("§aWelcome to Azalea Essentials!\n\n§ePlease make sure you set everything up properly.\n\n§dTo get a list of commands: !cmds\n§dTo view the guide: !guide\nTo get the config UI (aka admin panel): /give @s azalea:config_ui\n\n§eTo setup money, you need to have a basic understanding of the /scoreboard command. All players money is stored in \"money\" scoreboard by default.\n\n§bDocs: §rhttps://azalea.trashdev.org/\n§bDiscord: §rhttps://azalea-mc.org/discord\n§bYoutube: §rhttps://youtube.com/@azaleadev\n\n§eAzalea version: §6%%AZALEA_VER%%\n\n§dIf Config UI does not open, do: §r/tag @s add admin\n\n§cTo disable this message, toggle \"Disable Setup Message\" in the server settings menu in Config UI.");
         }
         if(betaTesterVersion) {
-            e.player.sendMessage(`§dWelcome to Azalea V2.0 Beta!\n\n§r§fDo NOT leak this version.\n§eIt is not recommended to use this version on realms or any public server as it may have bugs or some breaking changes later on that can cause you to lose some progress.`);
+            e.player.sendMessage(`§dWelcome to Azalea V2.2 Beta! §eIt is not recommended to use this version on realms or any public server as it may have bugs or some breaking changes later on that can cause you to lose some progress.`);
         }
 
     },40);

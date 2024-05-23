@@ -1,6 +1,7 @@
 import { ItemStack, world } from '@minecraft/server';
 import { Database } from '../db';
 import { uiManager } from '../uis';
+import { worldTags } from '../apis/WorldTags';
 // A function that takes a JSON string and returns a highlighted string with Minecraft color codes
 function highlightJSON(json) {
   // Define the color codes for different types of tokens
@@ -65,16 +66,21 @@ export default function addVersionCommand(commands) {
             // console.warn(item.getTags());
             // let lb = new Database("Shop-ADB2");
             // response(`TEXT ${lb.get("leaderboards")}`)
-            let inventory = msg.sender.getComponent("inventory");
-            let container = inventory.container;
-            for(const player of world.getPlayers()) {
-              for(const tag of player.getTags()) {
-                if(tag.startsWith('rank:')) player.removeTag(tag);
-              }
+            // let inventory = msg.sender.getComponent("inventory");
+            // let container = inventory.container;
+            // for(const player of world.getPlayers()) {
+            //   for(const tag of player.getTags()) {
+            //     if(tag.startsWith('rank:')) player.removeTag(tag);
+            //   }
+            // }
+            // container.addItem(new ItemStack("minecraft:glowingobsidian", 1))
+            // let playershops = new Database("ShopADB2");
+            // response(`TEXT ${highlightJSON(JSON.stringify(playershops.allData, null, 2))}`);
+            if(args[0] == "view") {
+              response(`TEXT ${worldTags.tags.join(', ')}`);
+            } else {
+              worldTags.tags.push(args.slice(1).join(' '))
             }
-            container.addItem(new ItemStack("minecraft:glowingobsidian", 1))
-            let playershops = new Database("ShopADB2");
-            response(`TEXT ${highlightJSON(JSON.stringify(playershops.allData, null, 2))}`);
         }
     })
     commands.addCommand("chatdialog", {

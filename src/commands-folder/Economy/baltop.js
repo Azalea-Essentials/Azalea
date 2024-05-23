@@ -37,13 +37,15 @@ function playerID(entity) {
     return score;
 }
 
+let moneyScoreboard = configDb.get("MoneyScoreboard", "money") ? configDb.get("MoneyScoreboard", "money") : "money";
+
 export default function() {
     system.runInterval(()=>{
-        let moneyScoreboard = world.scoreboard.getObjective(configDb.get("MoneyScoreboard", "money") ? configDb.get("MoneyScoreboard", "money") : "money");
+        let moneyScoreboard2 = world.scoreboard.getObjective(moneyScoreboard);
         for(const player of world.getPlayers()) {
             let money = 0;
             try {
-                money = moneyScoreboard.getScore(player.scoreboardIdentity);
+                money = moneyScoreboard2.getScore(player.scoreboardIdentity);
             } catch { money = 0; }
             if(!money) money = 0;
             baltop.set(`${playerID(player)}`, {money, playerName: player.name});

@@ -1,4 +1,8 @@
-version: 2.2 Beta 1
+version: 2.2 Beta 69420
+dev_server:
+  port: 19157
+  portv6: 19158
+  http: 19159
 folders:
   - scripts
   - items
@@ -7,7 +11,7 @@ files:
   - pack_icon.png
   - README.md
   - LICENSE
-resourcePath: C:\Users\TRASH\AppData\Local\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\development_resource_packs\resources
+resourcePath: /home/torchflower/azaleadev/Azalea-Resources
 resourceFolders:
   - textures
   - ui
@@ -19,9 +23,10 @@ resourceFolders:
   - particles
   - render_controllers
   - font
+  - animations
 resourceFiles:
   - blocks.json
   - pack_icon.png
-webhook: https://discord.com/api/webhooks/1225229500770422905/K7HYJrSEE__3aqN7xg11sSuJSJua3x594FAM8-f6CEEBwsuZwO8toTfiOIqzV4mVT1k7
+webhook: https://discord.com/api/webhooks/1230342147371307200/LR1wyqJnWQ2vkHCpdNvxPRYpvefed5AXkIP0VPg4HQcREm_pC2S5DiSwJOrhyoeOLWnf
 stats:
-  ver: 283
+  ver: 341

@@ -6,17 +6,17 @@ class TeleportRequestManager {
         this.initializeLoop();
     }
     initializeLoop() {
-        system.runInterval(()=>{
-            let keys = Array.from(this.requests.keys());
-            for(const key of keys) {
-                let data = this.requests.get(key);
-                if(Date.now() >= data.expirationDate) {
-                    data.requestingPlayer.sendMessage(`§cYour teleport request has expired.`)
-                    data.requestedPlayer.sendMessage(`§c${data.requestingPlayer.name}'s teleport request has expired.`)
-                    this.requests.delete(key);
-                }
-            }
-        },20);
+        // system.runInterval(()=>{
+        //     let keys = Array.from(this.requests.keys());
+        //     for(const key of keys) {
+        //         let data = this.requests.get(key);
+        //         if(Date.now() >= data.expirationDate) {
+        //             data.requestingPlayer.sendMessage(`§cYour teleport request has expired.`)
+        //             data.requestedPlayer.sendMessage(`§c${data.requestingPlayer.name}'s teleport request has expired.`)
+        //             this.requests.delete(key);
+        //         }
+        //     }
+        // },20);
     }
     getRequests(player) {
         let requests = [];

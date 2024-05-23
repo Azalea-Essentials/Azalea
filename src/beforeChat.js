@@ -27,6 +27,7 @@ export function beforeChat(msg) {
   let prefix = configDb.get("Prefix", "!");
   if(!prefix || !prefix.length) prefix = "!";
   let chatrankFormat = configDb.get("ChatrankFormat");
+
   if (msg.message.startsWith(prefix) || chatRanksEnabled) msg.cancel = true;
   system.run(() => {
     let personalPrefixes = getAllStringsStartingWithPrefixAndRemovePrefix(msg.sender.getTags(), "personalprefix:");

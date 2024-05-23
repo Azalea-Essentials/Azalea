@@ -2,6 +2,7 @@ import { Database } from "./db";
 import { ActionForm, ModalForm } from "./form_func";
 
 export function openConfigUI(player, configOptions, title, configTable = "Config") {
+    return;
     let mainForm = new ActionForm()
         .title(title);
     for (const key of Object.keys(configOptions)) {

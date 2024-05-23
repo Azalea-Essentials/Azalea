@@ -3,7 +3,7 @@ import { Database } from '../db';
 let configDb = new Database("Config");
 let seconds = 0;
 export default {
-    name: "second",
+    name: "heartbeat",
     callback() {
         seconds++;
         if(seconds % 10 != 0) return;

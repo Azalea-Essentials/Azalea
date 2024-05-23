@@ -5,6 +5,7 @@ import { ActionForm, ModalForm } from "../form_func";
 import icons from '../icons';
 import { ConfiguratorSub } from "../configuratorOptions";
 export const QUESTS = function() {
+    return;
     return new ConfiguratorSub("§5Quests", "textures/azalea_icons/icontextures/book_04e")
     .setCallback((player)=>{
         uiManager.open("Azalea/Quests/Edit/Root", player);
@@ -172,7 +173,7 @@ export const QUESTS = function() {
         for(let i = 0;i < quests.length;i++) {
             let quest = quests[i];
             // Get quest icon
-            let questIcon = quest.icon ? (icons.find(icon=> icon.name === quest.icon) ?? null) : null;
+            let questIcon = quest.icon ? (icons.get(quest.icon) ?? null) : null;
 
             // Add quest button
             actionForm.button(`§3${quest.title}\n§7Click for info`, questIcon, (player)=>{

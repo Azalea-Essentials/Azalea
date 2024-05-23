@@ -101,9 +101,9 @@ uiManager.addUI("Azalea1.1/Shop/Root/Category", (player, category, previousCateg
         }
         let icon;
         if(item.icon) {
-            icon = icons.find(_=>_.name == item.icon)
+            icon = icons.get(item.icon)
         } else if(item.category_reference) {
-            icon = icons.find(_=>_.name == shopItems.find(_=>_.reference_id == item.category_reference)?.icon)
+            icon = icons.get(shopItems.find(_=>_.reference_id == item.category_reference)?.icon)
         }
         // yes ik this is awful i do not care
         function strikethroughNumber(number) {
@@ -183,7 +183,7 @@ uiManager.addUI("Azalea1.1/Shop/Root/Category", (player, category, previousCateg
                     score = moneyScoreboard.getScore(player);
                 } catch { score = 0; }
                 if(!score) score = 0;
-                if(score >= finalPrice) {
+                if(score >= fullPrice) {
                     let moneyScoreboard = world.scoreboard.getObjective(configDb.get("MoneyScoreboard", "money") ? configDb.get("MoneyScoreboard", "money") : "money");
                     score -= fullPrice;
                     moneyScoreboard.setScore(player, score);
@@ -408,11 +408,11 @@ uiManager.addUI("Azalea1.1/Shop/Root/AdminManage/Category", (player, category)=>
     for(let i = 0;i < shopData.items.length;i++) {
         let item = shopData.items[i];
         let itemName;
-        let icon = icons.find(_=>_.name == item.icon);
+        let icon = icons.get(item.icon);
         if(item.category_reference) {
             if(!shopItems.find(_=>_.reference_id == item.category_reference)) continue;
             itemName = shopItems.find(_=>_.reference_id == item.category_reference).category;
-            icon = icons.find(_=>_.name == shopItems.find(_=>_.reference_id == item.category_reference).icon);
+            icon = icons.get(shopItems.find(_=>_.reference_id == item.category_reference).icon);
         } else if(item.display) {
             itemName = item.display;
         } else {
@@ -544,7 +544,7 @@ uiManager.addUI("Azalea1.1/Shop/Root/AdminManage", (player)=>{
         uiManager.open("Azalea1.1/Shop/Root", player)
     })
     for(const item of shopItems) {
-        let icon = icons.find(_=>_.name == item.icon);
+        let icon = icons.get(item.icon);
         if(!icon) icon = null;
         actionForm.button(item.category, icon && icon.path ? icon.path : null, (player, i)=>{
             uiManager.open("Azalea1.1/Shop/Root/AdminManage/Category", player, item.category);
@@ -650,7 +650,7 @@ uiManager.addUI("Azalea2.0/ShopChest/Root/Category", (player, category)=>{
         items2.push([slot, item]);
         if(item.category_reference) {
             let category2 = shopCategories.find(_=>_.reference_id == item.category_reference);
-            let iconData = icons.find(_=>_.name == category2.icon);
+            let iconData = icons.get(category2.icon);
             chest.button(slot, `${category2.category}`, [`Item Count: ${category2.items.length}`], iconData && iconData.path ? iconData.path : "textures/azalea_icons/Info");
         }
     }
@@ -699,7 +699,7 @@ uiManager.addUI("Azalea2.0/ShopChest/Root", (player)=>{
         if(categoryData.reference_id && shopCategories.find(_=>_.items.findIndex(_=>_.category_reference == categoryData.reference_id) >= 0)) continue;
         currSlot++;
         categoriesAdded.push(shopCategories.findIndex(_=>_.category == category));
-        let iconData = icons.find(_=>_.name == categoryData.icon);
+        let iconData = icons.get(categoryData.icon);
         chest.button(currSlot, `${category}`, [
             `Item Count: ${items.length}`,
 
@@ -745,7 +745,7 @@ uiManager.addUI("Azalea1.1/Shop/Root", (player)=>{
         ]
         shopDbV2.set(getShopKey(player), shopItems);
     }
-    if(isAdmin(player) && shopDb.get("Converted", "FALSE") != "TRUE") {
+    if(isAdmin(player) && shopDb.get("Converted", "FALSE") != "TRUE" && shopDb.get(getShopKey(player), []).length) {
         actionForm.body("Looks like you used shop on azalea versions before V1.1. To use the new shop update, you need to convert the old shop.");
         actionForm.button("Convert", null, (player,i)=>{
             let shopItems = shopDb.get(getShopKey(player), []);
@@ -783,7 +783,7 @@ uiManager.addUI("Azalea1.1/Shop/Root", (player)=>{
         }
         for(const shopItem of shopItems) {
             if(shopItem.reference_id && shopItems.find(_=>_.items.find(_=>_.category_reference == shopItem.reference_id))) continue;
-            let icon = icons.find(_=>_.name == shopItem.icon);
+            let icon = icons.get(shopItem.icon);
             if(!icon) icon = null;
             if(shopItem.tag && !player.hasTag(shopItem.tag) && !isAdmin(player)) continue;
             actionForm.button(shopItem.category, icon && icon.path ? icon.path : null, (player, i)=>{
@@ -954,24 +954,3 @@ function parseTypeId(typeId) {
     }).join(' ');
     return words;
 }
-uiManager.addUI("Azalea1.1/Sell/Root",(player)=>{
-    let sellShopDb = new Database("SellShop2");
-    let sellItems = sellShopDb.get("Items", []) ? sellShopDb.get("Items", []) : [];
-    let form = new ActionForm();
-    form.title("Sell Shop")
-    form.body("Here are some of the items from your inventory that you can sell:");
-    let inventory = player.getComponent('inventory');
-    let totals = {};
-    for(let i = 0;i < inventory.container.size;i++) {
-        let item = inventory.container.getItem(i);
-        if(!item) continue;
-        if(totals[item.typeId]) totals[item.typeId] = totals[item.typeId] + 1
-        else totals[item.typeId] = 1;
-    }
-    form.button("Leave", "textures/azalea_icons/2", (player)=>{})
-    for(const sellItem of sellItems) {
-        if(totals[sellItem]) {
-            form.button(`${parseTypeId(sellItem.typeId)}\n§r§6\uE117 ${sellItem.value}`)
-        }
-    }
-})

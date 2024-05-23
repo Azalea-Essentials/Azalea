@@ -9,7 +9,7 @@ export default {
         if(!e.initialSpawn) return;
         let player = e.player;
         let configDb = new Database("Config");
-        let WelcomeMessageEnabled = configDb.get("WelcomeMessageEnabled");
+        let WelcomeMessageEnabled = configDb.get("WelcomeMessageEnabled") == "true" ? true : false;
         let ServerWelcomeMessage = configDb.get("ServerWelcomeMessage") ? configDb.get("ServerWelcomeMessage") : `§cWelcome §e@[@username] §cto the server, and tell the admins to configure this message`;
         if (!WelcomeMessageEnabled) return;
         player.sendMessage(ServerWelcomeMessage.replace(/\[\@username\]/g, player.name).replace(/\[\@id\]/g, player.id));

@@ -12,7 +12,7 @@ let sellItems = ["Blocks", "Weapons/Armor", "Natural", "Misc"];
 let colors = ["playershop","playershop_green","playershop_blue","playershop_purple"];
 let colorsDisplay = ["§cRed", "§aGreen", "§bBlue", "§dPurple"];
 let itemDB = new ItemDatabase();
-uiManager.addUI("Azalea0.9.1/PlayerShop/AddShop", player => {
+uiManager.addUI("Azalea0.9.1/PlayerShop/AddShop:Create a shop", player => {
   let shops = playerShopDb.keys().filter(_=>_.startsWith(`${player.id}:`)).length;
   if(shops >= 3) {
     let messageForm = new ActionForm();
@@ -55,7 +55,7 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/AddShop", player => {
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
-uiManager.addUI("Azalea0.9.1/PlayerShop/Buy", (player, shopKey) => {
+uiManager.addUI("Azalea0.9.1/PlayerShop/Buy:Buy items from a shop", (player, shopKey) => {
   let shop = playerShopDb.get(shopKey);
   let actionform = new ActionForm();
   actionform.title(shop.name + " - Buy items");
@@ -118,7 +118,7 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/Buy", (player, shopKey) => {
   }
   actionform.show(player, null, (player, response) => {});
 });
-uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/AddItem/Setup", (player, shopKey, convertedItem, index, error = null) => {
+uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/AddItem/Setup:Setup a player shop items price", (player, shopKey, convertedItem, index, error = null) => {
   let shop = playerShopDb.get(shopKey);
   let modalForm = new ModalForm();
   modalForm.title("Select a price");
@@ -137,7 +137,7 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/AddItem/Setup", (player, shopKey, c
     });
   modalForm.show(player, true, () => {});
 });
-uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/EditInfo", (player, shopKey) => {
+uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/EditInfo:Edit info", (player, shopKey) => {
   let shop = playerShopDb.get(shopKey);
   let modalform = new ModalForm();
   modalform.title(`${shop.name} §r- Edit Info`);
@@ -163,7 +163,7 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/EditInfo", (player, shopKey) => {
     uiManager.open("Azalea0.9.1/PlayerShop/Edit", player, shopKey)
   });
 });
-uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/AddItem", (player, shopKey) => {
+uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/AddItem:Add item", (player, shopKey) => {
   let shop = playerShopDb.get(shopKey);
   let actionform = new ActionForm();
   actionform.title(shop.name + " - Add Item");
@@ -187,7 +187,7 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/AddItem", (player, shopKey) => {
   }
   actionform.show(player, true, (player, response) => {});
 });
-uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/Delete/Confirmation", (player, shopKey) => {
+uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/Delete/Confirmation:Player shop delete confirmation UI", (player, shopKey) => {
   let shop = playerShopDb.get(shopKey);
   let actionform = new ActionForm();
   actionform.title("Are you sure?");
@@ -201,7 +201,7 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/Delete/Confirmation", (player, shop
   });
   actionform.show(player, false, (player, response) => {});
 });
-uiManager.addUI("Azalea0.9.1/PlayerShop/Edit", (player, shopKey) => {
+uiManager.addUI("Azalea0.9.1/PlayerShop/Edit:Edit player shop", (player, shopKey) => {
   let shop = playerShopDb.get(shopKey);
   let actionform = new ActionForm();
   actionform.title(shop.name + " - Edit");

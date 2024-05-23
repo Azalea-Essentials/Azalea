@@ -68,9 +68,8 @@ export default function() {
             uiManager.open("Azalea2.2/Gift/Add", player);
         });
         let codes = giftCodesDB.get("codes", []);
-        let i = -1;
-        for(const code of codes) {
-            i++;
+        for(let i = 0;i < codes.length;i++) {
+            let code = codes[i];
             form.button(`§6${code.code}\n§7/${code.command.startsWith('/') ? code.command.substring(1) : code.command}`, `textures/azalea_icons/confetti`, (player)=>{
                 uiManager.open("Azalea2.2/Gift/Add", player, i);
             })

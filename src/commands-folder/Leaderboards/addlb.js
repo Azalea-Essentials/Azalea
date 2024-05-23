@@ -1,7 +1,10 @@
+import { playerStorage } from '../../apis/PlayerStorage';
 import { commands } from '../../commands';
 import { Database } from '../../db';
+import { prismarineDb } from '../../lib/@trash/PrismarineDB/prismarine-db';
 
 export default function main() {
+    let leaderboardDB = prismarineDb.table("Leaderboards");
     commands.addCommand("add-lb",{
         admin: true,
         description: "Adds leaderboards",
@@ -27,6 +30,16 @@ export default function main() {
                 objective: args[0]
             })
             leaderboardsDB.set("leaderboards", JSON.stringify(leaderboards));
+            // leaderboardDB.insertDocument({
+            //     objective: args[0],
+            //     loc: {
+            //         x: msg.sender.location.x,
+            //         y: msg.sender.location.y,
+            //         z: msg.sender.location.z,
+            //         dimension: msg.sender.dimension.id
+            //     },
+            //     createdBy: playerStorage.getID(msg.sender)
+            // });
             response(`SUCCESS ${translation.commands.addlb.addedLeaderboard}`)
         }
     })

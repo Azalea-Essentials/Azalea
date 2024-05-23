@@ -1,5 +1,5 @@
+import { worldTags } from '../../apis/WorldTags';
 import { CommandBuilder } from '../../commandBuilder';
-
 
 export default function() {
     new CommandBuilder("floating-text")
@@ -7,8 +7,9 @@ export default function() {
         .category("Floating Text")
         .requiresAdmin(true)
         .callback(({msg,args,theme,response})=>{
-            let rabbit = msg.sender.dimension.spawnEntity("rabbit", msg.sender.location);
+            let rabbit = msg.sender.dimension.spawnEntity("azalea:floating_text", msg.sender.location);
             rabbit.nameTag = args.join(' ').replaceAll('\\n','\n')
+            worldTags.addTag(`floating_text:${rabbit.id}`);
             response("SUCCESS Summoned!")
         })
         .register();

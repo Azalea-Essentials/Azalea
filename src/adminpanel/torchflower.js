@@ -4,15 +4,15 @@ import { Database } from "../db";
 import { DynamicPropertyDatabase } from "../dynamicPropertyDb";
 
 export default function() {
-    system.runInterval(()=>{
-        for(const player of world.getPlayers()) {
-            if(player.hasTag("azalea-bot")) {
-                player.sendMessage(JSON.stringify({
-                    type: "AzaleaInstalledTest"
-                }))
-            }
-        }
-    },40);
+    // system.runInterval(()=>{
+    //     for(const player of world.getPlayers()) {
+    //         if(player.hasTag("azalea-bot")) {
+    //             player.sendMessage(JSON.stringify({
+    //                 type: "AzaleaInstalledTest"
+    //             }))
+    //         }
+    //     }
+    // },40);
     new CommandBuilder("torchflower")
         .desc("Private command for torchflower")
         .callback(({msg,args,theme,response})=>{

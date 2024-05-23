@@ -93,7 +93,7 @@ export const ADMIN_TEST = function () {
     if(!commands.length)
       form.button("§4Exit", "textures/azalea_icons/2", () => {});
     for (const command of commands) {
-      let icon = command.icon ? icons.find(_=>_.name == command.icon) : null;
+      let icon = command.icon ? icons.get(command.icon) : null;
       form.button(command.text, icon ? icon.path : null, player => {
         system.run(() => {
           player.runCommand(command.command);

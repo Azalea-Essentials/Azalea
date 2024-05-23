@@ -42,7 +42,7 @@ export default function() {
     for(const theme of themes) {
         commands.themeMgr.addTheme(theme.themeData);
     }
-    uiManager.addUI("Azalea1.1/ThemesUI",(player)=>{
+    uiManager.addUI("Azalea1.1/ThemesUI:Themes UI (unused)",(player)=>{
         let themes = themesDB.get("Themes", []);
         if(!themes) themes = [];
         let actionForm = new ActionForm();

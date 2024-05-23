@@ -2,7 +2,7 @@ import { Container, world } from "@minecraft/server"
 import { Database } from "../db";
 
 export default {
-    name: "second",
+    name: "heartbeat",
     callback() {
         let db = new Database("BindableNames");
         for(const player of world.getPlayers()) {

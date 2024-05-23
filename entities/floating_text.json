@@ -1,0 +1,51 @@
+{
+	"format_version": "1.10.0",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "azalea:floating_text",
+			"is_spawnable": true,
+			"is_summonable": true,
+			"is_experimental": false
+		},
+		"components": {
+			"minecraft:type_family": {
+				"family": [
+					"floatingtext"
+				]
+			},
+			"minecraft:health": {
+				"value": 999999999,
+				"max": 999999999
+			},
+			"minecraft:collision_box": {
+				"width": 0.6,
+				"height": 1.8
+			},
+			"minecraft:nameable": {
+				"alwaysShow": true,
+				"allowNameTagRenaming": true
+			},
+			"minecraft:damage_sensor": {
+				"triggers": {
+					"cause": "all",
+					"deals_damage": false
+				}
+			},
+			"minecraft:fire_immune": true,
+			"minecraft:scale": {
+				"value": 0
+			},
+			"minecraft:knockback_resistance": {
+				"value": 1
+			},
+			"minecraft:physics": {
+				"has_gravity": false
+			},
+			"minecraft:pushable": {
+				"is_pushable": false
+			}
+		},
+		"component_groups": {},
+		"events": {}
+	}
+}

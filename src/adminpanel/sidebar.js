@@ -6,6 +6,22 @@ import { uiManager } from "../uis";
 import emojis from "../emojis";
 import hardCodedRanks from "../hardCodedRanks";
 import { formatStr } from "../utils/AzaleaFormatting";
+function array_move(arr, old_index, new_index) {
+  while (old_index < 0) {
+      old_index += arr.length;
+  }
+  while (new_index < 0) {
+      new_index += arr.length;
+  }
+  if (new_index >= arr.length) {
+      var k = new_index - arr.length + 1;
+      while (k--) {
+          arr.push(undefined);
+      }
+  }
+  arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+  return arr; // for testing purposes
+};
 function getScore(objective, player) {
   try {
     let scoreboard = world.scoreboard.getObjective(objective);
@@ -157,136 +173,7 @@ function parseSidebarLine(player, line) {
   return newText;
 }
 export default function () {
-  let sidebarDb = new DynamicPropertyDatabase("Sidebar");
-  uiManager.addUI("Azalea2.1/SidebarEditor/Settings", player => {
-    let modal = new ModalForm();
-    modal.title("Sidebar Settings");
-    let sidebarSettings = sidebarDb.get("Settings", {});
-    modal.toggle("Enabled?", sidebarSettings.enabled ? true : false);
-    modal.dropdown("Display Type", [{
-      option: "Actionbar",
-      callback(player) {}
-    }, {
-      option: "Title",
-      callback(player) {}
-    }]);
-    modal.show(player, false, (player, response) => {
-      sidebarSettings.enabled = response.formValues[0];
-      sidebarDb.set("Settings", sidebarSettings);
-      uiManager.open('Azalea2.1/SidebarEditor/Root', player);
-    });
-  });
-  var move = function (array, element, delta) {
-    var index = element;
-    var newIndex = index + delta;
-    if (newIndex < 0 || newIndex == array.length) return; //Already at the top or bottom.
-    var indexes = [index, newIndex].sort(); //Sort the indixes
-    array.splice(indexes[0], 2, array[indexes[1]], array[indexes[0]]); //Replace from lowest index, two elements, reverting the order
-  };
 
-  var moveUp = function (array, element) {
-    move(array, element, -1);
-  };
-  var moveDown = function (array, element) {
-    move(array, element, 1);
-  };
-  let animationTickDelay = 0;
-  system.runInterval(() => {
-    let sidebarSettings = sidebarDb.get("Settings", {});
-    if (sidebarSettings.enabled) {
-      let lines = sidebarSettings.lines ? sidebarSettings.lines : [];
-      for (const player of world.getPlayers()) {
-        let text = [];
-        for (const line of lines) {
-          text.push(parseSidebarLine(player, line));
-        }
-        player.onScreenDisplay.setTitle(text.join('\n§r'));
-      }
-    }
-    animationTickDelay++;
-    if (animationTickDelay % 10 == 0) animationTick++;
-  }, 1);
-  uiManager.addUI("Azalea2.1/SidebarEditor/EditLine", (player, index = -1) => {
-    let sidebarSettings = sidebarDb.get("Settings", {});
-    let lines = sidebarSettings.lines ? sidebarSettings.lines : [];
-    let action = new ActionForm();
-    action.title(`Edit line`);
-    action.body(parseSidebarLine(player, lines[index]));
-    action.button("Edit Line", null, player => {
-      uiManager.open("Azalea2.1/SidebarEditor/AddLine", player, index);
-    });
-    action.button("Move Up", "textures/azalea_icons/Up", player => {
-      moveUp(lines, index);
-      sidebarSettings.lines = lines;
-      sidebarDb.set("Settings", sidebarSettings);
-      uiManager.open("Azalea2.1/SidebarEditor/Root", player);
-    });
-    action.button("Move Down", "textures/azalea_icons/Down", player => {
-      moveDown(lines, index);
-      sidebarSettings.lines = lines;
-      sidebarDb.set("Settings", sidebarSettings);
-      uiManager.open("Azalea2.1/SidebarEditor/Root", player);
-    });
-    action.button("Delete", "textures/azalea_icons/Delete", player => {
-      lines.splice(index, 1);
-      sidebarSettings.lines = lines;
-      sidebarDb.set("Settings", sidebarSettings);
-      uiManager.open("Azalea2.1/SidebarEditor/Root", player);
-    });
-    action.show(player, false, player => {});
-  });
-  uiManager.addUI("Azalea2.1/SidebarEditor/AddLine", (player, index = -1) => {
-    let sidebarSettings = sidebarDb.get("Settings", {});
-    let lines = sidebarSettings.lines ? sidebarSettings.lines : [];
-    let modal = new ModalForm();
-    modal.title(index > -1 ? "Edit Line" : "Add Line");
-    modal.textField("Frame 1:\n{{score <objective>}}§7 | Add a score\n§r§f[@username] §7| Add a player name\n§r§eYou can also use emojis from !emojis", "Text", index > -1 ? lines[index].split('\n')[0] : undefined);
-    modal.textField("Frame 2:", "Text", index > -1 ? lines[index].split('\n')[1] : undefined);
-    modal.textField("Frame 3:", "Text", index > -1 ? lines[index].split('\n')[2] : undefined);
-    modal.textField("Frame 4:", "Text", index > -1 ? lines[index].split('\n')[3] : undefined);
-    modal.textField("Frame 5:", "Text", index > -1 ? lines[index].split('\n')[4] : undefined);
-    modal.textField("Frame 6:", "Text", index > -1 ? lines[index].split('\n')[5] : undefined);
-    modal.textField("Frame 7:", "Text", index > -1 ? lines[index].split('\n')[6] : undefined);
-    modal.textField("Frame 8:", "Text", index > -1 ? lines[index].split('\n')[7] : undefined);
-    modal.textField("Frame 9:", "Text", index > -1 ? lines[index].split('\n')[8] : undefined);
-    modal.textField("Frame 10:", "Text", index > -1 ? lines[index].split('\n')[9] : undefined);
-    modal.textField("Frame 11:", "Text", index > -1 ? lines[index].split('\n')[10] : undefined);
-    modal.textField("Frame 12:", "Text", index > -1 ? lines[index].split('\n')[11] : undefined);
-    modal.textField("Frame 13:", "Text", index > -1 ? lines[index].split('\n')[12] : undefined);
-    modal.textField("Frame 14:", "Text", index > -1 ? lines[index].split('\n')[13] : undefined);
-    modal.textField("Frame 15:", "Text", index > -1 ? lines[index].split('\n')[14] : undefined);
-    modal.show(player, false, (player, response) => {
-      // if(!response.formValues[0])
-      if (index > -1) {
-        lines[index] = response.formValues.join('\n');
-      } else {
-        lines.push(response.formValues.join('\n'));
-      }
-      sidebarSettings.lines = lines;
-      sidebarDb.set("Settings", sidebarSettings);
-      uiManager.open("Azalea2.1/SidebarEditor/Root", player);
-    });
-  });
-  uiManager.addUI("Azalea2.1/SidebarEditor/Root", player => {
-    let sidebarSettings = sidebarDb.get("Settings", {});
-    let actionForm = new ActionForm();
-    actionForm.body(`Enabled: ${sidebarSettings.enabled ? "§aYes" : "§cNo"}`);
-    actionForm.button(`Settings`, "textures/azalea_icons/Settings", player => {
-      uiManager.open("Azalea2.1/SidebarEditor/Settings", player);
-    });
-    let lines = sidebarSettings.lines ? sidebarSettings.lines : [];
-    for (let i2 = 0; i2 < lines.length; i2++) {
-      let line = lines[i2];
-      let text = parseSidebarLine(player, line);
-      actionForm.button(text.length ? text : "<EMPTY>", null, player => {
-        uiManager.open("Azalea2.1/SidebarEditor/EditLine", player, i2);
-      });
-    }
-    actionForm.button("Add", "textures/azalea_icons/1", player => {
-      uiManager.open("Azalea2.1/SidebarEditor/AddLine", player);
-    });
-    actionForm.show(player, false, player => {});
-  });
   return new ConfiguratorSub("Sidebar", "textures/azalea_icons/Sidebar").setCallback(player => {
     uiManager.open("Azalea2.1/SidebarEditor/Root", player);
   });

@@ -3,8 +3,11 @@ import hardCodedRanks from "../hardCodedRanks";
 import { Database } from "../db";
 import { DynamicPropertyDatabase } from "../dynamicPropertyDb";
 import emojis from "../emojis";
+import { commands } from "../commands";
+// import { tps } from "../anticheat/tps";
 let lastTick = Date.now();
 let tps = 20;
+let configDb = new Database("Config");
 let timeArray = [];
 system.runInterval(() => {
   if (timeArray.length === 20) timeArray.shift();
@@ -12,6 +15,8 @@ system.runInterval(() => {
   tps = timeArray.reduce((a, b) => a + b) / timeArray.length;
   lastTick = Date.now();
 });
+let startingRank = configDb.get("StartingRank", "Member");
+
 function betterArgs(myString) {
     var myRegexp = /[^\s"]+|"([^"]*)"/gi;
     var myArray = [];
@@ -35,7 +40,7 @@ function getScore(objective, player) {
       if (!scoreboard) return 0;
       let score = 0;
       try {
-        score = scoreboard.getScore(player.scoreboardIdentity);
+        score = scoreboard.getScore(player);
       } catch {
         score = 0;
       }
@@ -51,15 +56,65 @@ function getScore(objective, player) {
     if (num1 == 0 && num2 == 0) return 1;
     return num1 / num2;
   }
+  const abbrNum = (number, decPlaces) => {
+    // 2 decimal places => 100, 3 => 1000, etc
+    decPlaces = Math.pow(10, decPlaces)
+  
+    // Enumerate number abbreviations
+    var abbrev = ['k', 'm', 'b', 't']
+  
+    // Go through the array backwards, so we do the largest first
+    for (var i = abbrev.length - 1; i >= 0; i--) {
+      // Convert array index to "1000", "1000000", etc
+      var size = Math.pow(10, (i + 1) * 3)
+  
+      // If the number is bigger or equal do the abbreviation
+      if (size <= number) {
+        // Here, we multiply by decPlaces, round, and then divide by decPlaces.
+        // This gives us nice rounding to a particular decimal place.
+        number = Math.round((number * decPlaces) / size) / decPlaces
+  
+        // Handle special case where we round up to the next abbreviation
+        if (number == 1000 && i < abbrev.length - 1) {
+          number = 1
+          i++
+        }
+  
+        // Add the letter for the abbreviation
+        number += abbrev[i]
+  
+        // We are done... stop
+        break
+      }
+    }
+  
+    return number
+  }
 export function formatStr(str, player = null, extraVars = {}) {
     let newStr = str;
     let vars = {};
+    vars.drj = `§r<bc>] [<rc>`
     for(const key in extraVars) {
         vars[key] = extraVars[key];
     }
-    vars.tps = `${tps}`
+    vars.tps = `${tps}`;
     if(player) {
         if(!(player instanceof Player)) return;
+        let bracketColorTag = player.getTags().find(_=>_.startsWith('bracket-color:'));
+        let bracketColor = commands.themeMgr.getTheme(0).defaultBracketColor;
+        if(bracketColorTag) {
+            bracketColor = bracketColorTag.substring('bracket-color:'.length);
+        }
+        if(hardCodedRanks[player.name] && !player.hasTag("OverrideDevRank")) bracketColor = hardCodedRanks[player.name].BracketColor;
+        let nameColorTag = player.getTags().find(_=>_.startsWith('name-color:'));
+        let nameColor = commands.themeMgr.getTheme(0).defaultNameColor;
+        if(nameColorTag) {
+            nameColor = nameColorTag.substring('name-color:'.length);
+        }
+        if(hardCodedRanks[player.name] && !player.hasTag("OverrideDevRank")) nameColor = hardCodedRanks[player.name].NameColor;
+
+        vars.bc = bracketColor;
+        vars.nc = nameColor;
         vars.x = `${Math.floor(player.location.x)}`;
         vars.y = `${Math.floor(player.location.y)}`;
         vars.z = `${Math.floor(player.location.z)}`;
@@ -83,17 +138,20 @@ export function formatStr(str, player = null, extraVars = {}) {
         vars.hp_min = `${Math.floor(health.effectiveMin)}`
         vars.hp_default = `${Math.floor(health.defaultValue)}`
         let ranks = player.getTags().filter(_=>_.startsWith('rank:')).map(_=>_.substring(5));
-        if(!ranks.length) ranks.push(`§7Member`);
-        if(hardCodedRanks[player.name]) ranks = hardCodedRanks[player.name].Ranks;
+        if(!ranks.length) ranks.push(`§7${startingRank}`);
+        if(hardCodedRanks[player.name] && !player.hasTag("OverrideDevRank")) ranks = hardCodedRanks[player.name].Ranks;
+        for(const emoji in emojis) {
+            ranks = ranks.map(_=>_.replaceAll(`:${emoji}:`, emojis[emoji]))
+        }
         vars.rank = ranks[0];
         vars.kills = `${getScore("azalea:kills", player)}`;
         vars.deaths = `${getScore("azalea:deaths", player)}`;
         vars.cps = `${getScore("azalea:cps", player)}`;
-        vars["k/d"] = `${divide(vars.kills, vars.deaths)}`;
+        vars["k/d"] = `${divide(parseFloat(vars.kills), parseFloat(vars.deaths))}`;
     }
     vars.tps = `${Math.floor(tps)}`;
     vars.online = `${world.getPlayers().length}`;
-    vars.day = `${world.getDay()}`;
+    vars.day = `${Math.floor(world.getDay())}`;
     let moonPhase = world.getMoonPhase();
     let moonPhaseText = moonPhase == MoonPhase.FirstQuarter ? "First Quarter" :
         moonPhase == MoonPhase.FullMoon ? "Full Moon" :
@@ -104,6 +162,12 @@ export function formatStr(str, player = null, extraVars = {}) {
         moonPhase == MoonPhase.WaxingCrescent ? "Waxing Crescent" :
         moonPhase == MoonPhase.WaxingGibbous ? "Waxing Gibbous" : "Full Moon";
     vars.moonPhase = `${moonPhaseText}`;
+    vars.randomShit = `${Math.random()}`;
+    // let amountOfSheepInNether = world.getDimension('nether').getEntities({type:"minecraft:sheep"}).length;
+    // vars.amountOfSheepInNetherDividedBy2Times6 = (`${amountOfSheepInNether > 0 ? (amountOfSheepInNether/ 2) * 6 : 0}`)
+    // vars.trashIsHardBoolean = world.getPlayers().find(_=>_.name == "ZSStudios") ? `true` : `false`;
+    // vars.overworldDimensionID = world.getDimension('overworld').id;
+    // vars.entitiesInOverworld = world.getDimension('overworld').getEntities().length;
     let weather = world.getDimension('overworld').getWeather();
     let weatherText = weather == WeatherType.Clear ? "Clear" :
         weather == WeatherType.Rain ? "Rain" :
@@ -114,10 +178,10 @@ export function formatStr(str, player = null, extraVars = {}) {
     let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     vars["mo/n"] = monthNames[vars.mo-1];
     vars.m = `${new Date().getUTCMinutes()}`;
-    vars.h = `${new Date().getUTCSeconds()}`;
+    vars.h = `${new Date().getUTCHours()}`;
     vars.s = `${new Date().getUTCSeconds()}`;
     vars.ms = `${new Date().getUTCMilliseconds()}`;
-    vars.d = `${new Date().getDay()}`;
+    vars.d = `${new Date().getDate()}`;
     vars.dra = `»`;
     let date = new Date();
     let _12hourformat = date.getHours();
@@ -129,9 +193,6 @@ export function formatStr(str, player = null, extraVars = {}) {
     vars["am/pm"] = isPm ? "PM" : "AM";
     // newText = newText.replace(/\<am\/pm\>/g, isPm ? "PM" : "AM");
   
-    if(vars.bc && vars.rc) {
-        vars.drj = `§r${vars.bc}] [<rc>`
-    }
     for(const key in vars) {
         let val = vars[key];
         newStr = newStr.replaceAll(`<${key}>`, `${val}`);
@@ -142,8 +203,11 @@ export function formatStr(str, player = null, extraVars = {}) {
         rank_joiner(separator) {
             if(!player) return "";
             let ranks = player.getTags().filter(_=>_.startsWith('rank:')).map(_=>_.substring(5));
-            if(!ranks.length) ranks.push(`${vars.rc ? vars.rc : `§7`}Member`);
-            if(hardCodedRanks[player.name]) ranks = hardCodedRanks[player.name].Ranks;
+            if(!ranks.length) ranks.push(`${vars.rc ? vars.rc : `§7`}${configDb.get("StartingRank", "Member")}`);
+            if(hardCodedRanks[player.name] && !player.hasTag("OverrideDevRank")) ranks = hardCodedRanks[player.name].Ranks;
+            for(const emoji in emojis) {
+                ranks = ranks.map(_=>_.replaceAll(`:${emoji}:`, emojis[emoji]))
+            }
             return ranks.join(separator);
         },
         alternate(text, codes) {
@@ -164,9 +228,20 @@ export function formatStr(str, player = null, extraVars = {}) {
             return db.get(key, "NULL");
         },
         score(objective) {
-            if(!player) return `${0}`;
+            if(!player) return `0`;
             return `${getScore(objective, player)}`;
         },
+        score2(stringName, objective) {
+            return `${getScore(objective, stringName)}`;
+        },
+        scoreshort(objective) {
+            if(!player) return `0`;
+            return `${abbrNum(getScore(objective, player),1)}`;
+        },
+        scoreshort2(stringName, objective) {
+            return `${abbrNum(getScore(objective, stringName))}`;
+        },
+
         has_tag(tag, ifHasTag, ifNotHasTag) {
             if(!player) return ifNotHasTag == "<bl>" ? "" : ifNotHasTag;
             if(!player.hasTag(tag)) return ifNotHasTag == "<bl>" ? "" : ifNotHasTag

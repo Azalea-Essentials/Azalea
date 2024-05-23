@@ -3,6 +3,9 @@ import { DynamicPropertyDatabase } from "./dynamicPropertyDb";
 import { Database } from "./db";
 import hardCodedRanks from "./hardCodedRanks";
 import { commands } from "./commands";
+import { prismarineDb } from "./lib/@trash/PrismarineDB/prismarine-db";
+import { playerStorage } from "./apis/PlayerStorage";
+import emojis from "./emojis";
 function getPlayer(name) {
     for(const player of world.getPlayers()) {
         if(player.name.toLocaleLowerCase() == name.toLowerCase()) return player;
@@ -43,7 +46,120 @@ function playerID(entity) {
     return score;
 }
 
+let leaderboardDB = prismarineDb.table("Leaderboards");
+function getDbText(lbData) {
+    try {
+        let objective = world.scoreboard.getObjective(lbData.objective);
+        if(!objective) throw new Error("ERROR: Objective not found")
+    } catch {
+        return "§cERROR: Objective not found!";
+    }
+    let objective = world.scoreboard.getObjective(lbData.objective);
+    let onlinePlayers = [];
+    for(const player of world.getPlayers()) {
+        onlinePlayers.push(playerStorage.getID(player));
+    }
+    let scores = [];
+    for(const key of playerStorage.database.keys()) {
+        if(lbData.ignoreOffline && !onlinePlayers.includes(parseInt(key))) continue;
+        let player = playerStorage.getPlayerByID(parseInt(key));
+        let playerScore = player.scores.find(_=>_.objective == lbData.objective);
+        scores.push({score: playerScore && playerScore.score ? playerScore.score : 0, playerID: parseInt(key)});
+    }
+    scores = scores.sort((a,b)=>b.score - a.score);
+    let lbThemeID = lbData.theme ? lbData.theme : 0;
+    let theme = commands.themeMgr.getTheme(lbThemeID);
+    let lbTextList = [];
+    let displayName = `${lbData.displayName ? lbData.displayName : objective.displayName ? objective.displayName : objective.id}`;
+    // lbTextList.push(`${theme.category}`)
+    lbTextList.push(`a`);
+    let configDb = new Database("Config");
+    let scoreIndex = 0;
+    for(const score of scores) {
+        scoreIndex++;
+        let playerData = playerStorage.getPlayerByID(score.playerID);
+        let ranks = playerData.tags.filter(_=>_.startsWith('rank:')).map(_=>_.substring(5));
+        if(!ranks.length) ranks.push(`${theme.defaultRankColor}${configDb.get("StartingRank", "Member")}`);
+        if(hardCodedRanks[playerData.name] && !playerData.tags.includes("OverrideDevRank")) ranks = hardCodedRanks[playerData.name].Ranks;
+        for(const emoji in emojis) {
+            ranks = ranks.map(_=>_.replaceAll(`:${emoji}:`, emojis[emoji]))
+        }
+        let bracketColor = theme.defaultBracketColor;
+        let bracketColorTag = playerData.tags.find(_=>_.startsWith('bracket-color:'));
+        if(bracketColorTag) {
+            bracketColor = bracketColorTag.substring('bracket-color:'.length);
+        }
+        if(hardCodedRanks[playerData.name]) bracketColor = hardCodedRanks[playerData.name].BracketColor
+        let nameColor = theme.defaultNameColor;
+        let nameColorTag = playerData.tags.find(_=>_.startsWith('name-color:'));
+        if(nameColorTag) {
+            nameColor = nameColorTag.substring('name-color:'.length);
+        }
+        if(hardCodedRanks[playerData.name]) bracketColor = hardCodedRanks[playerData.name].BracketColor
+        if(hardCodedRanks[playerData.name]) nameColor = hardCodedRanks[playerData.name].NameColor;
+
+        lbTextList.push(`${theme.leaderboardNumber ? theme.leaderboardNumber : theme.command}${scoreIndex}. §r${bracketColor}[§r${theme.defaultRankColor}${ranks[0]}§r${bracketColor}] §r${nameColor}${playerData.name} §r${bracketColor}: §r${theme.leaderboardScore ? theme.leaderboardScore : theme.command}${score.score}`);
+    }
+    let longestText = JSON.parse(JSON.stringify(lbTextList)).map(_=>{
+        return _.replaceAll('§0', '').replaceAll('§1', '').replaceAll('§2', '').replaceAll('§3', '').replaceAll('§4', '').replaceAll('§5', '').replaceAll('§6', '').replaceAll('§7', '')
+        .replaceAll('§8', '')
+        .replaceAll('§9', '')
+        .replaceAll('§a', '')
+        .replaceAll('§b', '')
+        .replaceAll('§c', '')
+        .replaceAll('§d', '')
+        .replaceAll('§e', '')
+        .replaceAll('§f', '')
+        .replaceAll('§g', '')
+        .replaceAll('§h', '')
+        .replaceAll('§i', '')
+        .replaceAll('§j', '')
+        .replaceAll('§k', '')
+        .replaceAll('§l', '')
+        .replaceAll('§m', '')
+        .replaceAll('§m', '')
+        .replaceAll('§n', '')
+        .replaceAll('§o', '')
+        .replaceAll('§p', '')
+        .replaceAll('§q', '')
+        .replaceAll('§r', '')
+        .replaceAll('§s', '')
+        .replaceAll('§t', '')
+        .replaceAll('§u', '')
+        .replaceAll('§v', '')
+        .replaceAll('§w', '')
+        .replaceAll('§x', '')
+        .replaceAll('§y', '')
+        .replaceAll('§z', '')
+    }).sort((a,b)=>b.length-a.length);
+    let longestTextLength = longestText[0].length;
+    lbTextList[0] = `${theme.category}+${"-".repeat(Math.floor(longestTextLength / 2) - Math.floor(displayName.length / 2))} §r${theme.header ? theme.header : theme.command}§l${displayName} §r${theme.category}${"-".repeat(Math.floor(longestTextLength / 2) - Math.floor(displayName.length / 2))}+`
+    return lbTextList.join('\n§r')
+}
 system.runInterval(()=>{
+    // let leaderboards = leaderboardDB.findDocuments(null);
+    // for(const leaderboard of leaderboards) {
+    //     try {
+    //         if(!leaderboard.data.entityId) throw new Error("No Entity");
+    //         let entity = world.getEntity(leaderboard.data.entityId);
+    //         if(!entity) throw new Error("No Entity");
+    //         entity.nameTag = getDbText(leaderboard.data);
+    //     } catch(e) {
+    //         // console.warn(e)
+    //         try {
+    //             let dimension = world.getDimension(leaderboard.data.loc.dimension);
+    //             let entity = dimension.spawnEntity("azalea:floating_text", {
+    //                 x: leaderboard.data.loc.x,
+    //                 y: leaderboard.data.loc.y,
+    //                 z: leaderboard.data.loc.z
+    //             });
+    //             leaderboard.data.entityId = entity.id;
+    //             leaderboardDB.overwriteDataByID(leaderboard.id, leaderboard.data);
+    //             entity.nameTag = getDbText(leaderboard.data);
+    //         } catch {}
+    //     }
+    // }
+    // return;
     let LBOfflineDb = new DynamicPropertyDatabase("LBOffline");
     let leaderboardsDB = new Database("LB");
     leaderboards = leaderboardsDB.get("leaderboards") ? JSON.parse(leaderboardsDB.get("leaderboards")) : [];
@@ -159,7 +275,7 @@ system.runInterval(()=>{
                 }
             } else {
                 let overworld = world.getDimension(leaderboard.dimension ? leaderboard.dimension : 'overworld');
-                let entity = overworld.spawnEntity("minecraft:rabbit", {
+                let entity = overworld.spawnEntity("azalea:floating_text", {
                     x: leaderboard.loc.x,
                     y: leaderboard.loc.y,
                     z: leaderboard.loc.z,

@@ -2,11 +2,11 @@ import { ConfiguratorSub } from '../configuratorOptions';
 import { Database } from '../db';
 import { ActionForm } from '../form_func';
 import moment from '../moment';
+import { uiManager } from '../uis';
 
 export const REVIEWS = function() {
-    return new ConfiguratorSub("§6Reviews", "textures/azalea_icons/10")
-        .setCallback((player)=>{
-            let actionForm = new ActionForm();
+    uiManager.addUI("Azalea0.9/ReviewViewer", (player)=>{
+        let actionForm = new ActionForm();
             let text = [];
             let reviews = new Database("Reviews");
             let reviewList = reviews.get("Reviews", []);
@@ -26,5 +26,9 @@ export const REVIEWS = function() {
             actionForm.button("Ok", null, ()=>{})
             actionForm.body(text.join('\n§r'));
             actionForm.show(player, false, ()=>{})
+    })
+    return new ConfiguratorSub("§6Reviews", "textures/azalea_icons/10")
+        .setCallback((player)=>{
+            
         })
 }

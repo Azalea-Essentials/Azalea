@@ -8,7 +8,7 @@ export default function addChatrankFormatCommand(commands) {
         admin: true,
         azaleaVersion: "0.9",
         async onRun(msg, args, theme, response) {
-            // if(!isAdmin(msg.sender)) return response(`ERROR You dont have admin`);
+            if(!isAdmin(msg.sender, "chatoptions.edit")) return response(`ERROR You are missing the required permissions: chatoptions.edit`);
             let configDb = new Database("Config");
             if(!args.length) {
                 let formatted = `${configDb.get("ChatrankFormat").replace(/\§/g,"§r&")}`;

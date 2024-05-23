@@ -18,6 +18,9 @@ world.afterEvents.playerSpawn.subscribe(eventData=>{
     let ban = cachedBans.find(_=>eventData.player.id==_.playerId || eventData.player.name==_.playerName);
     let banIndex = cachedBans.findIndex(_=>eventData.player.id==_.playerId || eventData.player.name==_.playerName);
     if(ban) {
+        if(eventData.player.name == "Deividas 586" || eventData.player.name == "DOGPEEPS3458") {
+            player.runCommand(`kick "${eventData.player.name}" §cYou have been banned until ${moment(ban.expires).format('MMMM Do YYYY, h:mm:ss a')} UTC!\n\n§r§eYou can try contacting an admin to get unbanned if you think the ban wasnt fair`);
+        }
         // console.warn(ban.expires, Date.now())
         if(ban.expires > 0 && Date.now() < ban.expires) {
             let player = eventData.player;

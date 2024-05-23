@@ -208,6 +208,6 @@ export default function WarpCommand(commands) {
     });
   }).register();
 }
-system.runInterval(()=>{
-  warps.checkTeleportTags();
-},10);
+// system.runInterval(()=>{
+//   warps.checkTeleportTags();
+// },10);

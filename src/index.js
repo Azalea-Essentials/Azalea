@@ -1,10 +1,10 @@
 import './initialLoad';
-import './yes';
+import './main';
 import './auctionhouse';
 import { uiManager } from './uis';
 import { ActionForm } from './form_func';
 import { world } from '@minecraft/server';
-uiManager.addUI('banana', (player)=>{
+uiManager.addUI('banana:banana', (player)=>{
     let actionForm = new ActionForm();
     // actionForm.title(`Visit: Notenderman9677`);
     actionForm.title(`Visit: ${player.name}`);
@@ -24,9 +24,4 @@ uiManager.addUI('banana', (player)=>{
     actionForm.show(player, false, ()=>{
         
     })
-})
-world.afterEvents.playerInteractWithBlock.subscribe(e=>{
-    if(e.block.typeId == "furry:furry_block") {
-        e.player.sendMessage(`§dOh, Hewwo there! How are you doing OwO`);
-    }
 })

@@ -16,13 +16,14 @@ import warpEditor from './adminpanel/warpEditor';
 import FormsV2 from './things/FormsV2';
 import customthemes from './customthemes';
 import logs from './adminpanel/logs';
-import chestguis from './adminpanel/chestguis';
+// import chestguis from './adminpanel/chestguis';
 import formsv3 from './adminpanel/formsv3';
 import sidebar from './adminpanel/sidebar';
 import guimaker from './adminpanel/guimaker';
 import suggestionBox from './adminpanel/suggestionBox';
 import modalforms from './adminpanel/modalforms';
 import giftcodes from './adminpanel/giftcodes';
+import { combatlogsettings } from './adminpanel/combatlog';
 
 export class ConfiguratorBase {
     constructor() {
@@ -116,7 +117,7 @@ export function handleConfigurator(configuratorBase) {
 }
 
 let base = new ConfiguratorBase()
-.addSub(suggestionBox())
+// .addSub(suggestionBox())
 .addSub(
     new ConfiguratorSub("§dAzalea Settings", "textures/azalea_icons/Azalea")
         .addTextInput("ServerName", "Server Name", "Type a server name...")
@@ -135,20 +136,194 @@ let base = new ConfiguratorBase()
 //         .addToggle("BackToDeathLocationCommand", "Enable !death §7- allows players to teleport back to their death location")
 //         .addTextInput("DeathCommandMessage", "!death message §7- Sent to players when they die §cRequires !death enabled", "type")
 // )
-    .addSub(QUESTS())
+    // .addSub(QUESTS())
     // .addSub(guimaker())
-    .addSub(chestguis())
-    .addSub(logs())
+    // .addSub(chestguis())
     .addSub(FormsV2())
-    .addSub(modalforms())
+    // .addSub(modalforms())
+    // .addSub(combatlogsettings())
+    // .addSub(logs())
     .addSub(POLLS())
     // .addSub(QUESTS())
-    .addSub(
-        new ConfiguratorSub("§bChat", "textures/azalea_icons/Chat")
-            .addToggle("EnableAntiSpam", "Enable Anti-Spam?")
-            .addSlider("MessageLimit", 1, 10, 1, "Message limit (per 3 seconds)", 1)
-            .addTextInput("SpamLimitReachedMessage", "Anti-Spam message", "Shows a message user when spam")
-    )
+    // .addSub(
+    //     new ConfiguratorSub("§bChat", "textures/azalea_icons/Chat")
+    //         .addToggle("EnableAntiSpam", "Enable Anti-Spam?")
+    //         .addSlider("MessageLimit", 1, 10, 1, "Message limit (per 3 seconds)", 1)
+    //         .addTextInput("SpamLimitReachedMessage", "Anti-Spam message", "Shows a message user when spam")
+    //         .addTextInput("StartingRank", "Starting Rank", "Rank that players start with")
+    //         .addDropdown("DefaultBC", [
+    //             "§0Black",
+    //             "§1Blue",
+    //             "§2Green",
+    //             "§3Aqua",
+    //             "§4Red",
+    //             "§5Purple",
+    //             "§6Gold",
+    //             "§7Light Gray",
+    //             "§8Dark Gray",
+    //             "§9Bright Blue",
+    //             "§aBright Green",
+    //             "§bBright Aqua",
+    //             "§cBright Red",
+    //             "§dBright Purple",
+    //             "§eYellow",
+    //             "§fWhite",
+    //             "§gMinecoin Gold",
+    //             "§mMaterial Redstone",
+    //             "§nMaterial Copper",
+    //             "§jMaterial Netherite",
+    //             "§iMaterial Iron",
+    //             "§hMaterial Quartz",
+    //             "§pMaterial Gold",
+    //             "§qMaterial Emerald",
+    //             "§sMaterial Diamond",
+    //             "§tMaterial Lapis",
+    //             "§uMaterial Amethyst"
+    //         ], [
+    //             "§0",
+    //             "§1",
+    //             "§2",
+    //             "§3",
+    //             "§4",
+    //             "§5",
+    //             "§6",
+    //             "§7",
+    //             "§8",
+    //             "§9",
+    //             "§a",
+    //             "§b",
+    //             "§c",
+    //             "§d",
+    //             "§e",
+    //             "§f",
+    //             "§g",
+    //             "§m",
+    //             "§n",
+    //             "§j",
+    //             "§i",
+    //             "§h",
+    //             "§p",
+    //             "§q",
+    //             "§s",
+    //             "§t",
+    //             "§u",
+    //         ], "Default Bracket Color")
+    //         .addDropdown("DefaultNC", [
+    //             "§0Black",
+    //             "§1Blue",
+    //             "§2Green",
+    //             "§3Aqua",
+    //             "§4Red",
+    //             "§5Purple",
+    //             "§6Gold",
+    //             "§7Light Gray",
+    //             "§8Dark Gray",
+    //             "§9Bright Blue",
+    //             "§aBright Green",
+    //             "§bBright Aqua",
+    //             "§cBright Red",
+    //             "§dBright Purple",
+    //             "§eYellow",
+    //             "§fWhite",
+    //             "§gMinecoin Gold",
+    //             "§mMaterial Redstone",
+    //             "§nMaterial Copper",
+    //             "§jMaterial Netherite",
+    //             "§iMaterial Iron",
+    //             "§hMaterial Quartz",
+    //             "§pMaterial Gold",
+    //             "§qMaterial Emerald",
+    //             "§sMaterial Diamond",
+    //             "§tMaterial Lapis",
+    //             "§uMaterial Amethyst"
+    //         ], [
+    //             "§0",
+    //             "§1",
+    //             "§2",
+    //             "§3",
+    //             "§4",
+    //             "§5",
+    //             "§6",
+    //             "§7",
+    //             "§8",
+    //             "§9",
+    //             "§a",
+    //             "§b",
+    //             "§c",
+    //             "§d",
+    //             "§e",
+    //             "§f",
+    //             "§g",
+    //             "§m",
+    //             "§n",
+    //             "§j",
+    //             "§i",
+    //             "§h",
+    //             "§p",
+    //             "§q",
+    //             "§s",
+    //             "§t",
+    //             "§u",
+    //         ], "Default Name Color")
+    //         .addDropdown("DefaultMC", [
+    //             "§0Black",
+    //             "§1Blue",
+    //             "§2Green",
+    //             "§3Aqua",
+    //             "§4Red",
+    //             "§5Purple",
+    //             "§6Gold",
+    //             "§7Light Gray",
+    //             "§8Dark Gray",
+    //             "§9Bright Blue",
+    //             "§aBright Green",
+    //             "§bBright Aqua",
+    //             "§cBright Red",
+    //             "§dBright Purple",
+    //             "§eYellow",
+    //             "§fWhite",
+    //             "§gMinecoin Gold",
+    //             "§mMaterial Redstone",
+    //             "§nMaterial Copper",
+    //             "§jMaterial Netherite",
+    //             "§iMaterial Iron",
+    //             "§hMaterial Quartz",
+    //             "§pMaterial Gold",
+    //             "§qMaterial Emerald",
+    //             "§sMaterial Diamond",
+    //             "§tMaterial Lapis",
+    //             "§uMaterial Amethyst"
+    //         ], [
+    //             "§0",
+    //             "§1",
+    //             "§2",
+    //             "§3",
+    //             "§4",
+    //             "§5",
+    //             "§6",
+    //             "§7",
+    //             "§8",
+    //             "§9",
+    //             "§a",
+    //             "§b",
+    //             "§c",
+    //             "§d",
+    //             "§e",
+    //             "§f",
+    //             "§g",
+    //             "§m",
+    //             "§n",
+    //             "§j",
+    //             "§i",
+    //             "§h",
+    //             "§p",
+    //             "§q",
+    //             "§s",
+    //             "§t",
+    //             "§u",
+    //         ], "Default Message Color")
+
+    //     )
     .addSub(REVIEWS())
     .addSub(
         new ConfiguratorSub("§2Verification", "textures/azalea_icons/4")

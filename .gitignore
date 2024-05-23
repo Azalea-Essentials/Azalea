@@ -142,3 +142,5 @@ dist
 package-lock.json
 package-lock.json
 ws.js
+bds2
+bds-old

@@ -20,6 +20,9 @@ import { openShopUI } from './shopui';
 import { uiManager } from './uis';
 import icons from './icons';
 import { openConfigUI } from './configuratorBase';
+import { OptionTypes, options22 } from './configuratorOptions22';
+import { DynamicPropertyDatabase } from './dynamicPropertyDb';
+import { worldTags } from './apis/WorldTags';
 
 world.afterEvents.playerSpawn.subscribe((e) => {
 })
@@ -79,32 +82,41 @@ world.afterEvents.playerLeave.subscribe(e => {
 
 //     })
 // }
-uiManager.addUI("Azalea1.1/Warps", (player) => {
-    let warps2 = warps.getAllWarps();
-    let warpUIDB = new Database("WarpUI");
-    let warpUI = new ActionForm();
-    warpUI.title(warpUIDB.get("Title", "§dWarp UI") ? warpUIDB.get("Title", "§dWarp UI") : "§dWarp UI");
-    if (!warps2.length) {
-        warpUI.title("Warps - Not Configured");
-        warpUI.body("§cIt looks like warps are not configured on this server.\n§bFor admins: do §e!spawn set §bto set spawn, and §e!warp set <name> §bto set a warp.");
-        warpUI.button("§cLeave", "textures/azalea_icons/2", (player, i) => { })
-    }
-    for (const warpName of warps2) {
-        let warpData = warps.get2(warpName);
-        let icon = icons.find(_ => _.name == warpData.icon);
-        if (icon && icon.path) icon = icon.path
-        else icon = null;
-        warpUI.button(`§a${warpData.displayName ? warpData.displayName : warpName == "spawn" ? "§dWorld Spawn" : warpName}`, icon ? icon : warpName == "spawn" ? `textures/azalea_icons/icontextures/nether_star` : `textures/azalea_icons/icontextures/ender_pearl`, (player) => {
-            warps.tpDB(player, warpName);
-        })
-    }
-    warpUI.show(player, false, (player, response) => { });
 
-})
 world.beforeEvents.itemUse.subscribe((e) => {
+    if(!(e.source instanceof Player)) return;
     system.run(() => {
+        if(e.itemStack.typeId == 'azalea:floating_text_editor') {
+            let entities1 = worldTags.getTags().filter(_=>_.startsWith(`floating_text:`)).map(_=>_.replace(`floating_text:`, ``));
+            let entities = [];
+            for(const entity of entities1) {
+                try {
+                    let entity2 = world.getEntity(entity);
+                    if(!entity2) continue;
+                    entities.push(entity2);
+                } catch {}
+            }
+            let form = new ActionForm();
+            for(const entity of entities) {
+                form.button(entity.nameTag, null, (player)=>{
+                    let modalForm = new ModalForm();
+                    modalForm.title("Code Editor");
+                    modalForm.textField("M", "Type some text...", entity.nameTag)
+                    modalForm.show(player, false, (player, response)=>{
+                        if(response.formValues[0] || response.formValues[0].toLowerCase().includes('trash')) entity.nameTag = response.formValues[0];
+                    })
+                })
+            }
+            form.show(e.source, false, (player, response)=>{
+
+            })
+        }
         if (e.itemStack.typeId == "azalea:player_shop") {
             uiManager.open("Azalea0.9.1/PlayerShop/Main", e.source)
+        }
+        if(e.itemStack.typeId == "azalea:boost_feather") {
+            e.source.applyKnockback(e.source.getViewDirection().x, e.source.getViewDirection().z, 2.5, 1.5)
+            // e.source.applyKnockback(e.source.getViewDirection().x, e.source.getViewDirection().z, 1, -100)
         }
         if(e.itemStack.typeId == "azalea:tp_requests") {
             uiManager.open("Azalea2.0/TeleportRequests/Root", e.source)
@@ -125,250 +137,98 @@ world.beforeEvents.itemUse.subscribe((e) => {
         //     e.source.getComponent('inventory').container.setItem(e.source.selectedSlot, e.itemStack)
         //     return e.source.sendMessage("§bClick again to open admin panel!");
         // }
-        if (e.itemStack.typeId == 'azalea:config_ui' && isAdmin(e.source)) {
-            // Enable this line if you really hate config UI!
-            // return openConfigPanel(e.source);
-            let configOptions = baseConfigMenu.options;
-            if (e.source.hasTag("experiment-1")) {
-                // let mainForm = new ActionForm()
-                //     .title("Config UI V2");
-                // mainForm.button("Panel Settings", "textures/azalea_icons/Settings", (player) => {
-                //     let form2 = new ActionForm();
-                //     form2.button("Hidden Items", null, (player)=>{
-                //         let modal = new ModalForm();
-                //         for(const key of keys) {
-                //             modal.toggle(key, hiddenItems.includes(keys.indexOf(key)) ? true : false);
-                //         }
-                //         modal.show(player, false, (player, response)=>{
-                //             hiddenItems = [];
-                //             let i = -1;
-                //             for(const bool of response.formValues) {
-                //                 i++;
-                //                 if(bool) hiddenItems.push(i)
-                //                 e.itemStack.setLore([
-                //                     `I:${itemArangement.map(_=>_.toString()).join(';')}`,
-                //                     `H:${hiddenItems.map(_=>_.toString()).join(';')}`
-                //                 ])
-                //                 let inventory = e.source.getComponent('inventory');
-                //                 inventory.container.setItem(e.source.selectedSlot, e.itemStack);
-                //             }
-                //         })
-                //     })
-                //     form2.show(player, false, ()=>{})
-                // })
-                // mainForm.show(e.source, true)
-                openConfigUI(e.source, baseConfigMenu.toOptions(), "Config UI V2")
-                return;
-            }
-
-            e.cancel = true;
-            let player = e.source;
-            // let e = e2;
-            system.run(() => {
-                let actionForm = new ActionFormData();
-                actionForm.title(`${player.hasTag("light-mode") ? "§l§i§g§h§t" : ""}${"§r§dConfig Menu"}`);
-                // actionForm.body("");
-                let keys = [];
-                for (const key of Object.keys(configOptions)) {
-                    if(key.toLowerCase().includes('quests')) {
-                        let cfgDb = new Database("Config");
-                        let enabled = cfgDb.get("QuestsEnabled", "false") == "true";
-                        if(!enabled) continue;
-                    }
-                    keys.push(key);
-                    // if (key == "§eDeveloper Settings" && (!e.itemStack.getLore() || !e.itemStack.getLore().length || !e.itemStack.getLore().includes("§r§bDevPanel"))) continue;
-                    actionForm.button(key, configOptions[key].icon);
-                }
-                // let player = e.source;
-                // let configOptions2 = configOptions;
-                actionForm.show(player).then((res) => {
-                    if (res.canceled) return;
-                    let cfg = configOptions[keys[res.selection]];
-                    if (cfg.type && cfg.type == "func") {
-                        cfg.options[0].fn(player, res);
-                        return;
-                    }
-                    if (cfg.type && cfg.type == "hardcoded-playermenu") {
-                        let action2 = new ActionFormData();
-                        let btns = [];
-                        for (const player of world.getPlayers()) {
-                            btns.push(player);
-                            action2.button(`${player.name} ${isAdmin(player) ? "§t(ADMIN)" : "§n(MEMBER)"}`);
-                        }
-                        action2.show(player).then(res2 => {
-                            if (res2.canceled) return;
-                            let action3 = new ActionFormData();
-                            action3.button("Color info");
-                            action3.button("Ranks");
-                            action3.show(player).then(res3 => {
-                                if (res3.canceled) return;
-                                if (res3.selection == 0) {
-                                    let modal = new ModalFormData();
-                                    let colors = [
-                                        "Default Color",
-                                        "§0Color 0",
-                                        "§1Color 1",
-                                        "§2Color 2",
-                                        "§3Color 3",
-                                        "§4Color 4",
-                                        "§5Color 5",
-                                        "§6Color 6",
-                                        "§7Color 7",
-                                        "§8Color 8",
-                                        "§9Color 9",
-                                        "§aColor A",
-                                        "§bColor B",
-                                        "§cColor C",
-                                        "§dColor D",
-                                        "§eColor E",
-                                        "§fColor F",
-                                        "§gColor G",
-                                        "§hColor H",
-                                        "§jColor J",
-                                        "§mColor M",
-                                        "§nColor N",
-                                        "§tColor T",
-                                        "§uColor U",
-                                        "§iColor I",
-                                        "§pColor P",
-                                        "§qColor Q"
-                                    ]
-                                    let nameColor = btns[res2.selection].getTags().find(_ => _.startsWith('name-color:'));
-                                    let nameIndex = nameColor ? colors.findIndex(_ => _.startsWith(nameColor.substring('name-color:'.length))) : 0;
-                                    modal.dropdown("Name color", colors, nameIndex);
-                                    let messageColor = btns[res2.selection].getTags().find(_ => _.startsWith('message-color:'));
-                                    let messageIndex = messageColor ? colors.findIndex(_ => _.startsWith(messageColor.substring('message-color:'.length))) : 0;
-                                    modal.dropdown("Message color", colors, messageIndex);
-                                    let bracketColor = btns[res2.selection].getTags().find(_ => _.startsWith('bracket-color:'));
-                                    let bracketIindex = bracketColor ? colors.findIndex(_ => _.startsWith(bracketColor.substring('bracket-color:'.length))) : 0;
-                                    modal.dropdown("Bracket color", colors, bracketIindex);
-                                    let dropdowns = ["name-color:", "message-color:", "bracket-color:"];
-                                    modal.show(player).then(res => {
-                                        if (res.canceled) return;
-                                        for (let i = 0; i < res.formValues.length; i++) {
-                                            let value = res.formValues[i];
-                                            if (typeof value == 'number') {
-                                                let color = colors[value];
-                                                if (!color.startsWith('D')) {
-                                                    let tags = btns[res2.selection].getTags().filter(_ => _.startsWith(dropdowns[i]));
-                                                    if (tags && tags.length) {
-                                                        for (const tag of tags) {
-                                                            btns[res2.selection].removeTag(tag);
-                                                        }
-                                                    }
-                                                    btns[res2.selection].addTag(`${dropdowns[i]}${colors[value][0]}${colors[value][1]}`);
-                                                } else {
-                                                    let tags = btns[res2.selection].getTags().filter(_ => _.startsWith(dropdowns[i]));
-                                                    if (tags && tags.length) {
-                                                        for (const tag of tags) {
-                                                            btns[res2.selection].removeTag(tag);
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    })
-                                } else if (res3.selection == 1) {
-                                    let player2 = btns[res2.selection];
-                                    let rankActionForm = new ActionFormData();
-                                    rankActionForm.title(`${player2.name} - Rank Actions`);
-                                    rankActionForm.button(`Add rank`);
-                                    rankActionForm.button(`Remove rank`);
-                                    rankActionForm.show(player).then(res4 => {
-                                        if (res4.canceled) return;
-                                        if (res4.selection == 0) {
-                                            let modal2 = new ModalFormData();
-                                            modal2.textField("Rank name (you can use & instead of the normal character for color codes)", "Type a rank name");
-                                            modal2.show(player).then(modal2Response => {
-                                                if (modal2Response.canceled) return;
-                                                let rankName = modal2Response.formValues[0];
-                                                if (rankName) {
-                                                    player2.addTag(`rank:${rankName.replace(/\&/g, "§")}`);
-                                                    player2.sendMessage(`You have been given a rank: ${rankName}`);
-                                                }
-                                            })
-                                        } else if (res4.selection == 1) {
-                                            let action3 = new ActionFormData();
-                                            let ranks = player2.getTags().filter(_ => _.startsWith('rank:')).map(_ => _.substring(5));
-                                            for (const rank of ranks) {
-                                                action3.button(rank);
-                                            }
-                                            action3.show(player).then(res17million => {
-                                                if (res17million.canceled) return;
-                                                let rank = ranks[res17million.selection];
-                                                player2.removeTag(`rank:${rank}`);
-                                            })
-                                        }
-                                    });
-                                }
-                            })
-                        })
-                        return;
-                    }
-                    let modal = new ModalFormData();
+        if(e.itemStack.typeId == "azalea:config_ui") {
+            system.run(()=>{
+                function openOptionsPanel(player, panelData) {
+                    let modalForm = new ModalForm();
+                    modalForm.title(panelData.title);
                     let cfgDb = new Database("Config");
-                    let cmdtoggles = world.scoreboard.getObjective("cmdtoggles");
-                    if (!cmdtoggles) cmdtoggles = world.scoreboard.addObjective("cmdtoggles");
-                    for (const option of cfg.options) {
-                        if (option.type == "toggle") {
-                            let optionValue = cfgDb.get(option.key) ? cfgDb.get(option.key) : null;
-                            modal.toggle(option.label, optionValue ? optionValue == "true" ? true : false : false);
-                        } else if (option.type == "text-input") {
-                            let optionValue = cfgDb.get(option.key) ? cfgDb.get(option.key) : null;
-                            modal.textField(option.label, option.placeholder, optionValue);
-                        } else if (option.type == "dropdown") {
-                            let optionValue = cfgDb.get(option.key) ? cfgDb.get(option.key) : null;
-                            let index = option.keyOptions.findIndex(_ => _ == optionValue);
-                            modal.dropdown(option.label, ["Select an option", ...option.cliOptions], index < 0 ? null : index + 1);
-                        } else if (option.type == "dropdown-command") {
-                            /*
-            if (cmdStatus == 0) response(`TEXT ${theme.successColor}§l[TOGGLED] §r${theme.successColor}Default permissions`)
-            else if (cmdStatus == 1) response(`TEXT ${theme.warningColor}§l[TOGGLED] §r${theme.warningColor}Admins only`)
-            else if (cmdStatus == 2) response(`TEXT ${theme.errorColor}§l[TOGGLED] §r${theme.errorColor}Completely disabled`)
-            else if (cmdStatus == 3) response(`TEXT ${theme.infoColor}§l[TOGGLED] §r${theme.infoColor}Enabled for everyone (BETA)`)
-                            */
-                            let toggleScore = 0;
-                            try {
-                                toggleScore = cmdtoggles.getScore(option.command);
-                                if (!toggleScore) toggleScore = 0;
-                            } catch {
-                                toggleScore = 0;
-                            }
-                            modal.dropdown("!" + option.command + " toggle", ["Default permissions", "Force admins only", "Completely disabled", "Enabled for everyone"], toggleScore);
-                        } else if (option.type == "slider") {
-                            modal.slider(option.label, option.minVal, option.maxVal, option.step, cfgDb.get(option.key) == `NUM:${option.default}` ? option.default : cfgDb.get(option.key) ? parseInt(cfgDb.get(option.key).substring(4)) : option.default);
+                    let configData = cfgDb.allData;
+                    for(const option of panelData.options) {
+                        if(option.type == OptionTypes.Dropdown) {
+                            let keySelected = configData[option.id] ? configData[option.id] : option.default ? option.default : "unknownkey";
+                            let displayOptionI = option.keys.indexOf(keySelected);
+                            let displayOption = option.display[option.keys.indexOf(keySelected)];
+                            let displayOptions = ["Select an option...", ...option.display];
+                            modalForm.dropdown(option.label, displayOptions.map(_=>{
+                                return {
+                                    callback() {},
+                                    option: _
+                                }
+                            }), displayOptionI + 1);
+                        } else if(option.type == OptionTypes.Slider) {
+                            let num = typeof configData[option.id] == "string" && configData[option.id].startsWith('NUM:') ? parseInt(configData[option.id].substring(4)) : null
+                            let min = option.min ? option.min : 1;
+                            let max = option.max ? option.max : 10;
+                            let step = option.step ? option.step : 1;
+                            let val = num ? num : option.default ? option.default : min;
+                            modalForm.slider(option.label, min, max, step, val);
+                        } else if(option.type == OptionTypes.Toggle) {
+                            let val = configData[option.id] && typeof configData[option.id] == "string" ? configData[option.id] == "true" ? true : false : option.default ? option.default : false;
+                            modalForm.toggle(option.label, val);
+                        } else if(option.type == OptionTypes.TextField) {
+                            let val = configData[option.id] ? configData[option.id] : option.default ? option.default : undefined;
+                            modalForm.textField(option.label, option.placeholder ? option.placeholder : "Type something...", val);
                         }
                     }
-                    modal.title(`${player.hasTag("light-mode") ? `§l§i§g§h§t` : ``}§r${"Config menu - " + keys[res.selection]}`)
-                    modal.show(player).then(result => {
-                        if (result.canceled) return;
-                        for (let i = 0; i < result.formValues.length; i++) {
-                            let formValue = result.formValues[i];
-                            if (typeof formValue == 'string') {
-                                console.warn(cfg.options[i].key);
-                                let currVal = cfgDb.get(cfg.options[i].key);
-                                if (formValue != currVal)
-                                    cfgDb.set(cfg.options[i].key, formValue);
-                            } else if (typeof formValue == 'boolean') {
-                                cfgDb.set(cfg.options[i].key, formValue ? "true" : "false");
-                            } else if (typeof formValue == "number") {
-                                if (cfg.options[i].type == "dropdown-command") {
-                                    cmdtoggles.setScore(cfg.options[i].command, formValue);
-                                } else if (cfg.options[i].type == "slider") {
-                                    cfgDb.set(cfg.options[i].key, `NUM:${formValue}`);
+                    modalForm.show(player, false, (player, response)=>{
+                        let i = -1;
+                        for(const option of response.formValues) {
+                            i++;
+                            let configOption = panelData.options[i];
+                            if(configOption.type == OptionTypes.Toggle) {
+                                if(option) {
+                                    configData[configOption.id] = "true";
                                 } else {
-                                    if (formValue > 0) {
-                                        cfgDb.set(cfg.options[i].key, cfg.options[i].keyOptions[formValue - 1]);
-
-                                    }
-
+                                    configData[configOption.id] = "false";
+                                }
+                            } else if(configOption.type == OptionTypes.Dropdown) {
+                                if(option) {
+                                    configData[configOption.id] = option == 0 ? null : configOption.keys[option - 1];
+                                } else {
+                                    configData[configOption.id] = null;
+                                }
+                            } else if(configOption.type == OptionTypes.TextField) {
+                                if(option) {
+                                    configData[configOption.id] = option;
+                                } else {
+                                    configData[configOption.id] = null;
+                                }
+                            } else if(configOption.type == OptionTypes.Slider) {
+                                if(option) {
+                                    configData[configOption.id] = `NUM:${option}`;
+                                } else {
+                                    configData[configOption.id] = `NUM:${min}`;
                                 }
                             }
+                        }
+                        for(const key in configData) {
+                            cfgDb.set(key, configData[key])
                         }
                     })
-                })
-
-            })
+                }
+                function openPanel(player, panelData) {
+                    let actionForm = new ActionForm();
+                    actionForm.title(`${panelData.title ? panelData.title : "Config"} §7- §bV${panelData.version}`)
+                    for(const panelOption of panelData.options) {
+                        if(panelOption.permRequired && !isAdmin(player, panelOption.permRequired)) continue;
+                        actionForm.button(`${panelOption.name}${panelOption.subtext ? `\n§7${panelOption.subtext}` : ``}`, panelOption.icon ? panelOption.icon : null, (player)=>{
+                            if(panelOption.type == "panel") {
+                                openPanel(player, panelOption.panel);
+                            } else if(panelOption.type == "options_menu") {
+                                openOptionsPanel(player, panelOption.panel);
+                            } else if(panelOption.type == OptionTypes.ui) {
+                                uiManager.open(panelOption.ui, player);
+                            }
+                        });
+                    }
+                    actionForm.show(player, false, (player, response)=>{
+    
+                    })
+                }
+                openPanel(e.source, options22);
+    
+            });
         }
     });
 })
