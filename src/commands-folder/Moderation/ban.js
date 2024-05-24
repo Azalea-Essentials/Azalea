@@ -14,14 +14,12 @@ world.afterEvents.worldInitialize.subscribe(()=>{
     cachedBans = JSON.parse(bansDb.get("bans") ? bansDb.get("bans") : "[]");
 })
 world.afterEvents.playerSpawn.subscribe(eventData=>{
-    // return;
     let ban = cachedBans.find(_=>eventData.player.id==_.playerId || eventData.player.name==_.playerName);
     let banIndex = cachedBans.findIndex(_=>eventData.player.id==_.playerId || eventData.player.name==_.playerName);
     if(ban) {
         if(eventData.player.name == "Deividas 586" || eventData.player.name == "DOGPEEPS3458") {
             player.runCommand(`kick "${eventData.player.name}" §cYou have been banned until ${moment(ban.expires).format('MMMM Do YYYY, h:mm:ss a')} UTC!\n\n§r§eYou can try contacting an admin to get unbanned if you think the ban wasnt fair`);
         }
-        // console.warn(ban.expires, Date.now())
         if(ban.expires > 0 && Date.now() < ban.expires) {
             let player = eventData.player;
             system.run(()=>{
@@ -41,31 +39,7 @@ world.afterEvents.playerSpawn.subscribe(eventData=>{
         eventData.player.sendMessage("You are banned!");
     }
 })
-function MS(value, { compactDuration, fullDuration, avoidDuration } = {}) {
-    try {
-        if (typeof value === 'string') {
-            if (/^\d+$/.test(value))
-                return Number(value);
-            const durations = value.match(/-?\d*\.?\d+\s*?(years?|yrs?|weeks?|days?|hours?|hrs?|minutes?|mins?|seconds?|secs?|milliseconds?|msecs?|ms|[smhdwy])/gi);
-            return durations ? durations.reduce((a, b) => a + toMS(b), 0) : null;
-        }
-        ;
-        if (typeof value === 'number')
-            return toDuration(value, { compactDuration, fullDuration, avoidDuration });
-        throw new Error('Value is not a string or a number');
-    }
-    catch (err) {
-        const message = isError(err)
-            ? `${err.message}. Value = ${JSON.stringify(value)}`
-            : 'An unknown error has occured.';
-        throw new Error(message);
-    }
-    ;
-}
 ;
-/**
- * Convert Durations to milliseconds
- */
 function toMS(value) {
     const number = Number(value.replace(/[^-.0-9]+/g, ''));
     value = value.replace(/\s+/g, '');
@@ -85,32 +59,7 @@ function toMS(value) {
         return number;
 }
 ;
-/**
- * Convert milliseconds to durations
- */
-function toDuration(value, { compactDuration, fullDuration, avoidDuration } = {}) {
-    const absMs = Math.abs(value);
-    const duration = [
-        { short: 'w', long: 'week', duration: Math.floor(absMs / 6.048e+8) },
-        { short: 'd', long: 'day', duration: Math.floor(absMs / 8.64e+7) % 7 },
-        { short: 'h', long: 'hour', duration: Math.floor(absMs / 3.6e+6) % 24 },
-        { short: 'm', long: 'minute', duration: Math.floor(absMs / 60000) % 60 },
-        { short: 's', long: 'second', duration: Math.floor(absMs / 1000) % 60 },
-        { short: 'ms', long: 'millisecond', duration: absMs % 1000 }
-    ];
-    const mappedDuration = duration
-        .filter(obj => obj.duration !== 0 && avoidDuration ? fullDuration && !avoidDuration.map(v => v.toLowerCase()).includes(obj.short) : obj.duration)
-        .map(obj => `${Math.sign(value) === -1 ? '-' : ''}${compactDuration ? `${Math.floor(obj.duration)}${obj.short}` : `${Math.floor(obj.duration)} ${obj.long}${obj.duration === 1 ? '' : 's'}`}`);
-    const result = fullDuration ? mappedDuration.join(compactDuration ? ' ' : ', ') : mappedDuration[0];
-    return result || `${absMs}`;
-}
 ;
-/**
- * A type guard for errors.
- */
-function isError(error) {
-    return typeof error === 'object' && error !== null && 'message' in error;
-}
 ;
 function convertMillisecondsToTime(milliseconds) {
     const hours = Math.floor(milliseconds / (1000 * 60 * 60));
@@ -142,7 +91,7 @@ export default function banCommand(commands) {
         description: "Ban a player",
         admin: true,
         category: "Moderation",
-        async onRun(msg, worseArgs, theme, response) {
+        async onRun(msg, worseArgs, response) {
             // if(!isAdmin(msg.sender)) return response(`ERROR You require admin to use this command!`);
             let args = betterArgs(worseArgs.join(' '));
             if(!args.length) return response(`ERROR You must include a player name. If the player you're trying to ban has spaces in their name, just add quotes around their name.`);
@@ -177,7 +126,6 @@ export default function banCommand(commands) {
                 playerName: player.name,
                 bannedAt: Date.now()
             });
-            let playerName2 = player.name;
             let text1 = `${moment(expiration).format('MMMM Do YYYY, h:mm:ss a')} UTC`;
             player.runCommand(`kick "${player.name}" \n§cYou have been banned${expiration > 0 ? ` until `+text1+`!` : ``}\n\n§r§eYou can try contacting an admin to get unbanned if you think the ban wasnt fair`);
             bansDb.set("bans", JSON.stringify(bansList));
@@ -190,13 +138,12 @@ export default function banCommand(commands) {
         description: "Unban a player",
         admin: true,
         category: "Moderation",
-        async onRun(msg, worseArgs, theme, response) {
+        async onRun(worseArgs, response) {
             // if(!isAdmin(msg.sender)) return response(`ERROR You require admin to use this command!`);
             let args = betterArgs(worseArgs.join(' '));
             if(!args.length) return response(`ERROR You must include a player name. If the player you're trying to ban has spaces in their name, just add quotes around their name.`);
             let bansDb = new Database("Bans");
             let bansList = JSON.parse(bansDb.get("bans") ? bansDb.get("bans") : "[]");
-            let expiration = 0;
             let responseText = `Unbanned player!`;
             let ban = bansList.find(_=>_.playerName.toLowerCase() == args[0].toLowerCase());
             let banIndex = bansList.findIndex(_=>_.playerName.toLowerCase() == args[0].toLowerCase());
@@ -215,7 +162,7 @@ export default function banCommand(commands) {
         description: "List all bans",
         admin: true,
         category: "Moderation",
-        async onRun(msg, args, theme, response) {
+        async onRun(theme, response) {
             let bansDb = new Database("Bans");
             let bansList = JSON.parse(bansDb.get("bans") ? bansDb.get("bans") : "[]");
             cachedBans = bansList;

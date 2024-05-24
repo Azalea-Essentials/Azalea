@@ -46,7 +46,7 @@ export default function() {
                 actionForm.button(`§d${control.label ?? "NoLabel"}\n§7Slider`)
             }
         }
-        actionForm.show(player, false, (player, response)=>{
+        actionForm.show(player, false, (_player)=>{
 
         })
     });
@@ -54,13 +54,13 @@ export default function() {
         let actionForm = new ActionForm();
         let forms = modalForms.get("forms", []);
         actionForm.title(forms[index].title);
-        actionForm.button(`§cDelete\n§7Deletes the form`, `textures/azalea_icons/Delete`, (player)=>{
+        actionForm.button(`§cDelete\n§7Deletes the form`, `textures/azalea_icons/Delete`, ()=>{
 
         });
         actionForm.button(`§eEdit Controls\n§7Yes`, `textures/azalea_icons/Pencil`, (player)=>{
             uiManager.open("Azalea2.2/ModalFormEditor/Root/Edit/Controls", player, index);
         });
-        actionForm.show(player, false, (player, response)=>{});
+        actionForm.show(player, false, (_player)=>{});
     });
     uiManager.addUI("Azalea2.2/ModalFormEditor/Root/Add", (player)=>{
         let modal = new ModalForm();
@@ -93,7 +93,7 @@ export default function() {
                 uiManager.open("Azalea2.2/ModalFormEditor/Root/Edit", player, i);
             });
         }
-        actionForm.show(player, false, (player, response)=>{
+        actionForm.show(player, false, (_player)=>{
             
         });
     })

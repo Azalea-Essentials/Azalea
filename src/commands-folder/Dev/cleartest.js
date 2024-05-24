@@ -4,7 +4,7 @@ import { clear } from "../../things/Clear";
 export default function() {
     new CommandBuilder("clear")
         .desc("Clear dirt")
-        .callback(({msg,args,theme,response})=>{
+        .callback(({msg})=>{
             let itemToClear = "minecraft:dirt";
             let amount = 78;
             let inventory = msg.sender.getComponent('inventory');

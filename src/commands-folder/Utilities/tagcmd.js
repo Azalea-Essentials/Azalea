@@ -49,7 +49,7 @@ export default function AddTagCmdManager() {
     //         }
     //     }
     // }
-    commands.use((isCheckingCommandsList, cmdName, msg, args, theme, response, cmdsList, prefix)=>{
+    commands.use((isCheckingCommandsList, cmdName, msg, args, _theme, response)=>{
         try {
             let tagCmdTable = new Database("TagCmdConfig");
             let tagCmds = JSON.parse(tagCmdTable.get("Cmds") ? tagCmdTable.get("Cmds") : "[]");
@@ -160,20 +160,9 @@ export default function AddTagCmdManager() {
                 switch(args[0]) {
                     case "add":
                         return response(`DEPRINFO This command is deprecated. You can't add any TagCMDs as of v1.0, and this command only exists for compatibility. Please use custom commands in admin panel from now on`)
-                        if(args.length < 3) return response(`ERROR You must include a command name and tag name`)
-                        if(commands._cmds.find(_=>_.name.toLowerCase()==args[1]) || tagCmds.find(_=>_.name.toLowerCase()==args[1])) return response(`ERROR Command already exists!`)
 
-                        tagCmds.push({
-                            name: args[1],
-                            tag: args[2],
-                            description: "No description",
-                            category: "Uncategorized"
-                        })
 
-                        tagCmdTable.set("Cmds",JSON.stringify(tagCmds));
 
-                        response(`SUCCESS Command added!`)
-                        break;
                     case "remove":
                         if(args.length < 2) return response(`ERROR You must include a command name`)
 

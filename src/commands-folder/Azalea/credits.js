@@ -3,18 +3,8 @@ export default function addCreditsCommand(commands) {
         description: "Who helped make azalea",
         category: "{{ADDONNAME}}",
         azaleaVersion: "0.1",
-        onRun(msg, args, theme, response, commands, prefix) {
+        onRun(theme, response) {
             let text = [
-                // `${theme.category}<-=- ${theme.header ? theme.header : theme.command}Beta Testers ${theme.category}-=->`,
-                // `${theme.category}> ${theme.command}TRASH (Trash9240) ${theme.description}Main beta tester`,
-                // `${theme.category}> ${theme.command}Sabotage (brightfps_or_sabotage) ${theme.description}Beta tester`,
-                // `${theme.category}> ${theme.command}Archie (archie8713) ${theme.description}Beta tester`,
-                // `${theme.category}> ${theme.command}mexican(TTG) (el_cuh6712) ${theme.description}Beta tester`,
-                // `${theme.category}> ${theme.command}Drago (dragoluxidoor) ${theme.description}Beta tester`,
-                // `${theme.category}> ${theme.command}Flowy ($ Flow#1129) ${theme.description}Beta tester`,
-                // `${theme.category}> ${theme.command}DongWoo (woo.19) ${theme.description}Beta tester`,
-                // `${theme.category}> ${theme.command}KGUSE (kguse1) ${theme.description}Beta tester`,
-                // `${theme.category}> ${theme.command}slapisbetter (.slapisbetter) ${theme.description}Beta tester`,
                 `${theme.category}<-=- ${theme.header ? theme.header : theme.command}Contributors ${theme.category}-=->`,
                 `${theme.category}> ${theme.command}TRASH (Trash9240) ${theme.description}Main developer`,
                 `${theme.category}> ${theme.command}Voltrex ${theme.description}Trash's pookie`,

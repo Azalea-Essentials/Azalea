@@ -6,7 +6,7 @@ export default function addBroadcastCommand(commands) {
         category: "Management",
         admin: true, // this should be here, otherwise its for everyone to use
         aliases: ["bc"],
-        async onRun(msg, args, theme, response) {
+        async onRun(msg, args, response) {
             for(const player of mc.world.getPlayers()) {
                 player.sendMessage(`§b§l[BROADCAST] §a${msg.sender.name} §l§d>> §5${args.join(' ')}`)
             }

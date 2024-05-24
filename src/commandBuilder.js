@@ -8,7 +8,7 @@ export class CommandBuilder {
             admin: false,
             cb_version: 2,
             category: "Uncategorized",
-            onRun: (msg, args, theme, response)=> { response(`ERROR Looks like someone forgot to setup a callback!`) }
+            onRun: (_msg, _args, _theme, response)=> { response(`ERROR Looks like someone forgot to setup a callback!`) }
         }
     }
     callback(fn) {

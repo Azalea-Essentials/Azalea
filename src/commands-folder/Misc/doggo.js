@@ -4,7 +4,7 @@ export default function doggoCommand(commands) {
         permissions: ["commands.doggo"],
         category: "Fun",
         admin: true,
-        async onRun(msg, args, theme, response) {
+        async onRun(msg, args, response) {
             if(msg.sender.hasTag("already-has-doggo")) return response(`ERROR You already got a doggo.`);
             if(!args.length) return response(`ERROR Include a name`)
             let wolf = msg.sender.dimension.spawnEntity("minecraft:wolf", {

@@ -6,7 +6,7 @@ export default function addPermissionCommands(commands) {
         wip: true,
         admin: true,
         azaleaVersion: "2.1",
-        async onRun(msg, args, theme, response) {
+        async onRun() {
             
         }
     })

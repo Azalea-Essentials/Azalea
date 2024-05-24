@@ -25,7 +25,7 @@ export default function AddServerInfoCommand(commands) {
     commands.addCommand("server-info", {
         description: "View info about the server",
         category: "Info",
-        onRun(msg, args, theme, response) {
+        onRun(msg, theme, response) {
             let db = new Database("Config");
             let ServerName = db.get("ServerName");
             let ServerDescription = db.get("ServerDescription");
@@ -73,7 +73,7 @@ export default function AddServerInfoCommand(commands) {
                             }
                             actionForm.body(text.join('\n§r'));
                             actionForm.button("Ok");
-                            actionForm.show(msg.sender, false, (player)=>{})
+                            actionForm.show(msg.sender, false, ()=>{})
                         }
                     });
                 }

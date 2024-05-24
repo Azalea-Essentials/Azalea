@@ -1,16 +1,13 @@
-import { playerStorage } from '../../apis/PlayerStorage';
 import { commands } from '../../commands';
 import { Database } from '../../db';
-import { prismarineDb } from '../../lib/@trash/PrismarineDB/prismarine-db';
 
 export default function main() {
-    let leaderboardDB = prismarineDb.table("Leaderboards");
-    commands.addCommand("add-lb",{
+("add-lb",{
         admin: true,
         description: "Adds leaderboards",
         category: "Leaderboards",
         aliases: ["lb-add", "+lb"],
-        async onRun(msg, args, theme, response) {
+        async onRun(msg, args, response) {
             let translation = commands.callExtensionEvent(
                 "translation",
                 "get_translation",
@@ -48,7 +45,7 @@ export default function main() {
         description: "Removes a leaderboard",
         category: "Leaderboards",
         aliases: ["lb-remove", "-lb", "rm-lb", "lb-rm", "del-lb", "lb-del", "delete-lb", "lb-delete"],
-        async onRun(msg, args, theme, response) {
+        async onRun(msg, args, response) {
             let translation = commands.callExtensionEvent(
                 "translation",
                 "get_translation",

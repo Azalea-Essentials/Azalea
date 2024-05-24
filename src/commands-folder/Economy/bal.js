@@ -8,7 +8,7 @@ export default function() {
         .desc("See how much money you have")
         .category("Economy")
         .aliases(["bal", "$", "cash", "money", "gold"])
-        .callback(({msg,args,theme,response})=>{
+        .callback(({msg,theme,response})=>{
             let bankObjective = world.scoreboard.getObjective("Azalea-EconomyBank");
             if(!bankObjective) bankObjective = world.scoreboard.addObjective("Azalea-EconomyBank", "Azalea Bank");
             let moneyObjective = world.scoreboard.getObjective(configDb.get("MoneyScoreboard", "money") ?? "money");

@@ -107,7 +107,6 @@
 				"minecraft:inventory": {
 					"additional_slots_per_strength": 0,
 					"can_be_siphoned_from": false,
-					"container_type": "none",
 					"inventory_size": 5,
 					"private": true,
 					"restrict_to_owner": false

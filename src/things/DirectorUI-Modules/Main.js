@@ -18,15 +18,15 @@ export class DirectorUI {
             let modal = new ModalForm();
             modal.title("Code Editor - Chat Format");
             modal.textField("Chat Format", "Type a chat rank format", chatrankFormat)
-            modal.show(player, false, (player,response)=>{
+            modal.show(player, false, (_player,response)=>{
                 db.set("ChatrankFormat", response.formValues[0])
             })
         })
         return ui;
     }
-    open(player) {
+    open() {
         let ui = this.build();
-        ui.show(this.player, false, (player, response)=>{
+        ui.show(this.player, false, (_player)=>{
 
         })
     }

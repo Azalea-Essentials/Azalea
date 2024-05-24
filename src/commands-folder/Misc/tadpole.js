@@ -8,7 +8,7 @@ export default function addTadpoleCommand(commands) {
           description: "Spawns a tadpole",
           category: "Why",
           admin: true,
-          async onRun(msg, args, theme, response) {
+          async onRun(msg, response) {
               
             //   if(score == 0 && !isAdmin(msg.sender)) return response(`ERROR This command requires admin`);
               response(`INFO Summoning tadpole`)

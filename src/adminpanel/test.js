@@ -36,11 +36,10 @@ export const ADMIN_TEST = function () {
     form.button(`Add button`, null, player => {
       let commandEditor = new ModalForm();
       commandEditor.title("Add command");
-      //Azalea0.9.0/FormcmdFormEditCommandsRoot
       commandEditor.textField("Text", "Type the text of the button", null);
       commandEditor.textField("Command", "Type the command of the button", null);
       commandEditor.textField("Icon", "Type the icon name", null);
-      commandEditor.show(player, false, (player, response) => {
+      commandEditor.show(player, false, (_player, response) => {
         let toPush = {
           text: response.formValues[0],
           command: response.formValues[1],
@@ -61,7 +60,7 @@ export const ADMIN_TEST = function () {
         commandEditor.textField("Command", "Type the command of the button", button.command);
         commandEditor.textField("Icon", "Type the icon name", button.icon ? button.icon : null);
         commandEditor.toggle("Remove?", null);
-        commandEditor.show(player, false, (player, response) => {
+        commandEditor.show(player, false, (_player, response) => {
           if (response.formValues[2]) {
             commands[i].icon = response.formValues[2];
             forms[formDataIndex].commands = commands;
@@ -80,7 +79,7 @@ export const ADMIN_TEST = function () {
         });
       });
     }
-    form.show(player, false, (player, response) => {});
+    form.show(player, false, (_player) => {});
   });
   uiManager.addUI("Azalea0.9.0/FormPreview", function (player, formID) {
     let actionFormsDb = new Database("ActionForms");
@@ -141,13 +140,13 @@ export const ADMIN_TEST = function () {
     let formData = forms[formDataIndex];
     let form = new ActionForm();
     form.title(`Edit "${formData.title}"`)
-    form.button("Edit", null, (player, i) => {
+    form.button("Edit", null, (player) => {
       uiManager.open("Azalea0.9.0/FormcmdFormEditOptions", player, formData.id);
     });
-    form.button("Preview", null, (player, i) => {
+    form.button("Preview", null, (player) => {
       uiManager.open("Azalea0.9.0/FormPreview", player, formData.id);
     });
-    form.button("Delete", null, (player, i) => {
+    form.button("Delete", null, (_player) => {
       forms.splice(formDataIndex, 1);
       actionFormsDb.set("ActionForms", forms);
     });
@@ -162,7 +161,7 @@ export const ADMIN_TEST = function () {
       uiManager.open("Azalea0.9.0/FormcmdAdd", player);
     });
     for (const formData of forms) {
-      form.button(`§8${formData.title}\n${formData.id}`, null, (player, i) => {
+      form.button(`§8${formData.title}\n${formData.id}`, null, (player) => {
         uiManager.open("Azalea0.9.0/FormcmdFormEditRoot", player, formData.id);
       });
     }

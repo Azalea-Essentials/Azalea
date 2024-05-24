@@ -29,7 +29,7 @@ export default function bindCommands() {
         .desc("Unbind an item from a command")
         .category("Customization")
         .requiresAdmin(true)
-        .callback(({msg,args,theme,response})=>{
+        .callback(({msg,response})=>{
             let binds = new Database("Binds");
             let inventory = msg.sender.getComponent("inventory");
             let item = inventory.container.getItem(msg.sender.selectedSlot);

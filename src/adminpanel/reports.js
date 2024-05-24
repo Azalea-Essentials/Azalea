@@ -23,18 +23,18 @@ export const PLAYER_REPORTS = function () {
                 let messageForm = new MessageForm();
                 messageForm.title(`Case #${i}`);
                 messageForm.body(`Player reported: ${report.player}\nReason: ${report.reason}`);
-                messageForm.button1("Ok", (player) => {
+                messageForm.button1("Ok", () => {
                     reports.splice(i, 1);
                     reportsDb.set("Reports", reports);
                 });
-                messageForm.button2("Delete", (player, i2) => { })
-                messageForm.show(player, false, (player, response2) => { })
+                messageForm.button2("Delete", (_player) => { })
+                messageForm.show(player, false, (_player) => { })
             });
         }
-        actionForm.show(player, false, (player, response) => { });
+        actionForm.show(player, false, (_player) => { });
     })
     return new ConfiguratorSub("§cPlayer reports", "textures/azalea_icons/5")
-        .setCallback((player) => {
+        .setCallback(() => {
 
         })
 }

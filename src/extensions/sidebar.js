@@ -1,10 +1,7 @@
 import { system, world } from "@minecraft/server";
-import { ConfiguratorSub } from "../configuratorOptions";
 import { DynamicPropertyDatabase } from "../dynamicPropertyDb";
 import { ActionForm, ModalForm } from "../form_func";
 import { uiManager } from "../uis";
-import emojis from "../emojis";
-import hardCodedRanks from "../hardCodedRanks";
 import { formatStr } from "../utils/AzaleaFormatting";
 
 export default {
@@ -80,51 +77,8 @@ export default {
                     setScore("azalea:cps", player, 0);
                 }
             }, 20);
-            function divide(num1, num2) {
-                if (num1 > 0 && num2 == 0) return num1;
-                if (num1 == 0 && num2 > 0) return -num2;
-                if (num1 == 0 && num2 == 0) return 1;
-                return num1 / num2;
-            }
-            const abbrNum = (number, decPlaces) => {
-                // 2 decimal places => 100, 3 => 1000, etc
-                decPlaces = Math.pow(10, decPlaces)
-
-                // Enumerate number abbreviations
-                var abbrev = ['k', 'm', 'b', 't']
-
-                // Go through the array backwards, so we do the largest first
-                for (var i = abbrev.length - 1; i >= 0; i--) {
-                    // Convert array index to "1000", "1000000", etc
-                    var size = Math.pow(10, (i + 1) * 3)
-
-                    // If the number is bigger or equal do the abbreviation
-                    if (size <= number) {
-                        // Here, we multiply by decPlaces, round, and then divide by decPlaces.
-                        // This gives us nice rounding to a particular decimal place.
-                        number = Math.round((number * decPlaces) / size) / decPlaces
-
-                        // Handle special case where we round up to the next abbreviation
-                        if (number == 1000 && i < abbrev.length - 1) {
-                            number = 1
-                            i++
-                        }
-
-                        // Add the letter for the abbreviation
-                        number += abbrev[i]
-
-                        // We are done... stop
-                        break
-                    }
-                }
-
-                return number
-            }
             function parseSidebarLine(player, line) {
-                let formattingRegex = /\{\{([\s\S]*?)\}\}/g;
-                let formattingStrings = line.match(formattingRegex);
                 let animations = line.split('\n').filter(_ => _.length ? true : false);
-                // world.sendMessage(JSON.stringify(animations, null, 2))
                 if (!animations.length) return "";
                 let newText = animations[animationTick % animations.length];
                 return formatStr(newText, player)
@@ -137,10 +91,10 @@ export default {
                 modal.toggle("Enabled?", sidebarSettings.enabled ? true : false);
                 modal.dropdown("Display Type", [{
                     option: "Actionbar",
-                    callback(player) { }
+                    callback() { }
                 }, {
                     option: "Title",
-                    callback(player) { }
+                    callback() { }
                 }]);
                 modal.show(player, false, (player, response) => {
                     sidebarSettings.enabled = response.formValues[0];
@@ -148,20 +102,7 @@ export default {
                     uiManager.open('Azalea2.1/SidebarEditor/Root', player);
                 });
             });
-            var move = function (array, element, delta) {
-                var index = element;
-                var newIndex = index + delta;
-                if (newIndex < 0 || newIndex == array.length) return; //Already at the top or bottom.
-                var indexes = [index, newIndex].sort(); //Sort the indixes
-                array.splice(indexes[0], 2, array[indexes[1]], array[indexes[0]]); //Replace from lowest index, two elements, reverting the order
-            };
 
-            var moveUp = function (array, element) {
-                move(array, element, -1);
-            };
-            var moveDown = function (array, element) {
-                move(array, element, 1);
-            };
             let animationTickDelay = 0;
             system.runInterval(() => {
                 let sidebarSettings = sidebarDb.get("Settings", {});
@@ -208,7 +149,7 @@ export default {
                     sidebarDb.set("Settings", sidebarSettings);
                     uiManager.open("Azalea2.1/SidebarEditor/Root", player);
                 });
-                action.show(player, false, player => { });
+                action.show(player, false, () => { });
             });
             uiManager.addUI("Azalea2.1/SidebarEditor/AddLine", (player, index = -1) => {
                 let sidebarSettings = sidebarDb.get("Settings", {});
@@ -264,7 +205,7 @@ export default {
                 actionForm.button("Add", "textures/azalea_icons/1", player => {
                     uiManager.open("Azalea2.1/SidebarEditor/AddLine", player);
                 });
-                actionForm.show(player, false, player => { });
+                actionForm.show(player, false, () => { });
             });
         }
     }

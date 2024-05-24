@@ -67,7 +67,7 @@ export default function () {
                 }
             })
         }
-        form.show(player, false, (player)=>{
+        form.show(player, false, ()=>{
 
         })
     })

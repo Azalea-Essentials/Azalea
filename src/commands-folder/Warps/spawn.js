@@ -8,7 +8,7 @@ export default function() {
         .category("Warps")
         .desc("Set the spawn")
         .aliases(["hub", "lobby", "s"])
-        .callback(({msg,args,theme,response})=>{
+        .callback(({msg,args,response})=>{
             if(args.length && args[0] == "set") {
                 if(!isAdmin(msg.sender)) return response(`ERROR This command requires admin.`);
                 warps.setDBRotation(

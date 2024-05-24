@@ -407,9 +407,6 @@ export class Commands extends CommandExtensionManager {
                     }, cmdsList, prefix, name, this.$extensions)
     
                 } else {
-                    function response(responseStr) {
-                        if(!silent) this.callExtensionEvent("internal", "process_response", player, responseStr);
-                    }
                     //msg, args, theme, response, cmdsList, prefix,
                     cmd.onRun({msg, args, theme, response: (responseStr)=>{
                         if(!silent) this.callExtensionEvent("internal", "process_response", msg.sender, responseStr, theme, prefix);

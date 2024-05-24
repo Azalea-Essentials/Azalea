@@ -7,10 +7,10 @@ export const COOLDOWN = function() {
         .setCallback((player)=>{
             let modal = new ModalForm();
             for(const command of commands._cmds) {
-                modal.slider(`!${command.name}`, 1, 10, 1, 1, (player,i)=>{
+                modal.slider(`!${command.name}`, 1, 10, 1, 1, (_player)=>{
                     
                 })
             }
-            modal.show(player, false, (player,response)=>{})
+            modal.show(player, false, (_player)=>{})
         })
 }

@@ -7,12 +7,12 @@ import moment from '../moment';
 export const POLLS = function() {
     uiManager.addUI("Azalea0.9.1/Polls/Create",(player)=>{
         const durations = [
-            1000 * 60, // 1 minute
-            1000 * 60 * 30, // 30 minutes
-            1000 * 60 * 60, // 1 hour
-            1000 * 60 * 60 * 12, // 12 hours
-            1000 * 60 * 60 * 24, // 1 day
-            1000 * 60 * 60 * 24 * 7 // 1 week
+            1000 * 60,
+            1000 * 60 * 30,
+            1000 * 60 * 60,
+            1000 * 60 * 60 * 12,
+            1000 * 60 * 60 * 24,
+            1000 * 60 * 60 * 24 * 7
         ];
         const durationLabels = [
             "1 Minute",
@@ -47,11 +47,6 @@ export const POLLS = function() {
                 createdAt: duration - durations[response.formValues[1]],
                 options: optionsInput.split(',').map(_=>_.trim())
             })
-            let votesDb = new Database(`PollsVote-${pollID}`);
-            // votesDb.set(`${player.id}`, {
-            //     n: player.name,
-            //     t: Date.now()
-            // });
         })
     })
     uiManager.addUI("Azalea0.9.1/Polls/Main",(player)=>{
@@ -64,11 +59,11 @@ export const POLLS = function() {
         for(const key of pollsDb.keys()) {
             let pollData = pollsDb.get(key);
             let endsIn = (pollData.duration > Date.now() ? `Ends ` : `Ended `) + moment(pollData.duration).fromNow();
-            actionForm.button(`§c${pollData.name}\n§7${endsIn}`, "textures/azalea_icons/vote", (player, i)=>{
+            actionForm.button(`§c${pollData.name}\n§7${endsIn}`, "textures/azalea_icons/vote", (player)=>{
                 uiManager.open("Azalea0.9.1/CommunityCenter/Vote", player, `${pollData.pollId}`, `${key}`, true)
             })
         }
-        actionForm.show(player, false, (player, response)=>{
+        actionForm.show(player, false, (_player)=>{
 
         });
     })

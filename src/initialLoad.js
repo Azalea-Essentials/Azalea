@@ -1,6 +1,5 @@
 import { world, system } from '@minecraft/server';
 import { Database } from './db';
-import { isAdmin } from './isAdmin';
 let db = new Database("Config");
 let betaTesterVersion = true;
 (()=>{

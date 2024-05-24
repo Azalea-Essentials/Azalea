@@ -1,8 +1,6 @@
 // console.warn("test")
 import { system, world, EquipmentSlot, ScriptEventSource } from "@minecraft/server";
-import { ItemDatabase } from "./itemDB";
 import { playerStorage } from "./apis/PlayerStorage";
-import { worldTags } from "./apis/WorldTags";
 const equipmentSlots = [EquipmentSlot.Head, EquipmentSlot.Chest, EquipmentSlot.Legs, EquipmentSlot.Feet, EquipmentSlot.Offhand];
 
 async function saveInventory(player, invName) {
@@ -47,21 +45,6 @@ async function deleteInventory(invName) {
 }
 // let itemDB = new ItemDatabase();
 
-let playerMap = new Map();
-function getScore(objective, player) {
-    try {
-        let scoreboard = world.scoreboard.getObjective(objective);
-        if(!scoreboard) scoreboard = world.scoreboard.addObjective(objective, "Azalea Inventory");
-        let score = 0;
-        try {
-            score = scoreboard.getScore(player);
-        } catch {score = 0;}
-        if(!score) score = 0;
-        return score;
-    } catch {
-        return 0;
-    }
-}
 // system.runInterval(()=>{
 //     return;
 //     for(const player of world.getPlayers()) {

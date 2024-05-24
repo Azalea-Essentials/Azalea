@@ -1,9 +1,9 @@
-import { system, world } from '@minecraft/server';
+import { world } from '@minecraft/server';
 import { CommandBuilder } from '../../commandBuilder';
 
 import { isAdmin } from '../../isAdmin';
 import { warps } from '../../warpsapi';
-export default function WarpCommand(commands) {
+export default function WarpCommand() {
   // commands.addCommand("warp", {
   //     description: "Create locations players can teleport to anytime",
   //     category: "Teleportation",
@@ -191,9 +191,6 @@ export default function WarpCommand(commands) {
     }
   }).register();
   new CommandBuilder("wconvert").category("Data Conversion").desc("Convert old azalea warps to the new ones").callback(({
-    msg,
-    args,
-    theme,
     response
   }) => {
     let dimensions = ["minecraft:overworld", "minecraft:nether", "minecraft:the_end"];

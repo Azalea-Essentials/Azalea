@@ -2,13 +2,12 @@ import { Database } from "../../db";
 
 export default function addWhatCommand(commands) {
     // return;
-    let list = [];
     commands.addCommand("what", {
         description: "Does shit",
         category: "Fun",
         author: "ZSStudios + TRASH",
         usage: "!what <post | view> [text]",
-        onRun(msg, args, theme, response, commands, prefix) {
+        onRun(msg, args, theme, response) {
             let db = new Database("WhatList");
             if(!db.get("WhatList")) db.set("WhatList", "[]");
             let whatList = JSON.parse(db.get("WhatList") ? db.get("WhatList") : "[]");

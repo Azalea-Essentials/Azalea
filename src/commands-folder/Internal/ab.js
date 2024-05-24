@@ -26,7 +26,7 @@ export default function azaleaBotCmd(commands) {
     description: "Azalea Bot",
     category: "Azalea-Bot Communication",
     private: true,
-    async onRun(msg, worseArgs, theme, response) {
+    async onRun(msg, worseArgs, response) {
         // world.sendMessage(msg.message)
         if(!msg.sender.hasTag("azalea-bot")) return;
         let args = betterArgs(worseArgs.join(' ')).map(_=>_.replaceAll('^q','"'));

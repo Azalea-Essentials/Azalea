@@ -1,7 +1,3 @@
-// This is compatible with Betther Command Detection (https://mcpedl.com/betther-command-detection/)
-// That does not mean this code is stolen, it just uses the same tags
-// This is so you dont have to change your commands
-
 import { system, world } from "@minecraft/server";
 
 const objectives = [
@@ -62,13 +58,3 @@ export class CommandDetection {
         system.clearRun(this.intervalID);
     }
 }
-
-// function getBlockFromViewDirection(player, blockView) {
-//     const viewTags = player.getTags().filter(tag => tag.startsWith('blockFromViewDirection:'));
-//     for (const tag of viewTags) {
-//         if (tag.split(':')[1] !== blockView) {
-//             player.removeTag(tag);
-//         }
-//     }
-//     player.addTag('blockFromViewDirection:' + blockView);
-// }

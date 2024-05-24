@@ -74,7 +74,7 @@ export default function() {
                 uiManager.open("Azalea2.2/Gift/Add", player, i);
             })
         }
-        form.show(player, false, (player,respionse)=>{})
+        form.show(player, false, (_player)=>{})
     })
     return new ConfiguratorSub("§6Gift Codes", `textures/azalea_icons/confetti`)
         .setCallback((player)=>{
