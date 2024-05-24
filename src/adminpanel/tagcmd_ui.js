@@ -18,7 +18,7 @@ export const TAGCMD_UI = function() {
                 modal.textField("Category", "Type a category name", tagcmd.category ? tagcmd.category : "Uncategorized", ()=>{});
                 modal.textField("Description", "Type a description", tagcmd.description ? tagcmd.description : "Uncategorized", ()=>{});
                 modal.toggle("Execute on other", tagcmd.execOther ? true : false, ()=>{})
-                modal.show(player, false, (player, response)=>{
+                modal.show(player, false, (_player, response)=>{
                     let category = response.formValues[0];
                     let description = response.formValues[1];
                     let execOther = response.formValues[2];
@@ -29,7 +29,7 @@ export const TAGCMD_UI = function() {
                 })
             });
         }
-        cmds.show(player,false,(player,response)=>{
+        cmds.show(player,false,(_player)=>{
 
         })
     })

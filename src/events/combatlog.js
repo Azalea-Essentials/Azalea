@@ -1,5 +1,4 @@
 import { Player, world } from "@minecraft/server";
-let seconds = 30;
 let logs = new Map();
 world.afterEvents.projectileHitEntity.subscribe(e=>{
     if(e.source && e.source.typeId == "minecraft:player") {

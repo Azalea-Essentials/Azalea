@@ -2,7 +2,7 @@ import { uiManager } from './uis';
 import { ActionForm, ModalForm } from './form_func';
 import { ItemStack, world } from '@minecraft/server';
 import { Database } from './db';
-import { itemToJson, jsonToItem } from './conv';
+import { jsonToItem } from './conv';
 import { DynamicPropertyDatabase } from './dynamicPropertyDb';
 import { isAdmin } from './isAdmin';
 import { ItemDatabase } from './itemDB';
@@ -60,7 +60,7 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/Buy:Buy items from a shop", (player, sho
   let actionform = new ActionForm();
   actionform.title(shop.name + " - Buy items");
   if (!shop.mcItems || !shop.mcItems.length) actionform.body("§c§lSOLD OUT");else actionform.body("Select an item");
-  actionform.button("§4Exit", null, (player, i) => {});
+  actionform.button("§4Exit", null, (_player) => {});
   if (shop.mcItems && shop.mcItems.length) {
     for (let i = 0; i < shop.mcItems.length; i++) {
       let item = shop.mcItems[i];
@@ -116,13 +116,13 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/Buy:Buy items from a shop", (player, sho
       });
     }
   }
-  actionform.show(player, null, (player, response) => {});
+  actionform.show(player, null, (_player) => {});
 });
 uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/AddItem/Setup:Setup a player shop items price", (player, shopKey, convertedItem, index, error = null) => {
   let shop = playerShopDb.get(shopKey);
   let modalForm = new ModalForm();
   modalForm.title("Select a price");
-  modalForm.textField(`Enter a price for your item${error ? `\n  §c${error}` : ``}`, "Can't be a negative number", null, (player, text, i) => {
+  modalForm.textField(`Enter a price for your item${error ? `\n  §c${error}` : ``}`, "Can't be a negative number", null, (player, text) => {
     if (!/^\d+$/.test(text)) return uiManager.open("Azalea0.9.1/PlayerShop/Edit/AddItem/Setup", player, shopKey, convertedItem, index, "Not a valid number");
     if (!shop.mcItems) shop.mcItems = [];
     shop.mcItems.push({
@@ -180,50 +180,50 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/AddItem:Add item", (player, shopKey
   }
   for (const slot of items) {
     let [index, item] = slot;
-    actionform.button(`${item.nameTag ? item.nameTag : item.typeId.split(':').slice(1).join(':').split('_').map(_ => _[0].toUpperCase() + _.substring(1)).join(' ')} x${item.amount}`, null, (player, i) => {
+    actionform.button(`${item.nameTag ? item.nameTag : item.typeId.split(':').slice(1).join(':').split('_').map(_ => _[0].toUpperCase() + _.substring(1)).join(' ')} x${item.amount}`, null, (player) => {
       let convertedItem = itemDB.addItem(item);
       uiManager.open("Azalea0.9.1/PlayerShop/Edit/AddItem/Setup", player, shopKey, convertedItem, index);
     });
   }
-  actionform.show(player, true, (player, response) => {});
+  actionform.show(player, true, (_player) => {});
 });
 uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/Delete/Confirmation:Player shop delete confirmation UI", (player, shopKey) => {
   let shop = playerShopDb.get(shopKey);
   let actionform = new ActionForm();
   actionform.title("Are you sure?");
   actionform.body(`This will delete all items and you can not recover them. Are you sure you want to delete ${shop.name}§r?`);
-  actionform.button("Yes", null, (player, i) => {
+  actionform.button("Yes", null, (player) => {
     playerShopDb.hardDelete(shopKey);
     player.sendMessage(`Successfully deleted shop: ${shop.name}`);
   });
-  actionform.button("No", null, (player, i) => {
+  actionform.button("No", null, (player) => {
     uiManager.open("Azalea0.9.1/PlayerShop/Edit", player, shopKey);
   });
-  actionform.show(player, false, (player, response) => {});
+  actionform.show(player, false, (_player) => {});
 });
 uiManager.addUI("Azalea0.9.1/PlayerShop/Edit:Edit player shop", (player, shopKey) => {
   let shop = playerShopDb.get(shopKey);
   let actionform = new ActionForm();
   actionform.title(shop.name + " - Edit");
-  actionform.button("Back", "textures/azalea_icons/2", (player,i)=>{
+  actionform.button("Back", "textures/azalea_icons/2", (player)=>{
     uiManager.open("Azalea0.9.1/PlayerShop/Main", player);
   })
-  actionform.button("Add Item", "textures/azalea_icons/AddItem", (player, i) => {
+  actionform.button("Add Item", "textures/azalea_icons/AddItem", (player) => {
     uiManager.open("Azalea0.9.1/PlayerShop/Edit/AddItem", player, shopKey);
   });
-  actionform.button("Edit Info", null, (player, i) => {
+  actionform.button("Edit Info", null, (player) => {
     uiManager.open("Azalea0.9.1/PlayerShop/Edit/EditInfo", player, shopKey);
   });
-  actionform.button("§4Delete", "textures/azalea_icons/DeleteShop", (player, i) => {
+  actionform.button("§4Delete", "textures/azalea_icons/DeleteShop", (player) => {
     uiManager.open("Azalea0.9.1/PlayerShop/Edit/Delete/Confirmation", player, shopKey);
   });
-  actionform.show(player, true, (player, response) => {});
+  actionform.show(player, true, (_player) => {});
 });
 uiManager.addUI("Azalea0.9.1/PlayerShop/ReportShop/Thanks", player => {
   let actionform = new ActionForm();
   actionform.title("Report submitted!");
   actionform.body("Thank you for submitting a report. Admins will review your report soon.");
-  actionform.button("Ok", null, (player, i) => {});
+  actionform.button("Ok", null, (_player) => {});
   actionform.show(player, true, () => {});
 });
 uiManager.addUI("Azalea0.9.1/PlayerShop/ReportShop", (player, shopKey) => {
@@ -237,7 +237,7 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/ReportShop", (player, shopKey) => {
       callback() {}
     };
   }));
-  modalForm.textField("Extra details:", "Type extra details here", null, (player, text, i) => {});
+  modalForm.textField("Extra details:", "Type extra details here", null, (_player, _text) => {});
   modalForm.show(player, true, (player, response) => {
     let reason = reportReasonsAdmin[response.formValues[0]];
     let extraDetails = response.formValues[1] ? response.formValues[1] : "";
@@ -265,10 +265,10 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/OpenShop", (player, shopKey) => {
     uiManager.open("Azalea1.1/PlayerProfile", player, otherPlayer.name);
   })
   if(isAdmin(player)) {
-    actionform.button("§cAdmin: Delete", "textures/azalea_icons/DeleteShop", (player,i)=>{
+    actionform.button("§cAdmin: Delete", "textures/azalea_icons/DeleteShop", (player)=>{
         uiManager.open("Azalea0.9.1/PlayerShop/Edit/Delete/Confirmation", player, shopKey)
     })
-    actionform.button(shop.isFeatured ? `§bUnfeature` : `§6Feature`, shop.isFeatured ? `textures/azalea_icons/PlayerShop/Normal/Online/playershop` : `textures/azalea_icons/PlayerShop/Gold/Online/playershop`, (player,i)=>{
+    actionform.button(shop.isFeatured ? `§bUnfeature` : `§6Feature`, shop.isFeatured ? `textures/azalea_icons/PlayerShop/Normal/Online/playershop` : `textures/azalea_icons/PlayerShop/Gold/Online/playershop`, (_player)=>{
       let shop = playerShopDb.get(shopKey);
       shop.isFeatured = shop.isFeatured ? false : true;
       playerShopDb.set(shopKey, shop);
@@ -276,7 +276,7 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/OpenShop", (player, shopKey) => {
   }
   actionform.button(
     player.hasTag(`favorited-pshop:${shopKey}`) ? "Unfavorite" : "Favorite",
-    player.hasTag(`favorited-pshop:${shopKey}`) ? "textures/azalea_icons/PlayerShop/Normal/Online/playershop" : "textures/azalea_icons/PlayerShop/Favorited/Online/playershop", (player, i)=>{
+    player.hasTag(`favorited-pshop:${shopKey}`) ? "textures/azalea_icons/PlayerShop/Normal/Online/playershop" : "textures/azalea_icons/PlayerShop/Favorited/Online/playershop", (player)=>{
       if(player.hasTag(`favorited-pshop:${shopKey}`)) {
         player.removeTag(`favorited-pshop:${shopKey}`)
       } else {
@@ -284,18 +284,18 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/OpenShop", (player, shopKey) => {
       }
       uiManager.open("Azalea0.9.1/PlayerShop/Main", player)
   })
-  actionform.button("Buy items", "textures/azalea_icons/BuyItem", (player, i) => {
+  actionform.button("Buy items", "textures/azalea_icons/BuyItem", (player) => {
     uiManager.open("Azalea0.9.1/PlayerShop/Buy", player, shopKey);
   });
-  actionform.button("Report shop", "textures/azalea_icons/ReportShop", (player, i) => {
+  actionform.button("Report shop", "textures/azalea_icons/ReportShop", (player) => {
     uiManager.open("Azalea0.9.1/PlayerShop/ReportShop", player, shopKey);
   });
   if (isOwner) {
-    actionform.button("Edit shop", "textures/azalea_icons/EditShop", (player, i) => {
+    actionform.button("Edit shop", "textures/azalea_icons/EditShop", (player) => {
       uiManager.open("Azalea0.9.1/PlayerShop/Edit", player, shopKey);
     });
   }
-  actionform.show(player, true, (player, response) => {});
+  actionform.show(player, true, (_player) => {});
 });
 uiManager.addUI("Azalea0.9.1/PlayerShop/Settings", player => {
   let modal = new ModalForm();
@@ -404,10 +404,10 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/Main", player => {
       return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     })
   }
-  actionform.button("§aCreate a shop", "textures/azalea_icons/ShopAdd", (player, i) => {
+  actionform.button("§aCreate a shop", "textures/azalea_icons/ShopAdd", (player) => {
     uiManager.open("Azalea0.9.1/PlayerShop/AddShop", player);
   });
-  actionform.button("§aSettings", "textures/azalea_icons/Settings", (player, i) => {
+  actionform.button("§aSettings", "textures/azalea_icons/Settings", (player) => {
     uiManager.open("Azalea0.9.1/PlayerShop/Settings", player);
   });
   for (const shop of onlineShops) {
@@ -415,12 +415,12 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/Main", player => {
       let shopData = playerShopDb.get(shop);
       //§8${playerObj[shop.split(':')[0]].name}\n§8${shopData.items.join(', ')}
       actionform.button(`${player.hasTag(`favorited-pshop:${shop}`) ? `§d` : shopData.isFeatured ? `§6` : `§a`}${shopData.name}\n§r§f${shopData.items.join('§r§f, ')}`,
-      `textures/azalea_icons/PlayerShop/${player.hasTag(`favorited-pshop:${shop}`) ? `Favorited` : shopData.isFeatured ? `Gold` : `Normal`}/Online/${colors[shopData.color ? shopData.color : 0]}`, (player, i) => {
+      `textures/azalea_icons/PlayerShop/${player.hasTag(`favorited-pshop:${shop}`) ? `Favorited` : shopData.isFeatured ? `Gold` : `Normal`}/Online/${colors[shopData.color ? shopData.color : 0]}`, (player) => {
         uiManager.open("Azalea0.9.1/PlayerShop/OpenShop", player, shop);
       });
     } catch {}
   }
   actionform.title("§7---- §aPlayer Shops §7----");
   actionform.body("Player Shops are community-controlled shops. Feel free to look around.");
-  actionform.show(player, true, (player, response) => {});
+  actionform.show(player, true, (_player) => {});
 });

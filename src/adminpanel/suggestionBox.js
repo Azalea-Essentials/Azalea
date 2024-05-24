@@ -1,5 +1,4 @@
 import { ConfiguratorSub } from "../configuratorOptions";
-import { Database } from "../db";
 import { DynamicPropertyDatabase } from "../dynamicPropertyDb";
 import { ActionForm, ModalForm } from "../form_func";
 import { uiManager } from "../uis";
@@ -21,13 +20,13 @@ export default function() {
             action.button("Back", `textures/azalea_icons/2`, (player)=>{
                 uiManager.open("Dev:SuggestionBox", player);
             })
-            action.show(player, false, (player, response)=>{
+            action.show(player, false, (_player)=>{
 
             })
         });
         ui.button("Add Suggestion", `textures/amethyst_icons/Packs/asteroid_icons/Feedback`, (player)=>{
             let modal = new ModalForm();
-            modal.textField("Suggestion", "Type a suggestion here", undefined, (player)=>{})
+            modal.textField("Suggestion", "Type a suggestion here", undefined, ()=>{})
             modal.show(player, false, (player, response)=>{
                 let suggestions = suggestionDb.get("s", []);
                 suggestions.push(`§e@${player.name}§r§f: ${response.formValues[0]}`);
@@ -35,7 +34,7 @@ export default function() {
                 uiManager.open("Dev:SuggestionBox", player);
             })
         })
-        ui.show(player, false, (player,response)=>{})
+        ui.show(player, false, (_player)=>{})
     })
     return new ConfiguratorSub("§uDev: Suggestion Box", `textures/amethyst_icons/Packs/asteroid_icons/Feedback`)
         .setCallback((player)=>{

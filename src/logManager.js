@@ -1,4 +1,3 @@
-import { world } from "@minecraft/server";
 import { DynamicPropertyDatabase } from "./dynamicPropertyDb";
 
 class LogManager {

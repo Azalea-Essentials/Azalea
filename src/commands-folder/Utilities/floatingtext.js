@@ -6,7 +6,7 @@ export default function() {
         .desc("Float")
         .category("Floating Text")
         .requiresAdmin(true)
-        .callback(({msg,args,theme,response})=>{
+        .callback(({msg,args,response})=>{
             let rabbit = msg.sender.dimension.spawnEntity("azalea:floating_text", msg.sender.location);
             rabbit.nameTag = args.join(' ').replaceAll('\\n','\n')
             worldTags.addTag(`floating_text:${rabbit.id}`);

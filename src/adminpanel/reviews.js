@@ -28,7 +28,7 @@ export const REVIEWS = function() {
             actionForm.show(player, false, ()=>{})
     })
     return new ConfiguratorSub("§6Reviews", "textures/azalea_icons/10")
-        .setCallback((player)=>{
+        .setCallback(()=>{
             
         })
 }

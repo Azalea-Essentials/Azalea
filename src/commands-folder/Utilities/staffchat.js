@@ -10,7 +10,7 @@ export default function AddStaffChatCommand(commands) {
         description: "Staff chat, its a chat for staff",
         category: "Staff",
         admin: true,
-        onRun(msg, args, theme, response) {
+        onRun(msg, response) {
             // if(!isAdmin(msg.sender)) return response(`ERROR You need admin!`);
             let player = msg.sender;
             let config = new Database("Config");

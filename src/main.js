@@ -21,7 +21,6 @@ import { NicknamesModule } from './nicknames';
 import './leaderboardHandler';
 import './legacyPlayerShopNoChestUI';
 import './sellshop';
-import { openShopUI } from './shopui';
 import { warps } from './warpsapi';
 import { permList } from './isAdmin';
 import * as Events from './events';

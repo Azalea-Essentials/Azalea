@@ -1,6 +1,5 @@
 import { world } from "@minecraft/server";
 import { ActionForm, ModalForm } from "./form_func";
-import { tpRequests } from "./tpRequestManager";
 import { uiManager } from "./uis";
 import { invites } from "./inviteManager";
 uiManager.addUI("Azalea2.0/TeleportRequests/Incoming", (player)=>{
@@ -15,7 +14,7 @@ uiManager.addUI("Azalea2.0/TeleportRequests/Incoming", (player)=>{
     });
     for(const request of requests) {
         let requestData = invites.getInviteByCode(request);
-        form.button(`Request from §a${requestData.player.name}`, null, (player)=>{
+        form.button(`Request from §a${requestData.player.name}`, null, ()=>{
             invites.acceptInvite(request);
         })
     }
@@ -32,7 +31,6 @@ uiManager.addUI("Azalea2.0/TeleportRequests/Outgoing", (player)=>{
         uiManager.open("Azalea2.0/TeleportRequests/Root", player);
     });
     for(const request of requests) {
-        let requestData = invites.getInviteByCode(request);
         form.button(`Request to §a${requsestData.invitedPlayer.name}`, null, (player)=>{
             let actionForm = new ActionForm();
             actionForm.title("Request Actions");
@@ -109,7 +107,7 @@ uiManager.addUI("Azalea2.0/TeleportRequests/Root", (player)=>{
             player.sendMessage(`§aSent teleport request to ${players[response.formValues[0]].name}!`)
         })
     })
-    teleportRequestForm.show(player, false, (player, response)=>{
+    teleportRequestForm.show(player, false, (_player)=>{
 
     })
 })

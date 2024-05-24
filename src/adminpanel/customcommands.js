@@ -1,9 +1,4 @@
-import { commands } from "../commands";
 import { ConfiguratorSub } from "../configuratorOptions";
-import { customCommandsActions } from "../customcmds/actionsDefinition";
-import { Database } from "../db";
-import { DynamicPropertyDatabase } from "../dynamicPropertyDb";
-import { ActionForm, ModalForm } from "../form_func";
 import { uiManager } from "../uis";
 export function CUSTOM_COMMANDS() {
 

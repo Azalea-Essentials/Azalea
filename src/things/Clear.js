@@ -1,4 +1,3 @@
-import { world } from "@minecraft/server";
 
 export function clear(inventory, itemToClear, amount) {
     let container = inventory.container;
@@ -27,8 +26,6 @@ export function clear(inventory, itemToClear, amount) {
                     amount -= item.amount;
                     cleared += item.amount;
                 } else if(amount < item.amount) {
-                    let currentItemAmount = item.amount;
-                    let newItemAmount = item.amount - amount;
                     cleared = amount;
                     item.amount -= amount;
                     amount = 0;

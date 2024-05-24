@@ -70,7 +70,7 @@ export const customCommandsActions = [
                 "placeholder": "dont mess this up"
             }
         ],
-        cb(responseRaw, player, response) {
+        cb(responseRaw, response) {
             response(responseRaw);
         }
     },
@@ -111,7 +111,7 @@ export const customCommandsActions = [
                 placeholder: "Player name, usually $1 for first arg"
             }
         ],
-        cb(tag, otherPlayer, player, response) {
+        cb(tag, otherPlayer, response) {
             let otherPlayerData;
             for(const player of world.getPlayers()) {
                 if(player.name.toLowerCase() == otherPlayer.toLowerCase()) otherPlayerData = player;
@@ -135,7 +135,7 @@ export const customCommandsActions = [
                 placeholder: "Player name, usually $1 for first arg"
             }
         ],
-        cb(tag, otherPlayer, player, response) {
+        cb(tag, otherPlayer, response) {
             let otherPlayerData;
             for(const player of world.getPlayers()) {
                 if(player.name.toLowerCase() == otherPlayer.toLowerCase()) otherPlayerData = player;
@@ -159,7 +159,7 @@ export const customCommandsActions = [
                 placeholder: "Player name, usually $1 for first arg"
             }
         ],
-        cb(tag, otherPlayer, player, response) {
+        cb(tag, otherPlayer, response) {
             let otherPlayerData;
             for(const player of world.getPlayers()) {
                 if(player.name.toLowerCase() == otherPlayer.toLowerCase()) otherPlayerData = player;
@@ -186,7 +186,7 @@ export const customCommandsActions = [
                 placeholder: "type a response"
             }
         ],
-        cb(condition,responseRaw,player,response) {
+        cb(condition,responseRaw,response) {
             let conditions = condition.split(',').map(_=>_.trim());
             let pass = true;
             for(const condition of conditions) {

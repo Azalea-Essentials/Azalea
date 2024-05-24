@@ -1,10 +1,9 @@
 import { uiManager } from './uis';
 import { ActionForm, ModalForm } from './form_func';
-import { ItemStack, world } from '@minecraft/server';
+import { world } from '@minecraft/server';
 import { Database } from './db';
 import { itemToJson, jsonToItem } from './conv';
 import { ChestFormData } from './chestUI';
-import { typeIdToID } from './typeIds';
 let playerShopDb = new Database("PlayerShops");
 let configDb = new Database("Config")
 let sellItems = ["Blocks", "Weapons/Armor", "Natural", "Misc"];
@@ -110,7 +109,7 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/AddItem/Setup", (player, shopKey, c
     let shop = playerShopDb.get(shopKey);
     let modalForm = new ModalForm();
     modalForm.title("Select a price");
-    modalForm.textField(`Enter a price for your item${error ? `\n  §c${error}` : ``}`, "Can't be a negative number", null, (player, text, i) => {
+    modalForm.textField(`Enter a price for your item${error ? `\n  §c${error}` : ``}`, "Can't be a negative number", null, (player, text) => {
         if(!/^\d+$/.test(text)) return uiManager.open("Azalea0.9.1/PlayerShop/Edit/AddItem/Setup", player, shopKey, convertedItem, "Not a valid number");
         if (!shop.mcItems)
             shop.mcItems = [];
@@ -128,7 +127,7 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/EditInfo", (player, shopKey) => {
     modalform.title(`${shop.name} §r- Edit Info`);
     modalform.textField("Shop Name (Minimum 3 characters)",  "Enter a name", shop.name, ()=>{});
     modalform.textField("Shop Items (Separated by commas)", "Enter comma separated shop items", shop.items.map(_=>_.trim()).join(','), ()=>{});
-    modalform.show(player, true, (player, response)=>{
+    modalform.show(player, true, (_player, response)=>{
         let shopName = response.formValues[0];
         if(shopName.length < 3) return;
         let shopItems = response.formValues[1].split(',').map(_=>_.trim());
@@ -153,25 +152,25 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/Edit/AddItem", (player, shopKey) => {
     }
     for (const slot of items) {
         let [index, item] = slot;
-        actionform.button(`${item.nameTag ? item.nameTag : item.typeId.split(':').slice(1).join(':').split('_').map(_ => _[0].toUpperCase() + _.substring(1)).join(' ')} x${item.amount}`, null, (player, i) => {
+        actionform.button(`${item.nameTag ? item.nameTag : item.typeId.split(':').slice(1).join(':').split('_').map(_ => _[0].toUpperCase() + _.substring(1)).join(' ')} x${item.amount}`, null, (player) => {
             container.setItem(index);
             let convertedItem = itemToJson(item);
             uiManager.open("Azalea0.9.1/PlayerShop/Edit/AddItem/Setup", player, shopKey, convertedItem);
         });
     }
-    actionform.show(player, true, (player, response) => { })
+    actionform.show(player, true, (_player) => { })
 });
 uiManager.addUI("Azalea0.9.1/PlayerShop/Edit", (player, shopKey) => {
     let shop = playerShopDb.get(shopKey);
     let actionform = new ActionForm();
     actionform.title(shop.name + " - Edit");
-    actionform.button("Add Item", null, (player, i) => {
+    actionform.button("Add Item", null, (player) => {
         uiManager.open("Azalea0.9.1/PlayerShop/Edit/AddItem", player, shopKey);
     })
-    actionform.button("Edit Info", null, (player, i) => {
+    actionform.button("Edit Info", null, (player) => {
         uiManager.open("Azalea0.9.1/PlayerShop/Edit/EditInfo", player, shopKey);
     })
-    actionform.show(player, true, (player, response) => {
+    actionform.show(player, true, (_player) => {
 
     })
 })
@@ -179,7 +178,7 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/ReportShop/Thanks", (player) => {
     let actionform = new ActionForm();
     actionform.title("Report submitted!");
     actionform.body("Thank you for submitting a report. Admins will review your report soon.");
-    actionform.button("Ok", null, (player, i)=>{})
+    actionform.button("Ok", null, (_player)=>{})
     actionform.show(player, true, ()=>{});
 });
 uiManager.addUI("Azalea0.9.1/PlayerShop/ReportShop", (player, shopKey) => {
@@ -193,7 +192,7 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/ReportShop", (player, shopKey) => {
             callback() {}
         }
     }));
-    modalForm.textField("Extra details:", "Type extra details here", null, (player, text, i)=>{});
+    modalForm.textField("Extra details:", "Type extra details here", null, (_player, _text)=>{});
     modalForm.show(player, true, (player, response)=>{
         let reason = reportReasonsAdmin[response.formValues[0]];
         let extraDetails = response.formValues[1] ? response.formValues[1] : "";
@@ -212,18 +211,18 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/OpenShop", (player, shopKey) => {
     let isOwner = player.id.toString() == shopKey.split(':')[0];
     let actionform = new ActionForm();
     actionform.title(shop.name);
-    actionform.button("Buy items", null, (player, i) => {
+    actionform.button("Buy items", null, (player) => {
         uiManager.open("Azalea0.9.1/PlayerShop/Buy", player, shopKey);
     });
-    actionform.button("Report shop", null, (player, i) => {
+    actionform.button("Report shop", null, (player) => {
         uiManager.open("Azalea0.9.1/PlayerShop/ReportShop", player, shopKey)
     });
     if (isOwner) {
-        actionform.button("Edit shop", null, (player, i) => {
+        actionform.button("Edit shop", null, (player) => {
             uiManager.open("Azalea0.9.1/PlayerShop/Edit", player, shopKey)
         });
     }
-    actionform.show(player, true, (player, response) => {
+    actionform.show(player, true, (_player) => {
 
     })
 })
@@ -240,7 +239,6 @@ uiManager.addUI("Azalea0.9.1/PlayerShop/Main", (player) => {
     actionform.button(0, "§cCreate Shop", ["Create a shop"], "textures/ui/color_plus.png", 1)
     for(let i = 1; i < 9;i++) actionform.button(i, "", [""], "textures/blocks/glass_black", 1)
     for(let i = 45; i < 54;i++) actionform.button(i, "", [""], "textures/blocks/glass_black", 1)
-    let callbacks = [];
     for (const shop of onlineShops) {
         i++;
         let shopData = playerShopDb.get(shop);

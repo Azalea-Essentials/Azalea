@@ -7,7 +7,7 @@ export default function() {
         .category("Customization")
         .desc("change bindable name")
         .requiresAdmin(true)
-        .callback(({msg,args,response,theme})=>{
+        .callback(({msg,args,response})=>{
             let inventory = msg.sender.getComponent('inventory');
             let container = inventory.container;
             let item = container.getItem(msg.sender.selectedSlot);

@@ -1,105 +1,21 @@
-var gulp = require("gulp");
-var babel = require("gulp-babel");
-var replace = require('gulp-replace');
-const fs = require('fs');
-const AdmZip = require('adm-zip');
-const YAML = require('yaml');
-const GulpMinifier = require("./GulpMinifier");
-const MediaFire = require('mediafire');
-const webhooks = require('discord-webhook-node');
-const axios = require('axios').default;
-const supabase = require('@supabase/supabase-js');
-const express = require('express');
-gulp.task("dev", function (cb) {
-  const bedrockServer = require('./minecraft-bedrock-server/src/index')
+import { task, src, dest } from "gulp";
+import babel from "gulp-babel";
+import replace from 'gulp-replace';
+import { readFileSync, writeFileSync, writeFile } from 'fs';
+import AdmZip from 'adm-zip';
+import { parse, stringify } from 'yaml';
+import GulpMinifier from "./GulpMinifier";
+import { Webhook } from 'discord-webhook-node';
+task("dev", function () {
 
   const fs = require('fs');
-  let server2;
-  const onStart = () => {
-    let buildConfig = YAML.parse(fs.readFileSync('azalea-build-config.yaml').toString());
-    let app = express();
-    const httpserver = require('http').createServer(app);
-    const bedrock = require('bedrock-protocol');
-    // const bpClient = bedrock.createClient({
-    //     host: '127.0.0.1',   // optional
-    //     port: buildConfig.dev_server.port,         // optional, default 19132
-    //     skipPing: true,
-    //     username: 'azaleadevbot',   // the username you want to join as, optional if online mode
-    //     offline: true       // optional, default false. if true, do not login with Xbox Live. You will not be asked to sign-in if set to true.
-    // })
-    const io = require('socket.io')(httpserver);
-    io.on('connection', socket=>{
-      server2.stdout.on('data', (data)=>{
-        socket.emit('logger', `${data}`);
-      })
-      server2.stderr.on('data', (data)=>{
-        socket.emit('logger', `${data}`);
-      })
-      // bpClient.on('text', packet=>{
-      //   socket.emit('text_packet', packet)
-      // })
-    })
-    app.get('/',(req,res)=>{
-      res.sendFile(__dirname+'/assets/dev_assets/index.html')
-    })
-    app.get('/api/stop', (req,res)=>{
-      server2.stdin.setEncoding('utf-8');
-      server2.stdin.write("stop\n")
-      httpserver.close();
-      res.send('Server Stopped!');
-    })
-    app.get('/run-command', (req,res)=>{
-      if(!req.query.command) return;
-      server2.stdin.setEncoding('utf-8');
-      server2.stdin.write(`${req.query.command}\n`)
-      res.send('Server Stopped!');
-    })
-    httpserver.listen(buildConfig.dev_server.http, ()=>{
-      console.log("DEV SERVER STARTED ON PORT " + buildConfig.dev_server.http.toString())
-    });
-    gulp.watch("src/**/*.js", (cb) => {
-      
-      // server2.stdin.emit("data", "say hi\r\n")
-      return gulp.src("src/**/*.js")
-        .pipe(babel({
-          plugins: ["wildcard", ["@babel/plugin-transform-react-jsx", {
-            "throwIfNamespace": false,
-            "runtime": "automatic",
-            "importSource": "azalea-jsx"
-          }]]
-        }))
-        .pipe(replace(/\%\%AZALEA_VER\%\%/g, YAML.parse(fs.readFileSync('azalea-build-config.yaml').toString()).version))
-        .pipe(replace(/\/\*BUILDTIME\*\//g, Date.now().toString()))
-        .pipe(replace(/import '@build'/g, `let build = ${JSON.stringify(YAML.parse(fs.readFileSync('azalea-build-config.yaml').toString()))}`))
-        .pipe(GulpMinifier())
-        .pipe(gulp.dest("scripts"))
-        .on("end", () => {
-          let zip1 = new AdmZip();
-          zip1.addLocalFolder('./scripts', 'scripts');
-          zip1.addLocalFolder('./items', 'items');
-          zip1.addLocalFolder('./entities', 'entities');
-          zip1.addLocalFile('./manifest.json', '');
-          zip1.extractAllTo('bds/development_behavior_packs/azalea', true);
-          server2.stdin.setEncoding('utf-8');
-          server2.stdin.write("reload\n")
-          // server2.stdin.setEncoding('utf-8');
-          // server2.stdin.write("tellraw @a {\"rawtext\":[{\"text\":\"[DEV SERVER] Scripts reloaded.\"}]}\n")
-    
-          try {
-            axios.get('http://localhost:3056/').then(res => { }).catch(e => { })
-          } catch { }
-        })
-        
-    })
-  }
 
   fs.mkdirSync('bds/worlds/world', { 'recursive': true })
   const admzip = require('adm-zip');
   const zip = new admzip('world.zip');
   const behaviorManifest = require('./manifest.json');
-  let buildConfig = YAML.parse(fs.readFileSync('azalea-build-config.yaml').toString());
+  let buildConfig = parse(fs.readFileSync('azalea-build-config.yaml').toString());
   let resourceManifest = require(`${buildConfig.resourcePath}/manifest.json`);
-  let otherZip = new admzip();
   if (!fs.existsSync('bds/worlds/world/level.dat')) {
     zip.addFile("world_behavior_packs.json", Buffer.from(JSON.stringify([{
       "pack_id": behaviorManifest.header.uuid,
@@ -481,30 +397,6 @@ gulp.task("dev", function (cb) {
   zip2.addLocalFile(`${buildConfig.resourcePath}/manifest.json`, ``);
   zip2.extractAllTo(`bds/development_resource_packs/azalea`, true)
   fs.writeFileSync(`bds/server.properties`, fs.readFileSync('server.properties'));
-  let server3 = bedrockServer.startServer('1.20.80', onStart, {
-    'server-port': buildConfig.dev_server.port,
-    'server-portv6': buildConfig.dev_server.portv6,
-    'online-mode': false,
-    path: './bds',
-    'level-name': 'world',
-    'default-player-permission-level': 'operator',
-    'allow-cheats': true,
-    'gamemode': 'creative',
-    'difficulty': 'peaceful',
-    'server-name': '§aA§2z§aa§2l§ae§2a',
-
-  }).then(proc => {
-    setInterval(()=>{
-      server2.stdin.setEncoding('utf-8');
-      server2.stdin.write("op @a[tag=!devadmin]\n")
-      server2.stdin.setEncoding('utf-8');
-      server2.stdin.write("tag @a[tag=!devadmin] add devadmin\n")
-      // server2.stdin.write("tag @a[name=azaleadevbot] add azalea-bot\n")
-
-    },1000);
-    server2 = proc;
-    console.log("Dev server started!");
-  })
   
 });
 
@@ -516,11 +408,11 @@ function parseBuild(num) {
   ]
 }
 async function build(prefix = "DEV") {
-  let buildConfig = YAML.parse(fs.readFileSync('azalea-build-config.yaml').toString());
+  let buildConfig = parse(readFileSync('azalea-build-config.yaml').toString());
   buildConfig.stats.ver++;
-  fs.writeFileSync('azalea-build-config.yaml', YAML.stringify(buildConfig));
+  writeFileSync('azalea-build-config.yaml', stringify(buildConfig));
 
-  let behaviorManifest = YAML.parse(fs.readFileSync('manifest.dev.yaml').toString());
+  let behaviorManifest = parse(readFileSync('manifest.dev.yaml').toString());
 
   let version = parseBuild(buildConfig.stats.ver);
 
@@ -528,7 +420,7 @@ async function build(prefix = "DEV") {
   behaviorManifest.header.name = behaviorManifest.header.name.replace("<V>", buildConfig.version);
   behaviorManifest.modules[0].version = version;
   behaviorManifest.modules[1].version = version;
-  fs.writeFileSync('manifest.json', JSON.stringify(behaviorManifest));
+  writeFileSync('manifest.json', JSON.stringify(behaviorManifest));
 
   // Make behavior pack
 
@@ -545,14 +437,14 @@ async function build(prefix = "DEV") {
 
   let resourcesZip = new AdmZip();
 
-  let resourceManifest = YAML.parse(fs.readFileSync('resource-manifest.dev.yaml').toString());
+  let resourceManifest = parse(readFileSync('resource-manifest.dev.yaml').toString());
   version[0] = 2;
 
   resourceManifest.header.version = version;
   resourceManifest.header.name = resourceManifest.header.name.replace("<V>", buildConfig.version);
   resourceManifest.modules[0].version = version;
 
-  fs.writeFileSync(`${buildConfig.resourcePath}/manifest.json`, JSON.stringify(resourceManifest));
+  writeFileSync(`${buildConfig.resourcePath}/manifest.json`, JSON.stringify(resourceManifest));
 
   for (const folder of buildConfig.resourceFolders) {
     resourcesZip.addLocalFolder(`${buildConfig.resourcePath}/${folder}`, `${folder}`);
@@ -577,12 +469,12 @@ async function build(prefix = "DEV") {
   }));
   let filePath = `release/RELEASES/${prefix}-${buildConfig.stats.ver}.mcaddon`;
   let filePath2 = `release/RELEASES-WITH-src/${prefix}-${buildConfig.stats.ver}.mcaddon`;
-  fs.writeFile(filePath, mcAddon.toBuffer(), err => { })
+  writeFile(filePath, mcAddon.toBuffer(), () => { })
   let mcAddon2 = new AdmZip();
-  mcAddon2.addFile("resources.mcpack", resourcesZip.toBuffer());
+("resources.mcpack", resourcesZip.toBuffer());
   behaviorsZip.addLocalFolder(`${__dirname}/src`, `src`)
   mcAddon2.addFile("behavior.mcpack", behaviorsZip.toBuffer());
-  fs.writeFile(filePath2, mcAddon2.toBuffer(), err => { })
+  writeFile(filePath2, mcAddon2.toBuffer(), () => { })
   // let cli = supabase.createClient("https://gjqsznhwkjsanuvlryxe.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdqcXN6bmh3a2pzYW51dmxyeXhlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxMjUyNTA2NSwiZXhwIjoyMDI4MTAxMDY1fQ.DrPZFIGaCsm5nnMUJtWqtxDp-GrSkTzYPryWhlmXIkE");
   // let bucket = cli.storage.from('Downloads');
   // let uuid = crypto.randomUUID();
@@ -600,9 +492,8 @@ async function build(prefix = "DEV") {
   //   }),
   //   id: uuid
   // })
-  let webhook = new webhooks.Webhook(buildConfig.webhook);
-  let message = new webhooks.MessageBuilder()
-    .setColor(0x43cc68)
+  let webhook = new Webhook(buildConfig.webhook);
+  let message =(0x43cc68)
     .setTitle(`Build ${buildConfig.stats.ver}`)
     .setDescription(`Made on <t:${Math.floor(Date.now() / 1000)}:F>`);
   await webhook.send(message);
@@ -611,17 +502,17 @@ async function build(prefix = "DEV") {
   process.exit();
 }
 
-gulp.task("build-dev", async function (cb) {
+task("build-dev", async function () {
   build("DEV");
 });
-gulp.task("build", async function (cb) {
+task("build", async function () {
   build("RELEASE");
 });
-gulp.task("build-beta", async function (cb) {
+task("build-beta", async function () {
   build("BETA");
 });
-gulp.task('test', async function(cb) {
-  return gulp.src("src/**/*.js")
+task('test', async function() {
+  return src("src/**/*.js")
         .pipe(babel({
           plugins: ["wildcard", ["@babel/plugin-transform-react-jsx", {
             "throwIfNamespace": false,
@@ -629,9 +520,9 @@ gulp.task('test', async function(cb) {
             "importSource": "azalea-jsx"
           }]]
         }))
-        .pipe(replace(/\%\%AZALEA_VER\%\%/g, YAML.parse(fs.readFileSync('azalea-build-config.yaml').toString()).version))
+        .pipe(replace(/\%\%AZALEA_VER\%\%/g, parse(readFileSync('azalea-build-config.yaml').toString()).version))
         .pipe(replace(/\/\*BUILDTIME\*\//g, Date.now().toString()))
-        .pipe(replace(/import '@build'/g, `let build = ${JSON.stringify(YAML.parse(fs.readFileSync('azalea-build-config.yaml').toString()))}`))
+        .pipe(replace(/import '@build'/g, `let build = ${JSON.stringify(parse(readFileSync('azalea-build-config.yaml').toString()))}`))
         .pipe(GulpMinifier())
-        .pipe(gulp.dest("scripts"))
+        .pipe(dest("scripts"))
 })

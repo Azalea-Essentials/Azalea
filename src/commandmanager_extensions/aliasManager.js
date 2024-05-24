@@ -2,7 +2,7 @@ import { commands } from "../commands";
 import { Database } from "../db";
 import { isAdmin } from "../isAdmin";
 commands.registerExtension("alias_manager")
-commands.registerExtensionEvent("alias_manager", "get_commands", (commands)=>{
+commands.registerExtensionEvent("alias_manager", "get_commands", ()=>{
     return [
         {
             name: "alias",

@@ -4,14 +4,13 @@ import { Database } from '../../db';
 import { isAdmin } from '../../isAdmin';
 
 export default function addWhatCommand(commands) {
-    let list = [];
     commands.addCommand("announcements", {
         description: "Send out announcements",
         category: "Management",
         author: "TRASH",
         category: "Management",
         usage: "!announcements <post | view> [text]",
-        onRun(msg, args, theme, response, commands, prefix) {
+        onRun(msg, args, theme, response) {
             let db = new Database("AnncList");
             if(!db.get("AnncList")) db.set("AnncList", "[]");
             let whatList = JSON.parse(db.get("AnncList") ? db.get("AnncList") : "[]");

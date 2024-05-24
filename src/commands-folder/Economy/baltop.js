@@ -55,7 +55,7 @@ export default function() {
         .aliases(["top","$top"])
         .category("Economy")
         .desc("See players with the most money")
-        .callback(({msg,args,theme,response})=>{
+        .callback(({theme,response})=>{
             let limit = 20;
             let keys = baltop.keys();
             let scores = [];

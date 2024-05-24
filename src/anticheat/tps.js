@@ -1,5 +1,4 @@
 import { system } from "@minecraft/server";
-
 class Tps {
     tps;
     constructor() {}

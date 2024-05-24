@@ -14,11 +14,11 @@ export default function() {
         for(const log of logs) {
             if(!labels[log.label]) continue;
             let label = labels[log.label];
-            form.button(`${label.color}§l[${label.text}§r§l${label.color}] §r§7${log.text}`, null, (player)=>{
+            form.button(`${label.color}§l[${label.text}§r§l${label.color}] §r§7${log.text}`, null, ()=>{
 
             })
         }
-        form.show(player, false, (player)=>{})
+        form.show(player, false, ()=>{})
     })
     uiManager.addUI("Azalea1.1/AdminPanel/Logs/Root", (player)=>{
         let form = new ActionForm();
@@ -28,7 +28,7 @@ export default function() {
                 uiManager.open("Azalea1.1/AdminPanel/Logs/Root/Category", player, category)
             })
         }
-        form.show(player, false, (player)=>{})
+        form.show(player, false, ()=>{})
 
     })
 

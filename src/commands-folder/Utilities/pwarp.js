@@ -5,7 +5,7 @@ export default function() {
     new CommandBuilder("pwarp")
         .desc("Made for JaguireMC")
         .category("Teleportation")
-        .callback(({msg,args,theme,response})=>{
+        .callback(({msg,args,response})=>{
             let player = msg.sender;
             if(!(player instanceof Player)) return;
             if(args.length) {

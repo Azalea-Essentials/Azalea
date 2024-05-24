@@ -9,7 +9,6 @@ class Bans {
         world.afterEvents.playerSpawn.subscribe(e=>{
             let playerID = playerStorage.getID(e.player);
             if(this.bans.find(_=>_.playerID == playerID)) {
-                // this.kickPlayerByName(e.player.name, "§aYou have been banned!")
             }
         })
     }

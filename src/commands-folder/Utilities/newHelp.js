@@ -46,7 +46,7 @@ export default function() {
     new CommandBuilder("guide")
         .desc("Azalea Guide!")
         .category("Help Center")
-        .callback(({msg,args,theme,commands,response})=>{
+        .callback(({args,response})=>{
             let page = args.length ? /^\d+$/.test(args[0]) ? parseInt(args[0]) - 1 : 0 : 0;
             if(page < 0) page = 0;
             if(page >= pages.length) page = pages.length - 1;
@@ -57,7 +57,7 @@ export default function() {
         .requiresAdmin(true)
         .desc("Gets admin panel item")
         .category("Misc")
-        .callback(({msg,args,response})=>{
+        .callback(({msg,response})=>{
             let item = new ItemStack("azalea:config_ui", 1);
             item.setLore(["§rThis is azalea admin panel!","§rDo §d!guide 2 §rto view help with admin panel"]);
             item.nameTag = "§r§l§bAzalea Admin Panel §d§l[ §r§aV1 §r§d§l]";
@@ -70,7 +70,7 @@ export default function() {
         .requiresAdmin(true)
         .desc("Gets an end gateway!")
         .category("Misc")
-        .callback(({msg,args,response})=>{
+        .callback(({msg,response})=>{
             let item = new ItemStack("minecraft:end_gateway", 1);
             item.setLore(["§rNot to be used as a dildoo"]);
             item.nameTag = "§r§l§9END GATEWAY";
@@ -82,7 +82,7 @@ export default function() {
     new CommandBuilder("help")
         .desc("Azalea Guide!")
         .category("Help Center")
-        .callback(({msg,args,theme,response,prefix,cmdsList,usedCommand})=>{
+        .callback(({msg,args,theme,response,prefix,cmdsList})=>{
             if(args.length && (args[0] == "revert" || args[0] == "-r")) {
                 if(msg.sender.hasTag("old-help")) {
                     response("INFO Changed help back to the new help");

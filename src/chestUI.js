@@ -1,6 +1,5 @@
 import { ActionFormData } from '@minecraft/server-ui';
 import { typeIdToDataId, typeIdToID } from "./typeIds.js";
-import { world } from '@minecraft/server';
 
 const number_of_1_16_100_items = 278;
 // world.afterEvents.item

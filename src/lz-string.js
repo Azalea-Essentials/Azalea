@@ -1,14 +1,3 @@
-// one of the largest things in azalea that i did not make, its a compression library
-
-// Copyright (c) 2013 Pieroxy <pieroxy@pieroxy.net>
-// This work is free. You can redistribute it and/or modify it
-// under the terms of the WTFPL, Version 2
-// For more information see LICENSE.txt or http://www.wtfpl.net/
-//
-// For more information, the home page:
-// http://pieroxy.net/blog/pages/lz-string/testing.html
-//
-// LZ-based compression algorithm, version 1.4.5
 var LZString = (function () {
 
 	// private property
@@ -344,7 +333,6 @@ var LZString = (function () {
 
 		_decompress: function (length, resetValue, getNextValue) {
 			var dictionary = [],
-				next,
 				enlargeIn = 4,
 				dictSize = 4,
 				numBits = 3,
@@ -840,7 +828,6 @@ var LZString = (function () {
 
 		_decompress: function (length, resetValue, getNextValue) {
 			var dictionary = [],
-				next,
 				enlargeIn = 4,
 				dictSize = 4,
 				numBits = 3,

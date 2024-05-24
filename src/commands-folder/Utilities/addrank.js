@@ -9,7 +9,7 @@ export default function AddRankCommand(commands) {
         category: "Management",
         deprecated: true,
         admin: true,
-        onRun(msg, args, theme, response) {
+        onRun(args, theme, response) {
             return response("DEPRINFO Bro just use admin panel. §9§o!adminpanel")
             // if(!isAdmin(msg.sender)) return response(`ERROR You need admin!`);
             if(args.length) {

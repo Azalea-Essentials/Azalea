@@ -1,37 +1,27 @@
-import { ItemStack, world } from '@minecraft/server';
-import { Database } from '../../db';
+import { world } from '@minecraft/server';
 import { uiManager } from '../../uis';
-import { worldTags } from '../../apis/WorldTags';
-import { bans } from '../../apis/Bans';
 import { prismarineDb } from '../../lib/@trash/PrismarineDB/prismarine-db';
-import * as mc from '@minecraft/server';
-// A function that takes a JSON string and returns a highlighted string with Minecraft color codes
 function highlightJSON(json) {
-  // Define the color codes for different types of tokens
   const colors = {
-    string: "\u00A7a", // green
-    number: "\u00A76", // aqua
-    boolean: "\u00A7c", // red
-    null: "\u00A7c", // light purple
-    key: "\u00A7b", // yellow
-    colon: "\u00A77", // gold
-    comma: "\u00A77", // gray
-    bracket: "\u00A78", // dark gray
-    reset: "\u00A7r" // reset
+    string: "\u00A7a",
+    number: "\u00A76",
+    boolean: "\u00A7c",
+    null: "\u00A7c", 
+    key: "\u00A7b",
+    colon: "\u00A77",
+    comma: "\u00A77",
+    bracket: "\u00A78",
+    reset: "\u00A7r"
   };
-
-  // Use a regular expression to match different types of tokens in the JSON string
   const regex = /"(?:\\.|[^"\\])*"|\b(?:true|false|null)\b|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?|[,:[\]{}]/g;
-
-  // Replace each token with the corresponding color code and the token itself
   const highlighted = json.replace(regex, (...args) => {
     let match = args[0];
     let offset = args[args.length - 2];
     let string = args[args.length - 1];
-    let color = colors.reset; // default color
+    let color = colors.reset;
     if (match[0] === '"') {
       if (match[1] === '"') {
-        color = colors.key; // empty string
+        color = colors.key; 
       } else if (match[match.length - 1] === '"' && string[offset+match.length] == ":") {
         color = colors.key; // key
       } else {
@@ -68,7 +58,7 @@ class Tests {
 }
 const tests = new Tests();
 export default function addVersionCommand(commands) {
-  tests.addTest("apply-impulse", (msg,args,theme,response)=>{
+  tests.addTest("apply-impulse", (msg,_args,_theme,response)=>{
     let player = msg.sender;
     // if(!(player instanceof mc.Player)) return;
     try {
@@ -93,10 +83,10 @@ export default function addVersionCommand(commands) {
 
     return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
 }
-  tests.addTest("yes",(msg,args,theme,response)=>{
+  tests.addTest("yes",(_msg,_args,_theme,response)=>{
     response(`TEXT ${formatBytes(world.getDynamicPropertyTotalByteCount())}`)
   })
-  tests.addTest("prismarinedb/basic", (msg,args,theme,response)=>{
+  tests.addTest("prismarinedb/basic", (_msg,_args,_theme,response)=>{
     response(`SUCCESS Starting test`);
     let test = prismarineDb.table("test");
     test.clear();
@@ -118,7 +108,7 @@ export default function addVersionCommand(commands) {
     response(`TEXT ${highlightJSON(JSON.stringify(test.rawData, null, 2))}`);
     response(`INFO If something does not match the description, please report it to {{ALT}}@powertrash{{RESET}} on Discord.`)
   })
-  tests.addTest("prismarinedb/data-persistence",(msg, args, theme, response)=>{
+  tests.addTest("prismarinedb/data-persistence",(_msg, args, _theme, response)=>{
     response("SUCCESS Started test");
     let table1 = prismarineDb.table("test2");
     let table2 = prismarineDb.table("test2");
@@ -135,12 +125,12 @@ export default function addVersionCommand(commands) {
     response(`TEXT ${highlightJSON(JSON.stringify(table2.rawData, null, 2))}`);
     response(`INFO Running this command again should create another document, do !testing prismarinedb/data-persistence clear to clear it`)
   })
-  tests.addTest("prismarinedb/migration", (msg, args, theme, response)=>{
+  tests.addTest("prismarinedb/migration", (_msg, _args, _theme, response)=>{
     let legacyDb = prismarineDb.table("Legacy-Scoreboard-DB");
     legacyDb.load();
     response(`TEXT ${highlightJSON(JSON.stringify(legacyDb.data, null, 2))}`)
   })
-  tests.addTest("prismarinedb/lbdb", (msg, args, theme, response)=>{
+  tests.addTest("prismarinedb/lbdb", (_msg, _args, _theme, response)=>{
     let leaderboardDB = prismarineDb.table("Leaderboards");
 
     leaderboardDB.load();
@@ -203,7 +193,7 @@ export default function addVersionCommand(commands) {
         description: "Command to test code",
         isDev: true,
         category: "Development",
-        onRun(msg, args, theme, response) {
+        onRun(theme, response) {
             response(`TEXT ${theme.category}+---- ${theme.header}DIALOG ${theme.category}----+`);
             response(`TEXT ${theme.category}|                        |`);
             response(`TEXT ${theme.category}| §rThis is a test       ${theme.category}|`);
@@ -214,8 +204,7 @@ export default function addVersionCommand(commands) {
     commands.addCommand("uis", {
         description: "View UIs through UI manager",
         category: "Help Center",
-        onRun(msg,args, theme, response) {
-            let uis = uiManager.uis.map(_=>_.id);
+        onRun(theme, response) {
             let text = [`${theme.category}----- ${theme.header}UI IDs ${theme.category}-----`];
             let categories = {};
             for(const ui of uiManager.uis) {

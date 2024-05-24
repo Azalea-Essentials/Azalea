@@ -1,21 +1,11 @@
-import { system, world } from "@minecraft/server";
 import { CommandBuilder } from "../commandBuilder";
 import { Database } from "../db";
 import { DynamicPropertyDatabase } from "../dynamicPropertyDb";
 
 export default function() {
-    // system.runInterval(()=>{
-    //     for(const player of world.getPlayers()) {
-    //         if(player.hasTag("azalea-bot")) {
-    //             player.sendMessage(JSON.stringify({
-    //                 type: "AzaleaInstalledTest"
-    //             }))
-    //         }
-    //     }
-    // },40);
     new CommandBuilder("torchflower")
         .desc("Private command for torchflower")
-        .callback(({msg,args,theme,response})=>{
+        .callback(({msg,args,response})=>{
             if(!msg.sender.hasTag("azalea-bot")) return response("ERROR You are not a bot.");
             let json = JSON.parse(args.join(' '));
             if(json.type == "ndb-set") {

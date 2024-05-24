@@ -5,7 +5,7 @@ export default function() {
     new CommandBuilder("emojis")
         .desc("Lists emojis that can be used in chat and some other places")
         .category("Social")
-        .callback(({msg,args,theme,response})=>{
+        .callback(({response})=>{
             let text = [];
             for(const emoji in emojis) {
                 text.push(`:${emoji}: §7- ${emojis[emoji]}`);
