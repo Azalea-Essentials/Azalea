@@ -1,4 +1,4 @@
-![torchflower logo](https://azalea.trashdev.org/img/azalea_essentials2.png)
+![azalea logo](https://azalea.trashdev.org/img/azalea_essentials2.png)
 
 <div align="center">
 
