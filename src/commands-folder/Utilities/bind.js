@@ -12,7 +12,7 @@ export default function bindCommands() {
             if(args[0] == "set") {
                 let binds = new Database("Binds");
                 let inventory = msg.sender.getComponent("inventory");
-                let item = inventory.container.getItem(msg.sender.selectedSlot);
+                let item = inventory.container.getItem(msg.sender.selectedSlotIndex);
                 binds.set(`${item.typeId}`, args.slice(1).join(' '));
                 return response(`SUCCESS Binded ${item.typeId} to /${args.slice(1).join(' ')}`)
             } else if(args[0] == "list") {
@@ -32,7 +32,7 @@ export default function bindCommands() {
         .callback(({msg,response})=>{
             let binds = new Database("Binds");
             let inventory = msg.sender.getComponent("inventory");
-            let item = inventory.container.getItem(msg.sender.selectedSlot);
+            let item = inventory.container.getItem(msg.sender.selectedSlotIndex);
             let bind = binds.get(item.typeId);
             if(bind) {
                 binds.hardDelete(item.typeId);

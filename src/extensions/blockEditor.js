@@ -15,7 +15,7 @@ export default {
             world.beforeEvents.playerInteractWithBlock.subscribe(e => {
                 if(!isAdmin(e.player)) return;
                 let inventory = e.player.getComponent('inventory');
-                let item = inventory.container.getItem(e.player.selectedSlot);
+                let item = inventory.container.getItem(e.player.selectedSlotIndex);
                 if (item && item.typeId == 'azalea:block_editor') {
                     e.cancel = true;
                     system.run(() => {
@@ -46,7 +46,7 @@ export default {
                 } else {
                     let key = `${e.block.x},${e.block.y},${e.block.z}`;
                     let properties = blocksDb.get(key, {});
-                    if (properties.oninteract && typeof properties.oninteract == "string") {
+                    if (properties && properties.oninteract && typeof properties.oninteract == "string") {
                         e.cancel = true;
 
                         system.run(() => {

@@ -1,7 +1,8 @@
-import { Transform } from 'stream';
-import { minify_sync } from 'terser';
+const { Transform } = require('stream');
+const { minify_sync } = require('terser');
 
-export default function() {
+
+module.exports = function() {
   // Monkey patch Transform or create your own subclass,
   // implementing `_transform()` and optionally `_flush()`
   var transformStream = new Transform({objectMode: true});

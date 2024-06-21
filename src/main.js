@@ -21,12 +21,24 @@ import { NicknamesModule } from './nicknames';
 import './leaderboardHandler';
 import './legacyPlayerShopNoChestUI';
 import './sellshop';
+import './tpRequestUI'
+import './leaderboardHandler';
 import { warps } from './warpsapi';
 import { permList } from './isAdmin';
 import * as Events from './events';
 import { Database } from './db';
 import { uiManager } from './uis';
 import './iconExtension';
+import { world } from '@minecraft/server';
+let binds = new Database("Binds");
+world.beforeEvents.itemUse.subscribe(e=>{
+    let bind = binds.get(e.itemStack.typeId);
+    if(bind) {
+        system.run(()=>{
+            e.source.runCommand(bind);
+        })
+    }
+})
 class BindManager {
     constructor() {
         this.binds = new Map();

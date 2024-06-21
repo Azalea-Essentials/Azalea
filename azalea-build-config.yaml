@@ -11,7 +11,8 @@ files:
   - pack_icon.png
   - README.md
   - LICENSE
-resourcePath: /home/torchflower/azaleadev/Azalea-Resources
+resourcePath: c:\Users\Zip
+  Tie\AppData\Local\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\development_resource_packs\resources
 resourceFolders:
   - textures
   - ui
@@ -29,4 +30,4 @@ resourceFiles:
   - pack_icon.png
 webhook: https://discord.com/api/webhooks/1230342147371307200/LR1wyqJnWQ2vkHCpdNvxPRYpvefed5AXkIP0VPg4HQcREm_pC2S5DiSwJOrhyoeOLWnf
 stats:
-  ver: 341
+  ver: 345

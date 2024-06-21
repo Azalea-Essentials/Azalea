@@ -4,7 +4,7 @@ import { ModalForm } from "../form_func";
 import { isAdmin } from "../isAdmin";
 
 export default {
-    namespace: "DynamicSigns",
+    namespace: "Dynamic Signs",
     description: "Signs that update in realtime",
     icon: "https://azalea.trashdev.org/img/textures/amethyst_icons/Packs/asteroid_icons/accessibility_glyph_color.png",
     main: class {
@@ -69,6 +69,18 @@ export default {
                         
                 }
             })
+            system.runInterval(()=>{
+                for(const sign of dynamicSign.data) {
+                    try {
+                        let block = world.getDimension('overworld').getBlock(stringtovec3(sign.data.loc));
+                        if(!sign.data.format) return;
+                        if(block.getComponent('sign')) {
+                            let sign2 = block.getComponent('sign');
+                            sign2.setText(formatStr(sign.data.format ? sign.data.format : ""))
+                        }
+                    } catch {}
+                }
+            },30)
         }
     }
 }

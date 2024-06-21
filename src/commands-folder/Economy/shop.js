@@ -71,7 +71,7 @@ export default function main() {
                     if(!/^\d+$/.test(args[1])) return response("ERROR Invalid price!");
                     let inventory = msg.sender.getComponent("inventory");
                     let container = inventory.container;
-                    let itemStack = container.getItem(msg.sender.selectedSlot);
+                    let itemStack = container.getItem(msg.sender.selectedSlotIndex);
                     if(!itemStack) return response("ERROR You need to be holding an item");
                     // world.sendMessage(`${JSON.stringify(shopItems)}`);
                     let uncategorizedIndex = shopItems.findIndex(_=>_.category == "Uncategorized");
@@ -132,7 +132,7 @@ export default function main() {
                 if(!/^\d+$/.test(args[1])) return response("ERROR Invalid price!");
                 let inventory = msg.sender.getComponent("inventory");
                 let container = inventory.container;
-                let itemStack = container.getItem(msg.sender.selectedSlot);
+                let itemStack = container.getItem(msg.sender.selectedSlotIndex);
                 if(!itemStack) return response("ERROR You need to be holding an item");
                 // world.sendMessage(`${JSON.stringify(shopItems)}`);
                 let uncategorizedIndex = shopItems.findIndex(_=>_.category == "Uncategorized");
@@ -158,7 +158,7 @@ export default function main() {
                 if(!/^\d+$/.test(args[1])) return response("ERROR Invalid price!");
                 let inventory = msg.sender.getComponent("inventory");
                 let container = inventory.container;
-                let item = container.getItem(msg.sender.selectedSlot);
+                let item = container.getItem(msg.sender.selectedSlotIndex);
                 let nameTag = item.typeId.split(':').slice(1).join(':').split('_').map(_=>`${_[0].toUpperCase()}${_.substring(1)}`).join(' ');
                 let sellShopDb = new Database("SellShop");
                 let sellShopItems = sellShopDb.get("Items", {});

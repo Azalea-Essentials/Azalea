@@ -25,7 +25,7 @@ export default {
               world.beforeEvents.playerInteractWithEntity.subscribe(e => {
                 if(!isAdmin(e.player)) return;
                 let inventory = e.player.getComponent('inventory');
-                let currItem = inventory.container.getItem(e.player.selectedSlot);
+                let currItem = inventory.container.getItem(e.player.selectedSlotIndex);
                 if (currItem && currItem.typeId == "azalea:entity_editor") {
                   e.cancel = true;
                   system.run(() => {

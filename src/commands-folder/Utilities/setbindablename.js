@@ -10,7 +10,7 @@ export default function() {
         .callback(({msg,args,response})=>{
             let inventory = msg.sender.getComponent('inventory');
             let container = inventory.container;
-            let item = container.getItem(msg.sender.selectedSlot);
+            let item = container.getItem(msg.sender.selectedSlotIndex);
             if(!item.typeId.startsWith('azalea:bindable')) return response("ERROR Item is not bindable");
             db.set(item.typeId, args.join(' '));
             return response("SUCCESS Name set!")

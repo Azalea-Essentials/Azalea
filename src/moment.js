@@ -4,6 +4,7 @@
 //! license : MIT
 //! momentjs.com
 
+import { world } from "@minecraft/server";
 
 var hookCallback;
 
@@ -252,20 +253,18 @@ function copyConfig(to, from) {
 }
 
 // Moment prototype object
-class Moment {
-    constructor(config) {
-        copyConfig(this, config);
-        this._d = new Date(config._d != null ? config._d.getTime() : NaN);
-        if (!this.isValid()) {
-            this._d = new Date(NaN);
-        }
-        // Prevent infinite loop in case updateOffset creates new moment
-        // objects.
-        if (updateInProgress === false) {
-            updateInProgress = true;
-            hooks.updateOffset(this);
-            updateInProgress = false;
-        }
+function Moment(config) {
+    copyConfig(this, config);
+    this._d = new Date(config._d != null ? config._d.getTime() : NaN);
+    if (!this.isValid()) {
+        this._d = new Date(NaN);
+    }
+    // Prevent infinite loop in case updateOffset creates new moment
+    // objects.
+    if (updateInProgress === false) {
+        updateInProgress = true;
+        hooks.updateOffset(this);
+        updateInProgress = false;
     }
 }
 
@@ -275,7 +274,7 @@ function isMoment(obj) {
     );
 }
 
-function warn(_msg) {
+function warn(msg) {
 }
 
 function deprecate(msg, fn) {
@@ -341,29 +340,27 @@ function isFunction(input) {
     );
 }
 
-class set {
-    constructor(config) {
-        var prop, i;
-        for (i in config) {
-            if (hasOwnProp(config, i)) {
-                prop = config[i];
-                if (isFunction(prop)) {
-                    this[i] = prop;
-                } else {
-                    this['_' + i] = prop;
-                }
+function set(config) {
+    var prop, i;
+    for (i in config) {
+        if (hasOwnProp(config, i)) {
+            prop = config[i];
+            if (isFunction(prop)) {
+                this[i] = prop;
+            } else {
+                this['_' + i] = prop;
             }
         }
-        this._config = config;
-        // Lenient ordinal parsing accepts just a number in addition to
-        // number + (possibly) stuff coming from _dayOfMonthOrdinalParse.
-        // TODO: Remove "ordinalParse" fallback in next major release.
-        this._dayOfMonthOrdinalParseLenient = new RegExp(
-            (this._dayOfMonthOrdinalParseLenient.source || this._ordinalParse.source) +
+    }
+    this._config = config;
+    // Lenient ordinal parsing accepts just a number in addition to
+    // number + (possibly) stuff coming from _dayOfMonthOrdinalParse.
+    // TODO: Remove "ordinalParse" fallback in next major release.
+    this._dayOfMonthOrdinalParseLenient = new RegExp(
+        (this._dayOfMonthOrdinalParse.source || this._ordinalParse.source) +
             '|' +
             /\d{1,2}/.source
-        );
-    }
+    );
 }
 
 function mergeConfigs(parentConfig, childConfig) {
@@ -789,7 +786,7 @@ regexes = {};
 function addRegexToken(token, regex, strictRegex) {
     regexes[token] = isFunction(regex)
         ? regex
-        : function (isStrict) {
+        : function (isStrict, localeData) {
               return isStrict && strictRegex ? strictRegex : regex;
           };
 }
@@ -809,7 +806,7 @@ function unescapeFormat(s) {
             .replace('\\', '')
             .replace(
                 /\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g,
-                function (_matched, p1, p2, p3, p4) {
+                function (matched, p1, p2, p3, p4) {
                     return p1 || p2 || p3 || p4;
                 }
             )
@@ -841,7 +838,7 @@ function addParseToken(token, callback) {
 }
 
 function addWeekParseToken(token, callback) {
-    addParseToken(token, function (input, _array, config, token) {
+    addParseToken(token, function (input, array, config, token) {
         config._w = config._w || {};
         callback(input, config._w, config, token);
     });
@@ -984,99 +981,102 @@ function localeMonthsShort(m, format) {
           ][m.month()];
 }
 
-class handleStrictParse {
-    constructor(monthName, format, strict) {
-        var i, ii, mom, llc = monthName.toLocaleLowerCase();
-        if (!this._monthsParse) {
-            // this is not used
-            this._monthsParse = [];
-            this._longMonthsParse = [];
-            this._shortMonthsParse = [];
-            for (i = 0; i < 12; ++i) {
-                mom = createUTC([2000, i]);
-                this._shortMonthsParse[i] = this.monthsShort(
-                    mom,
-                    ''
-                ).toLocaleLowerCase();
-                this._longMonthsParse[i] = this.months(mom, '').toLocaleLowerCase();
-            }
+function handleStrictParse(monthName, format, strict) {
+    var i,
+        ii,
+        mom,
+        llc = monthName.toLocaleLowerCase();
+    if (!this._monthsParse) {
+        // this is not used
+        this._monthsParse = [];
+        this._longMonthsParse = [];
+        this._shortMonthsParse = [];
+        for (i = 0; i < 12; ++i) {
+            mom = createUTC([2000, i]);
+            this._shortMonthsParse[i] = this.monthsShort(
+                mom,
+                ''
+            ).toLocaleLowerCase();
+            this._longMonthsParse[i] = this.months(mom, '').toLocaleLowerCase();
         }
+    }
 
-        if (strict) {
-            if (format === 'MMM') {
-                ii = indexOf.call(this._shortMonthsParse, llc);
-                return ii !== -1 ? ii : null;
-            } else {
-                ii = indexOf.call(this._longMonthsParse, llc);
-                return ii !== -1 ? ii : null;
-            }
+    if (strict) {
+        if (format === 'MMM') {
+            ii = indexOf.call(this._shortMonthsParse, llc);
+            return ii !== -1 ? ii : null;
         } else {
-            if (format === 'MMM') {
-                ii = indexOf.call(this._shortMonthsParse, llc);
-                if (ii !== -1) {
-                    return ii;
-                }
-                ii = indexOf.call(this._longMonthsParse, llc);
-                return ii !== -1 ? ii : null;
-            } else {
-                ii = indexOf.call(this._longMonthsParse, llc);
-                if (ii !== -1) {
-                    return ii;
-                }
-                ii = indexOf.call(this._shortMonthsParse, llc);
-                return ii !== -1 ? ii : null;
+            ii = indexOf.call(this._longMonthsParse, llc);
+            return ii !== -1 ? ii : null;
+        }
+    } else {
+        if (format === 'MMM') {
+            ii = indexOf.call(this._shortMonthsParse, llc);
+            if (ii !== -1) {
+                return ii;
             }
+            ii = indexOf.call(this._longMonthsParse, llc);
+            return ii !== -1 ? ii : null;
+        } else {
+            ii = indexOf.call(this._longMonthsParse, llc);
+            if (ii !== -1) {
+                return ii;
+            }
+            ii = indexOf.call(this._shortMonthsParse, llc);
+            return ii !== -1 ? ii : null;
         }
     }
 }
 
-class localeMonthsParse {
-    constructor(monthName, format, strict) {
-        var i, mom, regex;
+function localeMonthsParse(monthName, format, strict) {
+    var i, mom, regex;
 
-        if (this._monthsParse) {
-            return handleStrictParse.call(this, monthName, format, strict);
+    if (this._monthsParseExact) {
+        return handleStrictParse.call(this, monthName, format, strict);
+    }
+
+    if (!this._monthsParse) {
+        this._monthsParse = [];
+        this._longMonthsParse = [];
+        this._shortMonthsParse = [];
+    }
+
+    // TODO: add sorting
+    // Sorting makes sure if one month (or abbr) is a prefix of another
+    // see sorting in computeMonthsParse
+    for (i = 0; i < 12; i++) {
+        // make the regex if we don't have it already
+        mom = createUTC([2000, i]);
+        if (strict && !this._longMonthsParse[i]) {
+            this._longMonthsParse[i] = new RegExp(
+                '^' + this.months(mom, '').replace('.', '') + '$',
+                'i'
+            );
+            this._shortMonthsParse[i] = new RegExp(
+                '^' + this.monthsShort(mom, '').replace('.', '') + '$',
+                'i'
+            );
         }
-
-        if (!this._monthsParse) {
-            this._monthsParse = [];
-            this._longMonthsParse = [];
-            this._shortMonthsParse = [];
+        if (!strict && !this._monthsParse[i]) {
+            regex =
+                '^' + this.months(mom, '') + '|^' + this.monthsShort(mom, '');
+            this._monthsParse[i] = new RegExp(regex.replace('.', ''), 'i');
         }
-
-        // TODO: add sorting
-        // Sorting makes sure if one month (or abbr) is a prefix of another
-        // see sorting in computeMonthsParse
-        for (i = 0; i < 12; i++) {
-            // make the regex if we don't have it already
-            mom = createUTC([2000, i]);
-            if (strict && !this._longMonthsParse[i]) {
-                this._longMonthsParse[i] = new RegExp(
-                    '^' + this.months(mom, '').replace('.', '') + '$',
-                    'i'
-                );
-                this._shortMonthsParse[i] = new RegExp(
-                    '^' + this.monthsShort(mom, '').replace('.', '') + '$',
-                    'i'
-                );
-            }
-            if (!strict && !this._monthsParse[i]) {
-                regex =
-                    '^' + this.months(mom, '') + '|^' + this.monthsShort(mom, '');
-                this._monthsParse[i] = new RegExp(regex.replace('.', ''), 'i');
-            }
-            // test the regex
-            if (strict &&
-                format === 'MMMM' &&
-                this._longMonthsParse[i].test(monthName)) {
-                return i;
-            } else if (strict &&
-                format === 'MMM' &&
-                this._shortMonthsParse[i].test(monthName)) {
-                return i;
-            } else if (!strict && this._monthsParse[i].test(monthName)) {
-                return i;
-            }
+        // test the regex
+        if (
+            strict &&
+            format === 'MMMM' &&
+            this._longMonthsParse[i].test(monthName)
+        ) {
+            return i;
+        } else if (
+            strict &&
+            format === 'MMM' &&
+            this._shortMonthsParse[i].test(monthName)
+        ) {
+            return i;
+        } else if (!strict && this._monthsParse[i].test(monthName)) {
+            return i;
         }
     }
 }
@@ -1118,95 +1118,91 @@ function getSetMonth(value) {
     }
 }
 
-class getDaysInMonth {
-    constructor() {
-        return daysInMonth(this.year(), this.month());
-    }
+function getDaysInMonth() {
+    return daysInMonth(this.year(), this.month());
 }
 
-class monthsShortRegex {
-    constructor(isStrict) {
-        if (this._monthsParseExact) {
-            if (!hasOwnProp(this, '_monthsRegex')) {
-                computeMonthsParse.call(this);
-            }
-            if (isStrict) {
-                return this._monthsShortRegex;
-            } else {
-                return this._monthsShortRegex;
-            }
+function monthsShortRegex(isStrict) {
+    if (this._monthsParseExact) {
+        if (!hasOwnProp(this, '_monthsRegex')) {
+            computeMonthsParse.call(this);
+        }
+        if (isStrict) {
+            return this._monthsShortStrictRegex;
         } else {
-            if (!hasOwnProp(this, '_monthsShortRegex')) {
-                this._monthsShortRegex = defaultMonthsShortRegex;
-            }
-            return this._monthsShortRegex && isStrict
-                ? this._monthsShortRegex
-                : this._monthsShortRegex;
+            return this._monthsShortRegex;
         }
+    } else {
+        if (!hasOwnProp(this, '_monthsShortRegex')) {
+            this._monthsShortRegex = defaultMonthsShortRegex;
+        }
+        return this._monthsShortStrictRegex && isStrict
+            ? this._monthsShortStrictRegex
+            : this._monthsShortRegex;
     }
 }
 
-class monthsRegex {
-    constructor(isStrict) {
-        if (this._monthsParseExact) {
-            if (!hasOwnProp(this, '_monthsRegex')) {
-                computeMonthsParse.call(this);
-            }
-            if (isStrict) {
-                return this._monthsRegex;
-            } else {
-                return this._monthsRegex;
-            }
+function monthsRegex(isStrict) {
+    if (this._monthsParseExact) {
+        if (!hasOwnProp(this, '_monthsRegex')) {
+            computeMonthsParse.call(this);
+        }
+        if (isStrict) {
+            return this._monthsStrictRegex;
         } else {
-            if (!hasOwnProp(this, '_monthsRegex')) {
-                this._monthsRegex = defaultMonthsRegex;
-            }
-            return this._monthsRegex && isStrict
-                ? this._monthsRegex
-                : this._monthsRegex;
+            return this._monthsRegex;
         }
+    } else {
+        if (!hasOwnProp(this, '_monthsRegex')) {
+            this._monthsRegex = defaultMonthsRegex;
+        }
+        return this._monthsStrictRegex && isStrict
+            ? this._monthsStrictRegex
+            : this._monthsRegex;
     }
 }
 
-class computeMonthsParse {
-    constructor() {
-        function cmpLenRev(a, b) {
-            return b.length - a.length;
-        }
-
-        var shortPieces = [], longPieces = [], mixedPieces = [], i, mom;
-        for (i = 0; i < 12; i++) {
-            // make the regex if we don't have it already
-            mom = createUTC([2000, i]);
-            shortPieces.push(this.monthsShort(mom, ''));
-            longPieces.push(this.months(mom, ''));
-            mixedPieces.push(this.months(mom, ''));
-            mixedPieces.push(this.monthsShort(mom, ''));
-        }
-        // Sorting makes sure if one month (or abbr) is a prefix of another it
-        // will match the longer piece.
-        shortPieces.sort(cmpLenRev);
-        longPieces.sort(cmpLenRev);
-        mixedPieces.sort(cmpLenRev);
-        for (i = 0; i < 12; i++) {
-            shortPieces[i] = regexEscape(shortPieces[i]);
-            longPieces[i] = regexEscape(longPieces[i]);
-        }
-        for (i = 0; i < 24; i++) {
-            mixedPieces[i] = regexEscape(mixedPieces[i]);
-        }
-
-        this._monthsRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
-        this._monthsShortRegex = this._monthsRegex;
-        this._monthsStrictRegex = new RegExp(
-            '^(' + longPieces.join('|') + ')',
-            'i'
-        );
-        this._monthsShortStrictRegex = new RegExp(
-            '^(' + shortPieces.join('|') + ')',
-            'i'
-        );
+function computeMonthsParse() {
+    function cmpLenRev(a, b) {
+        return b.length - a.length;
     }
+
+    var shortPieces = [],
+        longPieces = [],
+        mixedPieces = [],
+        i,
+        mom;
+    for (i = 0; i < 12; i++) {
+        // make the regex if we don't have it already
+        mom = createUTC([2000, i]);
+        shortPieces.push(this.monthsShort(mom, ''));
+        longPieces.push(this.months(mom, ''));
+        mixedPieces.push(this.months(mom, ''));
+        mixedPieces.push(this.monthsShort(mom, ''));
+    }
+    // Sorting makes sure if one month (or abbr) is a prefix of another it
+    // will match the longer piece.
+    shortPieces.sort(cmpLenRev);
+    longPieces.sort(cmpLenRev);
+    mixedPieces.sort(cmpLenRev);
+    for (i = 0; i < 12; i++) {
+        shortPieces[i] = regexEscape(shortPieces[i]);
+        longPieces[i] = regexEscape(longPieces[i]);
+    }
+    for (i = 0; i < 24; i++) {
+        mixedPieces[i] = regexEscape(mixedPieces[i]);
+    }
+
+    this._monthsRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
+    this._monthsShortRegex = this._monthsRegex;
+    this._monthsStrictRegex = new RegExp(
+        '^(' + longPieces.join('|') + ')',
+        'i'
+    );
+    this._monthsShortStrictRegex = new RegExp(
+        '^(' + shortPieces.join('|') + ')',
+        'i'
+    );
 }
 
 // FORMATTING
@@ -1396,7 +1392,7 @@ addRegexToken('WW', match1to2, match2);
 
 addWeekParseToken(
     ['w', 'ww', 'W', 'WW'],
-    function (input, week, _config, token) {
+    function (input, week, config, token) {
         week[token.substr(0, 1)] = toInt(input);
     }
 );
@@ -1489,7 +1485,7 @@ addWeekParseToken(['dd', 'ddd', 'dddd'], function (input, week, config, token) {
     }
 });
 
-addWeekParseToken(['d', 'e', 'E'], function (input, week, _config, token) {
+addWeekParseToken(['d', 'e', 'E'], function (input, week, config, token) {
     week[token] = toInt(input);
 });
 
@@ -1520,10 +1516,8 @@ function parseIsoWeekday(input, locale) {
 }
 
 // LOCALES
-class shiftWeekdays {
-    constructor(ws, n) {
-        return ws.slice(n, 7).concat(ws.slice(0, n));
-    }
+function shiftWeekdays(ws, n) {
+    return ws.slice(n, 7).concat(ws.slice(0, n));
 }
 
 var defaultLocaleWeekdays =
@@ -1565,136 +1559,142 @@ function localeWeekdaysMin(m) {
         : this._weekdaysMin;
 }
 
-class handleStrictParse$1 {
-    constructor(weekdayName, format, strict) {
-        var i, ii, mom, llc = weekdayName.toLocaleLowerCase();
-        if (!this._weekdaysParse) {
-            this._weekdaysParse = [];
-            this._shortWeekdaysParse = [];
-            this._minWeekdaysParse = [];
+function handleStrictParse$1(weekdayName, format, strict) {
+    var i,
+        ii,
+        mom,
+        llc = weekdayName.toLocaleLowerCase();
+    if (!this._weekdaysParse) {
+        this._weekdaysParse = [];
+        this._shortWeekdaysParse = [];
+        this._minWeekdaysParse = [];
 
-            for (i = 0; i < 7; ++i) {
-                mom = createUTC([2000, 1]).day(i);
-                this._minWeekdaysParse[i] = this.weekdaysMin(
-                    mom,
-                    ''
-                ).toLocaleLowerCase();
-                this._shortWeekdaysParse[i] = this.weekdaysShort(
-                    mom,
-                    ''
-                ).toLocaleLowerCase();
-                this._weekdaysParse[i] = this.weekdays(mom, '').toLocaleLowerCase();
-            }
+        for (i = 0; i < 7; ++i) {
+            mom = createUTC([2000, 1]).day(i);
+            this._minWeekdaysParse[i] = this.weekdaysMin(
+                mom,
+                ''
+            ).toLocaleLowerCase();
+            this._shortWeekdaysParse[i] = this.weekdaysShort(
+                mom,
+                ''
+            ).toLocaleLowerCase();
+            this._weekdaysParse[i] = this.weekdays(mom, '').toLocaleLowerCase();
         }
+    }
 
-        if (strict) {
-            if (format === 'dddd') {
-                ii = indexOf.call(this._weekdaysParse, llc);
-                return ii !== -1 ? ii : null;
-            } else if (format === 'ddd') {
-                ii = indexOf.call(this._shortWeekdaysParse, llc);
-                return ii !== -1 ? ii : null;
-            } else {
-                ii = indexOf.call(this._minWeekdaysParse, llc);
-                return ii !== -1 ? ii : null;
-            }
+    if (strict) {
+        if (format === 'dddd') {
+            ii = indexOf.call(this._weekdaysParse, llc);
+            return ii !== -1 ? ii : null;
+        } else if (format === 'ddd') {
+            ii = indexOf.call(this._shortWeekdaysParse, llc);
+            return ii !== -1 ? ii : null;
         } else {
-            if (format === 'dddd') {
-                ii = indexOf.call(this._weekdaysParse, llc);
-                if (ii !== -1) {
-                    return ii;
-                }
-                ii = indexOf.call(this._shortWeekdaysParse, llc);
-                if (ii !== -1) {
-                    return ii;
-                }
-                ii = indexOf.call(this._minWeekdaysParse, llc);
-                return ii !== -1 ? ii : null;
-            } else if (format === 'ddd') {
-                ii = indexOf.call(this._shortWeekdaysParse, llc);
-                if (ii !== -1) {
-                    return ii;
-                }
-                ii = indexOf.call(this._weekdaysParse, llc);
-                if (ii !== -1) {
-                    return ii;
-                }
-                ii = indexOf.call(this._minWeekdaysParse, llc);
-                return ii !== -1 ? ii : null;
-            } else {
-                ii = indexOf.call(this._minWeekdaysParse, llc);
-                if (ii !== -1) {
-                    return ii;
-                }
-                ii = indexOf.call(this._weekdaysParse, llc);
-                if (ii !== -1) {
-                    return ii;
-                }
-                ii = indexOf.call(this._shortWeekdaysParse, llc);
-                return ii !== -1 ? ii : null;
+            ii = indexOf.call(this._minWeekdaysParse, llc);
+            return ii !== -1 ? ii : null;
+        }
+    } else {
+        if (format === 'dddd') {
+            ii = indexOf.call(this._weekdaysParse, llc);
+            if (ii !== -1) {
+                return ii;
             }
+            ii = indexOf.call(this._shortWeekdaysParse, llc);
+            if (ii !== -1) {
+                return ii;
+            }
+            ii = indexOf.call(this._minWeekdaysParse, llc);
+            return ii !== -1 ? ii : null;
+        } else if (format === 'ddd') {
+            ii = indexOf.call(this._shortWeekdaysParse, llc);
+            if (ii !== -1) {
+                return ii;
+            }
+            ii = indexOf.call(this._weekdaysParse, llc);
+            if (ii !== -1) {
+                return ii;
+            }
+            ii = indexOf.call(this._minWeekdaysParse, llc);
+            return ii !== -1 ? ii : null;
+        } else {
+            ii = indexOf.call(this._minWeekdaysParse, llc);
+            if (ii !== -1) {
+                return ii;
+            }
+            ii = indexOf.call(this._weekdaysParse, llc);
+            if (ii !== -1) {
+                return ii;
+            }
+            ii = indexOf.call(this._shortWeekdaysParse, llc);
+            return ii !== -1 ? ii : null;
         }
     }
 }
 
-class localeWeekdaysParse {
-    constructor(weekdayName, format, strict) {
-        var i, mom, regex;
+function localeWeekdaysParse(weekdayName, format, strict) {
+    var i, mom, regex;
 
-        if (this._weekdaysParse) {
-            return handleStrictParse$1.call(this, weekdayName, format, strict);
+    if (this._weekdaysParseExact) {
+        return handleStrictParse$1.call(this, weekdayName, format, strict);
+    }
+
+    if (!this._weekdaysParse) {
+        this._weekdaysParse = [];
+        this._minWeekdaysParse = [];
+        this._shortWeekdaysParse = [];
+        this._fullWeekdaysParse = [];
+    }
+
+    for (i = 0; i < 7; i++) {
+        // make the regex if we don't have it already
+
+        mom = createUTC([2000, 1]).day(i);
+        if (strict && !this._fullWeekdaysParse[i]) {
+            this._fullWeekdaysParse[i] = new RegExp(
+                '^' + this.weekdays(mom, '').replace('.', '\\.?') + '$',
+                'i'
+            );
+            this._shortWeekdaysParse[i] = new RegExp(
+                '^' + this.weekdaysShort(mom, '').replace('.', '\\.?') + '$',
+                'i'
+            );
+            this._minWeekdaysParse[i] = new RegExp(
+                '^' + this.weekdaysMin(mom, '').replace('.', '\\.?') + '$',
+                'i'
+            );
         }
-
-        if (!this._weekdaysParse) {
-            this._weekdaysParse = [];
-            this._minWeekdaysParse = [];
-            this._shortWeekdaysParse = [];
-            this._fullWeekdaysParse = [];
+        if (!this._weekdaysParse[i]) {
+            regex =
+                '^' +
+                this.weekdays(mom, '') +
+                '|^' +
+                this.weekdaysShort(mom, '') +
+                '|^' +
+                this.weekdaysMin(mom, '');
+            this._weekdaysParse[i] = new RegExp(regex.replace('.', ''), 'i');
         }
-
-        for (i = 0; i < 7; i++) {
-            // make the regex if we don't have it already
-            mom = createUTC([2000, 1]).day(i);
-            if (strict && !this._fullWeekdaysParse[i]) {
-                this._fullWeekdaysParse[i] = new RegExp(
-                    '^' + this.weekdays(mom, '').replace('.', '\\.?') + '$',
-                    'i'
-                );
-                this._shortWeekdaysParse[i] = new RegExp(
-                    '^' + this.weekdaysShort(mom, '').replace('.', '\\.?') + '$',
-                    'i'
-                );
-                this._minWeekdaysParse[i] = new RegExp(
-                    '^' + this.weekdaysMin(mom, '').replace('.', '\\.?') + '$',
-                    'i'
-                );
-            }
-            if (!this._weekdaysParse[i]) {
-                regex =
-                    '^' +
-                    this.weekdays(mom, '') +
-                    '|^' +
-                    this.weekdaysShort(mom, '') +
-                    '|^' +
-                    this.weekdaysMin(mom, '');
-                this._weekdaysParse[i] = new RegExp(regex.replace('.', ''), 'i');
-            }
-            // test the regex
-            if (strict &&
-                format === 'dddd' &&
-                this._fullWeekdaysParse[i].test(weekdayName)) {
-                return i;
-            } else if (strict &&
-                format === 'ddd' &&
-                this._shortWeekdaysParse[i].test(weekdayName)) {
-                return i;
-            } else if (strict &&
-                format === 'dd' &&
-                this._minWeekdaysParse[i].test(weekdayName)) {
-                return i;
-            } else if (!strict && this._weekdaysParse[i].test(weekdayName)) {
-                return i;
-            }
+        // test the regex
+        if (
+            strict &&
+            format === 'dddd' &&
+            this._fullWeekdaysParse[i].test(weekdayName)
+        ) {
+            return i;
+        } else if (
+            strict &&
+            format === 'ddd' &&
+            this._shortWeekdaysParse[i].test(weekdayName)
+        ) {
+            return i;
+        } else if (
+            strict &&
+            format === 'dd' &&
+            this._minWeekdaysParse[i].test(weekdayName)
+        ) {
+            return i;
+        } else if (!strict && this._weekdaysParse[i].test(weekdayName)) {
+            return i;
         }
     }
 }
@@ -1739,116 +1739,116 @@ function getSetISODayOfWeek(input) {
     }
 }
 
-class weekdaysRegex {
-    constructor(isStrict) {
-        if (this._weekdaysRegex) {
-            if (!hasOwnProp(this, '_weekdaysRegex')) {
-                computeWeekdaysParse.call(this);
-            }
-            if (isStrict) {
-                return this._weekdaysRegex;
-            } else {
-                return this._weekdaysRegex;
-            }
-        } else {
-            if (!hasOwnProp(this, '_weekdaysRegex')) {
-                this._weekdaysRegex = defaultWeekdaysRegex;
-            }
-            return this._weekdaysRegex && isStrict
-                ? this._weekdaysRegex
-                : this._weekdaysRegex;
+function weekdaysRegex(isStrict) {
+    if (this._weekdaysParseExact) {
+        if (!hasOwnProp(this, '_weekdaysRegex')) {
+            computeWeekdaysParse.call(this);
         }
+        if (isStrict) {
+            return this._weekdaysStrictRegex;
+        } else {
+            return this._weekdaysRegex;
+        }
+    } else {
+        if (!hasOwnProp(this, '_weekdaysRegex')) {
+            this._weekdaysRegex = defaultWeekdaysRegex;
+        }
+        return this._weekdaysStrictRegex && isStrict
+            ? this._weekdaysStrictRegex
+            : this._weekdaysRegex;
     }
 }
 
-class weekdaysShortRegex {
-    constructor(isStrict) {
-        if (this._weekdaysParseExact) {
-            if (!hasOwnProp(this, '_weekdaysRegex')) {
-                computeWeekdaysParse.call(this);
-            }
-            if (isStrict) {
-                return this._weekdaysShortRegex;
-            } else {
-                return this._weekdaysShortRegex;
-            }
-        } else {
-            if (!hasOwnProp(this, '_weekdaysShortRegex')) {
-                this._weekdaysShortRegex = defaultWeekdaysShortRegex;
-            }
-            return this._weekdaysShortRegex && isStrict
-                ? this._weekdaysShortRegex
-                : this._weekdaysShortRegex;
+function weekdaysShortRegex(isStrict) {
+    if (this._weekdaysParseExact) {
+        if (!hasOwnProp(this, '_weekdaysRegex')) {
+            computeWeekdaysParse.call(this);
         }
+        if (isStrict) {
+            return this._weekdaysShortStrictRegex;
+        } else {
+            return this._weekdaysShortRegex;
+        }
+    } else {
+        if (!hasOwnProp(this, '_weekdaysShortRegex')) {
+            this._weekdaysShortRegex = defaultWeekdaysShortRegex;
+        }
+        return this._weekdaysShortStrictRegex && isStrict
+            ? this._weekdaysShortStrictRegex
+            : this._weekdaysShortRegex;
     }
 }
 
-class weekdaysMinRegex {
-    constructor(isStrict) {
-        if (this._weekdaysParseExact) {
-            if (!hasOwnProp(this, '_weekdaysRegex')) {
-                computeWeekdaysParse.call(this);
-            }
-            if (isStrict) {
-                return this._weekdaysMinRegex;
-            } else {
-                return this._weekdaysMinRegex;
-            }
-        } else {
-            if (!hasOwnProp(this, '_weekdaysMinRegex')) {
-                this._weekdaysMinRegex = defaultWeekdaysMinRegex;
-            }
-            return this._weekdaysMinRegex && isStrict
-                ? this._weekdaysMinRegex
-                : this._weekdaysMinRegex;
+function weekdaysMinRegex(isStrict) {
+    if (this._weekdaysParseExact) {
+        if (!hasOwnProp(this, '_weekdaysRegex')) {
+            computeWeekdaysParse.call(this);
         }
+        if (isStrict) {
+            return this._weekdaysMinStrictRegex;
+        } else {
+            return this._weekdaysMinRegex;
+        }
+    } else {
+        if (!hasOwnProp(this, '_weekdaysMinRegex')) {
+            this._weekdaysMinRegex = defaultWeekdaysMinRegex;
+        }
+        return this._weekdaysMinStrictRegex && isStrict
+            ? this._weekdaysMinStrictRegex
+            : this._weekdaysMinRegex;
     }
 }
 
-class computeWeekdaysParse {
-    constructor() {
-        function cmpLenRev(a, b) {
-            return b.length - a.length;
-        }
-
-        var minPieces = [], shortPieces = [], longPieces = [], mixedPieces = [], i, mom, minp, shortp, longp;
-        for (i = 0; i < 7; i++) {
-            // make the regex if we don't have it already
-            mom = createUTC([2000, 1]).day(i);
-            minp = regexEscape(this.weekdaysMin(mom, ''));
-            shortp = regexEscape(this.weekdaysShort(mom, ''));
-            longp = regexEscape(this.weekdays(mom, ''));
-            minPieces.push(minp);
-            shortPieces.push(shortp);
-            longPieces.push(longp);
-            mixedPieces.push(minp);
-            mixedPieces.push(shortp);
-            mixedPieces.push(longp);
-        }
-        // Sorting makes sure if one weekday (or abbr) is a prefix of another it
-        // will match the longer piece.
-        minPieces.sort(cmpLenRev);
-        shortPieces.sort(cmpLenRev);
-        longPieces.sort(cmpLenRev);
-        mixedPieces.sort(cmpLenRev);
-
-        this._weekdaysRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
-        this._weekdaysShortRegex = this._weekdaysRegex;
-        this._weekdaysMinRegex = this._weekdaysRegex;
-
-        this._weekdaysStrictRegex = new RegExp(
-            '^(' + longPieces.join('|') + ')',
-            'i'
-        );
-        this._weekdaysShortStrictRegex = new RegExp(
-            '^(' + shortPieces.join('|') + ')',
-            'i'
-        );
-        this._weekdaysMinStrictRegex = new RegExp(
-            '^(' + minPieces.join('|') + ')',
-            'i'
-        );
+function computeWeekdaysParse() {
+    function cmpLenRev(a, b) {
+        return b.length - a.length;
     }
+
+    var minPieces = [],
+        shortPieces = [],
+        longPieces = [],
+        mixedPieces = [],
+        i,
+        mom,
+        minp,
+        shortp,
+        longp;
+    for (i = 0; i < 7; i++) {
+        // make the regex if we don't have it already
+        mom = createUTC([2000, 1]).day(i);
+        minp = regexEscape(this.weekdaysMin(mom, ''));
+        shortp = regexEscape(this.weekdaysShort(mom, ''));
+        longp = regexEscape(this.weekdays(mom, ''));
+        minPieces.push(minp);
+        shortPieces.push(shortp);
+        longPieces.push(longp);
+        mixedPieces.push(minp);
+        mixedPieces.push(shortp);
+        mixedPieces.push(longp);
+    }
+    // Sorting makes sure if one weekday (or abbr) is a prefix of another it
+    // will match the longer piece.
+    minPieces.sort(cmpLenRev);
+    shortPieces.sort(cmpLenRev);
+    longPieces.sort(cmpLenRev);
+    mixedPieces.sort(cmpLenRev);
+
+    this._weekdaysRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
+    this._weekdaysShortRegex = this._weekdaysRegex;
+    this._weekdaysMinRegex = this._weekdaysRegex;
+
+    this._weekdaysStrictRegex = new RegExp(
+        '^(' + longPieces.join('|') + ')',
+        'i'
+    );
+    this._weekdaysShortStrictRegex = new RegExp(
+        '^(' + shortPieces.join('|') + ')',
+        'i'
+    );
+    this._weekdaysMinStrictRegex = new RegExp(
+        '^(' + minPieces.join('|') + ')',
+        'i'
+    );
 }
 
 // FORMATTING
@@ -1913,7 +1913,7 @@ addUnitPriority('hour', 13);
 
 // PARSING
 
-function matchMeridiem(_isStrict, locale) {
+function matchMeridiem(isStrict, locale) {
     return locale._meridiemParse;
 }
 
@@ -1932,11 +1932,11 @@ addRegexToken('Hmm', match3to4);
 addRegexToken('Hmmss', match5to6);
 
 addParseToken(['H', 'HH'], HOUR);
-addParseToken(['k', 'kk'], function (input, array) {
+addParseToken(['k', 'kk'], function (input, array, config) {
     var kInput = toInt(input);
     array[HOUR] = kInput === 24 ? 0 : kInput;
 });
-addParseToken(['a', 'A'], function (input, _array, config) {
+addParseToken(['a', 'A'], function (input, array, config) {
     config._isPm = config._locale.isPM(input);
     config._meridiem = input;
 });
@@ -1958,12 +1958,12 @@ addParseToken('hmmss', function (input, array, config) {
     array[SECOND] = toInt(input.substr(pos2));
     getParsingFlags(config).bigHour = true;
 });
-addParseToken('Hmm', function (input, array) {
+addParseToken('Hmm', function (input, array, config) {
     var pos = input.length - 2;
     array[HOUR] = toInt(input.substr(0, pos));
     array[MINUTE] = toInt(input.substr(pos));
 });
-addParseToken('Hmmss', function (input, array) {
+addParseToken('Hmmss', function (input, array, config) {
     var pos1 = input.length - 4,
         pos2 = input.length - 2;
     array[HOUR] = toInt(input.substr(0, pos1));
@@ -1986,7 +1986,7 @@ var defaultLocaleMeridiemParse = /[ap]\.?m?\.?/i,
     // this rule.
     getSetHour = makeGetSet('Hours', true);
 
-function localeMeridiem(hours, _minutes, isLower) {
+function localeMeridiem(hours, minutes, isLower) {
     if (hours > 11) {
         return isLower ? 'pm' : 'PM';
     } else {
@@ -3129,44 +3129,47 @@ function isDurationValid(m) {
     return true;
 }
 
-class isValid$1 {
-    constructor() {
-        return this._isValid;
-    }
+function isValid$1() {
+    return this._isValid;
 }
 
 function createInvalid$1() {
     return createDuration(NaN);
 }
 
-class Duration {
-    constructor(duration) {
-        var normalizedInput = normalizeObjectUnits(duration), years = normalizedInput.year || 0, quarters = normalizedInput.quarter || 0, months = normalizedInput.month || 0, weeks = normalizedInput.week || normalizedInput.isoWeek || 0, days = normalizedInput.day || 0, hours = normalizedInput.hour || 0, minutes = normalizedInput.minute || 0, seconds = normalizedInput.second || 0, milliseconds = normalizedInput.millisecond || 0;
+function Duration(duration) {
+    var normalizedInput = normalizeObjectUnits(duration),
+        years = normalizedInput.year || 0,
+        quarters = normalizedInput.quarter || 0,
+        months = normalizedInput.month || 0,
+        weeks = normalizedInput.week || normalizedInput.isoWeek || 0,
+        days = normalizedInput.day || 0,
+        hours = normalizedInput.hour || 0,
+        minutes = normalizedInput.minute || 0,
+        seconds = normalizedInput.second || 0,
+        milliseconds = normalizedInput.millisecond || 0;
 
-        this._isValid = isDurationValid(normalizedInput);
+    this._isValid = isDurationValid(normalizedInput);
 
-        // representation for dateAddRemove
-        this._milliseconds =
-            +milliseconds +
-            seconds * 1e3 + // 1000
-            minutes * 6e4 + // 1000 * 60
-            hours * 1000 * 60 * 60; //using 1000 * 60 * 60 instead of 36e5 to avoid floating point rounding errors https://github.com/moment/moment/issues/2978
+    // representation for dateAddRemove
+    this._milliseconds =
+        +milliseconds +
+        seconds * 1e3 + // 1000
+        minutes * 6e4 + // 1000 * 60
+        hours * 1000 * 60 * 60; //using 1000 * 60 * 60 instead of 36e5 to avoid floating point rounding errors https://github.com/moment/moment/issues/2978
+    // Because of dateAddRemove treats 24 hours as different from a
+    // day when working around DST, we need to store them separately
+    this._days = +days + weeks * 7;
+    // It is impossible to translate months into days without knowing
+    // which months you are are talking about, so we have to store
+    // it separately.
+    this._months = +months + quarters * 3 + years * 12;
 
+    this._data = {};
 
-        // Because of dateAddRemove treats 24 hours as different from a
-        // day when working around DST, we need to store them separately
-        this._days = +days + weeks * 7;
-        // It is impossible to translate months into days without knowing
-        // which months you are are talking about, so we have to store
-        // it separately.
-        this._months = +months + quarters * 3 + years * 12;
+    this._locale = getLocale();
 
-        this._data = {};
-
-        this._locale = getLocale();
-
-        this._bubble();
-    }
+    this._bubble();
 }
 
 function isDuration(obj) {
@@ -3224,7 +3227,7 @@ offset('ZZ', '');
 
 addRegexToken('Z', matchShortOffset);
 addRegexToken('ZZ', matchShortOffset);
-addParseToken(['Z', 'ZZ'], function (input, _array, config) {
+addParseToken(['Z', 'ZZ'], function (input, array, config) {
     config._useUTC = true;
     config._tzm = offsetFromString(matchShortOffset, input);
 });
@@ -3295,47 +3298,46 @@ hooks.updateOffset = function () {};
 // a second time. In case it wants us to change the offset again
 // _changeInProgress == true case, then we have to adjust, because
 // there is no such time in the given timezone.
-class getSetOffset {
-    constructor(input, keepLocalTime, keepMinutes) {
-        var offset = this._offset || 0, localAdjust;
-        if (!this.isValid()) {
-            return input != null ? this : NaN;
+function getSetOffset(input, keepLocalTime, keepMinutes) {
+    var offset = this._offset || 0,
+        localAdjust;
+    if (!this.isValid()) {
+        return input != null ? this : NaN;
+    }
+    if (input != null) {
+        if (typeof input === 'string') {
+            input = offsetFromString(matchShortOffset, input);
+            if (input === null) {
+                return this;
+            }
+        } else if (Math.abs(input) < 16 && !keepMinutes) {
+            input = input * 60;
         }
-        if (input != null) {
-            if (typeof input === 'string') {
-                input = offsetFromString(matchShortOffset, input);
-                if (input === null) {
-                    return this;
-                }
-            } else if (Math.abs(input) < 16 && !keepMinutes) {
-                input = input * 60;
-            }
-            if (!this._isUTC && keepLocalTime) {
-                localAdjust = getDateOffset(this);
-            }
-            this._offset = input;
-            this._isUTC = true;
-            if (localAdjust != null) {
-                this.add(localAdjust, 'm');
-            }
-            if (offset !== input) {
-                if (!keepLocalTime || this._changeInProgress) {
-                    addSubtract(
-                        this,
-                        createDuration(input - offset, 'm'),
-                        1,
-                        false
-                    );
-                } else if (!this._changeInProgress) {
-                    this._changeInProgress = true;
-                    hooks.updateOffset(this, true);
-                    this._changeInProgress = null;
-                }
-            }
-            return this;
-        } else {
-            return this._isUTC ? offset : getDateOffset(this);
+        if (!this._isUTC && keepLocalTime) {
+            localAdjust = getDateOffset(this);
         }
+        this._offset = input;
+        this._isUTC = true;
+        if (localAdjust != null) {
+            this.add(localAdjust, 'm');
+        }
+        if (offset !== input) {
+            if (!keepLocalTime || this._changeInProgress) {
+                addSubtract(
+                    this,
+                    createDuration(input - offset, 'm'),
+                    1,
+                    false
+                );
+            } else if (!this._changeInProgress) {
+                this._changeInProgress = true;
+                hooks.updateOffset(this, true);
+                this._changeInProgress = null;
+            }
+        }
+        return this;
+    } else {
+        return this._isUTC ? offset : getDateOffset(this);
     }
 }
 
@@ -3357,18 +3359,16 @@ function setOffsetToUTC(keepLocalTime) {
     return this.utcOffset(0, keepLocalTime);
 }
 
-class setOffsetToLocal {
-    constructor(keepLocalTime) {
-        if (this._isUTC) {
-            this.utcOffset(0, keepLocalTime);
-            this._isUTC = false;
+function setOffsetToLocal(keepLocalTime) {
+    if (this._isUTC) {
+        this.utcOffset(0, keepLocalTime);
+        this._isUTC = false;
 
-            if (keepLocalTime) {
-                this.subtract(getDateOffset(this), 'm');
-            }
+        if (keepLocalTime) {
+            this.subtract(getDateOffset(this), 'm');
         }
-        return this;
     }
+    return this;
 }
 
 function setOffsetToParsedOffset() {
@@ -3401,27 +3401,26 @@ function isDaylightSavingTime() {
     );
 }
 
-class isDaylightSavingTimeShifted {
-    constructor() {
-        if (!isUndefined(this._isDSTShifted)) {
-            return this._isDSTShifted;
-        }
-
-        var c = {}, other;
-
-        copyConfig(c, this);
-        c = prepareConfig(c);
-
-        if (c._a) {
-            other = c._isUTC ? createUTC(c._a) : createLocal(c._a);
-            this._isDSTShifted =
-                this.isValid() && compareArrays(c._a, other.toArray()) > 0;
-        } else {
-            this._isDSTShifted = false;
-        }
-
+function isDaylightSavingTimeShifted() {
+    if (!isUndefined(this._isDSTShifted)) {
         return this._isDSTShifted;
     }
+
+    var c = {},
+        other;
+
+    copyConfig(c, this);
+    c = prepareConfig(c);
+
+    if (c._a) {
+        other = c._isUTC ? createUTC(c._a) : createLocal(c._a);
+        this._isDSTShifted =
+            this.isValid() && compareArrays(c._a, other.toArray()) > 0;
+    } else {
+        this._isDSTShifted = false;
+    }
+
+    return this._isDSTShifted;
 }
 
 function isLocal() {
@@ -3985,7 +3984,7 @@ function from(time, withoutSuffix) {
         ((isMoment(time) && time.isValid()) || createLocal(time).isValid())
     ) {
         return createDuration({ to: this, from: time })
-            ._locale(this.locale())
+            .locale(this.locale())
             .humanize(!withoutSuffix);
     } else {
         return this.localeData().invalidDate();
@@ -4002,7 +4001,7 @@ function to(time, withoutSuffix) {
         ((isMoment(time) && time.isValid()) || createLocal(time).isValid())
     ) {
         return createDuration({ from: this, to: time })
-            ._locale(this.locale())
+            .locale(this.locale())
             .humanize(!withoutSuffix);
     } else {
         return this.localeData().invalidDate();
@@ -4016,19 +4015,17 @@ function toNow(withoutSuffix) {
 // If passed a locale key, it will set the locale for this
 // instance.  Otherwise, it will return the locale configuration
 // variables for this instance.
-class locale {
-    constructor(key) {
-        var newLocaleData;
+function locale(key) {
+    var newLocaleData;
 
-        if (key === undefined) {
-            return this._locale._abbr;
-        } else {
-            newLocaleData = getLocale(key);
-            if (newLocaleData != null) {
-                this._locale = newLocaleData;
-            }
-            return this;
+    if (key === undefined) {
+        return this._locale._abbr;
+    } else {
+        newLocaleData = getLocale(key);
+        if (newLocaleData != null) {
+            this._locale = newLocaleData;
         }
+        return this;
     }
 }
 
@@ -4293,7 +4290,7 @@ addRegexToken('NNNNN', matchEraNarrow);
 
 addParseToken(
     ['N', 'NN', 'NNN', 'NNNN', 'NNNNN'],
-    function (input, _array, config, token) {
+    function (input, array, config, token) {
         var era = config._locale.erasParse(input, token, config._strict);
         if (era) {
             getParsingFlags(config).era = era;
@@ -4310,7 +4307,7 @@ addRegexToken('yyyy', matchUnsigned);
 addRegexToken('yo', matchEraYearOrdinal);
 
 addParseToken(['y', 'yy', 'yyy', 'yyyy'], YEAR);
-addParseToken(['yo'], function (input, array, config) {
+addParseToken(['yo'], function (input, array, config, token) {
     var match;
     if (config._locale._eraYearOrdinalRegex) {
         match = input.match(config._locale._eraYearOrdinalRegex);
@@ -4323,7 +4320,7 @@ addParseToken(['yo'], function (input, array, config) {
     }
 });
 
-function localeEras(_m, _format) {
+function localeEras(m, format) {
     var i,
         l,
         date,
@@ -4521,32 +4518,36 @@ function matchEraNarrow(isStrict, locale) {
     return locale.erasNarrowRegex(isStrict);
 }
 
-function matchEraYearOrdinal(_isStrict, locale) {
+function matchEraYearOrdinal(isStrict, locale) {
     return locale._eraYearOrdinalRegex || matchUnsigned;
 }
 
-class computeErasParse {
-    constructor() {
-        var abbrPieces = [], namePieces = [], narrowPieces = [], mixedPieces = [], i, l, eras = this.eras();
+function computeErasParse() {
+    var abbrPieces = [],
+        namePieces = [],
+        narrowPieces = [],
+        mixedPieces = [],
+        i,
+        l,
+        eras = this.eras();
 
-        for (i = 0, l = eras.length; i < l; ++i) {
-            namePieces.push(regexEscape(eras[i].name));
-            abbrPieces.push(regexEscape(eras[i].abbr));
-            narrowPieces.push(regexEscape(eras[i].narrow));
+    for (i = 0, l = eras.length; i < l; ++i) {
+        namePieces.push(regexEscape(eras[i].name));
+        abbrPieces.push(regexEscape(eras[i].abbr));
+        narrowPieces.push(regexEscape(eras[i].narrow));
 
-            mixedPieces.push(regexEscape(eras[i].name));
-            mixedPieces.push(regexEscape(eras[i].abbr));
-            mixedPieces.push(regexEscape(eras[i].narrow));
-        }
-
-        this._erasRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
-        this._erasNameRegex = new RegExp('^(' + namePieces.join('|') + ')', 'i');
-        this._erasAbbrRegex = new RegExp('^(' + abbrPieces.join('|') + ')', 'i');
-        this._erasNarrowRegex = new RegExp(
-            '^(' + narrowPieces.join('|') + ')',
-            'i'
-        );
+        mixedPieces.push(regexEscape(eras[i].name));
+        mixedPieces.push(regexEscape(eras[i].abbr));
+        mixedPieces.push(regexEscape(eras[i].narrow));
     }
+
+    this._erasRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
+    this._erasNameRegex = new RegExp('^(' + namePieces.join('|') + ')', 'i');
+    this._erasAbbrRegex = new RegExp('^(' + abbrPieces.join('|') + ')', 'i');
+    this._erasNarrowRegex = new RegExp(
+        '^(' + narrowPieces.join('|') + ')',
+        'i'
+    );
 }
 
 // FORMATTING
@@ -4591,12 +4592,12 @@ addRegexToken('ggggg', match1to6, match6);
 
 addWeekParseToken(
     ['gggg', 'ggggg', 'GGGG', 'GGGGG'],
-    function (input, week, _config, token) {
+    function (input, week, config, token) {
         week[token.substr(0, 2)] = toInt(input);
     }
 );
 
-addWeekParseToken(['gg', 'GG'], function (input, week, _config, token) {
+addWeekParseToken(['gg', 'GG'], function (input, week, config, token) {
     week[token] = hooks.parseTwoDigitYear(input);
 });
 
@@ -4738,7 +4739,7 @@ addUnitPriority('dayOfYear', 4);
 
 addRegexToken('DDD', match1to3);
 addRegexToken('DDDD', match3);
-addParseToken(['DDD', 'DDDD'], function (input, _array, config) {
+addParseToken(['DDD', 'DDDD'], function (input, array, config) {
     config._dayOfYear = toInt(input);
 });
 
@@ -5166,23 +5167,21 @@ hooks.langData = deprecate(
 
 var mathAbs = Math.abs;
 
-class abs {
-    constructor() {
-        var data = this._data;
+function abs() {
+    var data = this._data;
 
-        this._milliseconds = mathAbs(this._milliseconds);
-        this._days = mathAbs(this._days);
-        this._months = mathAbs(this._months);
+    this._milliseconds = mathAbs(this._milliseconds);
+    this._days = mathAbs(this._days);
+    this._months = mathAbs(this._months);
 
-        data.milliseconds = mathAbs(data.milliseconds);
-        data.seconds = mathAbs(data.seconds);
-        data.minutes = mathAbs(data.minutes);
-        data.hours = mathAbs(data.hours);
-        data.months = mathAbs(data.months);
-        data.years = mathAbs(data.years);
+    data.milliseconds = mathAbs(data.milliseconds);
+    data.seconds = mathAbs(data.seconds);
+    data.minutes = mathAbs(data.minutes);
+    data.hours = mathAbs(data.hours);
+    data.months = mathAbs(data.months);
+    data.years = mathAbs(data.years);
 
-        return this;
-    }
+    return this;
 }
 
 function addSubtract$1(duration, input, value, direction) {
@@ -5562,37 +5561,37 @@ function toISOString$1() {
 
 var proto$2 = Duration.prototype;
 
-proto$2._isValid = isValid$1;
+proto$2.isValid = isValid$1;
 proto$2.abs = abs;
 proto$2.add = add$1;
 proto$2.subtract = subtract$1;
 proto$2.as = as;
-proto$2._milliseconds = asMilliseconds;
+proto$2.asMilliseconds = asMilliseconds;
 proto$2.asSeconds = asSeconds;
 proto$2.asMinutes = asMinutes;
 proto$2.asHours = asHours;
 proto$2.asDays = asDays;
 proto$2.asWeeks = asWeeks;
-proto$2._months = asMonths;
+proto$2.asMonths = asMonths;
 proto$2.asQuarters = asQuarters;
 proto$2.asYears = asYears;
 proto$2.valueOf = valueOf$1;
 proto$2._bubble = bubble;
 proto$2.clone = clone$1;
 proto$2.get = get$2;
-proto$2._milliseconds = milliseconds;
+proto$2.milliseconds = milliseconds;
 proto$2.seconds = seconds;
 proto$2.minutes = minutes;
 proto$2.hours = hours;
-proto$2._days = days;
+proto$2.days = days;
 proto$2.weeks = weeks;
-proto$2._months = months;
+proto$2.months = months;
 proto$2.years = years;
 proto$2.humanize = humanize;
 proto$2.toISOString = toISOString$1;
 proto$2.toString = toISOString$1;
 proto$2.toJSON = toISOString$1;
-proto$2._locale = locale;
+proto$2.locale = locale;
 proto$2.localeData = localeData;
 
 proto$2.toIsoString = deprecate(
@@ -5610,10 +5609,10 @@ addFormatToken('x', 0, 0, 'valueOf');
 
 addRegexToken('x', matchSigned);
 addRegexToken('X', matchTimestamp);
-addParseToken('X', function (input, _array, config) {
+addParseToken('X', function (input, array, config) {
     config._d = new Date(parseFloat(input) * 1000);
 });
-addParseToken('x', function (input, _array, config) {
+addParseToken('x', function (input, array, config) {
     config._d = new Date(toInt(input));
 });
 

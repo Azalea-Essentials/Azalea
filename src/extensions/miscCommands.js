@@ -65,8 +65,8 @@ export default {
                     if (e.itemStack.typeId == "azalea:player_shop") {
                         uiManager.open("Azalea0.9.1/PlayerShop/Main", e.source)
                     }
-                    if(e.itemStack.typeId == "azalea:boost_feather") {
-                        e.source.applyKnockback(e.source.getViewDirection().x, e.source.getViewDirection().z, 2.5, 1.5)
+                    if(e.itemStack.typeId == "azalea:boost_feather" && e.source.isOnGround) {
+                        e.source.applyKnockback(e.source.getViewDirection().x, e.source.getViewDirection().z, 2.2, 1.25)
                         // e.source.applyKnockback(e.source.getViewDirection().x, e.source.getViewDirection().z, 1, -100)
                     }
                     if(e.itemStack.typeId == "azalea:shop") {

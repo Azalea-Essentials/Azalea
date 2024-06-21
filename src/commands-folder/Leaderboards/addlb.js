@@ -2,12 +2,12 @@ import { commands } from '../../commands';
 import { Database } from '../../db';
 
 export default function main() {
-("add-lb",{
+    commands.addCommand("add-lb",{
         admin: true,
         description: "Adds leaderboards",
         category: "Leaderboards",
         aliases: ["lb-add", "+lb"],
-        async onRun(msg, args, response) {
+        async onRun(msg, args, theme, response) {
             let translation = commands.callExtensionEvent(
                 "translation",
                 "get_translation",

@@ -204,19 +204,19 @@ export default function addVersionCommand(commands) {
     commands.addCommand("uis", {
         description: "View UIs through UI manager",
         category: "Help Center",
-        onRun(theme, response) {
+        onRun(msg, args, theme, response) {
             let text = [`${theme.category}----- ${theme.header}UI IDs ${theme.category}-----`];
             let categories = {};
             for(const ui of uiManager.uis) {
-              let uiFnStringified = ui.ui.toString();
-              // let uiType = uiFnStringified.toLowerCase().includes('modalform') ? "Modal Form" :
-              // uiFnStringified.toLowerCase().includes('actionform') ? "Action Form" :
-              // uiFnStringified.toLowerCase().includes('modalform') ? "Modal Form"
-              let uiTypes = [];
-              if(uiFnStringified.toLowerCase().includes('modalform')) uiTypes.push("Modal Form")
-              if(uiFnStringified.toLowerCase().includes('actionform')) uiTypes.push("Action Form")
-              if(uiFnStringified.toLowerCase().includes('messageform')) uiTypes.push("Message Form")
-              if(!uiTypes.length) uiTypes.push("Unknown");
+              // let uiFnStringified = ui.ui.toString();
+              // // let uiType = uiFnStringified.toLowerCase().includes('modalform') ? "Modal Form" :
+              // // uiFnStringified.toLowerCase().includes('actionform') ? "Action Form" :
+              // // uiFnStringified.toLowerCase().includes('modalform') ? "Modal Form"
+              // let uiTypes = [];
+              // if(uiFnStringified.toLowerCase().includes('modalform')) uiTypes.push("Modal Form")
+              // if(uiFnStringified.toLowerCase().includes('actionform')) uiTypes.push("Action Form")
+              // if(uiFnStringified.toLowerCase().includes('messageform')) uiTypes.push("Message Form")
+              // if(!uiTypes.length) uiTypes.push("Unknown");
               let text2 = `${theme.category}> §r${theme.command}${ui.id} ${theme.description}${ui.desc ? ui.desc : "No Description"}`;
               if(categories[ui.id.split('/')[0]]) categories[ui.id.split('/')[0]].push(text2);
               else categories[ui.id.split('/')[0]] = [text2];
