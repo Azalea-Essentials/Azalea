@@ -1,3 +1,9 @@
+> NOTE:
+> 
+> As of July 21, 2024, azalea is being discontinued (kinda)
+> 
+> Azalea has had some major problems and I have decided to rewrite it. Newer versions can be found at [Leaf-Essentials](https://github.com/Leaf-Utilities/Leaf-Essentials)
+
 ![azalea logo](https://azalea.trashdev.org/img/azalea_essentials2.png)
 
 <div align="center">
